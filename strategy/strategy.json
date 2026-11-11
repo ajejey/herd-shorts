@@ -3,12 +3,55 @@
   "updated": "2026-11-11",
   "explore_share": 0.25,
   "formats": {
-    "A-herd-line": { "weight": 1, "game": "daily-guesstimate", "status": "testing" },
-    "B-board": { "weight": 1, "game": "top-answers", "status": "testing" },
-    "C-dial": { "weight": 1, "game": "hot-takes", "status": "testing" }
+    "A-herd-line": {
+      "weight": 1,
+      "game": "daily-guesstimate",
+      "status": "testing"
+    },
+    "B-board": {
+      "weight": 1,
+      "game": "top-answers",
+      "status": "testing"
+    },
+    "C-dial": {
+      "weight": 1,
+      "game": "hot-takes",
+      "status": "testing"
+    },
+    "D-doodle": {
+      "weight": 1,
+      "game": "guess-the-doodle",
+      "status": "planned",
+      "note": "The doodle draws itself line by line; viewers race to guess. Credit Quick, Draw! (CC BY 4.0) in every post."
+    },
+    "E-word-climb": {
+      "weight": 1,
+      "game": "word-climb",
+      "status": "planned"
+    },
+    "F-secret-word": {
+      "weight": 1,
+      "game": "secret-word",
+      "status": "planned"
+    },
+    "G-words-from": {
+      "weight": 1,
+      "game": "words-from-a-word",
+      "status": "planned"
+    }
   },
-  "length_seconds": { "min": 15, "max": 22 },
-  "post_times_utc": { "instagram": ["16:00"], "youtube": ["16:00"] },
+  "length_seconds": {
+    "min": 15,
+    "max": 22
+  },
+  "post_times_utc": {
+    "instagram": [
+      "16:00"
+    ],
+    "youtube": [
+      "16:00"
+    ]
+  },
   "hook_bank": {
     "A-herd-line": [
       "Guess before the herd does",
@@ -22,6 +65,22 @@
     "C-dial": [
       "{players} people voted. Where do you land?",
       "{statement_short}? America is split."
+    ],
+    "D-doodle": [
+      "Guess it before line 3",
+      "Only {first_line} of {players} got it from one line"
+    ],
+    "E-word-climb": [
+      "Only {climbed_all} of {players} climbed all 7",
+      "Most people opened with {opener}. Bad idea?"
+    ],
+    "F-secret-word": [
+      "The secret word took {median} guesses. Can you beat it?",
+      "So close: {close_call} was not it"
+    ],
+    "G-words-from": [
+      "{hidden} words hide in {word}. How many can you find?",
+      "Only {rarest} was found by one person"
     ]
   }
 }
