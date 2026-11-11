@@ -90,7 +90,7 @@
     ".hk-sun { position: absolute; left: 800px; top: 40px; width: 180px; height: 180px; border-radius: 90px; }",
     ".hk-sea { position: absolute; left: 0; top: 1560px; width: 1080px; height: 120px; }",
     ".hk-fall { position: absolute; left: 0; top: 0; }",
-    ".hk-insight { position: absolute; left: 226px; top: 1378px; width: 764px; color: rgba(45,24,16,0.78); font-family: 'Quicksand', sans-serif; font-size: 36px; font-weight: 700; white-space: nowrap; }",
+    ".hk-insight { position: absolute; left: 226px; top: 1378px; width: 764px; color: rgba(45,24,16,0.78); font-family: 'Quicksand', sans-serif; font-size: 40px; font-weight: 700; white-space: nowrap; }",
   ].join("\n");
 
   /*
@@ -103,9 +103,9 @@
     snow: { sky: ["#C9E1F2", "#E9F2F8", "#FFFFFF"], dots: "rgba(255,255,255,0.75)", hill: ["#F4F8FB", "#DCE7EF"], fall: "snow" },
     beach: { sky: ["#B8E6F6", "#E3F6F6", "#FFF0C8"], dots: "rgba(255,255,255,0.5)", hill: ["#F6D88E", "#EBC46C"], sea: "#7CC8E0", sun: "#FFD36E" },
     autumn: { sky: ["#F8DEC0", "#FBECD9", "#FFF6E2"], dots: "rgba(255,255,255,0.5)", hill: ["#DDA75E", "#C98C40"], fall: "leaf" },
-    spring: { sky: ["#DDF0FC", "#F1F8EA", "#FDEFF4"], dots: "rgba(255,255,255,0.6)", hill: ["#A8DB86", "#8ACB69"], fall: "blossom" },
+    spring: { sky: ["#FCDCE8", "#F7F0E8", "#E4F5D6"], dots: "rgba(255,255,255,0.6)", hill: ["#A8DB86", "#8ACB69"], fall: "blossom" },
   };
-  var FALL = { snow: { color: "#FFFFFF", r: "50%", w: 18, h: 18, edge: "2px solid rgba(160,190,215,0.7)" }, leaf: { color: "#E07B39", r: "0 60% 0 60%", w: 26, h: 18, edge: "none" }, blossom: { color: "#F7A8C8", r: "60% 0 60% 0", w: 20, h: 16, edge: "none" } };
+  var FALL = { snow: { color: "#FFFFFF", r: "50%", w: 22, h: 22, edge: "2px solid rgba(160,190,215,0.7)" }, leaf: { color: "#E07B39", r: "0 60% 0 60%", w: 38, h: 26, edge: "none" }, blossom: { color: "#F38DB6", r: "60% 0 60% 0", w: 30, h: 24, edge: "none" } };
 
   function el(parent, cls, html) {
     var d = document.createElement("div");
@@ -353,6 +353,7 @@
     /* The insight line: in under the sting, away when the banner rises */
     A.insight = function (tl, d, T) {
       if (!d.textContent) return;
+      fit(d, { max: 40, min: 28 });   // runs after fonts load (inside the scene's build), so it measures the real text
       tl.set(d, { visibility: "visible" }, T.sting + 0.7);
       tl.fromTo(d, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, T.sting + 0.7);
       tl.to(d, { opacity: 0, duration: 0.12 }, T.play - 0.1);
