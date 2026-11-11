@@ -9,7 +9,7 @@
 import { labelOfDay, num, need } from '../lib.mjs';
 
 const MIN_PLAYERS = 40;
-export const T = { line2: 1.4, line3: 2.8, restFrom: 3.9, restTo: 6.2, count: 6.6, reveal: 9.9, sting: 10.7, ask: 11.7, play: 13.0, rewind: 15.2, end: 16.0 };
+export const T = { line2: 1.4, line3: 2.8, restFrom: 3.9, restTo: 6.2, count: 6.6, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
 
 const cap = (s) => String(s).charAt(0).toUpperCase() + String(s).slice(1);
 
@@ -48,8 +48,7 @@ export function vars(data, pick = {}) {
   const word = d.answer || d.key;
   return {
     date: labelOfDay(data.day),
-    tag: 'Guess the doodle',
-    hook: copy.hook || 'Can you guess it before line 3?',
+    hook: copy.hook || 'Can you guess the doodle | before line 3?',
     mid: copy.mid || 'Got it yet?',
     final: copy.final || 'Final answer?',
     lines: d.lines,

@@ -72,6 +72,32 @@ review may overturn any rule with ledger rows.
 13. **Voice only if it earns its place.** Text, music and sound carry the
     videos. A voiced version is an explore test the weekly review judges, not a default.
 
+## Before anyone sees it: the cold-viewer review
+
+Every render, before it is shown to Ajey or posted. Take a frame every 1-2 s
+(and the exact frames of each change) and, for each one, pretend you just
+swiped in at that moment, with no sound:
+
+- **Do I know what I'm watching?** The challenge that explains the video stays
+  on screen the whole time; changing lines go in a slot below it, never in its place.
+- **Does every line stand alone?** No "it", "this" or "that" pointing at
+  something elsewhere on screen ("Can you guess the doodle", not "Can you guess it").
+- **Does every number say who and when?** "28 of 344 players had it by line 1",
+  never a bare "28 of 344 got it".
+- **Is anything said twice?** Two lines carrying near-identical numbers is
+  noise: make one element tell it (the meter shrinks to the line-1 share
+  instead of a second stat line).
+- **Is the moment the challenge turns on marked?** (Line 3 in "before line 3":
+  its badge turns pink.)
+- **Is every line on long enough to read?** About 0.3 s a word plus 0.5 s.
+- **Is the whole frame used?** Readable things in the safe area, the world
+  (sky, hill, herd) filling the rest.
+- **Does any small art read as something else at phone size?** (Seven tiny
+  sheep read as beetles: five bigger ones read as sheep.)
+- **The thumbnail (frame 0) alone:** would a stranger stop for it?
+
+Fix everything found, re-render, review again. Only then show it.
+
 ## The shape of a Herd Short (about 15 s)
 
 | Time | Beat | What happens |
