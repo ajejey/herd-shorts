@@ -18,7 +18,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT, FORMATS, readJson, NotEligible } from './lib.mjs';
+import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits } from './lib.mjs';
 import { render } from './render.mjs';
 
 const LEDGER = path.join(ROOT, 'ledger', 'videos.jsonl');
@@ -42,7 +42,8 @@ export async function eligible(data) {
   for (const [format, dir] of Object.entries(FORMATS)) {
     try {
       const { vars } = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'formats', `${dir}.mjs`)).href);
-      vars(data, {});
+      const hits = sensitiveHits(vars(data, {}));
+      if (hits.length) { console.error(`  skip ${format}: sensitive words on screen (${hits.join(', ')}); only a pick can choose it`); continue; }
       out.push(format);
     } catch (err) {
       console.error(`  skip ${format}: ${err instanceof NotEligible ? err.message : `error: ${err.message}`}`);

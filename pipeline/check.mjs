@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT, FORMATS, readJson, NotEligible } from './lib.mjs';
+import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits } from './lib.mjs';
 import { declaredVariables, checkValues, build } from './build.mjs';
 
 let failures = 0;
@@ -87,6 +87,16 @@ const C = await fmt('c-dial');
   is('C: no near tie: the most lopsided', C.chooseTake([tk(400, 300), tk(85, 537)]).id === '85-537');
   is('C: verdicts follow the gap', C.verdict(tk(343, 332)) === 'Split almost in half.' && C.verdict(tk(85, 537)) === 'Not even close.');
   is('C: takes under 100 votes are never shown', C.chooseTake([tk(40, 30)]) === null);
+  // The option labels never run under the sheep hub (hyperframes check can't see it: the hub is a picture, not text).
+  // Showcase, 11 Nov 2026: "Up at the first alarm" ran under it.
+  const css = fs.readFileSync(path.join(ROOT, 'templates', 'c-dial', 'compositions', 'dial.html'), 'utf8');
+  const sides = css.match(/#c-sides \{[^}]*left: (\d+)px;[^}]*width: (\d+)px;[^}]*column-gap: (\d+)px;/);
+  const hub = css.match(/#c-hub \{[^}]*left: (\d+)px;[^}]*width: (\d+)px;/);
+  if (sides && hub) {
+    const [l, w, g] = sides.slice(1).map(Number), [hl, hw] = hub.slice(1).map(Number);
+    const col = (w - g) / 2;
+    is(`C: label columns (${l}-${l + col}, ${l + col + g}-${l + w}) clear the hub (${hl}-${hl + hw})`, l + col <= hl && l + col + g >= hl + hw);
+  } else is('C: label columns and hub found in dial.html', false);
   // The needle's widest swing (0.62 of the amplitude) never passes the dial's end
   for (const p of [0.5, 0.86, 0.99]) {
     const FINAL = -(2 * p - 1) * 90, AMP = Math.min(75, (88 - Math.abs(FINAL)) / 0.62);
@@ -130,6 +140,19 @@ is('E: 7 rungs fill from 1.3 s to 8.2 s', (() => { const t = E.rungTimes(7); ret
       is(`builder: B-board day ${day}`, err instanceof NotEligible, err.message);
     }
   }
+}
+
+/* ── Brand safety: the words the unattended fallback must not put on screen ── */
+{
+  is('sensitive: a Word Climb rung "racism" is caught', sensitiveHits({ rungs: 'burn:124|usage:83|racism:64' }).length === 1);
+  is('sensitive: a Top Answers tile "Sex" is caught', sensitiveHits({ ans2: 'Sex' }).length === 1);
+  is('sensitive: ordinary words pass (snacks, Weather, Sussex, classic, hello, skill)', sensitiveHits({ a: 'Snacks', b: 'Weather', c: 'Sussex', d: 'classic', e: 'hello', f: 'skill' }).length === 0);
+  is('sensitive: the doodle credit and timing lists are not read', sensitiveHits({ credit: 'Doodles from Quick, Draw! by Google', lineTimes: '1.4,2.4' }).length === 0);
+  is('sensitive: the fallback list skips a format with a hit', await (async () => {
+    const { eligible } = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'daily.mjs')).href);
+    const d = readJson(path.join(ROOT, 'data', '161.json'));
+    return d.wordClimb ? !(await eligible(d)).includes('E-word-climb') : true;
+  })());
 }
 
 /* ── The fallback choice (no pick that day) ──────────────────────────────── */

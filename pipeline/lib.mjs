@@ -31,3 +31,24 @@ export const FORMATS = {
 /* A format that cannot be made from a day's data says why instead of rendering something wrong. */
 export class NotEligible extends Error {}
 export const need = (cond, why) => { if (!cond) throw new NotEligible(why); };
+
+/*
+  Words that should never go out on a public channel without a person (or
+  Claude, reading the candidates) choosing to: the unattended fallback skips any
+  format whose on-screen text contains one. Real catches: day 161's Word Climb
+  rung "racism", a Top Answers board with "Sex" at 10%.
+*/
+const SENSITIVE = /\b(sex\w*|porn\w*|nude\w*|naked|racis\w*|nazi\w*|hitler|rape\w*|suicid\w*|kill\w*|murder\w*|terror\w*|drug\w*|cocaine|heroin|weed|alcohol\w*|drunk|gun\w*|shoot\w*|bomb\w*|abuse\w*|slave\w*|genocide|holocaust|dead|death|die|dying|cancer|penis|vagina|boob\w*|fuck\w*|shit\w*|bitch\w*|damn|hell|crap|ass|bastard|dick\w*|piss\w*|communis\w*|fascis\w*|trump|biden|religio\w*|god|jesus|allah|islam\w*|christian\w*|jew\w*|muslim\w*)\b/i;
+
+/* Every on-screen string in a format's values that contains a sensitive word. */
+export function sensitiveHits(values) {
+  const hits = [];
+  for (const [k, v] of Object.entries(values)) {
+    if (typeof v !== 'string' || ['guesses', 'strokes', 'ticks1', 'ticks2', 'lineTimes', 'rungTimes', 'chipTimes', 'wordTimes', 'gotByLine', 'credit'].includes(k)) continue;
+    for (const part of v.split(/[|,;]/)) {
+      const m = part.match(SENSITIVE);
+      if (m) hits.push(`${k}: "${m[0]}"`);
+    }
+  }
+  return hits;
+}

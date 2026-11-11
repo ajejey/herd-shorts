@@ -28,11 +28,11 @@
     #c-hub { position: absolute; left: 460px; top: 910px; width: 160px; height: 160px; background: url("assets/img/sheep.svg") center / contain no-repeat; }
     #c-title { max-height: 260px; }
     .c-line { max-height: 108px; }
-    #c-sides { position: absolute; left: 140px; top: 1012px; width: 800px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; align-items: end; }
+    #c-sides { position: absolute; left: 140px; top: 1012px; width: 800px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 190px; align-items: end; }  /* the gap keeps both labels clear of the sheep hub (460-620) */
     .c-side { font-family: "Quicksand", sans-serif; font-size: 38px; font-weight: 700; line-height: 1.15; max-height: 88px; overflow: hidden; }
     #c-yes-label { color: #2F6E45; }
     #c-no-label { color: #C2306F; text-align: right; }
-    .c-num { margin-top: 6px; font-size: 150px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+    .c-num { margin-top: 6px; font-size: 140px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
     #c-yes-num { color: #3D8B5A; }
     #c-no-num { color: #E84A8B; text-align: right; }
     .c-count { font-family: "Quicksand", sans-serif; font-size: 32px; font-weight: 700; }
@@ -117,6 +117,10 @@
         H.fit("c-title", { max: 120, min: 72, maxH: 260 });
         ["c-line1", "c-line2", "c-line3", "c-line4"].forEach((id) => H.fit(id, { max: 42, min: 30, maxH: 108 }));
         ["c-yes-label", "c-no-label"].forEach((id) => H.fit(id, { max: 38, min: 28, maxH: 88 }));
+        // The source line sits under the vote columns, however many lines the options took
+        // (worked out, not measured: the shares and counts are clips, hidden until they land)
+        const labelH = Math.max(document.getElementById("c-yes-label").offsetHeight, document.getElementById("c-no-label").offsetHeight);
+        document.getElementById("c-source").style.top = (1012 + labelH + 6 + 140 + 40 + 14) + "px";
 
         // The needle: a damped swing (closed form of t), already moving at frame 0, settling by 7.6 s.
         // It crosses its resting point every 1.31 s whatever the result, so the ticks stay on it.
