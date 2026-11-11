@@ -94,7 +94,8 @@ const C = await fmt('c-dial');
   const tk = (a, b) => ({ id: `${a}-${b}`, prompt: 'x?', a: 'A', b: 'B', counts: [a, b], players: a + b });
   is('C: a near tie is chosen over a landslide', C.chooseTake([tk(500, 120), tk(330, 340)]).id === '330-340');
   is('C: no near tie: the most lopsided', C.chooseTake([tk(400, 300), tk(85, 537)]).id === '85-537');
-  is('C: verdicts follow the gap', C.verdict(tk(343, 332)) === 'Split almost in half.' && C.verdict(tk(85, 537)) === 'Not even close.');
+  is('C: verdicts follow the gap', C.verdict(tk(343, 332)) === 'Split almost in half!' && C.verdict(tk(85, 537)) === 'Not even close!');
+  is('C: a near tie says how close, a landslide says who won', C.sting(tk(343, 332)) === 'Only 11 votes apart' && /^86% picked/.test(C.sting(tk(85, 537))));
   is('C: takes under 100 votes are never shown', C.chooseTake([tk(40, 30)]) === null);
   // The option labels never run under the sheep hub (hyperframes check can't see it: the hub is a picture, not text).
   // Showcase, 11 Nov 2026: "Up at the first alarm" ran under it.
@@ -148,7 +149,8 @@ is('E: 7 rungs fill from 1.3 s to 8.2 s', (() => { const t = E.rungTimes(7); ret
       const r = await build({ format: 'B-board', day, out: path.join(ROOT, 'out', '_check-b') });
       const html = fs.readFileSync(path.join(r.dir, 'index.html'), 'utf8');
       const tiles = [1, 2, 3, 4, 5, 6, 7, 8].filter((i) => r.values[`ans${i}`]).length;
-      is(`builder: day ${day} board of ${tiles} keeps flip sounds only for its answers`, html.includes('id="snd-flip8"') === tiles >= 8 && html.includes('id="snd-flip7"') === tiles >= 7);
+      const flips = (html.match(/<audio id="snd-flip-\d+"/g) || []).length;
+      is(`builder: day ${day} board of ${tiles} gets one flip sound per tile it flips before #1 (${flips})`, flips === tiles - 1);
       fs.rmSync(r.dir, { recursive: true, force: true });
     } catch (err) {
       is(`builder: B-board day ${day}`, err instanceof NotEligible, err.message);
