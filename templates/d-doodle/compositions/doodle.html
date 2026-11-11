@@ -3,62 +3,92 @@
     @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
     @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
     #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
-    #d-ground {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 900px 900px at 10% 6%, #CFE6F3 0%, rgba(207, 230, 243, 0) 70%),
-        radial-gradient(ellipse 1000px 1000px at 95% 98%, #FFE6A6 0%, rgba(255, 230, 166, 0) 70%),
-        #FFF6E2;
-    }
+    #d-ground { position: absolute; inset: 0; background: linear-gradient(180deg, #BFE3F7 0%, #E9F4E8 45%, #FFE58F 100%); }
     #d-dots {
       position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(185, 204, 216, 0.35) 7px, rgba(185, 204, 216, 0) 7.5px);
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.55) 7px, rgba(255, 255, 255, 0) 7.5px);
       background-size: 64px 64px; background-position: 16px 24px;
     }
-    .d-cloud { position: absolute; background: url("assets/img/cloud.svg") center / contain no-repeat; }
-    #d-cloud1 { left: 40px; top: 120px; width: 230px; height: 115px; }
-    #d-cloud2 { left: 780px; top: 1440px; width: 200px; height: 100px; }
     #d-stage { position: absolute; inset: 0; }
-    .d-text { position: absolute; left: 90px; width: 900px; }
+    .d-c { position: absolute; left: 70px; width: 940px; text-align: center; }
     .d-w { display: inline-block; }
-    #d-kicker { top: 196px; font-family: "Quicksand", sans-serif; font-size: 30px; font-weight: 700; color: #C2306F; letter-spacing: 0.04em; }
-    #d-hook, #d-hold { top: 240px; max-height: 170px; font-size: 76px; font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; }
-    #d-answer { top: 232px; white-space: nowrap; font-size: 130px; font-weight: 700; line-height: 1.05; color: #E84A8B; letter-spacing: -0.01em; }
-    #d-stat, #d-cta { top: 392px; white-space: nowrap; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; }
-    #d-card {
-      position: absolute; left: 210px; top: 452px; width: 660px; height: 660px;
-      background: #FFFFFF; border: 4px solid #E8DCC6; border-radius: 40px;
-      box-shadow: 0 10px 0 rgba(45, 24, 16, 0.08);
-    }
-    #d-art { position: absolute; left: 240px; top: 482px; width: 600px; height: 600px; overflow: visible; }
-    #d-art path { fill: none; stroke: #2D1810; stroke-width: 4.6; stroke-linecap: round; stroke-linejoin: round; }
-    .d-row { position: absolute; top: 1134px; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; white-space: nowrap; }
-    #d-line-n { left: 210px; }
-    #d-got { left: 470px; width: 400px; text-align: right; color: #2F6E45; }
-    #d-credit { top: 1290px; font-family: "Quicksand", sans-serif; font-size: 28px; font-weight: 600; color: rgba(45, 24, 16, 0.6); text-align: center; }
+
+    /* The series tag; at the end it becomes the address */
+    .d-pill { position: absolute; top: 184px; left: 290px; width: 500px; text-align: center; padding: 10px 0 12px; border-radius: 40px; white-space: nowrap;
+      font-family: "Quicksand", sans-serif; font-size: 36px; font-weight: 700; letter-spacing: 0.05em; color: #FFFFFF; }
+    #d-tag, #d-tag2 { background: #E84A8B; }
+    #d-url { background: #2F6E45; letter-spacing: 0.01em; }
+
+    /* The line above the card: hook, then "got it yet?", then "final answer?", then the answer */
+    .d-head { top: 262px; height: 186px; display: flex; align-items: center; justify-content: center; font-size: 84px; font-weight: 700; line-height: 1.05; letter-spacing: -0.01em; }
+    #d-answer { color: #C2306F; white-space: nowrap; font-size: 140px; }
+
+    #d-card { position: absolute; left: 250px; top: 462px; width: 580px; height: 580px; background: #FFFFFF; border: 6px solid #2D1810; border-radius: 36px; box-shadow: 0 14px 0 rgba(45, 24, 16, 0.18); }
+    #d-art { position: absolute; left: 290px; top: 492px; width: 500px; height: 500px; overflow: visible; }
+    #d-art path { fill: none; stroke: #2D1810; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+    #d-credit { position: absolute; left: 256px; top: 1003px; width: 568px; text-align: center; font-family: "Quicksand", sans-serif; font-size: 22px; font-weight: 600; color: rgba(45, 24, 16, 0.6); }
+    #d-badge { position: absolute; left: 216px; top: 432px; padding: 8px 22px 10px; border-radius: 30px; background: #2D1810; color: #FFFFFF; font-size: 40px; font-weight: 700; white-space: nowrap; }
+
+    /* The final-answer timer: a ring that empties, the number inside */
+    #d-timer { position: absolute; left: 800px; top: 560px; width: 200px; height: 200px; }
+    #d-timer-num { position: absolute; left: 800px; top: 560px; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; font-size: 110px; font-weight: 700; color: #C2306F; }
+
+    /* The herd meter: how many players had it by this line, a sheep riding the fill */
+    #d-cow { position: absolute; left: 52px; top: 1040px; width: 160px; height: 160px; background: url("assets/img/cow.svg") center / contain no-repeat; }
+    #d-bubble { position: absolute; left: 158px; top: 1014px; width: 70px; height: 62px; border-radius: 31px; background: #FFFFFF; border: 4px solid #2D1810;
+      display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 700; }
+    #d-meter-label { position: absolute; left: 236px; top: 1066px; width: 620px; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; white-space: nowrap; }
+    #d-meter-label b { color: #2F6E45; }
+    #d-bar { position: absolute; left: 236px; top: 1124px; width: 620px; height: 30px; border-radius: 15px; background: rgba(255, 255, 255, 0.85); border: 4px solid #2D1810; overflow: hidden; }
+    #d-fill { position: absolute; left: 0; top: 0; height: 100%; width: 620px; background: #3D8B5A; transform-origin: 0 50%; }
+    #d-rider { position: absolute; left: 0; top: 1117px; width: 48px; height: 48px; background: url("assets/img/sheep.svg") center / contain no-repeat; }
+
+    /* After the reveal: how the herd did, then the comment line */
+    .d-low { font-weight: 700; line-height: 1.12; white-space: nowrap; }
+    #d-sting { top: 1178px; font-size: 50px; }
+    #d-cta { top: 1248px; font-size: 42px; font-family: "Quicksand", sans-serif; }
+    .d-low b { color: #C2306F; }
+
+    .d-bit { position: absolute; width: 18px; height: 30px; border-radius: 4px; }
   </style>
 
   <div id="root" data-composition-id="doodle" data-width="1080" data-height="1920">
     <div id="d-ground"></div>
     <div id="d-dots"></div>
-    <div id="d-cloud1" class="d-cloud"></div>
-    <div id="d-cloud2" class="d-cloud"></div>
 
     <div id="d-stage">
-      <div id="d-kicker" class="d-text"></div>
-      <!-- Hook: frame 0 is the thumbnail, the first line already drawn -->
-      <div id="d-hook" class="d-text clip" data-start="0" data-duration="10.2" data-track-index="1"></div>
-      <div id="d-hold" class="d-text clip" data-start="10.1" data-duration="1.0" data-track-index="2"></div>
-      <div id="d-answer" class="d-text clip" data-start="10.95" data-duration="6.65" data-track-index="3"><span id="d-answer-in"></span></div>
-      <div id="d-stat" class="d-text clip" data-start="11.85" data-duration="2.6" data-track-index="4"></div>
-      <div id="d-cta" class="d-text clip" data-start="14.4" data-duration="3.2" data-track-index="5"></div>
+      <div id="d-tag" class="d-pill clip" data-start="0" data-duration="13.25" data-track-index="1"></div>
+      <div id="d-url" class="d-pill clip" data-start="13.1" data-duration="1.65" data-track-index="2"></div>
+      <div id="d-tag2" class="d-pill clip" data-start="14.6" data-duration="0.8" data-track-index="1"></div>
+
+      <!-- Frame 0 is the thumbnail: the challenge, the first line already drawn -->
+      <div id="d-hook" class="d-c d-head clip" data-start="0" data-duration="2.85" data-track-index="3"><div id="d-hook-t"></div></div>
+      <div id="d-mid" class="d-c d-head clip" data-start="2.8" data-duration="3.85" data-track-index="4"><div id="d-mid-t"></div></div>
+      <div id="d-final" class="d-c d-head clip" data-start="6.6" data-duration="3.2" data-track-index="5"><div id="d-final-t"></div></div>
+      <div id="d-answer" class="d-c d-head clip" data-start="9.9" data-duration="4.8" data-track-index="6"><span id="d-answer-in"></span></div>
+      <div id="d-hook2" class="d-c d-head clip" data-start="14.65" data-duration="0.75" data-track-index="3"><div id="d-hook2-t"></div></div>
 
       <div id="d-card"></div>
       <svg id="d-art" viewBox="0 0 256 256"></svg>
+      <div id="d-credit"></div>
+      <div id="d-badge"></div>
 
-      <div id="d-line-n" class="d-row"></div>
-      <div id="d-got" class="d-row"></div>
-      <div id="d-credit" class="d-text"></div>
+      <svg id="d-timer" class="clip" data-start="6.5" data-duration="3.4" data-track-index="7" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="86" fill="#FFFFFF" stroke="#2D1810" stroke-width="8" />
+        <circle id="d-ring" cx="100" cy="100" r="70" fill="none" stroke="#E84A8B" stroke-width="18" stroke-linecap="round" transform="rotate(-90 100 100)" />
+      </svg>
+      <div id="d-timer-num" class="clip" data-start="6.5" data-duration="3.4" data-track-index="8"><span id="d-n">3</span></div>
+
+      <div id="d-cow"></div>
+      <div id="d-bubble"><span id="d-q">?</span><span id="d-x" style="position:absolute">!</span></div>
+      <div id="d-meter-label"></div>
+      <div id="d-bar"><div id="d-fill"></div></div>
+      <div id="d-rider"></div>
+
+      <div id="d-sting" class="d-c d-low clip" data-start="11.05" data-duration="3.75" data-track-index="9"></div>
+      <div id="d-cta" class="d-c d-low clip" data-start="12.2" data-duration="2.6" data-track-index="10"></div>
+
+      <div id="d-confetti" data-layout-allow-overflow></div>
     </div>
   </div>
 
@@ -69,83 +99,150 @@
       const STROKES = String(V.strokes).split("|").map((s) => s.split(",").map(Number));
       const N = STROKES.length;
       const GOT = String(V.gotByLine).split(",").map(Number);
-      const TIMES = [0].concat(String(V.lineTimes || "").split(",").filter(Boolean).map(Number));   // line k starts at TIMES[k]
       const CUM = GOT.reduce((a, g) => a.concat((a.length ? a[a.length - 1] : 0) + g), []);
-      const SLOT = N > 2 ? TIMES[2] - TIMES[1] : 2;
-      const DRAW = Math.min(0.7, SLOT * 0.8);
-      const COUNT = 0.4;   // the "got it" number counts up over this long after each line starts
+      const TIMES = [0].concat(String(V.lineTimes).split(",").filter(Boolean).map(Number));   // line k starts at TIMES[k]
+      const P = V.players;
+      const BAR = 620, X0 = 236;   // the meter bar's width and left edge
+      const T = { count: 6.6, reveal: 9.9, sting: 11.1, cta: 12.25, url: 13.1, rewind: 14.6, end: 15.4 };
 
-      document.getElementById("d-kicker").textContent = ("Guess the Doodle · " + V.date).toUpperCase();
-      const hookWords = H.words("d-hook", V.hook, "d-w");
-      const holdWords = H.words("d-hold", V.hold, "d-w");
+      document.getElementById("d-tag").textContent = V.tag.toUpperCase();
+      document.getElementById("d-tag2").textContent = V.tag.toUpperCase();
+      document.getElementById("d-url").textContent = V.url;
+      const hookW = H.words("d-hook-t", V.hook, "d-w");
+      H.words("d-hook2-t", V.hook, "d-w");
+      const midW = H.words("d-mid-t", V.mid, "d-w");
+      const finalW = H.words("d-final-t", V.final, "d-w");
       document.getElementById("d-answer-in").textContent = V.answer;
-      const statWords = H.words("d-stat", V.stat, "d-w");
-      const ctaWords = H.words("d-cta", V.cta, "d-w");
       document.getElementById("d-credit").textContent = V.credit;
+      // The sting: its first number in pink
+      document.getElementById("d-sting").innerHTML = String(V.sting).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/(\d[\d,]*)/, "<b>$1</b>");
+      const ctaW = H.words("d-cta", V.cta, "d-w");
 
       // The doodle, one path per line, in Quick, Draw!'s 256-unit square
       const art = document.getElementById("d-art");
-      const paths = STROKES.map((pts, k) => {
+      const paths = STROKES.map((pts) => {
         const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
         let d = "M " + pts[0] + " " + pts[1];
         for (let i = 2; i < pts.length; i += 2) d += " L " + pts[i] + " " + pts[i + 1];
         if (pts.length <= 2) d += " L " + (pts[0] + 0.5) + " " + pts[1];
         p.setAttribute("d", d);
-        p.setAttribute("id", "d-line-" + (k + 1));
         art.appendChild(p);
         return p;
       });
 
-      // The row under the card follows time: which line is up, and how many of the herd had it by then
-      const lineN = document.getElementById("d-line-n"), got = document.getElementById("d-got");
+      // Which line is up, and the herd meter, as functions of time (the rewind sends both back to line 1)
+      const badge = document.getElementById("d-badge"), label = document.getElementById("d-meter-label");
+      const lineAt = (t) => { if (t >= T.rewind + 0.5) return 0; let k = 0; while (k + 1 < N && t >= TIMES[k + 1]) k++; return k; };
       const clock = { t: 0 };
-      const showRow = () => {
-        let k = 0;
-        while (k + 1 < N && clock.t >= TIMES[k + 1]) k++;
-        const p = k === 0 ? 1 : Math.min(1, (clock.t - TIMES[k]) / COUNT);
-        const from = k === 0 ? CUM[0] : CUM[k - 1];
-        lineN.textContent = "Line " + (k + 1) + " of " + N;
-        got.textContent = H.num(Math.round(from + (CUM[k] - from) * p)) + " of " + H.num(V.players) + " got it";
+      const show = () => {
+        const t = clock.t, k = lineAt(t);
+        let got;
+        if (t >= T.rewind) got = CUM[0] + (CUM[N - 1] - CUM[0]) * Math.max(0, 1 - (t - T.rewind) / 0.6);
+        else if (k === 0) got = CUM[0];
+        else { const p = Math.min(1, (t - TIMES[k]) / 0.35); got = CUM[k - 1] + (CUM[k] - CUM[k - 1]) * p; }
+        got = Math.round(got);
+        badge.textContent = "LINE " + (k + 1);
+        label.innerHTML = "<b>" + H.num(got) + "</b> of " + H.num(P) + " got it";
+        const w = BAR * Math.max(0.04, got / P);
+        gsap.set("#d-fill", { scaleX: w / BAR });
+        gsap.set("#d-rider", { x: X0 + w - 24 });
       };
 
+      // Confetti for the reveal: seeded, so every render is the same
+      let seed = 11;
+      const rand = () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+      const COLORS = ["#E84A8B", "#3D8B5A", "#FFC93C", "#4FA3D9", "#FF7A45"];
+      const conf = document.getElementById("d-confetti");
+      const bits = Array.from({ length: 44 }, (_, i) => {
+        const b = document.createElement("div");
+        b.className = "d-bit";
+        b.style.background = COLORS[i % COLORS.length];
+        b.style.left = "531px"; b.style.top = "760px";
+        conf.appendChild(b);
+        const ang = -Math.PI / 2 + (rand() - 0.5) * 2.4, sp = 380 + rand() * 520;
+        return { b, dx: Math.cos(ang) * sp, dy: Math.sin(ang) * sp, rot: (rand() - 0.5) * 900, fall: 900 + rand() * 500 };
+      });
+
       H.fontsReady().then(() => {
-        H.fit("d-hook", { max: 76, min: 52, maxH: 170 });
-        H.fit("d-hold", { max: 76, min: 52, maxH: 170 });
-        H.fit("d-answer", { max: 130, min: 64 });
-        H.fit("d-stat", { max: 40, min: 28 });
-        H.fit("d-cta", { max: 40, min: 28 });
-        H.fit("d-credit", { max: 28, min: 22 });
+        ["d-hook", "d-hook2", "d-mid", "d-final"].forEach((id) => H.fit(id, { max: 84, min: 56, maxH: 186 }));
+        H.fit("d-answer", { max: 140, min: 70 });
+        H.fit("d-sting", { max: 50, min: 34 });
+        H.fit("d-cta", { max: 42, min: 30 });
         const lens = paths.map((p) => p.getTotalLength() + 1);
+        const RING = 2 * Math.PI * 70;
 
         const tl = gsap.timeline({ paused: true });
-        showRow();
-        tl.fromTo(clock, { t: 0 }, { t: 10.6, duration: 10.6, ease: "none", onUpdate: showRow }, 0);
+        show();
+        tl.fromTo(clock, { t: 0 }, { t: T.end, duration: T.end, ease: "none", onUpdate: show }, 0);
+        gsap.set(bits.map((x) => x.b), { opacity: 0 });
+        gsap.set("#d-badge", { rotation: -6 });
+        gsap.set("#d-x", { opacity: 0 });
 
-        // Clouds drift (the world)
-        tl.fromTo("#d-cloud1", { x: 0 }, { x: 100, duration: 17, ease: "none" }, 0);
-        tl.fromTo("#d-cloud2", { x: 0 }, { x: -84, duration: 17, ease: "none" }, 0);
-
-        // Line 1 is there at frame 0 (the game starts with it drawn); each next line draws on in its slot
+        // Line 1 is there at frame 0; each next line draws in its slot (fast once past line 3)
         paths.forEach((p, k) => {
           if (k === 0) { gsap.set(p, { strokeDasharray: lens[0], strokeDashoffset: 0 }); return; }
-          tl.fromTo(p, { strokeDasharray: lens[k], strokeDashoffset: lens[k] }, { strokeDashoffset: 0, duration: DRAW, ease: "power1.inOut" }, TIMES[k]);
+          const slot = (TIMES[k + 1] || T.count - 0.1) - TIMES[k];
+          tl.fromTo(p, { strokeDasharray: lens[k], strokeDashoffset: lens[k] }, { strokeDashoffset: 0, duration: Math.max(0.16, Math.min(0.85, slot * 0.85)), ease: "power1.inOut" }, TIMES[k]);
+          tl.fromTo("#d-badge", { scale: 1 }, { keyframes: { scale: [1, 1.18, 1] }, duration: 0.24, ease: "none" }, TIMES[k]);
         });
-        // The row ticks each time a line lands
-        for (let k = 1; k < N; k++) tl.fromTo("#d-got", { scale: 1 }, { keyframes: { scale: [1, 1.08, 1] }, duration: 0.3, ease: "none", transformOrigin: "100% 50%" }, TIMES[k] + 0.05);
 
-        // Hold, then the answer: the drawing turns pink as the word lands
-        tl.to(hookWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 9.95);
-        tl.fromTo(holdWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 10.15);
-        tl.fromTo("#d-card", { scale: 1 }, { keyframes: { scale: [1, 0.97, 1.03, 1] }, duration: 0.45, ease: "none" }, 10.95);
-        tl.fromTo("#d-art", { scale: 1 }, { keyframes: { scale: [1, 0.97, 1.03, 1] }, duration: 0.45, ease: "none", transformOrigin: "50% 50%" }, 10.95);
-        tl.to(paths, { stroke: "#E84A8B", duration: 0.3, ease: "power2.out" }, 11.0);
-        tl.fromTo("#d-answer-in", { opacity: 0, scale: 1.25, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out", transformOrigin: "0% 50%" }, 11.0);
-        tl.fromTo(statWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 11.9);
-        tl.to(statWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 14.25);
-        tl.fromTo(ctaWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 14.45);
+        // The cow thinks while you guess, fidgets through the countdown, jumps at the answer
+        tl.fromTo("#d-cow", { rotation: 0 }, { keyframes: { rotation: [0, -5, 0, 5, 0, -5, 0, 5, 0] }, duration: 6.4, ease: "none", transformOrigin: "50% 90%" }, 0.2);
+        tl.fromTo("#d-cow", { x: 0 }, { keyframes: { x: [0, -4, 4, -4, 4, -4, 4, -4, 4, 0] }, duration: 3.0, ease: "none" }, T.count);
+        tl.fromTo("#d-cow", { y: 0 }, { keyframes: { y: [0, -70, 0, -26, 0] }, duration: 0.7, ease: "none" }, T.reveal);
+        tl.to("#d-q", { opacity: 0, duration: 0.05 }, T.reveal);
+        tl.to("#d-x", { opacity: 1, duration: 0.05 }, T.reveal);
+        tl.to("#d-x", { opacity: 0, duration: 0.05 }, T.rewind + 0.6);
+        tl.to("#d-q", { opacity: 1, duration: 0.05 }, T.rewind + 0.6);
+        tl.fromTo("#d-bubble", { scale: 1 }, { keyframes: { scale: [1, 1.3, 1] }, duration: 0.3, ease: "none" }, T.reveal);
 
-        // Hand-off to the end card
-        tl.to("#d-stage", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 17.2);
+        // The line above the card changes at line 3 (a pattern break) and again for the countdown
+        tl.to(hookW, { opacity: 0, y: -20, duration: 0.15, stagger: 0.02, ease: "power2.in" }, 2.65);
+        tl.fromTo(midW, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.28, stagger: 0.06, ease: "back.out(2)" }, 2.85);
+        tl.to(midW, { opacity: 0, y: -20, duration: 0.15, stagger: 0.02, ease: "power2.in" }, 6.45);
+        tl.fromTo(finalW, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.28, stagger: 0.06, ease: "back.out(2)" }, 6.65);
+
+        // 3, 2, 1: the ring empties, the number pops each second
+        tl.fromTo("#d-ring", { strokeDasharray: RING, strokeDashoffset: 0 }, { strokeDashoffset: RING, duration: 3.0, ease: "none" }, T.count);
+        tl.fromTo(["#d-timer", "#d-timer-num"], { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2)", transformOrigin: "50% 50%" }, 6.5);
+        [3, 2, 1].forEach((n, i) => {
+          tl.set("#d-n", { textContent: String(n) }, T.count + i);
+          tl.fromTo("#d-n", { scale: 1.5 }, { scale: 1, duration: 0.3, ease: "back.out(2.5)" }, T.count + i);
+        });
+        tl.to(["#d-timer", "#d-timer-num"], { scale: 0, duration: 0.15, ease: "power2.in", transformOrigin: "50% 50%" }, 9.62);
+        // The held breath before the answer
+        tl.fromTo(["#d-card", "#d-art"], { x: 0 }, { keyframes: { x: [0, -6, 6, -6, 6, 0] }, duration: 0.25, ease: "none" }, 9.62);
+
+        // The reveal: the word slams in, the drawing goes pink, the card punches in, confetti
+        tl.to(finalW, { opacity: 0, duration: 0.08 }, 9.82);
+        tl.fromTo("#d-answer-in", { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(1.8)", transformOrigin: "50% 50%" }, T.reveal);
+        tl.fromTo(["#d-card", "#d-art"], { scale: 1 }, { keyframes: { scale: [1, 1.07, 1] }, duration: 0.45, ease: "none", transformOrigin: "50% 50%" }, T.reveal);
+        tl.to(paths, { stroke: "#E84A8B", duration: 0.2, ease: "power2.out" }, T.reveal);
+        bits.forEach((x, i) => {
+          const t0 = T.reveal + (i % 6) * 0.015;
+          tl.set(x.b, { opacity: 1 }, t0);
+          tl.fromTo(x.b, { x: 0, y: 0, rotation: 0 }, { x: x.dx, y: x.dy, rotation: x.rot * 0.4, duration: 0.5, ease: "power2.out" }, t0);
+          tl.to(x.b, { y: x.dy + x.fall, x: x.dx * 1.15, rotation: x.rot, duration: 1.3, ease: "power1.in" }, t0 + 0.5);
+          tl.set(x.b, { opacity: 0 }, t0 + 1.8);
+        });
+
+        // How the herd did, then the comment line
+        tl.fromTo("#d-sting", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.sting);
+        tl.fromTo("#d-bar", { scale: 1 }, { keyframes: { scale: [1, 1.04, 1] }, duration: 0.35, ease: "none" }, T.sting);
+        tl.fromTo(ctaW, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.cta);
+        tl.fromTo("#d-url", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.25, ease: "back.out(2)" }, T.url);
+        tl.to("#d-tag", { opacity: 0, duration: 0.12 }, T.url);
+
+        // Rewind to frame 0 so the loop is seamless: lines undraw, the drawing goes back to ink
+        tl.to(["#d-sting", ...ctaW], { opacity: 0, duration: 0.12 }, T.rewind);
+        tl.to("#d-answer-in", { opacity: 0, scale: 0.6, duration: 0.15, ease: "power2.in" }, T.rewind);
+        for (let k = N - 1; k >= 1; k--) tl.to(paths[k], { strokeDashoffset: lens[k], duration: 0.08, ease: "none" }, T.rewind + (N - 1 - k) * (0.5 / Math.max(1, N - 1)));
+        tl.to(paths, { stroke: "#2D1810", duration: 0.2, ease: "none" }, T.rewind);
+        tl.to("#d-url", { opacity: 0, duration: 0.1 }, T.rewind + 0.05);
+        tl.fromTo("#d-tag2", { opacity: 0 }, { opacity: 1, duration: 0.15 }, T.rewind + 0.05);
+        tl.fromTo("#d-hook2", { opacity: 0 }, { opacity: 1, duration: 0.2 }, T.rewind + 0.15);
+        // Something moves in the first half second: the line badge pops
+        tl.fromTo("#d-badge", { scale: 1 }, { keyframes: { scale: [1, 1.22, 1] }, duration: 0.3, ease: "none" }, 0.35);
 
         window.__timelines["doodle"] = tl;
       });

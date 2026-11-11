@@ -1,0 +1,43 @@
+# Sound effects
+
+All CC0 (public domain) from Freesound: no credit is required; listed so anyone can find the originals.
+
+- `tick-1.mp3` (each second of a countdown): "clock-tick-01.flac" by pbimal, https://freesound.org/people/pbimal/sounds/534094/
+- `tick-2.mp3` (each second of a countdown): "SFX Ambiance: Clock Tick" by trullilulli, https://freesound.org/people/trullilulli/sounds/422642/
+- `tick-3.mp3` (each second of a countdown): "assymetric_tick.wav" by Diboz, https://freesound.org/people/Diboz/sounds/211203/
+- `drumroll-1.mp3` (the hold right before the answer): "Tat-Tat.wav" by Bitbeast, https://freesound.org/people/Bitbeast/sounds/13149/
+- `drumroll-2.mp3` (the hold right before the answer): "Tat-Tat_2.wav" by Bitbeast, https://freesound.org/people/Bitbeast/sounds/13150/
+- `ding-1.mp3` (the answer revealed / right): "correct" by ertfelda, https://freesound.org/people/ertfelda/sounds/243701/
+- `ding-2.mp3` (the answer revealed / right): "Correct Bell" by Fupicat, https://freesound.org/people/Fupicat/sounds/538147/
+- `buzzer-1.mp3` (wrong / time up): "buzzer.wav" by guitarguy1985, https://freesound.org/people/guitarguy1985/sounds/54047/
+- `ooh-1.mp3` (a surprising number): "Group Ooh 2" by CHallSmith, https://freesound.org/people/CHallSmith/sounds/870651/
+- `ooh-2.mp3` (a surprising number): "Group Ooh 1" by CHallSmith, https://freesound.org/people/CHallSmith/sounds/870650/
+- `cheer-1.mp3` (the big reveal landing): "Burst of a short clap.mp3" by mrrap4food, https://freesound.org/people/mrrap4food/sounds/619035/
+- `cheer-2.mp3` (the big reveal landing): "CRWDCheer_Short Affirmative Cheer_ShaneVincent_GSC24_SpacedOmni-MK012.wav" by ShangusBurger, https://freesound.org/people/ShangusBurger/sounds/764274/
+- `whoosh-1.mp3` (a big element moving fast, a scene change): "Whoosh" by qubodup, https://freesound.org/people/qubodup/sounds/60013/
+- `whoosh-2.mp3` (a big element moving fast, a scene change): "swosh-22.flac" by qubodup, https://freesound.org/people/qubodup/sounds/60009/
+- `whoosh-3.mp3` (a big element moving fast, a scene change): "Swosh / Whoosh / Air Cut" by qubodup, https://freesound.org/people/qubodup/sounds/60030/
+- `pop-1.mp3` (a chip, badge or number landing): "Plop!" by Breviceps, https://freesound.org/people/Breviceps/sounds/447910/
+- `pop-2.mp3` (a chip, badge or number landing): "cartoon pop or drip" by AlaskaRobotics, https://freesound.org/people/AlaskaRobotics/sounds/221091/
+- `pop-3.mp3` (a chip, badge or number landing): "Pop Sound" by ConarB13, https://freesound.org/people/ConarB13/sounds/401542/
+- `flip-1.mp3` (a tile or card flipping): "cardsound32562" by memes_hodachy, https://freesound.org/people/memes_hodachy/sounds/554208/
+- `flip-2.mp3` (a tile or card flipping): "paper" by 1bob, https://freesound.org/people/1bob/sounds/651514/
+- `flip-3.mp3` (a tile or card flipping): "card-flipping-75622 (1)-[AudioTrimmer.com]" by ajaysingh318, https://freesound.org/people/ajaysingh318/sounds/793598/
+- `pencil-1.mp3` (a doodle line drawing): "Scribble" by Tomoyo Ichijouji, https://freesound.org/people/Tomoyo%20Ichijouji/sounds/211247/
+- `pencil-2.mp3` (a doodle line drawing): "Scribble_short.wav" by waldram, https://freesound.org/people/waldram/sounds/257518/
+- `pencil-3.mp3` (a doodle line drawing): "Scribble.wav" by TiesWijnen, https://freesound.org/people/TiesWijnen/sounds/341738/
+- `baa-1.mp3` (the herd arriving (our signature)): "sheep 3.mp3" by esperar, https://freesound.org/people/esperar/sounds/171149/
+- `baa-2.mp3` (the herd arriving (our signature)): "sheep 2.mp3" by esperar, https://freesound.org/people/esperar/sounds/171151/
+- `baa-3.mp3` (the herd arriving (our signature)): "sheep 1" by esperar, https://freesound.org/people/esperar/sounds/171152/
+- `moo-1.mp3` (the cow host reacting): "z-moo01.wav" by Zozzy, https://freesound.org/people/Zozzy/sounds/59245/
+- `impact-1.mp3` (the reveal hit (mid-range: phone speakers lose sub-bass)): "Kick_Drum_Hard_#3.wav" by Renovatio871, https://freesound.org/people/Renovatio871/sounds/190551/
+- `impact-2.mp3` (the reveal hit (mid-range: phone speakers lose sub-bass)): "Tennis smash" by gprosser, https://freesound.org/people/gprosser/sounds/412863/
+- `key-1.mp3` (a letter tile landing): "keyboard5.wav" by jim-ph, https://freesound.org/people/jim-ph/sounds/194799/
+- `key-2.mp3` (a letter tile landing): "Typewriter - single key - type 2.wav" by yottasounds, https://freesound.org/people/yottasounds/sounds/380137/
+- `key-3.mp3` (a letter tile landing): "Typewriter - single key - type 1.wav" by yottasounds, https://freesound.org/people/yottasounds/sounds/380138/
+- `riser-1.mp3` (tension into the reveal): "Riser sound effect short.wav" by syntheffects, https://freesound.org/people/syntheffects/sounds/685256/
+- `tada-1.mp3` (the answer revealed: the celebration): "Tada Fanfare A" by plasterbrain, https://freesound.org/people/plasterbrain/sounds/397355/
+- `tada-2.mp3` (the answer revealed: the celebration): "Tada Fanfare G" by plasterbrain, https://freesound.org/people/plasterbrain/sounds/397353/
+- `build-1.mp3` (the rumbling roll into the reveal): "IMPACT ROLL" by XHALE303, https://freesound.org/people/XHALE303/sounds/535607/
+- `beep-1.mp3` (the last 3 seconds of a countdown): "Countdown 1.wav" by basarunder, https://freesound.org/people/basarunder/sounds/515317/
+- `rimshot-1.mp3` (a joke landing (ba-dum-tss)): "Rimshot 1.wav" by Sorinious_Genious, https://freesound.org/people/Sorinious_Genious/sounds/573259/

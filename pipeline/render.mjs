@@ -63,6 +63,12 @@ export async function render({ format, day, pick = {}, quality = 'looks' }) {
   if (r.code !== 0 || !fs.existsSync(file)) throw new Error(`render failed:\n${r.out.slice(-2000)}`);
   if (fs.statSync(file).size < 100 * 1024) throw new Error(`render is only ${fs.statSync(file).size} bytes`);
 
+  // Loudness: Shorts and Reels play at about -14 LUFS; a quieter video sounds weak next to its neighbours
+  const loud = path.join(ROOT, 'renders', `${name}.loud.mp4`);
+  const ln = run('ffmpeg', ['-y', '-loglevel', 'error', '-i', q(file), '-c:v', 'copy', '-af', 'loudnorm=I=-14:TP=-1.5:LRA=11,alimiter=limit=0.84:level=false', '-c:a', 'aac', '-b:a', '192k', q(loud)]);
+  if (ln.code !== 0 || !fs.existsSync(loud)) throw new Error(`loudness pass failed: ${ln.out.slice(-400)}`);
+  fs.renameSync(loud, file);
+
   const probe = run('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', q(file)]);
   const duration = Number(probe.out.trim());
   if (!(Math.abs(duration - b.duration) < 0.25)) throw new Error(`rendered ${duration}s, composition is ${b.duration}s`);

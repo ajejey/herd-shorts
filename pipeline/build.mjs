@@ -19,6 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, FORMATS, readJson, NotEligible } from './lib.mjs';
+import { syncInto } from './sync-shared.mjs';
 
 const SKIP = new Set(['.hyperframes', '.media', 'node_modules', 'renders', 'out', 'snapshots']);
 
@@ -83,16 +84,20 @@ export async function build({ format, day, pick = {}, out }) {
     for (const e of fs.readdirSync(dir)) if (e !== '.hyperframes') fs.rmSync(path.join(dir, e), { recursive: true, force: true });
   }
   copyDir(template, dir);
-  fs.copyFileSync(path.join(ROOT, 'templates', '_shared', 'herd.js'), path.join(dir, 'assets', 'herd.js'));
+  syncInto(dir);
 
   const filled = decl.map((d) => ({ ...d, default: values[d.id] }));
   let html = src.replace(VARS_RE, () => `data-composition-variables='${encode(JSON.stringify(filled, null, 0).replace(/\},\{/g, '},\n    {'))}'`);
   html = html.replace(/[ \t]*<(\w+)\b[^>]*\sdata-if="(\w+)"[^>]*>[\s\S]*?<\/\1>\n?/g, (whole, _tag, id) => (values[id] ? whole : ''));
-  // data-each="<variable>": one copy per time in that comma list (e.g. a sound on every line of a doodle)
+  // data-each="<variable>": one copy per time in that comma list (e.g. a sound on every line of a doodle).
+  // data-rotate="a.mp3|b.mp3|c.mp3" beside it: the copies take turns, so no two in a row are the same take.
   html = html.replace(/([ \t]*)(<(\w+)\b[^>]*\sdata-each="(\w+)"[^>]*>[\s\S]*?<\/\3>)\n?/g, (whole, indent, el, _tag, id) => {
     const times = String(values[id] || '').split(',').filter(Boolean).map(Number);
+    const takes = ((el.match(/\sdata-rotate="([^"]+)"/) || [])[1] || '').split('|').filter(Boolean);
     return times.map((t, i) => `${indent}${el
       .replace(/\sdata-each="\w+"/, '')
+      .replace(/\sdata-rotate="[^"]*"/, '')
+      .replace(/\ssrc="[^"]*"/, (m) => (takes.length ? ` src="${takes[i % takes.length]}"` : m))
       .replace(/\sid="([^"]+)"/, (m, base) => ` id="${base}-${i + 1}"`)
       .replace(/\sdata-start="[^"]*"/, ` data-start="${t.toFixed(3)}"`)}\n`).join('');
   });

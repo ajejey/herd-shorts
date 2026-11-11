@@ -1,0 +1,352 @@
+{
+  "tick": [
+    {
+      "file": "tick-1.mp3",
+      "duration": 0.443,
+      "source": "https://freesound.org/people/pbimal/sounds/534094/",
+      "title": "clock-tick-01.flac",
+      "by": "pbimal",
+      "license": "CC0"
+    },
+    {
+      "file": "tick-2.mp3",
+      "duration": 0.103,
+      "source": "https://freesound.org/people/trullilulli/sounds/422642/",
+      "title": "SFX Ambiance: Clock Tick",
+      "by": "trullilulli",
+      "license": "CC0"
+    },
+    {
+      "file": "tick-3.mp3",
+      "duration": 0.962,
+      "source": "https://freesound.org/people/Diboz/sounds/211203/",
+      "title": "assymetric_tick.wav",
+      "by": "Diboz",
+      "license": "CC0"
+    }
+  ],
+  "drumroll": [
+    {
+      "file": "drumroll-1.mp3",
+      "duration": 2,
+      "source": "https://freesound.org/people/Bitbeast/sounds/13149/",
+      "title": "Tat-Tat.wav",
+      "by": "Bitbeast",
+      "license": "CC0"
+    },
+    {
+      "file": "drumroll-2.mp3",
+      "duration": 2,
+      "source": "https://freesound.org/people/Bitbeast/sounds/13150/",
+      "title": "Tat-Tat_2.wav",
+      "by": "Bitbeast",
+      "license": "CC0"
+    }
+  ],
+  "ding": [
+    {
+      "file": "ding-1.mp3",
+      "duration": 0.307,
+      "source": "https://freesound.org/people/ertfelda/sounds/243701/",
+      "title": "correct",
+      "by": "ertfelda",
+      "license": "CC0"
+    },
+    {
+      "file": "ding-2.mp3",
+      "duration": 1.598,
+      "source": "https://freesound.org/people/Fupicat/sounds/538147/",
+      "title": "Correct Bell",
+      "by": "Fupicat",
+      "license": "CC0"
+    }
+  ],
+  "buzzer": [
+    {
+      "file": "buzzer-1.mp3",
+      "duration": 1.919,
+      "source": "https://freesound.org/people/guitarguy1985/sounds/54047/",
+      "title": "buzzer.wav",
+      "by": "guitarguy1985",
+      "license": "CC0"
+    }
+  ],
+  "ooh": [
+    {
+      "file": "ooh-1.mp3",
+      "duration": 2.869,
+      "source": "https://freesound.org/people/CHallSmith/sounds/870651/",
+      "title": "Group Ooh 2",
+      "by": "CHallSmith",
+      "license": "CC0"
+    },
+    {
+      "file": "ooh-2.mp3",
+      "duration": 2.801,
+      "source": "https://freesound.org/people/CHallSmith/sounds/870650/",
+      "title": "Group Ooh 1",
+      "by": "CHallSmith",
+      "license": "CC0"
+    }
+  ],
+  "cheer": [
+    {
+      "file": "cheer-1.mp3",
+      "duration": 3.499,
+      "source": "https://freesound.org/people/mrrap4food/sounds/619035/",
+      "title": "Burst of a short clap.mp3",
+      "by": "mrrap4food",
+      "license": "CC0"
+    },
+    {
+      "file": "cheer-2.mp3",
+      "duration": 2.901,
+      "source": "https://freesound.org/people/ShangusBurger/sounds/764274/",
+      "title": "CRWDCheer_Short Affirmative Cheer_ShaneVincent_GSC24_SpacedOmni-MK012.wav",
+      "by": "ShangusBurger",
+      "license": "CC0"
+    }
+  ],
+  "whoosh": [
+    {
+      "file": "whoosh-1.mp3",
+      "duration": 0.426,
+      "source": "https://freesound.org/people/qubodup/sounds/60013/",
+      "title": "Whoosh",
+      "by": "qubodup",
+      "license": "CC0"
+    },
+    {
+      "file": "whoosh-2.mp3",
+      "duration": 0.307,
+      "source": "https://freesound.org/people/qubodup/sounds/60009/",
+      "title": "swosh-22.flac",
+      "by": "qubodup",
+      "license": "CC0"
+    },
+    {
+      "file": "whoosh-3.mp3",
+      "duration": 0.437,
+      "source": "https://freesound.org/people/qubodup/sounds/60030/",
+      "title": "Swosh / Whoosh / Air Cut",
+      "by": "qubodup",
+      "license": "CC0"
+    }
+  ],
+  "pop": [
+    {
+      "file": "pop-1.mp3",
+      "duration": 0.243,
+      "source": "https://freesound.org/people/Breviceps/sounds/447910/",
+      "title": "Plop!",
+      "by": "Breviceps",
+      "license": "CC0"
+    },
+    {
+      "file": "pop-2.mp3",
+      "duration": 0.122,
+      "source": "https://freesound.org/people/AlaskaRobotics/sounds/221091/",
+      "title": "cartoon pop or drip",
+      "by": "AlaskaRobotics",
+      "license": "CC0"
+    },
+    {
+      "file": "pop-3.mp3",
+      "duration": 0.155,
+      "source": "https://freesound.org/people/ConarB13/sounds/401542/",
+      "title": "Pop Sound",
+      "by": "ConarB13",
+      "license": "CC0"
+    }
+  ],
+  "flip": [
+    {
+      "file": "flip-1.mp3",
+      "duration": 0.619,
+      "source": "https://freesound.org/people/memes_hodachy/sounds/554208/",
+      "title": "cardsound32562",
+      "by": "memes_hodachy",
+      "license": "CC0"
+    },
+    {
+      "file": "flip-2.mp3",
+      "duration": 0.436,
+      "source": "https://freesound.org/people/1bob/sounds/651514/",
+      "title": "paper",
+      "by": "1bob",
+      "license": "CC0"
+    },
+    {
+      "file": "flip-3.mp3",
+      "duration": 0.776,
+      "source": "https://freesound.org/people/ajaysingh318/sounds/793598/",
+      "title": "card-flipping-75622 (1)-[AudioTrimmer.com]",
+      "by": "ajaysingh318",
+      "license": "CC0"
+    }
+  ],
+  "pencil": [
+    {
+      "file": "pencil-1.mp3",
+      "duration": 1.145,
+      "source": "https://freesound.org/people/Tomoyo%20Ichijouji/sounds/211247/",
+      "title": "Scribble",
+      "by": "Tomoyo Ichijouji",
+      "license": "CC0"
+    },
+    {
+      "file": "pencil-2.mp3",
+      "duration": 1.23,
+      "source": "https://freesound.org/people/waldram/sounds/257518/",
+      "title": "Scribble_short.wav",
+      "by": "waldram",
+      "license": "CC0"
+    },
+    {
+      "file": "pencil-3.mp3",
+      "duration": 0.759,
+      "source": "https://freesound.org/people/TiesWijnen/sounds/341738/",
+      "title": "Scribble.wav",
+      "by": "TiesWijnen",
+      "license": "CC0"
+    }
+  ],
+  "baa": [
+    {
+      "file": "baa-1.mp3",
+      "duration": 0.744,
+      "source": "https://freesound.org/people/esperar/sounds/171149/",
+      "title": "sheep 3.mp3",
+      "by": "esperar",
+      "license": "CC0"
+    },
+    {
+      "file": "baa-2.mp3",
+      "duration": 1.095,
+      "source": "https://freesound.org/people/esperar/sounds/171151/",
+      "title": "sheep 2.mp3",
+      "by": "esperar",
+      "license": "CC0"
+    },
+    {
+      "file": "baa-3.mp3",
+      "duration": 0.593,
+      "source": "https://freesound.org/people/esperar/sounds/171152/",
+      "title": "sheep 1",
+      "by": "esperar",
+      "license": "CC0"
+    }
+  ],
+  "moo": [
+    {
+      "file": "moo-1.mp3",
+      "duration": 1.716,
+      "source": "https://freesound.org/people/Zozzy/sounds/59245/",
+      "title": "z-moo01.wav",
+      "by": "Zozzy",
+      "license": "CC0"
+    }
+  ],
+  "impact": [
+    {
+      "file": "impact-1.mp3",
+      "duration": 0.456,
+      "source": "https://freesound.org/people/Renovatio871/sounds/190551/",
+      "title": "Kick_Drum_Hard_#3.wav",
+      "by": "Renovatio871",
+      "license": "CC0"
+    },
+    {
+      "file": "impact-2.mp3",
+      "duration": 1.278,
+      "source": "https://freesound.org/people/gprosser/sounds/412863/",
+      "title": "Tennis smash",
+      "by": "gprosser",
+      "license": "CC0"
+    }
+  ],
+  "key": [
+    {
+      "file": "key-1.mp3",
+      "duration": 0.393,
+      "source": "https://freesound.org/people/jim-ph/sounds/194799/",
+      "title": "keyboard5.wav",
+      "by": "jim-ph",
+      "license": "CC0"
+    },
+    {
+      "file": "key-2.mp3",
+      "duration": 0.27,
+      "source": "https://freesound.org/people/yottasounds/sounds/380137/",
+      "title": "Typewriter - single key - type 2.wav",
+      "by": "yottasounds",
+      "license": "CC0"
+    },
+    {
+      "file": "key-3.mp3",
+      "duration": 0.271,
+      "source": "https://freesound.org/people/yottasounds/sounds/380138/",
+      "title": "Typewriter - single key - type 1.wav",
+      "by": "yottasounds",
+      "license": "CC0"
+    }
+  ],
+  "riser": [
+    {
+      "file": "riser-1.mp3",
+      "duration": 2.332,
+      "source": "https://freesound.org/people/syntheffects/sounds/685256/",
+      "title": "Riser sound effect short.wav",
+      "by": "syntheffects",
+      "license": "CC0"
+    }
+  ],
+  "tada": [
+    {
+      "file": "tada-1.mp3",
+      "duration": 1.696,
+      "source": "https://freesound.org/people/plasterbrain/sounds/397355/",
+      "title": "Tada Fanfare A",
+      "by": "plasterbrain",
+      "license": "CC0"
+    },
+    {
+      "file": "tada-2.mp3",
+      "duration": 1.686,
+      "source": "https://freesound.org/people/plasterbrain/sounds/397353/",
+      "title": "Tada Fanfare G",
+      "by": "plasterbrain",
+      "license": "CC0"
+    }
+  ],
+  "build": [
+    {
+      "file": "build-1.mp3",
+      "duration": 3.226,
+      "source": "https://freesound.org/people/XHALE303/sounds/535607/",
+      "title": "IMPACT ROLL",
+      "by": "XHALE303",
+      "license": "CC0"
+    }
+  ],
+  "beep": [
+    {
+      "file": "beep-1.mp3",
+      "duration": 0.67,
+      "source": "https://freesound.org/people/basarunder/sounds/515317/",
+      "title": "Countdown 1.wav",
+      "by": "basarunder",
+      "license": "CC0"
+    }
+  ],
+  "rimshot": [
+    {
+      "file": "rimshot-1.mp3",
+      "duration": 2.661,
+      "source": "https://freesound.org/people/Sorinious_Genious/sounds/573259/",
+      "title": "Rimshot 1.wav",
+      "by": "Sorinious_Genious",
+      "license": "CC0"
+    }
+  ]
+}

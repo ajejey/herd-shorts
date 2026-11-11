@@ -17,6 +17,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits } from './lib.mjs';
 import { declaredVariables, checkValues, build } from './build.mjs';
+import { staleIn } from './sync-shared.mjs';
 
 let failures = 0;
 const is = (msg, cond, detail = '') => {
@@ -35,6 +36,12 @@ for (const [format, dir] of Object.entries(FORMATS)) {
   if (!fs.existsSync(tpl)) { is(`${format}: has a template`, false); continue; }
   const decl = declaredVariables(fs.readFileSync(tpl, 'utf8'));
   is(`${format}: template carries the current shared helper`, fs.readFileSync(path.join(ROOT, 'templates', dir, 'assets', 'herd.js'), 'utf8') === shared);
+  const stale = staleIn(path.join(ROOT, 'templates', dir));
+  is(`${format}: template's shared sounds and music are current (node pipeline/sync-shared.mjs)`, stale.length === 0, stale.slice(0, 5).join(', '));
+  // Every sound or music file the template plays exists
+  const html = fs.readFileSync(tpl, 'utf8');
+  const missing = [...html.matchAll(/(?:src|data-rotate)="([^"]+\.mp3[^"]*)"/g)].flatMap((m) => m[1].split('|')).filter((f) => !fs.existsSync(path.join(ROOT, 'templates', dir, f)));
+  is(`${format}: every sound it plays is there`, missing.length === 0, missing.join(', '));
   is(`${format}: the template's own defaults pass its contract`, checkValues(decl, Object.fromEntries(decl.map((d) => [d.id, d.default]))).length === 0);
   const { vars } = await fmt(dir);
   let made = 0;
@@ -108,9 +115,12 @@ const C = await fmt('c-dial');
 
 /* ── D-G: the timing lists the sounds follow ─────────────────────────────── */
 const D = await fmt('d-doodle');
-for (const n of [5, 7, 10, 16]) {
-  const t = D.lineTimes(n);
-  is(`D: ${n} lines → ${n - 1} draws, from 1.4 s to 9.4 s, in order`, t.length === n - 1 && Math.abs(t[0] - 1.4) < 1e-9 && Math.abs(t[t.length - 1] - 9.4) < 1e-9 && t.every((x, i) => !i || x > t[i - 1]));
+for (const n of [3, 5, 7, 10, 16]) {
+  const t = D.lineTimes(n), s = D.scribbleTimes(n);
+  // Lines 2 and 3 get a beat each (the challenge is "before line 3"); all lines are down before the countdown
+  is(`D: ${n} lines → ${n - 1} draws: line 2 at ${D.T.line2} s, line 3 at ${D.T.line3} s, all before the countdown (${D.T.count} s), in order`,
+    t.length === n - 1 && t[0] === D.T.line2 && t[1] === D.T.line3 && t[t.length - 1] < D.T.count - 0.3 && t.every((x, i) => !i || x > t[i - 1]));
+  is(`D: ${n} lines → pencil sounds never closer than 0.5 s (${s.length})`, s.every((x, i) => !i || x - s[i - 1] >= 0.5 - 1e-9) && s[0] === D.T.line2);
 }
 const E = await fmt('e-word-climb');
 is('E: 7 rungs fill from 1.3 s to 8.2 s', (() => { const t = E.rungTimes(7); return t.length === 7 && t[0] === 1.3 && Math.abs(t[6] - 8.2) < 1e-9; })());
@@ -121,9 +131,11 @@ is('E: 7 rungs fill from 1.3 s to 8.2 s', (() => { const t = E.rungTimes(7); ret
   try {
     const r = await build({ format: 'D-doodle', day: d, out: path.join(ROOT, 'out', '_check-d') });
     const html = fs.readFileSync(path.join(r.dir, 'index.html'), 'utf8');
-    const want = String(r.values.lineTimes).split(',').filter(Boolean).length;
-    const got = (html.match(/id="snd-line-\d+"/g) || []).length;
-    is(`builder: data-each made one line sound per drawn line (${got}/${want})`, got === want && !html.includes('data-each='));
+    const want = String(r.values.scribbleTimes).split(',').filter(Boolean).length;
+    const tags = html.match(/<audio id="snd-pencil-\d+"[^>]*>/g) || [];
+    is(`builder: data-each made one pencil sound per scribble time (${tags.length}/${want})`, tags.length === want && !html.includes('data-each=') && !html.includes('data-rotate='));
+    const srcs = tags.map((t) => (t.match(/src="([^"]+)"/) || [])[1]);
+    is('builder: data-rotate takes turns (no two pencil sounds in a row are the same take)', srcs.every((x, i) => !i || x !== srcs[i - 1]), srcs.join(' '));
     is('builder: the day\'s values are written in as defaults', html.includes(JSON.stringify(r.values.answer)));
     fs.rmSync(r.dir, { recursive: true, force: true });
   } catch (err) {
