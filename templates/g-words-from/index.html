@@ -3,17 +3,19 @@
   lang="en"
   data-resolution="portrait"
   data-composition-variables='[
-    {"id":"date","type":"string","label":"Date","default":"10 Nov 2026"},
-    {"id":"hook","type":"string","label":"Hook (frame 0)","default":"How many words can you make from NOTORIOUS?"},
-    {"id":"word","type":"string","label":"The big word","default":"notorious"},
-    {"id":"found","type":"string","label":"Found words (word:count|…)","default":"root:92|tour:92|sour:86|tours:84"},
-    {"id":"wordTimes","type":"string","label":"When each word drops (s)","default":"1.600,3.100,4.600,6.100"},
-    {"id":"players","type":"number","label":"Players","default":143},
-    {"id":"payoff","type":"string","label":"Payoff","default":"29 words hide in NOTORIOUS"},
-    {"id":"stat","type":"string","label":"Stat","default":"114 of 143 found NOTORIOUS itself"},
-    {"id":"cta","type":"string","label":"Call to comment","default":"How many can you find? Comment your count."},
-    {"id":"endHead","type":"string","label":"End card headline","default":"Play today’s word"},
-    {"id":"endGame","type":"string","label":"End card game line","default":"Words from a Word · new every day"}
+    {"id":"date","type":"string","label":"date","default":"10 Nov 2026"},
+    {"id":"hook","type":"string","label":"hook","default":"How many words can you find in NOTORIOUS?"},
+    {"id":"word","type":"string","label":"word","default":"NOTORIOUS"},
+    {"id":"found","type":"string","label":"found","default":"ROOT:92|TOUR:92|SOUR:86|TOURS:84"},
+    {"id":"wordTimes","type":"string","label":"wordTimes","default":"7.450,8.000,8.550,9.100"},
+    {"id":"turn","type":"string","label":"turn","default":"Find as many as you can"},
+    {"id":"finds","type":"string","label":"finds","default":"The herd’s top finds:"},
+    {"id":"reveal","type":"string","label":"reveal","default":"29 words were hiding!"},
+    {"id":"players","type":"number","label":"players","default":143},
+    {"id":"sting","type":"string","label":"sting","default":"114 of 143 spotted NOTORIOUS itself"},
+    {"id":"ask","type":"string","label":"ask","default":"How many did you find?"},
+    {"id":"play","type":"string","label":"play","default":"Play today’s Words from a Word"},
+    {"id":"url","type":"string","label":"url","default":"herdgamesonline.com"}
   ]'
 >
   <head>
@@ -24,27 +26,43 @@
       @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
       @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #FFF6E2; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #E9F4E8; }
       #root { position: relative; width: 100%; height: 100%; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="20.6" data-width="1080" data-height="1920">
-      <div id="words" data-composition-id="words" data-composition-src="compositions/words.html"
-        data-start="0" data-duration="17.6" data-track-index="1" data-track-kind="graphics"
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.1" data-width="1080" data-height="1920">
+      <div id="scene" data-composition-id="scene" data-composition-src="compositions/scene.html"
+        data-start="0" data-duration="16.1" data-track-index="1" data-track-kind="graphics"
         data-width="1080" data-height="1920" style="z-index: 1"></div>
-      <div id="end" data-composition-id="end" data-composition-src="compositions/end.html"
-        data-start="17.450000000000003" data-duration="3.15" data-track-index="2" data-track-kind="graphics"
-        data-width="1080" data-height="1920" style="z-index: 2"></div>
 
-      <!-- Sound: no music bed; effects only, each peak one frame after its picture -->
-      <audio id="snd-word" data-each="wordTimes" class="clip" src="assets/sfx/sfx_005.mp3" data-start="1.85" data-duration="0.2" data-track-index="10" data-volume="0.7"></audio>
-      <audio id="snd-riser" class="clip" src="assets/sfx/sfx_002.mp3" data-start="7.45" data-duration="2" data-track-index="12" data-volume="0.55"></audio>
-      <audio id="snd-impact" class="clip" src="assets/sfx/impact-bass-1.mp3" data-start="9.42" data-duration="2.1" data-track-index="13" data-volume="0.9"></audio>
-      <audio id="snd-stat" class="clip" src="assets/sfx/pop.mp3" data-start="11.37" data-duration="0.6" data-track-index="14" data-volume="0.7"></audio>
-      <audio id="snd-cta" class="clip" src="assets/sfx/sfx_001.mp3" data-start="14.27" data-duration="0.45" data-track-index="15" data-volume="0.6"></audio>
-      <audio id="snd-end-whoosh" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="17.350" data-duration="0.575" data-track-index="16" data-volume="0.6"></audio>
-      <audio id="snd-end-pop" class="clip" src="assets/sfx/pop.mp3" data-start="18.313" data-duration="0.6" data-track-index="17" data-volume="0.7"></audio>
+      <!-- Sound (strategy/PRINCIPLES.md rule 6), written by pipeline/make-root.mjs from the format's beat clock -->
+      <audio id="mus-a" class="clip" src="assets/shared/music/word-keys.mp3" data-start="0" data-duration="4.2" data-track-index="30" data-volume="0.55" data-fade-out="0.12"></audio>
+      <audio id="mus-b" class="clip" src="assets/shared/music/word-keys.mp3" data-start="4.2" data-media-start="4.2" data-duration="3" data-track-index="31" data-volume="0.22" data-fade-in="0.1" data-fade-out="0.1"></audio>
+      <audio id="mus-c" class="clip" src="assets/shared/music/word-keys.mp3" data-start="7.2" data-media-start="7.2" data-duration="2.55" data-track-index="33" data-volume="0.45" data-fade-in="0.1" data-fade-out="0.1"></audio>
+      <audio id="mus-d" class="clip" src="assets/shared/music/word-keys.mp3" data-start="9.9" data-media-start="9.9" data-duration="6.2" data-track-index="32" data-volume="0.55" data-fade-out="0.35"></audio>
+      <audio id="snd-beep3" class="clip" src="assets/shared/sfx/beep-1.mp3" data-start="4.2" data-duration="0.67" data-track-index="12" data-volume="0.55"></audio>
+      <audio id="snd-beep2" class="clip" src="assets/shared/sfx/beep-1.mp3" data-start="5.2" data-duration="0.67" data-track-index="12" data-volume="0.55"></audio>
+      <audio id="snd-beep1" class="clip" src="assets/shared/sfx/beep-1.mp3" data-start="6.2" data-duration="0.67" data-track-index="12" data-volume="0.6"></audio>
+      <audio id="snd-tick1" class="clip" src="assets/shared/sfx/tick-1.mp3" data-start="4.7" data-duration="0.443" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="snd-tick2" class="clip" src="assets/shared/sfx/tick-2.mp3" data-start="5.7" data-duration="0.103" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="snd-tick3" class="clip" src="assets/shared/sfx/tick-1.mp3" data-start="6.7" data-duration="0.443" data-track-index="13" data-volume="0.6"></audio>
+      <audio id="snd-build" class="clip" src="assets/shared/sfx/build-1.mp3" data-start="6.65" data-duration="3.15" data-track-index="14" data-volume="0.35" data-fade-out="0.1"></audio>
+      <audio id="snd-tada" class="clip" src="assets/shared/sfx/tada-1.mp3" data-start="9.9" data-duration="1.696" data-track-index="15" data-volume="0.8"></audio>
+      <audio id="snd-cheer" class="clip" src="assets/shared/sfx/cheer-2.mp3" data-start="9.95" data-duration="2.9" data-track-index="16" data-volume="0.5"></audio>
+      <audio id="snd-hit" class="clip" src="assets/shared/sfx/impact-1.mp3" data-start="9.9" data-duration="0.456" data-track-index="17" data-volume="0.5"></audio>
+      <audio id="snd-ooh" class="clip" src="assets/shared/sfx/ooh-1.mp3" data-start="10.6" data-duration="2.869" data-track-index="18" data-volume="0.65"></audio>
+      <audio id="snd-baa" class="clip" src="assets/shared/sfx/baa-2.mp3" data-start="11.12" data-duration="1.095" data-track-index="19" data-volume="0.6"></audio>
+      <audio id="snd-play" class="clip" src="assets/shared/sfx/whoosh-1.mp3" data-start="13.2" data-duration="0.426" data-track-index="20" data-volume="0.45"></audio>
+      <audio id="snd-play-pop" class="clip" src="assets/shared/sfx/pop-3.mp3" data-start="13.95" data-duration="0.155" data-track-index="22" data-volume="0.6"></audio>
+      <audio id="snd-rewind" class="clip" src="assets/shared/sfx/whoosh-3.mp3" data-start="15.3" data-duration="0.437" data-track-index="21" data-volume="0.5"></audio>
+      <!-- The first three seconds of the six-second turn tick (the last three beep, from the shared plan) -->
+      <audio id="snd-t6" class="clip" src="assets/shared/sfx/tick-1.mp3" data-start="1.2" data-duration="0.443" data-track-index="26" data-volume="0.55"></audio>
+      <audio id="snd-t5" class="clip" src="assets/shared/sfx/tick-3.mp3" data-start="2.2" data-duration="0.962" data-track-index="26" data-volume="0.5"></audio>
+      <audio id="snd-t4" class="clip" src="assets/shared/sfx/tick-1.mp3" data-start="3.2" data-duration="0.443" data-track-index="26" data-volume="0.55"></audio>
+      <!-- Each of the herd's finds dropping into the list -->
+      <audio id="snd-find" data-each="wordTimes" data-rotate="assets/shared/sfx/key-1.mp3|assets/shared/sfx/key-2.mp3|assets/shared/sfx/key-3.mp3" class="clip" src="assets/shared/sfx/key-1.mp3" data-start="7.45" data-duration="0.27" data-track-index="23" data-volume="0.7"></audio>
+      <audio id="snd-find-pop" data-each="wordTimes" data-rotate="assets/shared/sfx/pop-1.mp3|assets/shared/sfx/pop-3.mp3" class="clip" src="assets/shared/sfx/pop-1.mp3" data-start="7.75" data-duration="0.155" data-track-index="24" data-volume="0.5"></audio>
     </div>
     <script src="assets/herd.js"></script>
     <script>

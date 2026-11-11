@@ -126,7 +126,22 @@ for (const n of [3, 5, 7, 10, 16]) {
   is(`D: ${n} lines → pencil sounds never closer than 0.5 s (${s.length})`, s.every((x, i) => !i || x - s[i - 1] >= 0.5 - 1e-9) && s[0] === D.T.line2);
 }
 const E = await fmt('e-word-climb');
-is('E: 7 rungs fill from 1.3 s to 8.2 s', (() => { const t = E.rungTimes(7); return t.length === 7 && t[0] === 1.3 && Math.abs(t[6] - 8.2) < 1e-9; })());
+// The clue colours must be the game's own: a wrong colour teaches the viewer a wrong word
+is('E: colours follow the game (STAR vs FOAM: A right spot, the rest not in word)', E.colour('star', 'foam') === 'xxgx');
+is('E: a repeated letter is yellow only as many times as the answer has it (SPEED vs ABIDE)', E.colour('speed', 'abide') === 'xxyxy');
+is('E: right spot wins over wrong spot for the same letter (ALLEE vs EAGLE)', E.colour('allee', 'eagle') === 'yyxyg');
+{
+  // Clues that show no coloured letter give the viewer nothing: the format moves to a rung that does
+  const d161 = readJson(path.join(ROOT, 'data', '161.json'));
+  if (d161.wordClimb) {
+    const v = E.vars(d161, {});
+    const coloured = String(v.rows).split('|').reduce((a, r) => a + r.split(':')[1].replace(/x/g, '').length, 0);
+    is(`E: the clues always give something to go on (day 161 uses ${v.word}, ${coloured} coloured letters)`, coloured >= 2);
+  }
+}
+const F = await fmt('f-secret-word'), G = await fmt('g-words-from');
+is('F: cold guesses land before the near misses', (() => { const t = F.chipTimes(3, 4); return t.length === 7 && t.every((x, i) => !i || x > t[i - 1]) && t[3] < F.T.count; })());
+is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordTimes(4); return t.length === 4 && t[3] + 0.5 < G.T.reveal; })());
 
 /* ── The builder ─────────────────────────────────────────────────────────── */
 {
@@ -174,7 +189,8 @@ is('E: 7 rungs fill from 1.3 s to 8.2 s', (() => { const t = E.rungTimes(7); ret
   is('sensitive: the fallback list skips a format with a hit', await (async () => {
     const { eligible } = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'daily.mjs')).href);
     const d = readJson(path.join(ROOT, 'data', '161.json'));
-    return d.wordClimb ? !(await eligible(d)).includes('E-word-climb') : true;
+    // Day 161's Top Answers board shows "Sex" at 10%: the unattended fallback must not choose it
+    return d.topAnswers ? !(await eligible(d)).includes('B-board') : true;
   })());
 }
 

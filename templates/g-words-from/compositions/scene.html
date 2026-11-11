@@ -1,0 +1,129 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #g-world, #g-stage, #g-front { position: absolute; inset: 0; }
+    /* The big word's letters */
+    .g-btile { position: absolute; top: 590px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: #FFE6A6; border: 5px solid #2D1810; font-weight: 700; }
+    .g-glow { position: absolute; inset: -5px; border-radius: 16px; background: #E84A8B; opacity: 0; }
+    .g-btile span { position: relative; }
+    /* The herd's finds */
+    .g-row { position: absolute; left: 100px; width: 880px; height: 76px; }
+    .g-stile { position: absolute; top: 0; width: 68px; height: 76px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #3D8B5A; color: #FFFFFF; border: 4px solid #2D1810; font-size: 42px; font-weight: 700; }
+    .g-count { position: absolute; right: 0; top: 14px; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; color: #2F6E45; white-space: nowrap; }
+  </style>
+
+  <div id="root" data-composition-id="scene" data-width="1080" data-height="1920">
+    <div id="g-world"></div>
+    <div id="g-stage"><div id="g-big"></div><div id="g-list"></div></div>
+    <div id="g-front"></div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V, K = H.kit(), A = K.anim;
+      const T = { turn: 1.2, count: 4.2, finds: 7.3, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
+      const BIG = String(V.word);
+      const FOUND = String(V.found).split("|").filter(Boolean).map((p) => { const i = p.lastIndexOf(":"); return { word: p.slice(0, i), count: Number(p.slice(i + 1)) }; });
+      const TIMES = String(V.wordTimes).split(",").map(Number);
+
+      const world = K.world(document.getElementById("g-world"));
+      const front = document.getElementById("g-front");
+      const hook = K.hook(front, V.hook);
+      const sTurn = K.slot(front, V.turn), sFinds = K.slot(front, V.finds), sAns = K.slot(front, V.reveal, true);
+      const host = K.host(front);
+      const stat1 = K.stat(front), stat2 = K.stat(front);
+      K.statText(stat1, "<b>" + H.num(V.players) + "</b> players searched", false);
+      K.statText(stat2, K.pick(V.sting), true);
+      gsap.set([stat1, stat2], { visibility: "hidden" });
+      const ask = K.ask(front, V.ask);
+      const banner = K.banner(front, V.play, V.url);
+      const bits = K.confetti(front, 531, 484, 44, 17);
+      // The turn is the game here: a big 6-second ring where the finds will land
+      const ring = K.ring(front, 400, 800, 280);
+
+      // The big word, sized so up to 11 letters span the width
+      const n = BIG.length, GAP = 8, TS = Math.min(104, Math.floor((920 - (n - 1) * GAP) / n));
+      const left0 = 540 - (n * TS + (n - 1) * GAP) / 2;
+      const bigEl = document.getElementById("g-big");
+      const big = Array.from(BIG).map((ch, i) => {
+        const t = document.createElement("div");
+        t.className = "g-btile";
+        Object.assign(t.style, { left: (left0 + i * (TS + GAP)) + "px", width: TS + "px", height: Math.round(TS * 1.1) + "px", fontSize: Math.round(TS * 0.6) + "px" });
+        t.innerHTML = '<div class="g-glow"></div><span></span>';
+        t.querySelector("span").textContent = ch;
+        bigEl.appendChild(t);
+        return { tile: t, glow: t.querySelector(".g-glow"), ch };
+      });
+      // Which of the big word's tiles spell a find (each tile used once)
+      const tilesFor = (w) => { const used = new Set(); return Array.from(w).map((ch) => { const i = big.findIndex((b, j) => b.ch === ch && !used.has(j)); if (i >= 0) used.add(i); return i; }).filter((i) => i >= 0); };
+      const list = document.getElementById("g-list");
+      const rows = FOUND.map((f, k) => {
+        const row = document.createElement("div");
+        row.className = "g-row"; row.style.top = (770 + k * 100) + "px";
+        let html = "";
+        for (let i = 0; i < f.word.length; i++) html += '<div class="g-stile" style="left:' + i * 74 + 'px"></div>';
+        row.innerHTML = html + '<div class="g-count"></div>';
+        row.querySelectorAll(".g-stile").forEach((s, i) => { s.textContent = f.word[i]; });
+        row.querySelector(".g-count").textContent = H.num(f.count) + " found it";
+        list.appendChild(row);
+        return { tiles: row.querySelectorAll(".g-stile"), count: row.querySelector(".g-count"), from: tilesFor(f.word) };
+      });
+
+      H.fontsReady().then(() => {
+        H.fit(hook.el, { max: 84, min: 52, maxH: 200 });
+        [sTurn, sFinds].forEach((s) => H.fit(s.el, { max: 68, min: 44, maxH: 120 }));
+        H.fit(sAns.el, { max: 96, min: 56 });
+        H.fit(stat2, { max: 46, min: 30 });
+        H.fit(ask.el, { max: 56, min: 34 });
+        H.fit(banner.url, { max: 92, min: 56 });
+
+        const tl = gsap.timeline({ paused: true });
+        rows.forEach((x) => { gsap.set(x.tiles, { opacity: 0 }); gsap.set(x.count, { opacity: 0 }); });
+
+        A.world(tl, world, T);
+        A.host(tl, host, T);
+        A.popIn(tl, hook.spans, 0.02, { stagger: 0.06 });
+        tl.fromTo(big.map((b) => b.tile), { y: 0 }, { keyframes: { y: [0, -16, 0] }, duration: 0.4, stagger: 0.05, ease: "none" }, 0.6);
+
+        // Your turn: six seconds
+        A.slot(tl, sTurn, 0.9, T.finds - 0.05);
+        A.ring(tl, ring, T.turn, 6);
+
+        // The herd's finds: letters light up in the big word, then drop into the list
+        A.slot(tl, sFinds, T.finds, T.reveal - 0.1);
+        tl.set(stat1, { visibility: "visible" }, T.finds);
+        tl.fromTo(stat1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.finds);
+        rows.forEach((x, k) => {
+          const t = TIMES[k];
+          tl.fromTo(x.from.map((i) => big[i].glow), { opacity: 0 }, { keyframes: { opacity: [0, 0.9, 0.9, 0] }, duration: 0.8, ease: "none", stagger: 0.03 }, t);
+          tl.fromTo(x.tiles, { opacity: 0, y: -150 }, { opacity: 1, y: 0, duration: 0.28, ease: "back.out(1.4)", stagger: 0.05 }, t + 0.2);
+          tl.fromTo(x.count, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.25, ease: "power2.out" }, t + 0.45);
+        });
+
+        // The reveal: how many words were hiding
+        tl.fromTo(big.map((b) => b.glow), { opacity: 0 }, { keyframes: { opacity: [0, 0.7, 0] }, duration: 0.5, ease: "none", stagger: 0.03 }, T.reveal - 0.1);
+        A.slot(tl, sAns, T.reveal, T.rewind + 0.15, true);
+        A.burst(tl, bits, T.reveal);
+
+        tl.set(stat1, { visibility: "hidden" }, T.sting);
+        tl.set(stat2, { visibility: "visible" }, T.sting);
+        tl.fromTo(stat2, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.sting);
+        tl.set(ask.el, { visibility: "visible" }, T.ask);
+        tl.fromTo(ask.spans, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.ask);
+        tl.to(ask.spans, { opacity: 0, duration: 0.12 }, T.play - 0.1);
+        tl.set(ask.el, { visibility: "hidden" }, T.play);
+        A.banner(tl, banner, T, [stat2, host.cow, host.bubble]);
+
+        // Rewind: the finds lift away, the challenge pops out
+        tl.set(stat2, { visibility: "hidden" }, T.rewind + 0.15);
+        rows.forEach((x, k) => tl.to(Array.from(x.tiles).concat([x.count]), { opacity: 0, y: -60, duration: 0.2, ease: "power2.in" }, T.rewind + 0.05 + k * 0.05));
+        A.popOut(tl, hook.spans, T.end - 0.42);
+
+        window.__timelines["scene"] = tl;
+      });
+    })();
+  </script>
+</template>
