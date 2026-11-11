@@ -1,0 +1,139 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #b-world, #b-stage, #b-front { position: absolute; inset: 0; }
+    /* The challenge: what to do (pink) over the question; both stay on screen */
+    #b-label { color: #C2306F; }
+    /* The board */
+    .b-tile { position: absolute; left: 100px; width: 880px; height: 72px; perspective: 900px; }
+    .b-blank, .b-face { position: absolute; inset: 0; border-radius: 20px; display: flex; align-items: center; backface-visibility: hidden; border: 4px solid #2D1810; }
+    .b-blank { background: #FFFFFF; }
+    .b-face { background: #FFF1D6; }
+    .b-face.b-top { background: #E84A8B; color: #FFFFFF; }
+    .b-num { width: 50px; height: 50px; margin-left: 10px; border-radius: 25px; background: #2D1810; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; flex: none; }
+    .b-top .b-num { background: #FFFFFF; color: #C2306F; }
+    .b-ans { margin-left: 20px; font-size: 44px; font-weight: 700; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+    .b-pct { margin-right: 22px; font-family: "Quicksand", sans-serif; font-size: 42px; font-weight: 700; }
+  </style>
+
+  <div id="root" data-composition-id="scene" data-width="1080" data-height="1920">
+    <div id="b-world"></div>
+    <div id="b-stage"></div>
+    <div id="b-front"></div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V, K = H.kit(), A = K.anim;
+      const T = { count: 1.1, flips: 4.5, hold: 8.3, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
+      const cap = (s) => String(s).charAt(0).toUpperCase() + String(s).slice(1);
+      const TILES = [];
+      for (let i = 1; i <= 8; i++) if (V["ans" + i]) TILES.push([cap(V["ans" + i]), V["pct" + i]]);
+      const N = TILES.length;
+      const FLIPS = String(V.flipTimes).split(",").filter(Boolean).map(Number);   // tile N first ... tile 2 last
+      const PITCH = 82, TOP0 = 588 + Math.round((8 - N) * PITCH / 2);           // a shorter board sits centred on the stage
+
+      const world = K.world(document.getElementById("b-world"));
+      const front = document.getElementById("b-front");
+      // The challenge: "Guess the #1 answer:" over the question, popping in together
+      const hookEl = document.createElement("div");
+      hookEl.className = "hk-c hk-hook";
+      hookEl.style.height = "236px";
+      hookEl.innerHTML = '<div><div id="b-label"></div><div id="b-q"></div></div>';
+      front.appendChild(hookEl);
+      const labelW = H.words(document.getElementById("b-label"), V.label, "hk-w");
+      const qW = H.words(document.getElementById("b-q"), V.question, "hk-w");
+      const sTurn = K.slot(front, V.turn), sHerd = K.slot(front, V.herd), sHold = K.slot(front, V.hold), sAns = K.slot(front, TILES[0][0], true);
+      [sTurn, sHerd, sHold, sAns].forEach((s) => { s.el.style.top = "452px"; s.el.style.height = "110px"; });
+      const host = K.host(front);
+      const stat1 = K.stat(front), stat2 = K.stat(front);
+      K.statText(stat1, "<b>" + H.num(V.total) + "</b> people answered", false);
+      K.statText(stat2, K.pick(V.sting), true);
+      gsap.set([stat1, stat2], { visibility: "hidden" });
+      const ask = K.ask(front, V.ask);
+      const banner = K.banner(front, V.play, V.url);
+      const bits = K.confetti(front, 531, TOP0 + 30, 44, 5);
+
+      // The board: blank tiles, numbered, flipping to the answers
+      const stage = document.getElementById("b-stage");
+      const tiles = TILES.map(([ans, pct], i) => {
+        const t = document.createElement("div");
+        t.className = "b-tile"; t.style.top = (TOP0 + i * PITCH) + "px";
+        t.innerHTML = '<div class="b-blank"><div class="b-num">' + (i + 1) + '</div></div><div class="b-face' + (i === 0 ? " b-top" : "") + '"><div class="b-num">' + (i + 1) + '</div><div class="b-ans"></div><div class="b-pct">' + pct + "%</div></div>";
+        t.querySelector(".b-ans").textContent = ans;
+        stage.appendChild(t);
+        return { t, blank: t.querySelector(".b-blank"), face: t.querySelector(".b-face"), ans: t.querySelector(".b-ans") };
+      });
+      // Your turn: the countdown big, over the blank board
+      const ring = K.ring(front, 405, TOP0 + (N * PITCH) / 2 - 135, 270);
+
+      H.fontsReady().then(() => {
+        H.fit(hookEl, { max: 72, min: 48, maxH: 236 });
+        [sTurn, sHerd, sHold].forEach((s) => H.fit(s.el, { max: 68, min: 44, maxH: 110 }));
+        H.fit(sAns.el, { max: 100, min: 56 });
+        tiles.forEach((x) => H.fit(x.ans, { max: 44, min: 28 }));
+        H.fit(stat2, { max: 46, min: 32 });
+        H.fit(ask.el, { max: 56, min: 34 });
+        H.fit(banner.url, { max: 92, min: 56 });
+
+        const tl = gsap.timeline({ paused: true });
+        // Each face hidden until its own flip (edge-on it would still cover the number under it)
+        tiles.forEach((x) => gsap.set(x.face, { rotationX: 90, visibility: "hidden" }));
+
+        A.world(tl, world, T);
+        A.host(tl, host, T);
+        A.popIn(tl, Array.from(labelW).concat(Array.from(qW)), 0.02, { stagger: 0.06 });
+
+        // Your turn
+        A.slot(tl, sTurn, 0.9, T.flips - 0.05);
+        A.ring(tl, ring, T.count, 3);
+
+        // The herd's answers, from the last up to #2
+        const flip = (i, t) => {
+          tl.fromTo(tiles[i].blank, { rotationX: 0 }, { rotationX: -90, duration: 0.14, ease: "power2.in" }, t);
+          tl.set(tiles[i].face, { visibility: "visible" }, t + 0.14);
+          tl.set(tiles[i].blank, { visibility: "hidden" }, t + 0.14);
+          tl.fromTo(tiles[i].face, { rotationX: 90 }, { rotationX: 0, duration: 0.24, ease: "back.out(1.6)" }, t + 0.14);
+        };
+        A.slot(tl, sHerd, T.flips, T.hold);
+        tl.set(stat1, { visibility: "visible" }, T.flips);
+        tl.fromTo(stat1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.flips);
+        for (let i = N - 1; i >= 1; i--) flip(i, FLIPS[N - 1 - i]);
+
+        // And the #1 answer... (its tile shakes), then it flips: the answer lands, confetti
+        A.slot(tl, sHold, T.hold, T.reveal - 0.1);
+        tl.fromTo(tiles[0].t, { x: 0 }, { keyframes: { x: [0, -10, 9, -7, 5, -3, 0, -6, 5, -3, 0] }, duration: 0.8, ease: "none" }, T.reveal - 1.0);
+        flip(0, T.reveal - 0.14);
+        tl.fromTo(tiles[0].t, { scale: 1 }, { keyframes: { scale: [1, 1.08, 1] }, duration: 0.45, ease: "none" }, T.reveal + 0.1);
+        A.slot(tl, sAns, T.reveal, T.rewind + 0.15, true);
+        A.burst(tl, bits, T.reveal);
+
+        // How the herd did, the question to the viewer, where to play
+        tl.set(stat1, { visibility: "hidden" }, T.sting);
+        tl.set(stat2, { visibility: "visible" }, T.sting);
+        tl.fromTo(stat2, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.sting);
+        tl.set(ask.el, { visibility: "visible" }, T.ask);
+        tl.fromTo(ask.spans, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.ask);
+        tl.to(ask.spans, { opacity: 0, duration: 0.12 }, T.play - 0.1);
+        tl.set(ask.el, { visibility: "hidden" }, T.play);
+        A.banner(tl, banner, T, [stat2, host.cow, host.bubble]);
+
+        // Rewind to frame 0: the tiles flip back to blank, the challenge pops out
+        tl.set(stat2, { visibility: "hidden" }, T.rewind + 0.15);
+        tiles.forEach((x, i) => {
+          const t = T.rewind + 0.05 + i * 0.04;
+          tl.to(x.face, { rotationX: 90, duration: 0.12, ease: "power2.in" }, t);
+          tl.set(x.face, { visibility: "hidden" }, t + 0.12);
+          tl.set(x.blank, { visibility: "visible" }, t + 0.12);
+          tl.to(x.blank, { rotationX: 0, duration: 0.16, ease: "power2.out" }, t + 0.12);
+        });
+        A.popOut(tl, Array.from(labelW).concat(Array.from(qW)), T.end - 0.42);
+
+        window.__timelines["scene"] = tl;
+      });
+    })();
+  </script>
+</template>

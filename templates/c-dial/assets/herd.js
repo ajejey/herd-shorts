@@ -192,7 +192,8 @@
       opt = opt || {};
       tl.fromTo(spans, { opacity: 0, scale: 1.5, y: -14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, stagger: opt.stagger || 0.08, ease: "back.out(2.2)" }, t);
     };
-    A.popOut = function (tl, spans, t) { tl.to(spans, { opacity: 0, scale: 0.6, duration: 0.14, stagger: 0.03, ease: "power2.in" }, t); };
+    /* Gone completely within 0.3 s however many words, so the last frame matches the first */
+    A.popOut = function (tl, spans, t) { var n = spans.length || 1; tl.to(spans, { opacity: 0, scale: 0.6, duration: 0.12, stagger: Math.min(0.03, 0.18 / n), ease: "power2.in" }, t); };
 
     /* A slot line: shown from tIn, gone by tOut (hidden, not just transparent, so nothing overlaps it while it's away) */
     A.slot = function (tl, s, tIn, tOut, big) {
