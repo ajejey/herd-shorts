@@ -1,0 +1,13 @@
+node_modules/
+renders/
+out/
+capture/
+*.log
+.env
+.env.*
+# HyperFrames run artifacts (history.json and video-state stay)
+**/.hyperframes/artifacts/
+**/.hyperframes/review/
+**/.hyperframes/snap*/
+**/.hyperframes/seamfix*/
+**/.hyperframes/video-state-lock
