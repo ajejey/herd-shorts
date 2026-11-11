@@ -1,0 +1,218 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #a-world, #a-stage, #a-front { position: absolute; inset: 0; }
+    /* The number line the herd lands on */
+    #a-axis { position: absolute; left: 100px; top: 1206px; width: 880px; height: 8px; border-radius: 4px; background: #2D1810; }
+    .a-tick { position: absolute; left: 0; top: 1214px; width: 4px; height: 16px; background: #2D1810; border-radius: 2px; }
+    .a-tick-label { position: absolute; left: 0; top: 1230px; font-family: "Quicksand", sans-serif; font-size: 30px; font-weight: 700; white-space: nowrap; color: #2D1810; }
+    #a-herd { position: absolute; inset: 0; }
+    .a-sheep { position: absolute; width: 64px; height: 64px; background: url("assets/img/sheep.svg") center / contain no-repeat; }
+    .a-sheep.pink { background-image: url("assets/img/sheep-pink.svg"); }
+    #a-flag { position: absolute; inset: 0; }
+    #a-pole { position: absolute; left: 0; top: 900px; width: 6px; height: 306px; background: #2D1810; border-radius: 3px; }
+    #a-pennant { position: absolute; left: 0; top: 902px; width: 116px; height: 86px; }
+    #a-arrow { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; pointer-events: none; }
+  </style>
+
+  <div id="root" data-composition-id="scene" data-width="1080" data-height="1920">
+    <div id="a-world"></div>
+    <div id="a-stage">
+      <div id="a-axis"></div>
+      <div id="a-ticks" data-layout-allow-overflow></div>
+      <div id="a-flag"><div id="a-flag-in"><div id="a-pole"></div><svg id="a-pennant" viewBox="0 0 116 86"><path id="a-pennant-path" d="M 116 0 L 116 86 L 0 43 Z" fill="#E84A8B" /></svg></div></div>
+      <div id="a-herd" data-layout-allow-overflow></div>
+      <svg id="a-arrow" viewBox="0 0 1080 1920"><path id="a-arrow-path" fill="none" stroke="#2D1810" stroke-width="6" stroke-linecap="round" /><path id="a-arrow-head" fill="none" stroke="#2D1810" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    </div>
+    <div id="a-front"></div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V, K = H.kit(), A = K.anim;
+      const T = { count: 1.2, herd: 4.5, most: 6.9, hold: 8.3, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
+      const LOG = V.scale === "log";
+      const Tf = LOG ? Math.log10 : (x) => x;
+      const GUESSES = String(V.guesses).split(",").map(Number).filter((g) => Number.isFinite(g) && (!LOG || g > 0));
+      const v1 = [Tf(V.view1Lo), Tf(V.view1Hi)], v2 = [Tf(V.view2Lo), Tf(V.view2Hi)];
+      const PULL = !!V.pull;
+      const X0 = 100, AXW = 880, AXY = 1206, S = 64, FOOT = 9, COLS = 24;
+      const view = { lo: v1[0], hi: v1[1] };
+      const step = (v1[1] - v1[0]) / COLS;
+      const binOf = (g) => Math.round(Tf(g) / step) * step;
+      const xAt = (t, lo, hi) => X0 + ((t - lo) / (hi - lo)) * AXW;
+      const isPink = V.hiliteMode === "exact" ? (g) => g === V.answer : V.hiliteMode === "close" ? (g) => g >= V.closeLo && g <= V.closeHi : () => false;
+
+      // The shared pieces: the world, the challenge (the question, on screen throughout), the slot lines, the host, the ring
+      const world = K.world(document.getElementById("a-world"));
+      const front = document.getElementById("a-front");
+      const hook = K.hook(front, V.question);
+      hook.el.style.height = "236px";   // questions run long: room for three lines at a readable size
+      const sTurn = K.slot(front, V.turn), sMost = K.slot(front, V.tag), sHold = K.slot(front, V.reveal), sAns = K.slot(front, V.answerText, true);
+      [sTurn, sMost, sHold, sAns].forEach((s) => { s.el.style.top = "452px"; });
+      const host = K.host(front);
+      // Your turn is the moment: the countdown big, in the middle of the empty stage
+      const ring = K.ring(front, 390, 680, 300);
+      const stat1 = K.stat(front), stat2 = K.stat(front);
+      K.statText(stat1, "<b>" + H.num(V.players) + "</b> players guessed", false);
+      K.statText(stat2, K.pick(V.sting), true);
+      gsap.set([stat1, stat2], { visibility: "hidden" });
+      const ask = K.ask(front, V.ask);
+      const banner = K.banner(front, V.play, V.url);
+      const bits = K.confetti(front, 531, 484, 40, 7);
+
+      // The herd: one sheep per guess, dropped in a seeded order, stacked in columns (capped at 300 px)
+      const rand = H.seeded(7);
+      const order = GUESSES.map((v, i) => i);
+      for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+      const counts = {};
+      GUESSES.forEach((g) => { const b = binOf(g); counts[b] = (counts[b] || 0) + 1; });
+      const SP = Math.min(14, 400 / Math.max(1, Math.max(...Object.values(counts)) - 1));   // columns up to 400 px: the herd fills the stage
+      const herdEl = document.getElementById("a-herd");
+      const stack = {}, sheep = [];
+      order.forEach((gi, n) => {
+        const g = GUESSES[gi], bt = binOf(g), j = (stack[bt] = (stack[bt] || 0) + 1) - 1;
+        const el = document.createElement("div");
+        el.className = "a-sheep";
+        el.style.top = (AXY - S + FOOT - j * SP) + "px"; el.style.zIndex = String(200 - j);
+        herdEl.appendChild(el);
+        const land = T.herd + 0.15 + 2.1 * Math.pow(n / Math.max(1, order.length - 1), 0.85);
+        sheep.push({ el, bt, j, land, pink: isPink(g), jx: isPink(g) ? 0 : Math.round((rand() - 0.5) * 14) });
+      });
+      const pinks = sheep.filter((s) => s.pink).map((s) => {
+        const p = document.createElement("div");
+        p.className = "a-sheep pink"; p.style.top = s.el.style.top; p.style.zIndex = "300";
+        herdEl.appendChild(p);
+        return { el: p, of: s };
+      });
+
+      // Ticks for the opening view (set 1) and, if the camera pulls out, the reveal view (set 2)
+      const ticksEl = document.getElementById("a-ticks");
+      const parseTicks = (s, set) => String(s || "").split(";").filter(Boolean).map((pair) => {
+        const i = pair.indexOf(":");
+        const t = document.createElement("div"); t.className = "a-tick a-set" + set; ticksEl.appendChild(t);
+        const l = document.createElement("div"); l.className = "a-tick-label a-set" + set; l.textContent = pair.slice(i + 1); ticksEl.appendChild(l);
+        gsap.set(l, { xPercent: -50 });
+        return { t: Tf(Number(pair.slice(0, i))), tick: t, label: l };
+      });
+      const ticks = parseTicks(V.ticks1, 1).concat(PULL ? parseTicks(V.ticks2, 2) : []);
+      const inside = (x, m) => x >= X0 - m && x <= X0 + AXW + m;
+      const layout = () => {
+        // Off the axis = hidden by visibility; opacity belongs to the drop and the lift-off, never to the camera
+        for (const s of sheep) { const x = xAt(s.bt, view.lo, view.hi); gsap.set(s.el, { x: x - S / 2 + s.jx, visibility: inside(x, 20) ? "visible" : "hidden" }); }
+        for (const p of pinks) gsap.set(p.el, { x: xAt(p.of.bt, view.lo, view.hi) - S / 2 });
+        for (const tk of ticks) { const x = xAt(tk.t, view.lo, view.hi), on = inside(x, 1) ? "visible" : "hidden"; gsap.set(tk.tick, { x: x - 2, visibility: on }); gsap.set(tk.label, { x: x, visibility: on }); }
+      };
+      const colTop = (bt) => AXY - S + FOOT - Math.max(0, (counts[bt] || 1) - 1) * SP;
+
+      H.fontsReady().then(() => {
+        H.fit(hook.el, { max: 72, min: 50, maxH: 236 });
+        [sTurn, sMost, sHold].forEach((s) => H.fit(s.el, { max: 72, min: 48, maxH: 120 }));
+        H.fit(sAns.el, { max: 104, min: 56 });
+        H.fit(stat2, { max: 46, min: 32 });
+        H.fit(ask.el, { max: 56, min: 34 });
+        H.fit(banner.url, { max: 92, min: 56 });
+
+        // "Most said ...": an arrow from the slot down to the top of the median's column
+        const mBin = binOf(V.median), mx = xAt(mBin, v1[0], v1[1]);
+        const sx = Math.max(300, Math.min(780, mx)), sy = 552, ex = mx, ey = colTop(mBin) - 10;
+        const c1x = sx + (ex - sx) * 0.15, c2x = ex, c2y = ey - (ey - sy) * 0.5;
+        document.getElementById("a-arrow-path").setAttribute("d", "M " + sx + " " + sy + " C " + c1x + " " + (sy + 40) + ", " + c2x + " " + c2y + ", " + ex + " " + ey);
+        const ang = Math.atan2(ey - c2y, ex - c2x), k = 18;
+        document.getElementById("a-arrow-head").setAttribute("d", "M " + (ex + Math.cos(ang + Math.PI - 0.55) * k) + " " + (ey + Math.sin(ang + Math.PI - 0.55) * k) + " L " + ex + " " + ey + " L " + (ex + Math.cos(ang + Math.PI + 0.55) * k) + " " + (ey + Math.sin(ang + Math.PI + 0.55) * k));
+        const arrowLen = document.getElementById("a-arrow-path").getTotalLength();
+
+        // The answer's flag, where the answer sits in the reveal view, taller than any column near it
+        const fx = xAt(Tf(V.answer), v2[0], v2[1]);
+        let poleTop = 900;
+        for (const s of sheep) if (Math.abs(xAt(s.bt, v2[0], v2[1]) - fx) < 40) poleTop = Math.min(poleTop, AXY - S + FOOT - s.j * SP - 110);
+        const pole = document.getElementById("a-pole"), pen = document.getElementById("a-pennant");
+        pole.style.left = (fx - 3) + "px"; pole.style.top = poleTop + "px"; pole.style.height = (AXY - poleTop) + "px";
+        pen.style.top = (poleTop + 2) + "px";
+        if (fx < 300) { pen.style.left = (fx + 3) + "px"; document.getElementById("a-pennant-path").setAttribute("d", "M 0 0 L 0 86 L 116 43 Z"); }
+        else pen.style.left = (fx - 114) + "px";
+
+        const tl = gsap.timeline({ paused: true });
+        layout();
+        if (PULL) gsap.set(".a-set2", { opacity: 0 });
+        if (pinks.length) gsap.set(pinks.map((p) => p.el), { opacity: 0 });
+        gsap.set(sheep.map((s) => s.el), { y: -520, opacity: 0 });
+        gsap.set("#a-flag-in", { y: -1300 });
+        gsap.set("#a-arrow", { opacity: 0 });
+
+        A.world(tl, world, T);
+        A.host(tl, host, T);
+        // The question pops in and stays
+        A.popIn(tl, hook.spans, 0.02, { stagger: 0.06 });
+
+        // Your turn: lock in a guess while the ring counts down
+        A.slot(tl, sTurn, 0.9, T.herd - 0.05);
+        A.ring(tl, ring, T.count, 3);
+
+        // The herd lands
+        for (const s of sheep) {
+          tl.fromTo(s.el, { y: -520, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: "power2.in" }, s.land - 0.3);
+          tl.to(s.el, { scaleY: 0.84, transformOrigin: "50% 88%", duration: 0.06, ease: "power2.out" }, s.land);
+          tl.to(s.el, { scaleY: 1, duration: 0.16, ease: "back.out(2.4)" }, s.land + 0.06);
+        }
+        tl.set(stat1, { visibility: "visible" }, T.herd);
+        tl.fromTo(stat1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.herd);
+
+        // Most said ...
+        A.slot(tl, sMost, T.most, T.hold);
+        tl.set("#a-arrow", { opacity: 1 }, T.most + 0.1);
+        tl.fromTo("#a-arrow-path", { strokeDasharray: arrowLen, strokeDashoffset: arrowLen }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, T.most + 0.1);
+        tl.fromTo("#a-arrow-head", { opacity: 0 }, { opacity: 1, duration: 0.08 }, T.most + 0.42);
+        tl.to("#a-arrow", { opacity: 0, duration: 0.15 }, T.hold - 0.15);
+
+        // The real answer is... (the camera pulls out if the answer is past the herd)
+        A.slot(tl, sHold, T.hold, T.reveal - 0.1);
+        if (PULL) {
+          tl.fromTo(view, { lo: v1[0], hi: v1[1] }, { lo: v2[0], hi: v2[1], duration: 1.3, ease: "power2.inOut", onUpdate: layout }, T.hold + 0.1);
+          tl.to(".a-set1", { opacity: 0, duration: 0.4 }, T.hold + 0.15);
+          tl.to(".a-set2", { opacity: 1, duration: 0.5 }, T.hold + 0.8);
+        }
+
+        // The reveal: the flag slams down, the answer lands, confetti
+        tl.fromTo("#a-flag-in", { y: -1300 }, { y: 0, duration: 0.3, ease: "power3.in" }, T.reveal - 0.3);
+        A.slot(tl, sAns, T.reveal, T.rewind + 0.15, true);
+        A.burst(tl, bits, T.reveal);
+
+        // The sting: the guessers who got it turn pink and hop, and the stat line says how many
+        tl.set(stat1, { visibility: "hidden" }, T.sting);
+        tl.set(stat2, { visibility: "visible" }, T.sting);
+        tl.fromTo(stat2, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.sting);
+        if (pinks.length) {
+          const pe = pinks.map((p) => p.el), st = Math.min(0.04, 0.4 / pe.length);
+          tl.to(pe, { opacity: 1, duration: 0.12 }, T.sting);
+          tl.to(pe, { y: -40, scale: 1.7, transformOrigin: "50% 90%", duration: 0.16, ease: "power2.out", stagger: st }, T.sting);
+          tl.to(pe, { y: 0, duration: 0.24, ease: "bounce.out", stagger: st }, T.sting + 0.16);
+        }
+        // The question to the viewer
+        tl.set(ask.el, { visibility: "visible" }, T.ask);
+        tl.fromTo(ask.spans, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.ask);
+        tl.to(ask.spans, { opacity: 0, duration: 0.12 }, T.play - 0.1);
+        tl.set(ask.el, { visibility: "hidden" }, T.play);
+
+        // Where to play
+        A.banner(tl, banner, T, [stat2, host.cow, host.bubble]);
+
+        // Rewind to frame 0: the herd lifts off, the flag goes up, the view comes back, the question pops out
+        tl.set(stat2, { visibility: "hidden" }, T.rewind + 0.15);
+        tl.to(sheep.map((s) => s.el).concat(pinks.map((p) => p.el)), { y: -520, opacity: 0, duration: 0.35, ease: "power2.in", stagger: 0.002 }, T.rewind);
+        tl.to("#a-flag-in", { y: -1300, duration: 0.3, ease: "power2.in" }, T.rewind);
+        if (PULL) {
+          tl.to(view, { lo: v1[0], hi: v1[1], duration: 0.4, ease: "power2.inOut", onUpdate: layout }, T.rewind + 0.2);
+          tl.to(".a-set2", { opacity: 0, duration: 0.2 }, T.rewind + 0.2);
+          tl.to(".a-set1", { opacity: 1, duration: 0.2 }, T.rewind + 0.4);
+        }
+        A.popOut(tl, hook.spans, T.end - 0.42);
+
+        window.__timelines["scene"] = tl;
+      });
+    })();
+  </script>
+</template>

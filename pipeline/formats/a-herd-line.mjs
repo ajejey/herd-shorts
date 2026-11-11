@@ -9,6 +9,10 @@
 import { labelOfDay, num, need } from '../lib.mjs';
 
 const MAX_SHEEP = 180;
+
+/* The beat clock (seconds): your turn first, then the herd, then the answer (strategy/PRINCIPLES.md) */
+export const T = { count: 1.2, herd: 4.5, most: 6.9, hold: 8.3, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
+export const SCENE = 'scene';
 const MIN_PLAYERS = 40;
 
 export const quantile = (sorted, f) => sorted[Math.min(sorted.length - 1, Math.max(0, Math.floor(f * sorted.length)))];
@@ -134,22 +138,24 @@ export function vars(data, pick = {}) {
   const copy = pick.copy || {};
   const ans = answerParts(q);
 
-  let hiliteMode = 'none', hilite;
+  const share = (n) => n / q.players;
+  let hiliteMode = 'none', sting;
   if (q.exact > 0 && shown.some((g) => g === q.answer)) {
     hiliteMode = 'exact';
-    hilite = `${num(q.exact)} of ${num(q.players)} players got it exactly`;
+    sting = `${share(q.exact) <= 0.15 ? 'Only ' : ''}${num(q.exact)} of ${num(q.players)} players got it exactly`;
   } else if (q.close > 0 && shown.some(close)) {
     hiliteMode = 'close';
-    hilite = `Only ${num(q.close)} of ${num(q.players)} got ${q.closeRule}`;
+    sting = `Only ${num(q.close)} of ${num(q.players)} players got ${q.closeRule}`;
   } else {
-    hilite = `Nobody got ${q.closeRule}`;
+    sting = `Nobody got ${q.closeRule}`;
   }
+  // The answer as it lands in the slot: the number and what it counts (a year or a percentage says itself)
+  const answerText = q.unit === 'year' || q.unit === 'percent' || !ans.unit ? ans.big : `${ans.big} ${ans.unit}`;
 
   return {
     date: labelOfDay(data.day),
     question: q.question,
-    hook: copy.hook || 'Guess before the herd does',
-    context: copy.context || q.question,
+    turn: copy.turn || 'Lock in your guess',
     players: q.players,
     guesses: shown.map((g) => String(g)).join(','), // exact values: an exact guess must still equal the answer
     scale: sc.log ? 'log' : 'linear',
@@ -160,15 +166,14 @@ export function vars(data, pick = {}) {
     tag: copy.tag || `Most said ${say(q.median, q.unit)}`,
     reveal: copy.reveal || 'The real answer is…',
     answer: q.answer,
-    answerBig: ans.big,
-    answerUnit: copy.unitLine ?? ans.unit,
-    fact: copy.fact ?? (q.fact || ''),
+    answerText: copy.answerText || answerText,
     hiliteMode,
     closeLo: q.unit === 'year' ? q.answer - 2 : q.answer - Math.abs(q.answer) * 0.1,
     closeHi: q.unit === 'year' ? q.answer + 2 : q.answer + Math.abs(q.answer) * 0.1,
-    hilite: copy.hilite || hilite,
+    sting: copy.sting || sting,
+    ask: copy.ask || 'What did you guess?',
+    play: copy.play || 'Play today\u2019s Guesstimate free',
+    url: 'herdgamesonline.com',
     pull: sc.pull,
-    endHead: copy.endHead || 'Can you beat | the herd?',
-    endGame: 'Daily Guesstimate · new every day',
   };
 }
