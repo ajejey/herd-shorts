@@ -27,7 +27,7 @@ export function vars(data, pick = {}) {
     reveal: copy.reveal || 'The secret word was…',
     stat: copy.stat || `${num(sw.found)} of ${num(sw.players)} found it`,
     stat2: copy.stat2 || (sw.fewestGuesses === 1 ? 'Someone got it in 1 guess' : `Fastest: ${num(sw.fewestGuesses)} guesses`),
-    cta: copy.cta || 'How many guesses would you need? Comment it.',
+    cta: copy.cta || 'How many guesses would you need?',
     endHead: copy.endHead || 'Find today’s word',
     endGame: 'Secret Word · a new word every day',
   };

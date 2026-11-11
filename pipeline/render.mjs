@@ -15,7 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
-import { ROOT, readJson, NotEligible } from './lib.mjs';
+import { ROOT, readJson, NotEligible, engagementAsks } from './lib.mjs';
 import { build } from './build.mjs';
 
 const HF = ['--yes', 'hyperframes@0.9.20'];
@@ -44,6 +44,9 @@ export function findings(report) {
 
 export async function render({ format, day, pick = {}, quality = 'looks' }) {
   const b = await build({ format, day, pick });
+  // A pick's copy is held to the same rule as the defaults: no explicit asks for comments, shares or tags
+  const asks = engagementAsks(b.values);
+  if (asks.length) throw new Error(`copy asks for engagement (Instagram won't recommend it): ${asks.join('; ')}`);
   const name = `${day}-${path.basename(b.dir).replace(/^\d+-/, '')}`;
 
   const started = Date.now();

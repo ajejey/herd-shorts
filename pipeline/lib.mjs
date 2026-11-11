@@ -52,3 +52,14 @@ export function sensitiveHits(values) {
   }
   return hits;
 }
+
+/*
+  Explicit asks for engagement. Instagram does not recommend posts that ask for
+  comments, shares or tags (its engagement-bait rule), so on-screen copy asks a
+  real question instead ("When did you get it?"). check.mjs fails any default
+  copy that matches; a pick's copy is checked the same way before render.
+*/
+const ASKS = /\b(comment|comments|share|shares|tag a|tag your|tag someone|follow|subscribe|send this|send it to|repost|like and)\b/i;
+export function engagementAsks(values) {
+  return Object.entries(values).filter(([k, v]) => typeof v === 'string' && !['strokes', 'guesses', 'credit'].includes(k) && ASKS.test(v)).map(([k, v]) => `${k}: "${v}"`);
+}

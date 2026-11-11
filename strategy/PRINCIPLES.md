@@ -42,18 +42,33 @@ review may overturn any rule with ledger rows.
    repeated. Never one sound for everything.
 7. **Compare them with the herd.** "Only 28 of 344 got it from one line. Did
    you?" Social comparison is what makes people comment and send it on.
-8. **Make replying easy.** A one-word or one-number comment ("Comment your
-   guess"). A share line where it fits ("Send this to someone who'd get it wrong").
-9. **Short, and loop.** 12-18 s. No 3-second end card: that is where people
-   swipe. The site address rides in the lower band during the last beats, and
-   the last frame leads back into the first so the replay feels seamless.
+8. **Ask a real question, never for engagement.** "When did you get it?",
+   "What did you guess?": a question with a one-word answer invites replies.
+   Never "comment", "share", "tag", "like", "follow" or "send this to": Instagram
+   says it will not recommend posts that explicitly ask for comments, shares or
+   tags (engagement bait), and those are exactly the non-followers we need
+   (11 Nov 2026; check.mjs fails any default copy that asks).
+9. **Short, loop, and say where to play.** 12-18 s. No separate end card: that
+   is where people swipe. The last beat is a big invitation inside the video,
+   "Play today's <game> free" with **herdgamesonline.com** large enough to
+   remember and type (links in Shorts and Reels aren't clickable, so the address
+   on screen is how they find us; nothing says a site name costs reach). Then
+   the last frame rewinds into the first so the replay is seamless. The same
+   address goes in the caption, the Instagram bio link and the YouTube
+   related-video link.
 10. **One recurring face.** The cow hosts every video: thinking during the
     countdown, shocked or cheering at the reveal. A series people recognise.
 11. **True and safe.** Every number from the data. No invented urgency. No
     "yesterday" about Top Answers counts (boards are sometimes reused). Nothing
     from the sensitive-word list without a deliberate pick.
-12. **Readable without sound.** At most 6 words a line, key lines 64 px or
-    bigger, all text inside the 168-1330 px band (platform UI covers the rest).
+12. **Readable without sound, and fill the frame.** At most 6 words a line,
+    key lines 64 px or bigger. Everything to read sits in the safe area, about
+    y 250-1600 and x 60-990 on 1080x1920 (the apps' top bar, right-hand buttons
+    and bottom caption cover the rest; guides in 2026 agree on roughly a
+    1000x1400 centred box). The frame is still used edge to edge: sky above, the
+    herd on a hill below, decoration that can be covered without losing anything.
+    (11 Nov 2026: the first renders kept everything above 1330 px and left the
+    bottom third empty; Ajey spotted it.)
 13. **Voice only if it earns its place.** Text, music and sound carry the
     videos. A voiced version is an explore test the weekly review judges, not a default.
 

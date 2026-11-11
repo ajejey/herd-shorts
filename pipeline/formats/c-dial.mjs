@@ -41,9 +41,9 @@ export function vars(data, pick = {}) {
     countA: take.counts[0],
     countB: take.counts[1],
     line1: copy.hook || `${num(take.players)} people answered. | Where did they land?`,
-    line2: copy.line2 || 'Comment your guess before it stops',
+    line2: copy.line2 || 'Guess where it stops',
     line3: copy.verdict || verdict(take),
-    line4: copy.line4 || 'Which side are you on? Comment it.',
+    line4: copy.line4 || 'Which side are you on?',
     endHead: copy.endHead || 'Pick your side',
     endGame: 'Daily Hot Takes · new takes every day',
   };

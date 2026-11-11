@@ -9,14 +9,15 @@
     {"id":"mid","type":"string","label":"Line at line 3","default":"Got it yet?"},
     {"id":"final","type":"string","label":"Line during the countdown","default":"Final answer?"},
     {"id":"lines","type":"number","label":"Lines","default":10},
-    {"id":"strokes","type":"string","label":"The doodle (x,y,… per line, | between lines)","default":"150,15,136,4,114,1,77,9,56,18,19,58,9,79,2,111,0,152,4,173,23,214,58,241,108,253,145,248,165,243,203,225,224,206,244,179,254,145,255,118,251,92,234,56,224,44,201,25,168,12,134,9,123,12,124,14|108,0,122,76,122,145|8,159,76,156,118,146|135,246,126,146|253,116,175,133,131,150|211,14,190,36,170,65,147,107,133,149|20,46,48,62,84,116,113,144|76,244,92,192,114,164,124,158|231,193,182,176,132,149|105,142,102,152,109,156,117,155"},
+    {"id":"strokes","type":"string","label":"The doodle (x,y per line, | between lines)","default":"150,15,136,4,114,1,77,9,56,18,19,58,9,79,2,111,0,152,4,173,23,214,58,241,108,253,145,248,165,243,203,225,224,206,244,179,254,145,255,118,251,92,234,56,224,44,201,25,168,12,134,9,123,12,124,14|108,0,122,76,122,145|8,159,76,156,118,146|135,246,126,146|253,116,175,133,131,150|211,14,190,36,170,65,147,107,133,149|20,46,48,62,84,116,113,144|76,244,92,192,114,164,124,158|231,193,182,176,132,149|105,142,102,152,109,156,117,155"},
     {"id":"gotByLine","type":"string","label":"Players who got it at each line","default":"28,17,10,20,19,28,55,29,32,62"},
     {"id":"players","type":"number","label":"Players","default":344},
-    {"id":"lineTimes","type":"string","label":"When lines 2… start (s)","default":"1.400,2.800,3.900,4.283,4.667,5.050,5.433,5.817,6.200"},
+    {"id":"lineTimes","type":"string","label":"When lines 2 on start (s)","default":"1.400,2.800,3.900,4.283,4.667,5.050,5.433,5.817,6.200"},
     {"id":"scribbleTimes","type":"string","label":"Pencil sounds (s)","default":"1.400,2.800,3.900,4.667,5.433,6.200"},
     {"id":"answer","type":"string","label":"Answer","default":"Basketball"},
     {"id":"sting","type":"string","label":"How the herd did","default":"Only 28 of 344 got it from line 1"},
-    {"id":"cta","type":"string","label":"Comment line","default":"When did you get it? Comment the line"},
+    {"id":"ask","type":"string","label":"The question to the viewer","default":"When did you get it?"},
+    {"id":"play","type":"string","label":"Play line","default":"Play today’s doodle free"},
     {"id":"url","type":"string","label":"Address","default":"herdgamesonline.com"},
     {"id":"credit","type":"string","label":"Credit (CC BY 4.0, keep)","default":"Doodles from Quick, Draw! by Google, CC BY 4.0"}
   ]'
@@ -34,15 +35,15 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="15.4" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.0" data-width="1080" data-height="1920">
       <div id="doodle" data-composition-id="doodle" data-composition-src="compositions/doodle.html"
-        data-start="0" data-duration="15.4" data-track-index="1" data-track-kind="graphics"
+        data-start="0" data-duration="16.0" data-track-index="1" data-track-kind="graphics"
         data-width="1080" data-height="1920" style="z-index: 1"></div>
 
       <!-- Sound: see strategy/PRINCIPLES.md rule 6. Music from frame 0, ducked under the countdown, out for the held breath, back on the reveal. -->
       <audio id="mus-a" class="clip" src="assets/shared/music/sketch-uke.mp3" data-start="0" data-duration="6.6" data-track-index="30" data-volume="0.55" data-fade-out="0.12"></audio>
       <audio id="mus-b" class="clip" src="assets/shared/music/sketch-uke.mp3" data-start="6.6" data-media-start="6.6" data-duration="3.15" data-track-index="31" data-volume="0.22" data-fade-in="0.1" data-fade-out="0.1"></audio>
-      <audio id="mus-c" class="clip" src="assets/shared/music/sketch-uke.mp3" data-start="9.9" data-media-start="9.9" data-duration="5.5" data-track-index="32" data-volume="0.55" data-fade-out="0.35"></audio>
+      <audio id="mus-c" class="clip" src="assets/shared/music/sketch-uke.mp3" data-start="9.9" data-media-start="9.9" data-duration="6.1" data-track-index="32" data-volume="0.55" data-fade-out="0.35"></audio>
       <audio id="snd-pencil" data-each="scribbleTimes" data-rotate="assets/shared/sfx/pencil-1.mp3|assets/shared/sfx/pencil-2.mp3|assets/shared/sfx/pencil-3.mp3" class="clip" src="assets/shared/sfx/pencil-1.mp3" data-start="1.4" data-duration="0.76" data-track-index="10" data-volume="0.75"></audio>
       <audio id="snd-mid" class="clip" src="assets/shared/sfx/pop-1.mp3" data-start="2.85" data-duration="0.24" data-track-index="11" data-volume="0.6"></audio>
       <audio id="snd-beep3" class="clip" src="assets/shared/sfx/beep-1.mp3" data-start="6.6" data-duration="0.67" data-track-index="12" data-volume="0.55"></audio>
@@ -55,10 +56,11 @@
       <audio id="snd-tada" class="clip" src="assets/shared/sfx/tada-1.mp3" data-start="9.9" data-duration="1.696" data-track-index="15" data-volume="0.8"></audio>
       <audio id="snd-cheer" class="clip" src="assets/shared/sfx/cheer-2.mp3" data-start="9.95" data-duration="2.9" data-track-index="16" data-volume="0.5"></audio>
       <audio id="snd-hit" class="clip" src="assets/shared/sfx/impact-1.mp3" data-start="9.9" data-duration="0.456" data-track-index="17" data-volume="0.5"></audio>
-      <audio id="snd-ooh" class="clip" src="assets/shared/sfx/ooh-1.mp3" data-start="11.1" data-duration="2.869" data-track-index="18" data-volume="0.65"></audio>
-      <audio id="snd-baa" class="clip" src="assets/shared/sfx/baa-2.mp3" data-start="12.27" data-duration="1.095" data-track-index="19" data-volume="0.6"></audio>
-      <audio id="snd-url" class="clip" src="assets/shared/sfx/whoosh-1.mp3" data-start="13.1" data-duration="0.426" data-track-index="20" data-volume="0.45"></audio>
-      <audio id="snd-rewind" class="clip" src="assets/shared/sfx/whoosh-3.mp3" data-start="14.6" data-duration="0.437" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="snd-ooh" class="clip" src="assets/shared/sfx/ooh-1.mp3" data-start="10.7" data-duration="2.869" data-track-index="18" data-volume="0.65"></audio>
+      <audio id="snd-baa" class="clip" src="assets/shared/sfx/baa-2.mp3" data-start="11.72" data-duration="1.095" data-track-index="19" data-volume="0.6"></audio>
+      <audio id="snd-play" class="clip" src="assets/shared/sfx/whoosh-1.mp3" data-start="13.0" data-duration="0.426" data-track-index="20" data-volume="0.45"></audio>
+      <audio id="snd-rewind" class="clip" src="assets/shared/sfx/whoosh-3.mp3" data-start="15.2" data-duration="0.437" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="snd-play-pop" class="clip" src="assets/shared/sfx/pop-3.mp3" data-start="13.75" data-duration="0.155" data-track-index="22" data-volume="0.6"></audio>
     </div>
     <script src="assets/herd.js"></script>
     <script>

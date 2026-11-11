@@ -32,6 +32,9 @@ push renders it.
   claim ("Only 35 of 206 climbed all 7"). Never a number that is not in the data.
 - Top Answers counts can come from an older Daily Herd day: never say
   "yesterday" about them.
+- Ask a real question ("When did you get it?"), never for engagement: no
+  "comment", "share", "tag", "follow", "send this to". Instagram won't recommend
+  posts that ask, and the render refuses copy that does (`strategy/PRINCIPLES.md` rule 8).
 - Only set the copy lines you want to change; the rest default from the data.
   The lines each format reads are the keys in its `pipeline/formats/<fmt>.mjs`
   (`copy.hook`, `copy.verdict`, `copy.stat`, `copy.gag`, ...).

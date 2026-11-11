@@ -24,7 +24,7 @@ export function vars(data, pick = {}) {
     players: wf.players,
     payoff: copy.payoff || `${num(wf.hidden)} words hide in ${W}`,
     stat: copy.stat || `${num(wf.foundBigWord)} of ${num(wf.players)} found ${W} itself`,
-    cta: copy.cta || 'How many can you find? Comment your count.',
+    cta: copy.cta || 'How many can you find?',
     endHead: copy.endHead || 'Play today’s word',
     endGame: 'Words from a Word · new every day',
   };

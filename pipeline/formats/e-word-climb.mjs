@@ -36,7 +36,7 @@ export function vars(data, pick = {}) {
     rungTimes: rungTimes(wc.rungs.length).map((t) => t.toFixed(3)).join(','),
     payoff: copy.payoff || payoff(wc),
     stat: copy.stat || (op ? `Most popular opener: ${op.value.toUpperCase()} (rung ${op.rung})` : `${num(wc.finished)} finished the ladder`),
-    cta: copy.cta || 'How far would you get? Comment your rung.',
+    cta: copy.cta || 'How far would you get?',
     endHead: copy.endHead || 'Climb today’s ladder',
     endGame: 'Word Climb · a new ladder every day',
   };

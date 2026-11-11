@@ -15,7 +15,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits } from './lib.mjs';
+import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits, engagementAsks } from './lib.mjs';
 import { declaredVariables, checkValues, build } from './build.mjs';
 import { staleIn } from './sync-shared.mjs';
 
@@ -50,6 +50,8 @@ for (const [format, dir] of Object.entries(FORMATS)) {
       const values = vars(readJson(path.join(ROOT, 'data', `${day}.json`)), {});
       const problems = checkValues(decl, values);
       is(`${format} day ${day}: values match the template`, problems.length === 0, problems.join('; '));
+      const asks = engagementAsks(values);
+      is(`${format} day ${day}: no explicit ask for comments/shares/tags on screen`, asks.length === 0, asks.join('; '));
       made += 1;
     } catch (err) {
       is(`${format} day ${day}: ${err instanceof NotEligible ? `not eligible (${err.message})` : 'threw'}`, err instanceof NotEligible, err.message);
@@ -152,6 +154,13 @@ is('E: 7 rungs fill from 1.3 s to 8.2 s', (() => { const t = E.rungTimes(7); ret
       is(`builder: B-board day ${day}`, err instanceof NotEligible, err.message);
     }
   }
+}
+
+/* ── Engagement bait: the asks Instagram won't recommend ─────────────────── */
+{
+  is('asks: "Comment the line" is caught', engagementAsks({ cta: 'When did you get it? Comment the line' }).length === 1);
+  is('asks: "Send this to someone" is caught', engagementAsks({ x: 'Send this to someone who would get it wrong' }).length === 1);
+  is('asks: a real question passes ("When did you get it?", "Which side are you on?")', engagementAsks({ a: 'When did you get it?', b: 'Which side are you on?', c: 'Play today’s doodle free' }).length === 0);
 }
 
 /* ── Brand safety: the words the unattended fallback must not put on screen ── */
