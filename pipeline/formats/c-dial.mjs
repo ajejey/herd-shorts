@@ -1,7 +1,14 @@
-/* C-dial: one Hot Take as a gauge; the needle swings and settles on the real split. */
+/*
+  C-dial, "Pick a side" (Hot Takes): the viewer picks in 3 seconds, the needle
+  swings to where the herd landed, the split slams in. Follows strategy/PRINCIPLES.md.
+*/
 import { labelOfDay, num, need } from '../lib.mjs';
 
 const MIN_VOTES = 100;
+
+/* The beat clock (seconds) */
+export const T = { count: 1.1, swing: 4.4, settle: 8.6, hold: 8.6, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
+export const SCENE = 'scene';
 
 /* How far apart the two sides are, in percentage points. */
 export const gap = (t) => (t.players ? Math.abs(t.counts[0] - t.counts[1]) * 100 / t.players : 100);
@@ -21,10 +28,26 @@ export function chooseTake(takes) {
 
 export function verdict(t) {
   const g = gap(t);
-  if (g <= 6) return 'Split almost in half.';
-  if (g <= 20) return 'Close, but not a tie.';
-  if (g <= 50) return 'A clear winner.';
-  return 'Not even close.';
+  if (g <= 6) return 'Split almost in half!';
+  if (g <= 20) return 'Close, but not a tie';
+  if (g <= 50) return 'A clear winner';
+  return 'Not even close!';
+}
+
+export function sting(t) {
+  const diff = Math.abs(t.counts[0] - t.counts[1]);
+  if (gap(t) <= 3) return `Only ${num(diff)} votes apart`;
+  const win = t.counts[0] >= t.counts[1] ? 0 : 1;
+  const pct = Math.round((100 * t.counts[win]) / t.players);
+  return `${pct}% picked “${win ? t.b : t.a}”`;
+}
+
+/* The needle's swing (the template draws the same curve): seconds of the swing at which it crosses its resting point */
+export function swingTicks() {
+  const k = 7.6 / (T.settle - T.swing);   // the curve's own clock runs 7.6 s over the swing
+  const out = [];
+  for (let i = 0; i < 6; i++) { const tp = (Math.PI / 2 - 0.9) / 2.4 + (i * Math.PI) / 2.4; if (tp < 6.6) out.push(T.swing + tp / k); }
+  return out;
 }
 
 export function vars(data, pick = {}) {
@@ -35,16 +58,21 @@ export function vars(data, pick = {}) {
   const copy = pick.copy || {};
   return {
     date: labelOfDay(data.day),
+    label: copy.label || 'Pick a side:',
     prompt: take.prompt,
     a: take.a,
     b: take.b,
     countA: take.counts[0],
     countB: take.counts[1],
-    line1: copy.hook || `${num(take.players)} people answered. | Where did they land?`,
-    line2: copy.line2 || 'Guess where it stops',
-    line3: copy.verdict || verdict(take),
-    line4: copy.line4 || 'Which side are you on?',
-    endHead: copy.endHead || 'Pick your side',
-    endGame: 'Daily Hot Takes · new takes every day',
+    turn: copy.turn || 'Quick, pick one!',
+    herd: copy.herd || 'Where did the herd land?',
+    hold: copy.hold || 'The herd says…',
+    verdict: copy.verdict || verdict(take),
+    players: take.players,
+    sting: copy.sting || sting(take),
+    ask: copy.ask || 'Which side are you on?',
+    play: copy.play || 'Play today’s Hot Takes free',
+    url: 'herdgamesonline.com',
+    swingTicks: swingTicks().map((t) => t.toFixed(3)).join(','),
   };
 }

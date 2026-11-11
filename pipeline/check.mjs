@@ -98,14 +98,14 @@ const C = await fmt('c-dial');
   is('C: takes under 100 votes are never shown', C.chooseTake([tk(40, 30)]) === null);
   // The option labels never run under the sheep hub (hyperframes check can't see it: the hub is a picture, not text).
   // Showcase, 11 Nov 2026: "Up at the first alarm" ran under it.
-  const css = fs.readFileSync(path.join(ROOT, 'templates', 'c-dial', 'compositions', 'dial.html'), 'utf8');
+  const css = fs.readFileSync(path.join(ROOT, 'templates', 'c-dial', 'compositions', 'scene.html'), 'utf8');
   const sides = css.match(/#c-sides \{[^}]*left: (\d+)px;[^}]*width: (\d+)px;[^}]*column-gap: (\d+)px;/);
   const hub = css.match(/#c-hub \{[^}]*left: (\d+)px;[^}]*width: (\d+)px;/);
   if (sides && hub) {
     const [l, w, g] = sides.slice(1).map(Number), [hl, hw] = hub.slice(1).map(Number);
     const col = (w - g) / 2;
     is(`C: label columns (${l}-${l + col}, ${l + col + g}-${l + w}) clear the hub (${hl}-${hl + hw})`, l + col <= hl && l + col + g >= hl + hw);
-  } else is('C: label columns and hub found in dial.html', false);
+  } else is('C: label columns and hub found in scene.html', false);
   // The needle's widest swing (0.62 of the amplitude) never passes the dial's end
   for (const p of [0.5, 0.86, 0.99]) {
     const FINAL = -(2 * p - 1) * 90, AMP = Math.min(75, (88 - Math.abs(FINAL)) / 0.62);
