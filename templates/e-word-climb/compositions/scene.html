@@ -1,0 +1,146 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #e-world, #e-stage, #e-front { position: absolute; inset: 0; }
+    /* The grid: the herd's first guesses, coloured as the game colours them, and the hidden word */
+    .e-tile { position: absolute; perspective: 700px; }
+    .e-blank, .e-face { position: absolute; inset: 0; border-radius: 14px; display: flex; align-items: center; justify-content: center; backface-visibility: hidden; font-weight: 700; text-transform: uppercase; }
+    .e-blank { background: #FFFFFF; border: 4px solid #2D1810; color: #8C7A5E; }
+    .e-g { background: #3D8B5A; color: #FFFFFF; border: 4px solid #2D1810; }
+    .e-y { background: #F2BE2E; color: #2D1810; border: 4px solid #2D1810; }   /* dark letters: white on yellow is unreadable */
+    .e-x { background: #8E8A86; color: #FFFFFF; border: 4px solid #2D1810; }
+    /* The colour key: on screen as long as the colours are */
+    #e-key { position: absolute; left: 70px; top: 1210px; width: 940px; display: flex; justify-content: center; gap: 30px; font-family: "Quicksand", sans-serif; font-size: 32px; font-weight: 700; white-space: nowrap; }
+    .e-key-i { display: flex; align-items: center; gap: 10px; }
+    .e-key-s { width: 30px; height: 30px; border-radius: 7px; border: 3px solid #2D1810; }
+  </style>
+
+  <div id="root" data-composition-id="scene" data-width="1080" data-height="1920">
+    <div id="e-world"></div>
+    <div id="e-stage">
+      <div id="e-grid"></div>
+      <div id="e-key">
+        <div class="e-key-i"><div class="e-key-s e-g"></div>Right spot</div>
+        <div class="e-key-i"><div class="e-key-s e-y"></div>Wrong spot</div>
+        <div class="e-key-i"><div class="e-key-s e-x"></div>Not in word</div>
+      </div>
+    </div>
+    <div id="e-front"></div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V, K = H.kit(), A = K.anim;
+      const T = { clues: 1.0, count: 4.2, herd: 7.3, hold: 8.3, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
+      const ROWS = String(V.rows).split("|").map((r) => { const [g, c] = r.split(":"); return { guess: g, code: c }; });
+      const TIMES = String(V.rowTimes).split(",").map(Number);
+      const WORD = String(V.word);
+      const L = WORD.length, GAP = 12;
+      const TS = Math.min(130, Math.floor((900 - (L - 1) * GAP) / L));
+      const PITCH = TS + 16, NR = ROWS.length + 1;
+      const TOP0 = 596 + Math.round((4 - NR) * PITCH / 2), LEFT0 = 540 - (L * TS + (L - 1) * GAP) / 2;
+
+      const world = K.world(document.getElementById("e-world"));
+      const front = document.getElementById("e-front");
+      const hook = K.hook(front, V.hook);
+      const sClues = K.slot(front, V.clues), sTurn = K.slot(front, V.turn), sHold = K.slot(front, V.hold), sAns = K.slot(front, WORD, true);
+      const host = K.host(front);
+      const stat1 = K.stat(front), stat2 = K.stat(front);
+      K.statText(stat1, "<b>" + H.num(V.solved) + "</b> of " + H.num(V.reached) + " players got it", false);
+      K.statText(stat2, K.pick(V.sting), true);
+      gsap.set([stat1, stat2], { visibility: "hidden" });
+      const ask = K.ask(front, V.ask);
+      const banner = K.banner(front, V.play, V.url);
+      const bits = K.confetti(front, 531, 484, 44, 3);   // from the word in the slot, clear of the text below
+      const ring = K.ring(front, 858, 398, 160);
+
+      // Rows of tiles: the clue rows, then the hidden word ("?")
+      const grid = document.getElementById("e-grid");
+      const mkRow = (r, letters, codes, isAnswer) => Array.from(letters).map((ch, i) => {
+        const t = document.createElement("div");
+        t.className = "e-tile";
+        Object.assign(t.style, { left: (LEFT0 + i * (TS + GAP)) + "px", top: (TOP0 + r * PITCH) + "px", width: TS + "px", height: TS + "px" });
+        const fs = Math.round(TS * 0.55) + "px";
+        t.innerHTML = '<div class="e-blank" style="font-size:' + fs + '">' + (isAnswer ? "?" : "") + '</div><div class="e-face e-' + codes[i] + '" style="font-size:' + fs + '"></div>';
+        t.querySelector(".e-face").textContent = ch;
+        grid.appendChild(t);
+        return { blank: t.querySelector(".e-blank"), face: t.querySelector(".e-face") };
+      });
+      const rows = ROWS.map((r, i) => mkRow(i, r.guess, r.code, false));
+      const ans = mkRow(ROWS.length, WORD, "g".repeat(L), true);
+
+      H.fontsReady().then(() => {
+        H.fit(hook.el, { max: 84, min: 52, maxH: 200 });
+        [sClues, sTurn, sHold].forEach((s) => H.fit(s.el, { max: 68, min: 44, maxH: 120 }));
+        H.fit(sAns.el, { max: 110, min: 60 });
+        H.fit(stat1, { max: 44, min: 30 });
+        H.fit(stat2, { max: 46, min: 30 });
+        H.fit(ask.el, { max: 56, min: 34 });
+        H.fit(banner.url, { max: 92, min: 56 });
+
+        const tl = gsap.timeline({ paused: true });
+        rows.concat([ans]).forEach((row) => row.forEach((x) => gsap.set(x.face, { rotationX: 90, visibility: "hidden" })));
+        gsap.set("#e-key", { opacity: 0 });
+
+        A.world(tl, world, T);
+        A.host(tl, host, T);
+        A.popIn(tl, hook.spans, 0.02, { stagger: 0.07 });
+
+        // The herd's first guesses flip in, row by row; the colour key appears with the first
+        const flipRow = (row, t, st) => row.forEach((x, i) => {
+          const ti = t + i * st;
+          tl.fromTo(x.blank, { rotationX: 0 }, { rotationX: -90, duration: 0.12, ease: "power2.in" }, ti);
+          tl.set(x.face, { visibility: "visible" }, ti + 0.12);
+          tl.set(x.blank, { visibility: "hidden" }, ti + 0.12);
+          tl.fromTo(x.face, { rotationX: 90 }, { rotationX: 0, duration: 0.22, ease: "back.out(1.6)" }, ti + 0.12);
+        });
+        const unflipRow = (row, t) => row.forEach((x, i) => {
+          const ti = t + i * 0.03;
+          tl.to(x.face, { rotationX: 90, duration: 0.1, ease: "power2.in" }, ti);
+          tl.set(x.face, { visibility: "hidden" }, ti + 0.1);
+          tl.set(x.blank, { visibility: "visible" }, ti + 0.1);
+          tl.to(x.blank, { rotationX: 0, duration: 0.14, ease: "power2.out" }, ti + 0.1);
+        });
+        A.slot(tl, sClues, 0.9, T.count - 0.05);
+        rows.forEach((row, r) => flipRow(row, TIMES[r], 0.07));
+        tl.to("#e-key", { opacity: 1, duration: 0.3 }, TIMES[0] + 0.2);
+
+        // Your turn: the hidden word's row waits, the ring counts down by the slot
+        A.slot(tl, sTurn, T.count, T.hold);
+        A.ring(tl, ring, T.count, 3);
+        tl.fromTo(ans.map((x) => x.blank), { y: 0 }, { keyframes: { y: [0, -12, 0] }, duration: 0.35, stagger: 0.06, ease: "none" }, T.count + 0.1);
+
+        // How the herd did on this word (before the answer: most got it, did you?)
+        tl.set(stat1, { visibility: "visible" }, T.herd);
+        tl.fromTo(stat1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.herd);
+
+        // The word was...: its row shakes, then flips green; the word lands in the slot; confetti
+        A.slot(tl, sHold, T.hold, T.reveal - 0.1);
+        tl.fromTo(ans.map((x) => x.blank), { x: 0 }, { keyframes: { x: [0, -8, 8, -6, 6, -3, 0] }, duration: 0.5, ease: "none" }, T.reveal - 0.7);
+        flipRow(ans, T.reveal - 0.12, 0.05);
+        A.slot(tl, sAns, T.reveal, T.rewind + 0.15, true);
+        A.burst(tl, bits, T.reveal);
+
+        tl.set(stat1, { visibility: "hidden" }, T.sting);
+        tl.set(stat2, { visibility: "visible" }, T.sting);
+        tl.fromTo(stat2, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.sting);
+        tl.set(ask.el, { visibility: "visible" }, T.ask);
+        tl.fromTo(ask.spans, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.ask);
+        tl.to(ask.spans, { opacity: 0, duration: 0.12 }, T.play - 0.1);
+        tl.set(ask.el, { visibility: "hidden" }, T.play);
+        A.banner(tl, banner, T, [stat2, host.cow, host.bubble]);
+
+        // Rewind: every row flips back to blank, the key and the challenge go
+        tl.set(stat2, { visibility: "hidden" }, T.rewind + 0.15);
+        rows.concat([ans]).forEach((row, r) => unflipRow(row, T.rewind + 0.05 + r * 0.05));
+        tl.to("#e-key", { opacity: 0, duration: 0.2 }, T.rewind + 0.1);
+        A.popOut(tl, hook.spans, T.end - 0.42);
+
+        window.__timelines["scene"] = tl;
+      });
+    })();
+  </script>
+</template>
