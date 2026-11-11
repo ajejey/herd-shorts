@@ -1,0 +1,839 @@
+{
+  "day": 161,
+  "lastFinished": 162,
+  "guesstimate": [
+    {
+      "id": 394,
+      "question": "How many colors can a standard 24-bit computer display show?",
+      "unit": "colors",
+      "answer": 16777216,
+      "fact": "That is 256 shades each of red, green and blue.",
+      "players": 150,
+      "median": 161.5,
+      "exact": 4,
+      "close": 6,
+      "closeRule": "within 10%",
+      "guesses": [
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        10,
+        12,
+        16,
+        19,
+        20,
+        20,
+        23,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        24,
+        26,
+        30,
+        30,
+        32,
+        32,
+        36,
+        43,
+        47,
+        48,
+        48,
+        60,
+        64,
+        68,
+        80,
+        100,
+        100,
+        100,
+        100,
+        100,
+        105,
+        120,
+        128,
+        128,
+        155,
+        168,
+        168,
+        169,
+        179,
+        184,
+        200,
+        240,
+        246,
+        246,
+        246,
+        250,
+        256,
+        256,
+        256,
+        256,
+        256,
+        292,
+        300,
+        300,
+        365,
+        456,
+        480,
+        500,
+        512,
+        512,
+        512,
+        576,
+        576,
+        652,
+        745,
+        768,
+        800,
+        900,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1024,
+        1080,
+        1200,
+        1987,
+        2400,
+        2500,
+        2500,
+        4096,
+        10000,
+        15000,
+        16000,
+        24000,
+        30000,
+        75000,
+        100000,
+        100000,
+        100000,
+        300000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1234567,
+        1658175,
+        2000000,
+        5000000,
+        15000000,
+        15000000,
+        16000000,
+        16777216,
+        16777216,
+        16777216,
+        16777216,
+        17000000,
+        1000000000,
+        1000000000,
+        1500000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 359,
+      "question": "Roughly how many Americans watched the final episode of M*A*S*H in 1983?",
+      "unit": "Americans",
+      "answer": 106000000,
+      "fact": "It remains the most-watched scripted episode in US TV history.",
+      "players": 145,
+      "median": 4000000,
+      "exact": 0,
+      "close": 6,
+      "closeRule": "within 10%",
+      "guesses": [
+        12,
+        21,
+        56,
+        100,
+        120,
+        567,
+        1000,
+        2036,
+        3000,
+        3204,
+        10000,
+        12300,
+        20000,
+        23456,
+        45000,
+        50000,
+        58000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        150000,
+        200000,
+        240000,
+        250000,
+        250000,
+        300000,
+        300000,
+        400000,
+        500000,
+        500000,
+        650000,
+        700000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000005,
+        1230000,
+        1234567,
+        1500000,
+        1500000,
+        1500000,
+        1600000,
+        1999999,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2400000,
+        2500000,
+        3000000,
+        3000000,
+        3000000,
+        3000000,
+        3000000,
+        3285000,
+        4000000,
+        4000000,
+        5000000,
+        5000000,
+        5000000,
+        5000000,
+        5000000,
+        5000000,
+        6000000,
+        6000000,
+        6000000,
+        6099934,
+        7000000,
+        8000000,
+        8000000,
+        9600000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        12000000,
+        12000000,
+        12000000,
+        13000000,
+        13000000,
+        14000000,
+        14000000,
+        15000000,
+        15000000,
+        15000000,
+        16000000,
+        17000000,
+        20000000,
+        20000000,
+        20000000,
+        20000000,
+        20000000,
+        25000000,
+        25000000,
+        25000000,
+        25000000,
+        30000000,
+        30000000,
+        40000000,
+        40000000,
+        47000000,
+        48000000,
+        49000000,
+        50000000,
+        50000000,
+        50000000,
+        50000000,
+        50000000,
+        50000000,
+        67000000,
+        80000000,
+        80000000,
+        90000000,
+        100000000,
+        100000000,
+        100000000,
+        100000000,
+        105000000,
+        108000000,
+        150000000,
+        280000000,
+        600000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 347,
+      "question": "How many blocks are in a standard Jenga set?",
+      "unit": "blocks",
+      "answer": 54,
+      "fact": "The name comes from a Swahili word meaning \"to build\".",
+      "players": 141,
+      "median": 52,
+      "exact": 6,
+      "close": 19,
+      "closeRule": "within 10%",
+      "guesses": [
+        20,
+        20,
+        21,
+        24,
+        24,
+        25,
+        27,
+        27,
+        30,
+        30,
+        30,
+        32,
+        33,
+        33,
+        33,
+        34,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        38,
+        39,
+        39,
+        39,
+        40,
+        40,
+        40,
+        41,
+        44,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        45,
+        46,
+        46,
+        46,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        48,
+        49,
+        50,
+        50,
+        50,
+        50,
+        51,
+        51,
+        52,
+        52,
+        52,
+        54,
+        54,
+        54,
+        54,
+        54,
+        54,
+        56,
+        56,
+        57,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        62,
+        62,
+        64,
+        64,
+        64,
+        64,
+        65,
+        67,
+        70,
+        72,
+        72,
+        75,
+        80,
+        80,
+        80,
+        80,
+        80,
+        80,
+        84,
+        88,
+        90,
+        90,
+        90,
+        96,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        104,
+        106,
+        108,
+        108,
+        108,
+        125,
+        128,
+        128,
+        144,
+        150,
+        150,
+        150,
+        168,
+        250,
+        300
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "What's the most awkward small talk topic?",
+    "answers": 2145,
+    "survey": false,
+    "tiles": [
+      {
+        "shown": "weather",
+        "count": 991,
+        "pct": 46
+      },
+      {
+        "shown": "Sex",
+        "count": 206,
+        "pct": 10
+      },
+      {
+        "shown": "politics",
+        "count": 186,
+        "pct": 9
+      },
+      {
+        "shown": "Relationship",
+        "count": 82,
+        "pct": 4
+      },
+      {
+        "shown": "Family",
+        "count": 62,
+        "pct": 3
+      },
+      {
+        "shown": "work",
+        "count": 55,
+        "pct": 3
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "iced",
+      "prompt": "Iced coffee in winter?",
+      "a": "Iced, always",
+      "b": "Hot, obviously",
+      "counts": [
+        227,
+        448
+      ],
+      "players": 675
+    },
+    {
+      "id": "snooze",
+      "prompt": "Snooze button?",
+      "a": "Up at the first alarm",
+      "b": "Snooze five times",
+      "counts": [
+        343,
+        332
+      ],
+      "players": 675
+    },
+    {
+      "id": "worklunch",
+      "prompt": "Lunch at work?",
+      "a": "With the team",
+      "b": "Alone, in peace",
+      "counts": [
+        207,
+        468
+      ],
+      "players": 675
+    },
+    {
+      "id": "upgrade",
+      "prompt": "New phone?",
+      "a": "Every year",
+      "b": "When it breaks",
+      "counts": [
+        33,
+        642
+      ],
+      "players": 675
+    },
+    {
+      "id": "askway",
+      "prompt": "Lost in a new city?",
+      "a": "Check the map",
+      "b": "Ask a local",
+      "counts": [
+        536,
+        139
+      ],
+      "players": 675
+    },
+    {
+      "id": "gifts",
+      "prompt": "Gifts for you?",
+      "a": "Surprise me",
+      "b": "Send a wish list",
+      "counts": [
+        402,
+        273
+      ],
+      "players": 675
+    },
+    {
+      "id": "karaoke",
+      "prompt": "Karaoke?",
+      "a": "Hand me the mic",
+      "b": "I’ll watch",
+      "counts": [
+        217,
+        458
+      ],
+      "players": 675
+    }
+  ],
+  "doodle": null,
+  "wordClimb": {
+    "players": 160,
+    "finished": 57,
+    "climbedAll": 19,
+    "rungs": [
+      {
+        "word": "burn",
+        "letters": 4,
+        "reached": 160,
+        "solved": 124,
+        "openers": [
+          {
+            "value": "stop",
+            "count": 5
+          },
+          {
+            "value": "spot",
+            "count": 4
+          },
+          {
+            "value": "help",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "usage",
+        "letters": 5,
+        "reached": 112,
+        "solved": 83,
+        "openers": [
+          {
+            "value": "adieu",
+            "count": 7
+          },
+          {
+            "value": "stare",
+            "count": 7
+          },
+          {
+            "value": "house",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "racism",
+        "letters": 6,
+        "reached": 79,
+        "solved": 64,
+        "openers": [
+          {
+            "value": "aliens",
+            "count": 2
+          },
+          {
+            "value": "stared",
+            "count": 2
+          },
+          {
+            "value": "steady",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "unknown",
+        "letters": 7,
+        "reached": 63,
+        "solved": 45,
+        "openers": [
+          {
+            "value": "thought",
+            "count": 2
+          },
+          {
+            "value": "staring",
+            "count": 2
+          },
+          {
+            "value": "plummet",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "remember",
+        "letters": 8,
+        "reached": 45,
+        "solved": 41,
+        "openers": [
+          {
+            "value": "friendly",
+            "count": 2
+          },
+          {
+            "value": "elephant",
+            "count": 2
+          },
+          {
+            "value": "blinders",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "absorbent",
+        "letters": 9,
+        "reached": 35,
+        "solved": 23,
+        "openers": [
+          {
+            "value": "relations",
+            "count": 2
+          },
+          {
+            "value": "transport",
+            "count": 2
+          },
+          {
+            "value": "remembers",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "unoriginal",
+        "letters": 10,
+        "reached": 23,
+        "solved": 19,
+        "openers": [
+          {
+            "value": "monopolies",
+            "count": 1
+          },
+          {
+            "value": "freakishly",
+            "count": 1
+          },
+          {
+            "value": "absorbents",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "purse",
+    "players": 232,
+    "found": 90,
+    "gaveUp": 43,
+    "medianGuesses": 36,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "ocean",
+        "count": 15
+      },
+      {
+        "value": "sea",
+        "count": 13
+      },
+      {
+        "value": "house",
+        "count": 9
+      },
+      {
+        "value": "dog",
+        "count": 8
+      },
+      {
+        "value": "water",
+        "count": 7
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "bag",
+        "count": 39
+      },
+      {
+        "value": "wallet",
+        "count": 16
+      },
+      {
+        "value": "handbag",
+        "count": 13
+      },
+      {
+        "value": "satchel",
+        "count": 6
+      },
+      {
+        "value": "tote",
+        "count": 5
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "increased",
+    "hidden": 94,
+    "players": 136,
+    "foundBigWord": 95,
+    "mostFound": [
+      {
+        "word": "increased",
+        "count": 95
+      },
+      {
+        "word": "creed",
+        "count": 82
+      },
+      {
+        "word": "increase",
+        "count": 82
+      },
+      {
+        "word": "seed",
+        "count": 81
+      },
+      {
+        "word": "crease",
+        "count": 74
+      }
+    ],
+    "rarestFound": [
+      "seir",
+      "rede",
+      "scend",
+      "carse",
+      "cinereas"
+    ],
+    "differentWordsFound": 424
+  }
+}

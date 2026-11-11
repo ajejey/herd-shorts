@@ -1,0 +1,756 @@
+{
+  "day": 160,
+  "lastFinished": 162,
+  "guesstimate": [
+    {
+      "id": 33,
+      "question": "How tall is Uluru in central Australia, in meters?",
+      "unit": "meters",
+      "answer": 348,
+      "fact": "Like an iceberg, much of the rock is hidden below the ground.",
+      "players": 119,
+      "median": 480,
+      "exact": 1,
+      "close": 6,
+      "closeRule": "within 10%",
+      "guesses": [
+        10,
+        13,
+        16,
+        20,
+        25,
+        25,
+        25,
+        31,
+        36,
+        40,
+        50,
+        50,
+        56,
+        58,
+        65,
+        70,
+        89,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        120,
+        134,
+        139,
+        147,
+        150,
+        153,
+        173,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        230,
+        235,
+        245,
+        245,
+        246,
+        250,
+        250,
+        290,
+        300,
+        300,
+        318,
+        324,
+        345,
+        348,
+        350,
+        375,
+        400,
+        400,
+        400,
+        450,
+        480,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        500,
+        562,
+        567,
+        600,
+        670,
+        750,
+        796,
+        800,
+        803,
+        804,
+        842,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1100,
+        1280,
+        1500,
+        1500,
+        2000,
+        2000,
+        2500,
+        2500,
+        2500,
+        2685,
+        3000,
+        3000,
+        3000,
+        3685,
+        4000,
+        4000,
+        4000,
+        4500,
+        5000,
+        5000,
+        5000,
+        5000,
+        5036,
+        5426,
+        5600,
+        10000,
+        15000,
+        15000,
+        18000,
+        25000,
+        30000,
+        50000,
+        86000,
+        234858,
+        1000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 192,
+      "question": "Roughly how many square miles is Australia?",
+      "unit": "square miles",
+      "answer": 2970000,
+      "fact": "It is the only country that covers an entire continent.",
+      "players": 113,
+      "median": 30000,
+      "exact": 0,
+      "close": 5,
+      "closeRule": "within 10%",
+      "guesses": [
+        45,
+        100,
+        120,
+        190,
+        200,
+        243,
+        300,
+        345,
+        375,
+        500,
+        578,
+        700,
+        700,
+        867,
+        900,
+        938,
+        1000,
+        1000,
+        1000,
+        1009,
+        1200,
+        1800,
+        2000,
+        2000,
+        3000,
+        3500,
+        3500,
+        3500,
+        3500,
+        3600,
+        3600,
+        3742,
+        4000,
+        4600,
+        5200,
+        5400,
+        5789,
+        5800,
+        6000,
+        6789,
+        7000,
+        8237,
+        8292,
+        8500,
+        8945,
+        9000,
+        9000,
+        9000,
+        10000,
+        10000,
+        15000,
+        26000,
+        28000,
+        28000,
+        30000,
+        30000,
+        30000,
+        30000,
+        36000,
+        45000,
+        50000,
+        60000,
+        60000,
+        65000,
+        65000,
+        69000,
+        80000,
+        85236,
+        100000,
+        100000,
+        100000,
+        150000,
+        150000,
+        200000,
+        200000,
+        200000,
+        280000,
+        280000,
+        300000,
+        300000,
+        300000,
+        500000,
+        500000,
+        500000,
+        600000,
+        800000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2500000,
+        2968464,
+        3000000,
+        3000000,
+        3000000,
+        3000000,
+        3500000,
+        5000000,
+        7000000,
+        7740000,
+        10000000,
+        10000000,
+        14000000,
+        20000000,
+        23000000,
+        34000000,
+        50000000,
+        50000000,
+        50000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 149,
+      "question": "In roughly how many years will the Sun swell into a red giant?",
+      "unit": "years",
+      "answer": 5000000000,
+      "fact": "It is about halfway through its life as a steady, hydrogen-burning star.",
+      "players": 111,
+      "median": 1000000000,
+      "exact": 6,
+      "close": 7,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        2,
+        100,
+        120,
+        150,
+        200,
+        600,
+        1000,
+        6000,
+        8000,
+        9000,
+        17850,
+        18000,
+        50000,
+        100000,
+        100000,
+        100000,
+        120000,
+        710000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1088800,
+        1500000,
+        1500000,
+        2000000,
+        2000000,
+        2000000,
+        4000000,
+        4000000,
+        5000000,
+        5000000,
+        5000000,
+        5000000,
+        10000000,
+        20000000,
+        20000000,
+        20000000,
+        20000000,
+        30000000,
+        45000000,
+        75000000,
+        83273258,
+        99000000,
+        100000000,
+        200000000,
+        345000006,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1500000000,
+        1500000000,
+        2000000000,
+        2000000000,
+        2000000000,
+        2000000000,
+        3000000000,
+        3200000000,
+        3400000000,
+        4000000000,
+        4000000000,
+        4000000000,
+        4000000000,
+        4500000000,
+        5000000000,
+        5000000000,
+        5000000000,
+        5000000000,
+        5000000000,
+        5000000000,
+        5900000000,
+        6000000000,
+        7000000000,
+        8000000000,
+        8000000000,
+        9000000000,
+        9000000000,
+        9586483403,
+        10000000000,
+        10000000000,
+        10000000000,
+        15000000000,
+        25000000000,
+        30000000000,
+        50000000000,
+        85000000000,
+        100000000000,
+        100000000000,
+        100000000000,
+        140000000000,
+        300000000000,
+        800000000000,
+        1000000000000,
+        1000000000000,
+        293729037912083,
+        1000000000000000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name something you need for a road trip.",
+    "answers": 1712,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "Snacks",
+        "count": 410,
+        "pct": 24
+      },
+      {
+        "shown": "car",
+        "count": 358,
+        "pct": 21
+      },
+      {
+        "shown": "Music",
+        "count": 175,
+        "pct": 10
+      },
+      {
+        "shown": "Phone",
+        "count": 133,
+        "pct": 8
+      },
+      {
+        "shown": "map",
+        "count": 90,
+        "pct": 5
+      },
+      {
+        "shown": "water",
+        "count": 80,
+        "pct": 5
+      },
+      {
+        "shown": "Gas",
+        "count": 77,
+        "pct": 4
+      },
+      {
+        "shown": "food",
+        "count": 74,
+        "pct": 4
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "hug",
+      "prompt": "Greeting a friend?",
+      "a": "A big hug",
+      "b": "A wave works",
+      "counts": [
+        436,
+        278
+      ],
+      "players": 714
+    },
+    {
+      "id": "voicenotes",
+      "prompt": "Voice notes?",
+      "a": "Love sending them",
+      "b": "Just type it",
+      "counts": [
+        155,
+        559
+      ],
+      "players": 714
+    },
+    {
+      "id": "rainy",
+      "prompt": "A rainy day?",
+      "a": "Cozy inside",
+      "b": "Splash outside",
+      "counts": [
+        666,
+        48
+      ],
+      "players": 714
+    },
+    {
+      "id": "longhaul",
+      "prompt": "A long flight?",
+      "a": "Sleep the whole way",
+      "b": "Movie marathon",
+      "counts": [
+        265,
+        449
+      ],
+      "players": 714
+    },
+    {
+      "id": "brunch",
+      "prompt": "Brunch is…",
+      "a": "The best meal",
+      "b": "Overpriced eggs",
+      "counts": [
+        384,
+        330
+      ],
+      "players": 714
+    },
+    {
+      "id": "desk",
+      "prompt": "Your desk?",
+      "a": "Spotless",
+      "b": "Organized chaos",
+      "counts": [
+        242,
+        472
+      ],
+      "players": 714
+    },
+    {
+      "id": "laundry",
+      "prompt": "Clean laundry?",
+      "a": "Folded right away",
+      "b": "Lives on the chair",
+      "counts": [
+        410,
+        304
+      ],
+      "players": 714
+    }
+  ],
+  "doodle": null,
+  "wordClimb": {
+    "players": 142,
+    "finished": 93,
+    "climbedAll": 23,
+    "rungs": [
+      {
+        "word": "were",
+        "letters": 4,
+        "reached": 142,
+        "solved": 83,
+        "openers": [
+          {
+            "value": "dear",
+            "count": 4
+          },
+          {
+            "value": "rain",
+            "count": 3
+          },
+          {
+            "value": "spot",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "loyal",
+        "letters": 5,
+        "reached": 78,
+        "solved": 57,
+        "openers": [
+          {
+            "value": "adieu",
+            "count": 7
+          },
+          {
+            "value": "think",
+            "count": 3
+          },
+          {
+            "value": "drain",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "ticket",
+        "letters": 6,
+        "reached": 55,
+        "solved": 49,
+        "openers": [
+          {
+            "value": "breaks",
+            "count": 2
+          },
+          {
+            "value": "breach",
+            "count": 2
+          },
+          {
+            "value": "player",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "classic",
+        "letters": 7,
+        "reached": 47,
+        "solved": 45,
+        "openers": [
+          {
+            "value": "penguin",
+            "count": 2
+          },
+          {
+            "value": "whistle",
+            "count": 1
+          },
+          {
+            "value": "brownie",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "commence",
+        "letters": 8,
+        "reached": 41,
+        "solved": 38,
+        "openers": [
+          {
+            "value": "question",
+            "count": 2
+          },
+          {
+            "value": "claiming",
+            "count": 2
+          },
+          {
+            "value": "chapters",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "reimburse",
+        "letters": 9,
+        "reached": 38,
+        "solved": 26,
+        "openers": [
+          {
+            "value": "computers",
+            "count": 2
+          },
+          {
+            "value": "threepeat",
+            "count": 1
+          },
+          {
+            "value": "pheasants",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "adulterate",
+        "letters": 10,
+        "reached": 26,
+        "solved": 23,
+        "openers": [
+          {
+            "value": "reimbursed",
+            "count": 2
+          },
+          {
+            "value": "acquisitor",
+            "count": 1
+          },
+          {
+            "value": "associates",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "magician",
+    "players": 206,
+    "found": 92,
+    "gaveUp": 48,
+    "medianGuesses": 40,
+    "fewestGuesses": 7,
+    "firstGuesses": [
+      {
+        "value": "dog",
+        "count": 12
+      },
+      {
+        "value": "ocean",
+        "count": 10
+      },
+      {
+        "value": "cat",
+        "count": 8
+      },
+      {
+        "value": "sea",
+        "count": 7
+      },
+      {
+        "value": "water",
+        "count": 7
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "magic",
+        "count": 34
+      },
+      {
+        "value": "clown",
+        "count": 27
+      },
+      {
+        "value": "wizard",
+        "count": 24
+      },
+      {
+        "value": "circus",
+        "count": 23
+      },
+      {
+        "value": "sorcerer",
+        "count": 11
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "rereading",
+    "hidden": 59,
+    "players": 120,
+    "foundBigWord": 69,
+    "mostFound": [
+      {
+        "word": "reading",
+        "count": 99
+      },
+      {
+        "word": "read",
+        "count": 92
+      },
+      {
+        "word": "ding",
+        "count": 91
+      },
+      {
+        "word": "ring",
+        "count": 89
+      },
+      {
+        "word": "rear",
+        "count": 77
+      }
+    ],
+    "rarestFound": [
+      "reagin",
+      "earding",
+      "eard",
+      "gerne",
+      "agrin"
+    ],
+    "differentWordsFound": 245
+  }
+}

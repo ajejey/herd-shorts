@@ -3,10 +3,18 @@
   lang="en"
   data-resolution="portrait"
   data-composition-variables='[
-    {"id":"color-ink","type":"color","label":"Text","default":"#2D1810"},
-    {"id":"color-yes","type":"color","label":"Absolutely side","default":"#3D8B5A"},
-    {"id":"color-no","type":"color","label":"Never side","default":"#E84A8B"},
-    {"id":"font-display","type":"string","label":"Display font","default":"Fredoka"}
+    {"id":"date","type":"string","label":"Date","default":"4 Nov 2026"},
+    {"id":"prompt","type":"string","label":"The take","default":"Pineapple on pizza?"},
+    {"id":"a","type":"string","label":"Left side (first option)","default":"Absolutely"},
+    {"id":"b","type":"string","label":"Right side (second option)","default":"Never"},
+    {"id":"countA","type":"number","label":"Votes for the left side","default":3981},
+    {"id":"countB","type":"number","label":"Votes for the right side","default":3702},
+    {"id":"line1","type":"string","label":"Hook (frame 0; | breaks the line)","default":"7,683 people answered. | Where did they land?"},
+    {"id":"line2","type":"string","label":"While the needle swings","default":"Comment your guess before it stops"},
+    {"id":"line3","type":"string","label":"Verdict","default":"Split almost in half."},
+    {"id":"line4","type":"string","label":"Call to comment","default":"Which side are you on? Comment it."},
+    {"id":"endHead","type":"string","label":"End card headline","default":"Pick your side"},
+    {"id":"endGame","type":"string","label":"End card game line","default":"Daily Hot Takes · new takes every day"}
   ]'
 >
   <head>
@@ -14,6 +22,8 @@
     <meta name="viewport" content="width=1080, height=1920" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
     <style>
+      @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+      @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #FFF6E2; }
       #root { position: relative; width: 100%; height: 100%; }
@@ -42,6 +52,7 @@
       <audio id="snd-end-whoosh" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="13.55" data-duration="0.575" data-track-index="16" data-volume="0.6"></audio>
       <audio id="snd-end-pop" class="clip" src="assets/sfx/pop.mp3" data-start="14.513" data-duration="0.6" data-track-index="14" data-volume="0.7"></audio>
     </div>
+    <script src="assets/herd.js"></script>
     <script>
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = gsap.timeline({ paused: true });
