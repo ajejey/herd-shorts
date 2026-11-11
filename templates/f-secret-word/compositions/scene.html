@@ -1,0 +1,155 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #f-world, #f-stage, #f-front { position: absolute; inset: 0; }
+    /* The hidden word */
+    .f-tile { position: absolute; top: 588px; perspective: 700px; }
+    .f-blank, .f-face { position: absolute; inset: 0; border-radius: 16px; display: flex; align-items: center; justify-content: center; backface-visibility: hidden; font-weight: 700; text-transform: uppercase; border: 5px solid #2D1810; }
+    .f-blank { background: #FFFFFF; color: #8C7A5E; }
+    .f-face { background: #E84A8B; color: #FFFFFF; }
+    /* The herd's guesses: cold on the left, hot on the right, over a cold-to-hot bar that stays on screen */
+    .f-chip { position: absolute; padding: 10px 26px 12px; border-radius: 40px; border: 4px solid #2D1810; white-space: nowrap; display: flex; align-items: baseline; gap: 12px; }
+    .f-chip b { font-size: 54px; font-weight: 700; }
+        .f-cold { background: #D7ECF8; color: #1F4E6B; }
+    .f-hot { background: #FFD3C2; color: #8E2A12; }
+    #f-bar { position: absolute; left: 90px; top: 1170px; width: 900px; height: 30px; border-radius: 15px; border: 4px solid #2D1810; background: linear-gradient(90deg, #6FB7E8 0%, #F7E7A6 50%, #F06A3A 100%); }
+    .f-end { position: absolute; top: 1206px; font-family: "Quicksand", sans-serif; font-size: 38px; font-weight: 700; }
+    #f-cold-l { left: 90px; color: #1F4E6B; } #f-hot-l { left: 790px; width: 200px; text-align: right; color: #8E2A12; }
+  </style>
+
+  <div id="root" data-composition-id="scene" data-width="1080" data-height="1920">
+    <div id="f-world"></div>
+    <div id="f-stage">
+      <div id="f-word"></div>
+      <div id="f-chips"></div>
+      <div id="f-key"><div id="f-bar"></div><div id="f-cold-l" class="f-end">Cold</div><div id="f-hot-l" class="f-end">Hot</div></div>
+    </div>
+    <div id="f-front"></div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V, K = H.kit(), A = K.anim;
+      const T = { clues: 1.0, count: 4.2, herd: 7.3, hold: 8.3, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
+      const pairs = (s) => String(s || "").split("|").filter(Boolean).map((p) => { const i = p.lastIndexOf(":"); return { value: p.slice(0, i), count: Number(p.slice(i + 1)) }; });
+      const COLD = pairs(V.cold), HOT = pairs(V.hot);
+      const TIMES = String(V.chipTimes).split(",").map(Number);
+      const WORD = String(V.word), L = WORD.length, GAP = 12;
+      const TS = Math.min(140, Math.floor((880 - (L - 1) * GAP) / L));
+
+      const world = K.world(document.getElementById("f-world"));
+      const front = document.getElementById("f-front");
+      const hook = K.hook(front, V.hook);
+      const sClues = K.slot(front, V.clues), sTurn = K.slot(front, V.turn), sHold = K.slot(front, V.hold), sAns = K.slot(front, WORD, true);
+      const host = K.host(front);
+      const stat1 = K.stat(front), stat2 = K.stat(front);
+      K.statText(stat1, "<b>" + H.num(V.players) + "</b> players tried", false);
+      K.statText(stat2, K.pick(V.sting), true);
+      gsap.set([stat1, stat2], { visibility: "hidden" });
+      const ask = K.ask(front, V.ask);
+      const banner = K.banner(front, V.play, V.url);
+      const bits = K.confetti(front, 531, 484, 44, 13);
+      const ring = K.ring(front, 858, 398, 160);
+
+      // The hidden word's tiles
+      const left0 = 540 - (L * TS + (L - 1) * GAP) / 2;
+      const wordEl = document.getElementById("f-word");
+      const tiles = Array.from(WORD).map((ch, i) => {
+        const t = document.createElement("div");
+        t.className = "f-tile";
+        Object.assign(t.style, { left: (left0 + i * (TS + GAP)) + "px", width: TS + "px", height: Math.round(TS * 1.08) + "px" });
+        const fs = Math.round(TS * 0.58) + "px";
+        t.innerHTML = '<div class="f-blank" style="font-size:' + fs + '">?</div><div class="f-face" style="font-size:' + fs + '"></div>';
+        t.querySelector(".f-face").textContent = ch;
+        wordEl.appendChild(t);
+        return { blank: t.querySelector(".f-blank"), face: t.querySelector(".f-face") };
+      });
+
+      // The guesses: cold chips stacked on the left, hot on the right (who guessed each, small)
+      const box = document.getElementById("f-chips");
+      const chip = (x, cls, left, top, right) => {
+        const c = document.createElement("div");
+        c.className = "f-chip " + cls;
+        c.innerHTML = "<b></b>";
+        c.querySelector("b").textContent = x.value;
+        c.style.top = top + "px";
+        if (right) c.style.right = (1080 - right) + "px"; else c.style.left = left + "px";
+        box.appendChild(c);
+        return c;
+      };
+      const cold = COLD.map((x, i) => chip(x, "f-cold", 90, 790 + i * 106));
+      const hot = HOT.map((x, i) => chip(x, "f-hot", 0, 770 + i * 98, 990));
+
+      H.fontsReady().then(() => {
+        H.fit(hook.el, { max: 84, min: 52, maxH: 200 });
+        [sClues, sTurn, sHold].forEach((s) => H.fit(s.el, { max: 66, min: 42, maxH: 120 }));
+        H.fit(sAns.el, { max: 110, min: 60 });
+        H.fit(stat2, { max: 46, min: 30 });
+        H.fit(ask.el, { max: 56, min: 34 });
+        H.fit(banner.url, { max: 92, min: 56 });
+
+        const tl = gsap.timeline({ paused: true });
+        tiles.forEach((x) => gsap.set(x.face, { rotationX: 90, visibility: "hidden" }));
+        gsap.set(cold.concat(hot), { opacity: 0 });
+        gsap.set("#f-key", { opacity: 0 });
+
+        A.world(tl, world, T);
+        A.host(tl, host, T);
+        A.popIn(tl, hook.spans, 0.02, { stagger: 0.07 });
+        tl.fromTo(tiles.map((x) => x.blank), { y: 0 }, { keyframes: { y: [0, -14, 0] }, duration: 0.4, stagger: 0.08, ease: "none" }, 0.5);
+
+        // The herd's guesses land: cold first, then the near misses
+        A.slot(tl, sClues, 0.9, T.count - 0.05);
+        tl.to("#f-key", { opacity: 1, duration: 0.3 }, 1.0);
+        cold.concat(hot).forEach((c, i) => tl.fromTo(c, { opacity: 0, scale: 0.5, y: 24 }, { opacity: 1, scale: 1, y: 0, duration: 0.32, ease: "back.out(2)" }, TIMES[i]));
+
+        // Your turn
+        A.slot(tl, sTurn, T.count, T.hold);
+        A.ring(tl, ring, T.count, 3);
+        tl.set(stat1, { visibility: "visible" }, T.herd);
+        tl.fromTo(stat1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.herd);
+
+        // The secret word was...: the tiles shake, then flip in; the cold guesses fade back
+        A.slot(tl, sHold, T.hold, T.reveal - 0.1);
+        tl.fromTo(tiles.map((x) => x.blank), { x: 0 }, { keyframes: { x: [0, -8, 8, -6, 6, -3, 0] }, duration: 0.5, ease: "none" }, T.reveal - 0.7);
+        tiles.forEach((x, i) => {
+          const ti = T.reveal - 0.12 + i * 0.06;
+          tl.fromTo(x.blank, { rotationX: 0 }, { rotationX: -90, duration: 0.12, ease: "power2.in" }, ti);
+          tl.set(x.face, { visibility: "visible" }, ti + 0.12);
+          tl.set(x.blank, { visibility: "hidden" }, ti + 0.12);
+          tl.fromTo(x.face, { rotationX: 90 }, { rotationX: 0, duration: 0.24, ease: "back.out(1.6)" }, ti + 0.12);
+        });
+        tl.to(cold, { opacity: 0.35, duration: 0.4 }, T.reveal + 0.3);
+        A.slot(tl, sAns, T.reveal, T.rewind + 0.15, true);
+        A.burst(tl, bits, T.reveal);
+
+        tl.set(stat1, { visibility: "hidden" }, T.sting);
+        tl.set(stat2, { visibility: "visible" }, T.sting);
+        tl.fromTo(stat2, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.6)" }, T.sting);
+        tl.set(ask.el, { visibility: "visible" }, T.ask);
+        tl.fromTo(ask.spans, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.ask);
+        tl.to(ask.spans, { opacity: 0, duration: 0.12 }, T.play - 0.1);
+        tl.set(ask.el, { visibility: "hidden" }, T.play);
+        A.banner(tl, banner, T, [stat2, host.cow, host.bubble]);
+
+        // Rewind: the word hides again, the guesses and the key go, the challenge pops out
+        tl.set(stat2, { visibility: "hidden" }, T.rewind + 0.15);
+        tiles.forEach((x, i) => {
+          const ti = T.rewind + 0.05 + i * 0.04;
+          tl.to(x.face, { rotationX: 90, duration: 0.1, ease: "power2.in" }, ti);
+          tl.set(x.face, { visibility: "hidden" }, ti + 0.1);
+          tl.set(x.blank, { visibility: "visible" }, ti + 0.1);
+          tl.to(x.blank, { rotationX: 0, duration: 0.14, ease: "power2.out" }, ti + 0.1);
+        });
+        tl.to(cold.concat(hot), { opacity: 0, scale: 0.6, duration: 0.2, stagger: 0.02, ease: "power2.in" }, T.rewind + 0.05);
+        tl.to("#f-key", { opacity: 0, duration: 0.2 }, T.rewind + 0.2);
+        A.popOut(tl, hook.spans, T.end - 0.42);
+
+        window.__timelines["scene"] = tl;
+      });
+    })();
+  </script>
+</template>
