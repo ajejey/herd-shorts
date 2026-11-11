@@ -1,0 +1,151 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #g-ground {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 900px 900px at 10% 6%, #CFE6F3 0%, rgba(207, 230, 243, 0) 70%),
+        radial-gradient(ellipse 1000px 1000px at 95% 98%, #FFE6A6 0%, rgba(255, 230, 166, 0) 70%),
+        #FFF6E2;
+    }
+    #g-dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(185, 204, 216, 0.35) 7px, rgba(185, 204, 216, 0) 7.5px);
+      background-size: 64px 64px; background-position: 16px 24px;
+    }
+    .g-cloud { position: absolute; background: url("assets/img/cloud.svg") center / contain no-repeat; }
+    #g-cloud1 { left: 40px; top: 120px; width: 230px; height: 115px; }
+    #g-cloud2 { left: 780px; top: 1440px; width: 200px; height: 100px; }
+    #g-stage { position: absolute; inset: 0; }
+    .g-text { position: absolute; left: 90px; width: 900px; }
+    .g-w { display: inline-block; }
+    #g-kicker { top: 196px; font-family: "Quicksand", sans-serif; font-size: 30px; font-weight: 700; color: #2B5A78; letter-spacing: 0.04em; }
+    #g-hook { top: 240px; max-height: 170px; font-size: 68px; font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; }
+    #g-payoff { top: 240px; max-height: 170px; font-size: 76px; font-weight: 700; line-height: 1.08; color: #3D8B5A; letter-spacing: -0.01em; }
+    #g-big { position: absolute; left: 90px; top: 440px; width: 900px; }
+    .g-btile {
+      position: absolute; top: 0; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      background: #FFE6A6; border: 4px solid #E3B94F; font-weight: 700; text-transform: uppercase;
+    }
+    .g-glow { position: absolute; inset: -4px; border-radius: 16px; background: #E84A8B; opacity: 0; }
+    .g-btile span { position: relative; }
+    #g-list { position: absolute; left: 90px; top: 620px; width: 900px; }
+    .g-row { position: absolute; left: 0; width: 900px; height: 64px; }
+    .g-stile {
+      position: absolute; top: 0; width: 58px; height: 64px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      background: #3D8B5A; color: #FFFFFF; font-size: 36px; font-weight: 700; text-transform: uppercase;
+    }
+    .g-count { position: absolute; right: 0; top: 10px; font-family: "Quicksand", sans-serif; font-size: 36px; font-weight: 700; color: #2F6E45; white-space: nowrap; }
+    #g-stat, #g-cta { top: 1110px; white-space: nowrap; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; }
+  </style>
+
+  <div id="root" data-composition-id="words" data-width="1080" data-height="1920">
+    <div id="g-ground"></div>
+    <div id="g-dots"></div>
+    <div id="g-cloud1" class="g-cloud"></div>
+    <div id="g-cloud2" class="g-cloud"></div>
+
+    <div id="g-stage">
+      <div id="g-kicker" class="g-text"></div>
+      <!-- Hook: frame 0 is the thumbnail, the big word under it -->
+      <div id="g-hook" class="g-text clip" data-start="0" data-duration="9.4" data-track-index="1"></div>
+      <div id="g-payoff" class="g-text clip" data-start="9.35" data-duration="8.25" data-track-index="2"></div>
+      <div id="g-big"></div>
+      <div id="g-list"></div>
+      <div id="g-stat" class="g-text clip" data-start="11.3" data-duration="2.95" data-track-index="3"></div>
+      <div id="g-cta" class="g-text clip" data-start="14.2" data-duration="3.4" data-track-index="4"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V;
+      const BIG = String(V.word).toUpperCase();
+      const FOUND = String(V.found).split("|").filter(Boolean).map((p) => { const i = p.lastIndexOf(":"); return { word: p.slice(0, i).toUpperCase(), count: Number(p.slice(i + 1)) }; });
+      const TIMES = String(V.wordTimes).split(",").map(Number);
+
+      document.getElementById("g-kicker").textContent = ("Words from a Word · " + V.date).toUpperCase();
+      const hookWords = H.words("g-hook", V.hook, "g-w");
+      const payWords = H.words("g-payoff", V.payoff, "g-w");
+      const statWords = H.words("g-stat", V.stat, "g-w");
+      const ctaWords = H.words("g-cta", V.cta, "g-w");
+
+      // The big word's tiles, sized so any word up to 11 letters spans the width
+      const n = BIG.length, GAP = 8;
+      const TS = Math.min(92, Math.floor((900 - (n - 1) * GAP) / n));
+      const left0 = (900 - (n * TS + (n - 1) * GAP)) / 2;
+      const bigEl = document.getElementById("g-big");
+      bigEl.style.height = Math.round(TS * 1.1) + "px";
+      const big = BIG.split("").map((ch, i) => {
+        const t = document.createElement("div");
+        t.className = "g-btile";
+        Object.assign(t.style, { left: left0 + i * (TS + GAP) + "px", width: TS + "px", height: Math.round(TS * 1.1) + "px", fontSize: Math.round(TS * 0.6) + "px" });
+        t.innerHTML = '<div class="g-glow"></div><span></span>';
+        t.querySelector("span").textContent = ch;
+        bigEl.appendChild(t);
+        return { tile: t, glow: t.querySelector(".g-glow"), ch };
+      });
+
+      // Which of the big word's tiles spell a found word (each tile used once)
+      const tilesFor = (w) => {
+        const used = new Set();
+        return w.split("").map((ch) => { const i = big.findIndex((b, j) => b.ch === ch && !used.has(j)); if (i >= 0) used.add(i); return i; }).filter((i) => i >= 0);
+      };
+
+      const list = document.getElementById("g-list");
+      const rows = FOUND.map((f, k) => {
+        const row = document.createElement("div");
+        row.className = "g-row"; row.style.top = k * 100 + "px";
+        let html = "";
+        for (let i = 0; i < f.word.length; i++) html += '<div class="g-stile" style="left:' + i * 64 + 'px"></div>';
+        row.innerHTML = html + '<div class="g-count"></div>';
+        row.querySelectorAll(".g-stile").forEach((s, i) => { s.textContent = f.word[i]; });
+        row.querySelector(".g-count").textContent = H.num(f.count) + " found it";
+        list.appendChild(row);
+        return { row, tiles: row.querySelectorAll(".g-stile"), count: row.querySelector(".g-count"), from: tilesFor(f.word) };
+      });
+
+      H.fontsReady().then(() => {
+        H.fit("g-hook", { max: 68, min: 48, maxH: 170 });
+        H.fit("g-payoff", { max: 76, min: 52, maxH: 170 });
+        H.fit("g-stat", { max: 40, min: 28 });
+        H.fit("g-cta", { max: 40, min: 28 });
+
+        const tl = gsap.timeline({ paused: true });
+        rows.forEach((x) => { gsap.set(x.tiles, { opacity: 0 }); gsap.set(x.count, { opacity: 0 }); });
+
+        // Clouds drift (the world)
+        tl.fromTo("#g-cloud1", { x: 0 }, { x: 100, duration: 17.6, ease: "none" }, 0);
+        tl.fromTo("#g-cloud2", { x: 0 }, { x: -84, duration: 17.6, ease: "none" }, 0);
+        // The big word bounces once while the hook is read
+        tl.fromTo(big.map((b) => b.tile), { y: 0 }, { keyframes: { y: [0, -14, 0] }, duration: 0.4, stagger: 0.05, ease: "none" }, 0.4);
+
+        // Each found word: its letters light up in the big word, then drop into the list
+        rows.forEach((x, k) => {
+          const t = TIMES[k];
+          const glows = x.from.map((i) => big[i].glow);
+          tl.fromTo(glows, { opacity: 0 }, { keyframes: { opacity: [0, 0.9, 0.9, 0] }, duration: 1.0, ease: "none", stagger: 0.04 }, t);
+          tl.fromTo(x.tiles, { opacity: 0, y: -160 }, { opacity: 1, y: 0, duration: 0.32, ease: "back.out(1.4)", stagger: 0.06 }, t + 0.25);
+          tl.fromTo(x.count, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, t + 0.55);
+        });
+
+        // The payoff: how many words were hiding
+        tl.fromTo(big.map((b) => b.glow), { opacity: 0 }, { keyframes: { opacity: [0, 0.6, 0] }, duration: 0.5, ease: "none", stagger: 0.04 }, 8.3);
+        tl.to(hookWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 9.15);
+        tl.fromTo(payWords, { opacity: 0, filter: "blur(8px)", scale: 1.15 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.3, stagger: 0.06, ease: "expo.out" }, 9.4);
+        tl.fromTo("#g-big", { scale: 1 }, { keyframes: { scale: [1, 1.05, 1] }, duration: 0.5, ease: "none", transformOrigin: "50% 50%" }, 9.45);
+        tl.fromTo(statWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 11.35);
+        tl.to(statWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 14.05);
+        tl.fromTo(ctaWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 14.25);
+
+        // Hand-off to the end card
+        tl.to("#g-stage", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 17.2);
+
+        window.__timelines["words"] = tl;
+      });
+    })();
+  </script>
+</template>

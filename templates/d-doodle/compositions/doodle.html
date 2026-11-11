@@ -1,0 +1,154 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #d-ground {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 900px 900px at 10% 6%, #CFE6F3 0%, rgba(207, 230, 243, 0) 70%),
+        radial-gradient(ellipse 1000px 1000px at 95% 98%, #FFE6A6 0%, rgba(255, 230, 166, 0) 70%),
+        #FFF6E2;
+    }
+    #d-dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(185, 204, 216, 0.35) 7px, rgba(185, 204, 216, 0) 7.5px);
+      background-size: 64px 64px; background-position: 16px 24px;
+    }
+    .d-cloud { position: absolute; background: url("assets/img/cloud.svg") center / contain no-repeat; }
+    #d-cloud1 { left: 40px; top: 120px; width: 230px; height: 115px; }
+    #d-cloud2 { left: 780px; top: 1440px; width: 200px; height: 100px; }
+    #d-stage { position: absolute; inset: 0; }
+    .d-text { position: absolute; left: 90px; width: 900px; }
+    .d-w { display: inline-block; }
+    #d-kicker { top: 196px; font-family: "Quicksand", sans-serif; font-size: 30px; font-weight: 700; color: #C2306F; letter-spacing: 0.04em; }
+    #d-hook, #d-hold { top: 240px; max-height: 170px; font-size: 76px; font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; }
+    #d-answer { top: 232px; white-space: nowrap; font-size: 130px; font-weight: 700; line-height: 1.05; color: #E84A8B; letter-spacing: -0.01em; }
+    #d-stat, #d-cta { top: 392px; white-space: nowrap; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; }
+    #d-card {
+      position: absolute; left: 210px; top: 452px; width: 660px; height: 660px;
+      background: #FFFFFF; border: 4px solid #E8DCC6; border-radius: 40px;
+      box-shadow: 0 10px 0 rgba(45, 24, 16, 0.08);
+    }
+    #d-art { position: absolute; left: 240px; top: 482px; width: 600px; height: 600px; overflow: visible; }
+    #d-art path { fill: none; stroke: #2D1810; stroke-width: 4.6; stroke-linecap: round; stroke-linejoin: round; }
+    .d-row { position: absolute; top: 1134px; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; white-space: nowrap; }
+    #d-line-n { left: 210px; }
+    #d-got { left: 470px; width: 400px; text-align: right; color: #2F6E45; }
+    #d-credit { top: 1290px; font-family: "Quicksand", sans-serif; font-size: 28px; font-weight: 600; color: rgba(45, 24, 16, 0.6); text-align: center; }
+  </style>
+
+  <div id="root" data-composition-id="doodle" data-width="1080" data-height="1920">
+    <div id="d-ground"></div>
+    <div id="d-dots"></div>
+    <div id="d-cloud1" class="d-cloud"></div>
+    <div id="d-cloud2" class="d-cloud"></div>
+
+    <div id="d-stage">
+      <div id="d-kicker" class="d-text"></div>
+      <!-- Hook: frame 0 is the thumbnail, the first line already drawn -->
+      <div id="d-hook" class="d-text clip" data-start="0" data-duration="10.2" data-track-index="1"></div>
+      <div id="d-hold" class="d-text clip" data-start="10.1" data-duration="1.0" data-track-index="2"></div>
+      <div id="d-answer" class="d-text clip" data-start="10.95" data-duration="6.65" data-track-index="3"><span id="d-answer-in"></span></div>
+      <div id="d-stat" class="d-text clip" data-start="11.85" data-duration="2.6" data-track-index="4"></div>
+      <div id="d-cta" class="d-text clip" data-start="14.4" data-duration="3.2" data-track-index="5"></div>
+
+      <div id="d-card"></div>
+      <svg id="d-art" viewBox="0 0 256 256"></svg>
+
+      <div id="d-line-n" class="d-row"></div>
+      <div id="d-got" class="d-row"></div>
+      <div id="d-credit" class="d-text"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V;
+      const STROKES = String(V.strokes).split("|").map((s) => s.split(",").map(Number));
+      const N = STROKES.length;
+      const GOT = String(V.gotByLine).split(",").map(Number);
+      const TIMES = [0].concat(String(V.lineTimes || "").split(",").filter(Boolean).map(Number));   // line k starts at TIMES[k]
+      const CUM = GOT.reduce((a, g) => a.concat((a.length ? a[a.length - 1] : 0) + g), []);
+      const SLOT = N > 2 ? TIMES[2] - TIMES[1] : 2;
+      const DRAW = Math.min(0.7, SLOT * 0.8);
+      const COUNT = 0.4;   // the "got it" number counts up over this long after each line starts
+
+      document.getElementById("d-kicker").textContent = ("Guess the Doodle · " + V.date).toUpperCase();
+      const hookWords = H.words("d-hook", V.hook, "d-w");
+      const holdWords = H.words("d-hold", V.hold, "d-w");
+      document.getElementById("d-answer-in").textContent = V.answer;
+      const statWords = H.words("d-stat", V.stat, "d-w");
+      const ctaWords = H.words("d-cta", V.cta, "d-w");
+      document.getElementById("d-credit").textContent = V.credit;
+
+      // The doodle, one path per line, in Quick, Draw!'s 256-unit square
+      const art = document.getElementById("d-art");
+      const paths = STROKES.map((pts, k) => {
+        const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        let d = "M " + pts[0] + " " + pts[1];
+        for (let i = 2; i < pts.length; i += 2) d += " L " + pts[i] + " " + pts[i + 1];
+        if (pts.length <= 2) d += " L " + (pts[0] + 0.5) + " " + pts[1];
+        p.setAttribute("d", d);
+        p.setAttribute("id", "d-line-" + (k + 1));
+        art.appendChild(p);
+        return p;
+      });
+
+      // The row under the card follows time: which line is up, and how many of the herd had it by then
+      const lineN = document.getElementById("d-line-n"), got = document.getElementById("d-got");
+      const clock = { t: 0 };
+      const showRow = () => {
+        let k = 0;
+        while (k + 1 < N && clock.t >= TIMES[k + 1]) k++;
+        const p = k === 0 ? 1 : Math.min(1, (clock.t - TIMES[k]) / COUNT);
+        const from = k === 0 ? CUM[0] : CUM[k - 1];
+        lineN.textContent = "Line " + (k + 1) + " of " + N;
+        got.textContent = H.num(Math.round(from + (CUM[k] - from) * p)) + " of " + H.num(V.players) + " got it";
+      };
+
+      H.fontsReady().then(() => {
+        H.fit("d-hook", { max: 76, min: 52, maxH: 170 });
+        H.fit("d-hold", { max: 76, min: 52, maxH: 170 });
+        H.fit("d-answer", { max: 130, min: 64 });
+        H.fit("d-stat", { max: 40, min: 28 });
+        H.fit("d-cta", { max: 40, min: 28 });
+        H.fit("d-credit", { max: 28, min: 22 });
+        const lens = paths.map((p) => p.getTotalLength() + 1);
+
+        const tl = gsap.timeline({ paused: true });
+        showRow();
+        tl.fromTo(clock, { t: 0 }, { t: 10.6, duration: 10.6, ease: "none", onUpdate: showRow }, 0);
+
+        // Clouds drift (the world)
+        tl.fromTo("#d-cloud1", { x: 0 }, { x: 100, duration: 17, ease: "none" }, 0);
+        tl.fromTo("#d-cloud2", { x: 0 }, { x: -84, duration: 17, ease: "none" }, 0);
+
+        // Line 1 is there at frame 0 (the game starts with it drawn); each next line draws on in its slot
+        paths.forEach((p, k) => {
+          if (k === 0) { gsap.set(p, { strokeDasharray: lens[0], strokeDashoffset: 0 }); return; }
+          tl.fromTo(p, { strokeDasharray: lens[k], strokeDashoffset: lens[k] }, { strokeDashoffset: 0, duration: DRAW, ease: "power1.inOut" }, TIMES[k]);
+        });
+        // The row ticks each time a line lands
+        for (let k = 1; k < N; k++) tl.fromTo("#d-got", { scale: 1 }, { keyframes: { scale: [1, 1.08, 1] }, duration: 0.3, ease: "none", transformOrigin: "100% 50%" }, TIMES[k] + 0.05);
+
+        // Hold, then the answer: the drawing turns pink as the word lands
+        tl.to(hookWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 9.95);
+        tl.fromTo(holdWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 10.15);
+        tl.fromTo("#d-card", { scale: 1 }, { keyframes: { scale: [1, 0.97, 1.03, 1] }, duration: 0.45, ease: "none" }, 10.95);
+        tl.fromTo("#d-art", { scale: 1 }, { keyframes: { scale: [1, 0.97, 1.03, 1] }, duration: 0.45, ease: "none", transformOrigin: "50% 50%" }, 10.95);
+        tl.to(paths, { stroke: "#E84A8B", duration: 0.3, ease: "power2.out" }, 11.0);
+        tl.fromTo("#d-answer-in", { opacity: 0, scale: 1.25, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "expo.out", transformOrigin: "0% 50%" }, 11.0);
+        tl.fromTo(statWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 11.9);
+        tl.to(statWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 14.25);
+        tl.fromTo(ctaWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 14.45);
+
+        // Hand-off to the end card
+        tl.to("#d-stage", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 17.2);
+
+        window.__timelines["doodle"] = tl;
+      });
+    })();
+  </script>
+</template>

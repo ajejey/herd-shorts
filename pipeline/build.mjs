@@ -88,12 +88,20 @@ export async function build({ format, day, pick = {}, out }) {
   const filled = decl.map((d) => ({ ...d, default: values[d.id] }));
   let html = src.replace(VARS_RE, () => `data-composition-variables='${encode(JSON.stringify(filled, null, 0).replace(/\},\{/g, '},\n    {'))}'`);
   html = html.replace(/[ \t]*<(\w+)\b[^>]*\sdata-if="(\w+)"[^>]*>[\s\S]*?<\/\1>\n?/g, (whole, _tag, id) => (values[id] ? whole : ''));
+  // data-each="<variable>": one copy per time in that comma list (e.g. a sound on every line of a doodle)
+  html = html.replace(/([ \t]*)(<(\w+)\b[^>]*\sdata-each="(\w+)"[^>]*>[\s\S]*?<\/\3>)\n?/g, (whole, indent, el, _tag, id) => {
+    const times = String(values[id] || '').split(',').filter(Boolean).map(Number);
+    return times.map((t, i) => `${indent}${el
+      .replace(/\sdata-each="\w+"/, '')
+      .replace(/\sid="([^"]+)"/, (m, base) => ` id="${base}-${i + 1}"`)
+      .replace(/\sdata-start="[^"]*"/, ` data-start="${t.toFixed(3)}"`)}\n`).join('');
+  });
   fs.writeFileSync(path.join(dir, 'index.html'), html);
   fs.writeFileSync(path.join(dir, 'variables.json'), `${JSON.stringify(values, null, 2)}\n`);
   return { dir, values, duration: rootDuration(html) };
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const arg = (k) => (process.argv.find((a) => a.startsWith(`--${k}=`)) || '').split('=').slice(1).join('=');
   try {
     const pick = arg('pick') ? readJson(path.resolve(arg('pick'))) : {};

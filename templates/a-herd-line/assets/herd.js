@@ -14,11 +14,17 @@
 
   function num(n) { return Number(n).toLocaleString("en-US"); }
 
-  /* Fill an element with one span per word ("|" is a line break); returns the spans. */
+  /* Fill an element with one span per word ("|" is a line break); returns the spans.
+     The last two words share a span, so a line never ends on one short word alone. */
   function words(el, text, cls) {
     if (typeof el === "string") el = document.getElementById(el);
     cls = cls || "w";
-    el.innerHTML = String(text == null ? "" : text).split(" ").map(function (w) {
+    var parts = String(text == null ? "" : text).split(" ");
+    var n = parts.length;
+    if (n >= 4 && parts[n - 1] !== "|" && parts[n - 2] !== "|" && (parts[n - 1] + parts[n - 2]).length <= 16) {
+      parts.splice(n - 2, 2, parts[n - 2] + "\u00a0" + parts[n - 1]);
+    }
+    el.innerHTML = parts.map(function (w) {
       return w === "|" ? "<br />" : '<span class="' + cls + '">' + w.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</span>";
     }).join(" ");
     return el.querySelectorAll("." + cls);

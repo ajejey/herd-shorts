@@ -1,0 +1,137 @@
+<template>
+  <style>
+    @font-face { font-family: "Fredoka"; src: url("assets/fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    @font-face { font-family: "Quicksand"; src: url("assets/fonts/quicksand.woff2") format("woff2"); font-weight: 300 700; font-display: block; }
+    #root { position: absolute; inset: 0; overflow: hidden; color: #2D1810; font-family: "Fredoka", sans-serif; }
+    #w-ground {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 900px 900px at 10% 6%, #CFE6F3 0%, rgba(207, 230, 243, 0) 70%),
+        radial-gradient(ellipse 1000px 1000px at 95% 98%, #FFE6A6 0%, rgba(255, 230, 166, 0) 70%),
+        #FFF6E2;
+    }
+    #w-dots {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(185, 204, 216, 0.35) 7px, rgba(185, 204, 216, 0) 7.5px);
+      background-size: 64px 64px; background-position: 16px 24px;
+    }
+    .w-cloud { position: absolute; background: url("assets/img/cloud.svg") center / contain no-repeat; }
+    #w-cloud1 { left: 40px; top: 120px; width: 230px; height: 115px; }
+    #w-cloud2 { left: 780px; top: 1440px; width: 200px; height: 100px; }
+    #w-stage { position: absolute; inset: 0; }
+    .w-text { position: absolute; left: 90px; width: 900px; }
+    .w-w { display: inline-block; }
+    #w-kicker { top: 196px; font-family: "Quicksand", sans-serif; font-size: 30px; font-weight: 700; color: #2F6E45; letter-spacing: 0.04em; }
+    #w-hook { top: 240px; max-height: 170px; font-size: 68px; font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; }
+    #w-payoff { top: 240px; max-height: 170px; font-size: 76px; font-weight: 700; line-height: 1.08; color: #3D8B5A; letter-spacing: -0.01em; }
+    #w-head { top: 424px; font-family: "Quicksand", sans-serif; font-size: 30px; font-weight: 700; color: rgba(45, 24, 16, 0.6); text-align: right; }
+    #w-ladder { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+    .w-row { position: absolute; left: 90px; width: 900px; height: 64px; }
+    .w-rail { position: absolute; left: 40px; top: 30px; width: 4px; height: 92px; background: rgba(45, 24, 16, 0.25); border-radius: 2px; }
+    .w-tiles { position: absolute; left: 70px; top: 0; height: 64px; }
+    .w-tile { position: absolute; top: 0; width: 64px; height: 64px; perspective: 600px; }
+    .w-blank, .w-face {
+      position: absolute; inset: 0; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      backface-visibility: hidden; font-size: 38px; font-weight: 700; text-transform: uppercase;
+    }
+    .w-blank { background: #FFFFFF; border: 3px solid #E0D3BC; }
+    .w-face { background: #3D8B5A; color: #FFFFFF; }
+    .w-dot { position: absolute; left: 30px; top: 20px; width: 24px; height: 24px; border-radius: 12px; background: #FFFFFF; border: 4px solid rgba(45, 24, 16, 0.35); }
+    .w-count { position: absolute; right: 0; top: 4px; width: 140px; text-align: right; font-size: 46px; font-weight: 700; color: #2F6E45; }
+    #w-sheep { position: absolute; left: 92px; top: 0; width: 76px; height: 76px; background: url("assets/img/sheep.svg") center / contain no-repeat; z-index: 5; }
+    #w-stat, #w-cta { top: 1150px; white-space: nowrap; font-family: "Quicksand", sans-serif; font-size: 40px; font-weight: 700; }
+  </style>
+
+  <div id="root" data-composition-id="climb" data-width="1080" data-height="1920">
+    <div id="w-ground"></div>
+    <div id="w-dots"></div>
+    <div id="w-cloud1" class="w-cloud"></div>
+    <div id="w-cloud2" class="w-cloud"></div>
+
+    <div id="w-stage">
+      <div id="w-kicker" class="w-text"></div>
+      <!-- Hook: frame 0 is the thumbnail, the empty ladder under it -->
+      <div id="w-hook" class="w-text clip" data-start="0" data-duration="9.4" data-track-index="1"></div>
+      <div id="w-payoff" class="w-text clip" data-start="9.35" data-duration="8.25" data-track-index="2"></div>
+      <div id="w-head" class="w-text">made it</div>
+      <div id="w-ladder"></div>
+      <div id="w-sheep"></div>
+      <div id="w-stat" class="w-text clip" data-start="11.3" data-duration="2.95" data-track-index="3"></div>
+      <div id="w-cta" class="w-text clip" data-start="14.2" data-duration="3.4" data-track-index="4"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
+      const H = window.HERD, V = H.V;
+      const RUNGS = String(V.rungs).split("|").map((r) => { const [word, solved] = r.split(":"); return { word, solved: Number(solved) }; });
+      const R = RUNGS.length;
+      const TIMES = String(V.rungTimes).split(",").map(Number);
+      const TOP = 470, PITCH = 92;
+      const rowTop = (k) => TOP + (R - 1 - k) * PITCH;   // rung 1 at the bottom
+
+      document.getElementById("w-kicker").textContent = ("Word Climb · " + V.date).toUpperCase();
+      const hookWords = H.words("w-hook", V.hook, "w-w");
+      const payWords = H.words("w-payoff", V.payoff, "w-w");
+      const statWords = H.words("w-stat", V.stat, "w-w");
+      const ctaWords = H.words("w-cta", V.cta, "w-w");
+
+      const ladder = document.getElementById("w-ladder");
+      const rows = RUNGS.map((r, k) => {
+        const row = document.createElement("div");
+        row.className = "w-row"; row.id = "w-rung-" + (k + 1);
+        row.style.top = rowTop(k) + "px";
+        let html = (k < R - 1 ? '<div class="w-rail"></div>' : "") + '<div class="w-dot"></div><div class="w-tiles">';
+        for (let i = 0; i < r.word.length; i++) {
+          html += '<div class="w-tile" style="left:' + i * 70 + 'px"><div class="w-blank"></div><div class="w-face">' + r.word[i] + "</div></div>";
+        }
+        html += '</div><div class="w-count"></div>';
+        row.innerHTML = html;
+        row.querySelector(".w-count").textContent = H.num(r.solved);
+        ladder.appendChild(row);
+        return { row, blanks: row.querySelectorAll(".w-blank"), faces: row.querySelectorAll(".w-face"), count: row.querySelector(".w-count") };
+      });
+
+      H.fontsReady().then(() => {
+        H.fit("w-hook", { max: 68, min: 48, maxH: 170 });
+        H.fit("w-payoff", { max: 76, min: 52, maxH: 170 });
+        H.fit("w-stat", { max: 40, min: 28 });
+        H.fit("w-cta", { max: 40, min: 28 });
+
+        const tl = gsap.timeline({ paused: true });
+        rows.forEach((x) => { gsap.set(x.faces, { rotationX: 90 }); gsap.set(x.count, { opacity: 0 }); });
+        gsap.set("#w-sheep", { x: 0, y: rowTop(0) - 6 });
+
+        // Clouds drift (the world)
+        tl.fromTo("#w-cloud1", { x: 0 }, { x: 100, duration: 17.6, ease: "none" }, 0);
+        tl.fromTo("#w-cloud2", { x: 0 }, { x: -84, duration: 17.6, ease: "none" }, 0);
+        // The empty ladder breathes while the hook is read
+        tl.fromTo(rows.map((x) => x.row), { y: 0 }, { keyframes: { y: [0, -6, 0] }, duration: 0.4, stagger: 0.06, ease: "none" }, 0.35);
+
+        // Rung by rung: the word flips in, the count of who made it, and the sheep climbs up to it
+        rows.forEach((x, k) => {
+          const t = TIMES[k];
+          tl.fromTo(x.blanks, { rotationX: 0 }, { rotationX: -90, duration: 0.12, ease: "power2.in", stagger: 0.035 }, t);
+          tl.fromTo(x.faces, { rotationX: 90 }, { rotationX: 0, duration: 0.22, ease: "back.out(1.6)", stagger: 0.035 }, t + 0.12);
+          tl.fromTo(x.count, { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out", transformOrigin: "100% 50%" }, t + 0.2);
+          if (k > 0) tl.to("#w-sheep", { keyframes: { y: [rowTop(k - 1) - 6, rowTop(k) - 40, rowTop(k) - 6] }, duration: 0.35, ease: "none" }, t - 0.25);
+        });
+
+        // The payoff: who made it to the top
+        tl.to(hookWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 9.15);
+        tl.fromTo(payWords, { opacity: 0, filter: "blur(8px)", scale: 1.15 }, { opacity: 1, filter: "blur(0px)", scale: 1, duration: 0.3, stagger: 0.06, ease: "expo.out" }, 9.4);
+        tl.fromTo(rows[R - 1].row, { scale: 1 }, { keyframes: { scale: [1, 1.06, 1] }, duration: 0.5, ease: "none", transformOrigin: "0% 50%" }, 9.45);
+        tl.to("#w-sheep", { keyframes: { y: [rowTop(R - 1) - 6, rowTop(R - 1) - 50, rowTop(R - 1) - 6], rotation: [0, -12, 0] }, duration: 0.45, ease: "none" }, 9.5);
+        tl.fromTo(statWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 11.35);
+        tl.to(statWords, { opacity: 0, filter: "blur(8px)", duration: 0.16, stagger: 0.02, ease: "power2.in" }, 14.05);
+        tl.fromTo(ctaWords, { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.13, stagger: 0.067 }, 14.25);
+
+        // Hand-off to the end card
+        tl.to("#w-stage", { opacity: 0, filter: "blur(10px)", duration: 0.25, ease: "power2.in" }, 17.2);
+
+        window.__timelines["climb"] = tl;
+      });
+    })();
+  </script>
+</template>

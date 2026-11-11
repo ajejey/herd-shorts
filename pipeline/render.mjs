@@ -42,7 +42,7 @@ export function findings(report) {
   return out;
 }
 
-export async function render({ format, day, pick = {}, quality = 'standard' }) {
+export async function render({ format, day, pick = {}, quality = 'looks' }) {
   const b = await build({ format, day, pick });
   const name = `${day}-${path.basename(b.dir).replace(/^\d+-/, '')}`;
 
@@ -79,11 +79,11 @@ export async function render({ format, day, pick = {}, quality = 'standard' }) {
   return { ok: true, file: path.relative(ROOT, file), sheet: path.relative(ROOT, sheet), duration, warnings: all.filter((f) => f.severity === 'warning').map((f) => `${f.code}: ${(f.message || '').slice(0, 120)}`), values: b.values };
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const arg = (k) => (process.argv.find((a) => a.startsWith(`--${k}=`)) || '').split('=').slice(1).join('=');
   try {
     const pick = arg('pick') ? readJson(path.resolve(arg('pick'))) : {};
-    const r = await render({ format: arg('format') || pick.format, day: Number(arg('day') || pick.day), pick, quality: arg('quality') || 'standard' });
+    const r = await render({ format: arg('format') || pick.format, day: Number(arg('day') || pick.day), pick, quality: arg('quality') || 'looks' });
     console.log(JSON.stringify(r));
   } catch (err) {
     console.log(JSON.stringify({ ok: false, notEligible: err instanceof NotEligible, error: err.message }));

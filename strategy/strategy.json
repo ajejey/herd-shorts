@@ -6,38 +6,41 @@
     "A-herd-line": {
       "weight": 1,
       "game": "daily-guesstimate",
-      "status": "testing"
+      "status": "testing",
+      "note": "Default question: the herd's biggest miss. The camera pull only happens when the answer is well outside the middle 70% of guesses."
     },
     "B-board": {
       "weight": 1,
       "game": "top-answers",
-      "status": "testing"
+      "status": "testing",
+      "note": "Weak when the #1 answer is under ~12% (a flat board: day 162 \"whisk\" 7%). Boards are sometimes reused from older Daily Herd days, so never say \"yesterday\" about the count."
     },
     "C-dial": {
       "weight": 1,
       "game": "hot-takes",
-      "status": "testing"
+      "status": "testing",
+      "note": "Default take: a near tie (gap <= 8 points) if there is one, else the most lopsided."
     },
     "D-doodle": {
       "weight": 1,
       "game": "guess-the-doodle",
-      "status": "planned",
+      "status": "testing",
       "note": "The doodle draws itself line by line; viewers race to guess. Credit Quick, Draw! (CC BY 4.0) in every post."
     },
     "E-word-climb": {
       "weight": 1,
       "game": "word-climb",
-      "status": "planned"
+      "status": "testing"
     },
     "F-secret-word": {
       "weight": 1,
       "game": "secret-word",
-      "status": "planned"
+      "status": "testing"
     },
     "G-words-from": {
       "weight": 1,
       "game": "words-from-a-word",
-      "status": "planned"
+      "status": "testing"
     }
   },
   "length_seconds": {
@@ -64,10 +67,10 @@
     ],
     "C-dial": [
       "{players} people voted. Where do you land?",
-      "{statement_short}? America is split."
+      "{statement_short}? The herd is split."
     ],
     "D-doodle": [
-      "Guess it before line 3",
+      "Can you guess it from one line?",
       "Only {first_line} of {players} got it from one line"
     ],
     "E-word-climb": [
@@ -75,12 +78,12 @@
       "Most people opened with {opener}. Bad idea?"
     ],
     "F-secret-word": [
-      "The secret word took {median} guesses. Can you beat it?",
+      "The herd needed {median} guesses. Can you beat that?",
       "So close: {close_call} was not it"
     ],
     "G-words-from": [
-      "{hidden} words hide in {word}. How many can you find?",
-      "Only {rarest} was found by one person"
+      "How many words can you make from {word}?",
+      "{hidden} words hide in {word}. How many can you find?"
     ]
   }
 }

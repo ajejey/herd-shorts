@@ -1,0 +1,120 @@
+name: Daily short
+
+# A day runs in three steps:
+#   06:10 UTC  pull yesterday's numbers (games close at 06:00: late play runs 6 h past midnight)
+#              and commit data/<day>.json
+#   ~06:30     Claude reads the data, the ledger and the strategy, and commits picks/<date>.json;
+#              that push renders the pick straight away
+#   09:00 UTC  fallback: if nothing was rendered for the date, render the strategy's choice
+on:
+  schedule:
+    - cron: '10 6 * * *'
+    - cron: '0 9 * * *'
+  push:
+    branches: [main]
+    paths: ['picks/**']
+  workflow_dispatch:
+    inputs:
+      day:
+        description: 'Herd day (blank: the latest finished day)'
+        required: false
+      format:
+        description: 'Force a format, e.g. B-board (blank: the pick, else the strategy)'
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-short
+  cancel-in-progress: false
+
+jobs:
+  pull:
+    if: github.event_name == 'schedule' && github.event.schedule == '10 6 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Pull the finished day
+        env:
+          SHORTS_KEY: ${{ secrets.SHORTS_KEY }}
+        run: node pipeline/pull-data.mjs
+      - name: Commit it for the pick
+        run: |
+          git config user.name "herd-shorts bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Data for the latest finished day"
+          git pull --rebase --quiet && git push
+
+  render:
+    if: github.event_name != 'schedule' || github.event.schedule == '0 9 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pull the finished day (again, in case the morning pull failed)
+        env:
+          SHORTS_KEY: ${{ secrets.SHORTS_KEY }}
+        run: node pipeline/pull-data.mjs ${{ inputs.day && format('--day={0}', inputs.day) || '' }}
+
+      - name: Already rendered today?
+        id: seen
+        if: github.event_name == 'schedule'
+        run: node pipeline/daily.mjs --check-done
+
+      - name: FFmpeg for the renderer
+        if: steps.seen.outputs.done != 'true'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg > /dev/null
+
+      - name: Chrome for HyperFrames
+        if: steps.seen.outputs.done != 'true'
+        run: npx --yes hyperframes@0.9.20 browser ensure
+
+      - name: Pipeline checks
+        if: steps.seen.outputs.done != 'true'
+        run: node pipeline/check.mjs
+
+      - name: Pick, render, record
+        id: daily
+        if: steps.seen.outputs.done != 'true'
+        run: node pipeline/daily.mjs ${{ inputs.day && format('--day={0}', inputs.day) || '' }} ${{ inputs.format && format('--format={0}', inputs.format) || '' }}
+
+      - name: Keep the video for 30 days
+        if: steps.daily.outputs.id
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.daily.outputs.id }}
+          path: |
+            ${{ steps.daily.outputs.file }}
+            ${{ steps.daily.outputs.sheet }}
+          retention-days: 30
+
+      - name: Attach to the day's release
+        if: steps.daily.outputs.id
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="short-${{ steps.daily.outputs.id }}"
+          gh release view "$tag" > /dev/null 2>&1 || gh release create "$tag" --title "${{ steps.daily.outputs.id }} (${{ steps.daily.outputs.format }}, day ${{ steps.daily.outputs.day }})" --notes "Rendered by the daily workflow. Not posted yet."
+          gh release upload "$tag" "${{ steps.daily.outputs.file }}" "${{ steps.daily.outputs.sheet }}" --clobber
+
+      - name: Save the data and the ledger row
+        if: steps.daily.outputs.id
+        run: |
+          git config user.name "herd-shorts bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data ledger
+          git diff --cached --quiet || git commit -m "Day ${{ steps.daily.outputs.day }}: ${{ steps.daily.outputs.id }} rendered"
+          git pull --rebase --quiet && git push
