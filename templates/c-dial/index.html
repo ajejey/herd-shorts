@@ -16,10 +16,15 @@
     {"id":"verdict","type":"string","label":"verdict","default":"Split almost in half!"},
     {"id":"players","type":"number","label":"players","default":675},
     {"id":"sting","type":"string","label":"sting","default":"Only 11 votes apart"},
+    {"id":"insight","type":"string","label":"insight","default":"The most divided take of the day"},
     {"id":"ask","type":"string","label":"ask","default":"Which side are you on?"},
     {"id":"play","type":"string","label":"play","default":"Play today’s Hot Takes free"},
     {"id":"url","type":"string","label":"url","default":"herdgamesonline.com"},
-    {"id":"swingTicks","type":"string","label":"swingTicks","default":"4.554,5.278,6.001,6.725,7.448"}
+    {"id":"swingTicks","type":"string","label":"swingTicks","default":"4.554,5.278,6.001,6.725,7.448"},
+    {"id":"theme","type":"enum","label":"World","default":"beach","options":[{"value":"meadow","label":"meadow"},{"value":"sunset","label":"sunset"},{"value":"snow","label":"snow"},{"value":"beach","label":"beach"},{"value":"autumn","label":"autumn"},{"value":"spring","label":"spring"}]},
+    {"id":"party","type":"enum","label":"Celebration at the reveal","default":"confetti","options":[{"value":"confetti","label":"confetti"},{"value":"stars","label":"stars"},{"value":"stampede","label":"stampede"}]},
+    {"id":"react","type":"enum","label":"The cow at the reveal","default":"spin","options":[{"value":"jump","label":"jump"},{"value":"spin","label":"spin"},{"value":"dance","label":"dance"}]},
+    {"id":"music","type":"string","label":"Music bed (file in assets/shared/music)","default":"funk-clav"}
   ]'
 >
   <head>
@@ -41,10 +46,10 @@
         data-width="1080" data-height="1920" style="z-index: 1"></div>
 
       <!-- Sound (strategy/PRINCIPLES.md rule 6), written by pipeline/make-root.mjs from the format's beat clock -->
-      <audio id="mus-a" class="clip" src="assets/shared/music/debate-synth.mp3" data-start="0" data-duration="1.1" data-track-index="30" data-volume="0.55" data-fade-out="0.12"></audio>
-      <audio id="mus-b" class="clip" src="assets/shared/music/debate-synth.mp3" data-start="1.1" data-media-start="1.1" data-duration="3" data-track-index="31" data-volume="0.22" data-fade-in="0.1" data-fade-out="0.1"></audio>
-      <audio id="mus-c" class="clip" src="assets/shared/music/debate-synth.mp3" data-start="4.1" data-media-start="4.1" data-duration="5.65" data-track-index="33" data-volume="0.45" data-fade-in="0.1" data-fade-out="0.1"></audio>
-      <audio id="mus-d" class="clip" src="assets/shared/music/debate-synth.mp3" data-start="9.9" data-media-start="9.9" data-duration="6.2" data-track-index="32" data-volume="0.55" data-fade-out="0.35"></audio>
+      <audio id="mus-a" data-music="1" class="clip" src="assets/shared/music/funk-clav.mp3" data-start="0" data-duration="1.1" data-track-index="30" data-volume="0.55" data-fade-out="0.12"></audio>
+      <audio id="mus-b" data-music="1" class="clip" src="assets/shared/music/funk-clav.mp3" data-start="1.1" data-media-start="1.1" data-duration="3" data-track-index="31" data-volume="0.22" data-fade-in="0.1" data-fade-out="0.1"></audio>
+      <audio id="mus-c" data-music="1" class="clip" src="assets/shared/music/funk-clav.mp3" data-start="4.1" data-media-start="4.1" data-duration="5.65" data-track-index="33" data-volume="0.45" data-fade-in="0.1" data-fade-out="0.1"></audio>
+      <audio id="mus-d" data-music="1" class="clip" src="assets/shared/music/funk-clav.mp3" data-start="9.9" data-media-start="9.9" data-duration="6.2" data-track-index="32" data-volume="0.55" data-fade-out="0.35"></audio>
       <audio id="snd-beep3" class="clip" src="assets/shared/sfx/beep-1.mp3" data-start="1.1" data-duration="0.67" data-track-index="12" data-volume="0.55"></audio>
       <audio id="snd-beep2" class="clip" src="assets/shared/sfx/beep-1.mp3" data-start="2.1" data-duration="0.67" data-track-index="12" data-volume="0.55"></audio>
       <audio id="snd-beep1" class="clip" src="assets/shared/sfx/beep-1.mp3" data-start="3.1" data-duration="0.67" data-track-index="12" data-volume="0.6"></audio>

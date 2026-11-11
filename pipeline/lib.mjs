@@ -63,3 +63,41 @@ const ASKS = /\b(comment|comments|share|shares|tag a|tag your|tag someone|follow
 export function engagementAsks(values) {
   return Object.entries(values).filter(([k, v]) => typeof v === 'string' && !['strokes', 'guesses', 'credit'].includes(k) && ASKS.test(v)).map(([k, v]) => `${k}: "${v}"`);
 }
+
+/*
+  Variety (strategy/PRINCIPLES.md, YouTube's "inauthentic content" rule:
+  template-made videos "with little to no variation" lose standing). Every
+  video gets a world, a celebration, a host reaction and a music bed, rotated
+  by day so the same format never looks or sounds the same two days running,
+  and offset by format so the same day's formats differ too. A pick can set
+  any of them ("variety": { "theme": "snow" }).
+*/
+export const THEMES = ['meadow', 'sunset', 'snow', 'beach', 'autumn', 'spring'];
+export const PARTIES = ['confetti', 'stars', 'stampede'];
+export const REACTS = ['jump', 'spin', 'dance'];
+export const MUSIC = {
+  'A-herd-line': ['quiz-pluck', 'orchestral-pizz', 'arcade-bounce', 'jazz-swing'],
+  'B-board': ['feud-funk', 'funk-clav', 'synth-pop', 'tropical'],
+  'C-dial': ['debate-synth', 'synth-pop', 'arcade-bounce', 'funk-clav'],
+  'D-doodle': ['sketch-uke', 'orchestral-pizz', 'tropical', 'jazz-swing'],
+  'E-word-climb': ['word-keys', 'jazz-swing', 'orchestral-pizz', 'synth-pop'],
+  'F-secret-word': ['word-keys', 'tension-pulse', 'funk-clav', 'tropical'],
+  'G-words-from': ['word-keys', 'arcade-bounce', 'jazz-swing', 'synth-pop'],
+};
+export function variety(format, day, pick = {}) {
+  const fi = Math.max(0, Object.keys(FORMATS).indexOf(format));
+  const v = pick.variety || {};
+  const pool = MUSIC[format] || MUSIC['A-herd-line'];
+  return {
+    theme: v.theme || THEMES[(day + fi * 5) % THEMES.length],
+    party: v.party || PARTIES[(day + fi * 2) % PARTIES.length],
+    react: v.react || REACTS[(day + fi) % REACTS.length],
+    music: v.music || pool[(day + fi) % pool.length],
+  };
+}
+export const VARIETY_DECL = {
+  theme: { label: 'World', options: THEMES },
+  party: { label: 'Celebration at the reveal', options: PARTIES },
+  react: { label: 'The cow at the reveal', options: REACTS },
+  music: { label: 'Music bed (file in assets/shared/music)' },
+};

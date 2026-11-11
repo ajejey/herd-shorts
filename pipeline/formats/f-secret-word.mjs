@@ -39,6 +39,7 @@ export function vars(data, pick = {}) {
     hold: copy.hold || 'The secret word was…',
     players: sw.players,
     sting: copy.sting || (sw.found / sw.players < 0.5 ? `Only ${num(sw.found)} of ${num(sw.players)} found it` : `${num(sw.found)} of ${num(sw.players)} found it`),
+    insight: copy.insight ?? (sw.closeCalls[0] ? `Most common near miss: \u201c${sw.closeCalls[0].value}\u201d` : ''),
     ask: copy.ask || 'Did you get it?',
     play: copy.play || 'Play today’s Secret Word free',
     url: 'herdgamesonline.com',

@@ -34,6 +34,7 @@ export function vars(data, pick = {}) {
     reveal: copy.reveal || `${num(wf.hidden)} words were hiding!`,
     players: wf.players,
     sting: copy.sting || `${num(wf.foundBigWord)} of ${num(wf.players)} spotted ${W} itself`,
+    insight: copy.insight ?? (wf.differentWordsFound ? `The herd found ${num(wf.differentWordsFound)} different words` : ''),
     ask: copy.ask || 'How many did you find?',
     play: copy.play || 'Play today’s Words from a Word',
     url: 'herdgamesonline.com',

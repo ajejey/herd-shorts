@@ -39,6 +39,7 @@
       K.statText(stat2, K.pick(V.sting), true);
       gsap.set([stat1, stat2], { visibility: "hidden" });
       const ask = K.ask(front, V.ask);
+      const insight = K.insight(front, V.insight);   // commentary on the result, under the stat
       const banner = K.banner(front, V.play, V.url);
       const bits = K.confetti(front, 531, 484, 44, 17);
       // The turn is the game here: a big 6-second ring where the finds will land
@@ -115,6 +116,7 @@
         tl.fromTo(ask.spans, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.ask);
         tl.to(ask.spans, { opacity: 0, duration: 0.12 }, T.play - 0.1);
         tl.set(ask.el, { visibility: "hidden" }, T.play);
+        A.insight(tl, insight, T);
         A.banner(tl, banner, T, [stat2, host.cow, host.bubble]);
 
         // Rewind: the finds lift away, the challenge pops out

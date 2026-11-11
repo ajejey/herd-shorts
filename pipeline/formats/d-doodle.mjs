@@ -9,6 +9,7 @@
 import { labelOfDay, num, need } from '../lib.mjs';
 
 const MIN_PLAYERS = 40;
+export const SCENE = 'doodle';
 export const T = { line2: 1.4, line3: 2.8, restFrom: 3.9, restTo: 6.2, count: 6.6, reveal: 9.9, sting: 10.6, ask: 11.1, play: 13.2, rewind: 15.3, end: 16.1 };
 
 const cap = (s) => String(s).charAt(0).toUpperCase() + String(s).slice(1);
@@ -38,6 +39,14 @@ export function sting(d) {
     : `${num(first)} of ${num(d.players)} got it from line 1`;
 }
 
+/* Commentary: the line by which half the herd had it */
+export function insight(d) {
+  const got = d.gotByLine.reduce((a, b) => a + b, 0);
+  let cum = 0;
+  for (let i = 0; i < d.gotByLine.length; i++) { cum += d.gotByLine[i]; if (cum >= got / 2) return `Half the herd had it by line ${i + 1}`; }
+  return '';
+}
+
 export function vars(data, pick = {}) {
   const d = data.doodle;
   need(d, 'no doodle that day (Guess the Doodle launched on day 162)');
@@ -59,6 +68,7 @@ export function vars(data, pick = {}) {
     scribbleTimes: scribbleTimes(d.lines).map((t) => t.toFixed(3)).join(','),
     answer: cap(word),
     sting: copy.sting || sting(d),
+    insight: copy.insight ?? insight(d),
     // A real question, never "comment ...": Instagram does not recommend posts that explicitly ask for comments, shares or tags
     ask: copy.ask || 'When did you get it?',
     play: copy.play || 'Play today’s doodle free',

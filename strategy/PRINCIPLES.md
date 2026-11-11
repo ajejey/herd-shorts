@@ -72,6 +72,18 @@ review may overturn any rule with ledger rows.
     herd on a hill below, decoration that can be covered without losing anything.
     (11 Nov 2026: the first renders kept everything above 1330 px and left the
     bottom third empty; Ajey spotted it.)
+14. **Never the same video twice (12 Nov 2026).** YouTube's "inauthentic content"
+    rule (July 2025, clarified July 2026) withholds standing from channels whose
+    videos look "made with a template with little to no variation", judged across
+    the whole channel and including titles and descriptions. So every video gets a
+    world (meadow, sunset, snow, beach, autumn, spring), a celebration (confetti,
+    stars, the herd stampeding), a cow reaction (jump, spin, dance) and a music bed
+    from its format's pool of four, rotated so no format repeats any of them on
+    consecutive days (check.mjs proves it). Each video carries a line that reads its
+    result ("78% guessed too low"), not just numbers. Titles and descriptions come
+    from the day's own question or finding, and metadata.mjs refuses a title too
+    close to any of the last 20. Instagram's matching April 2026 rule targets reposted
+    content; everything here is our own.
 13. **Voice only if it earns its place.** Text, music and sound carry the
     videos. A voiced version is an explore test the weekly review judges, not a default.
 

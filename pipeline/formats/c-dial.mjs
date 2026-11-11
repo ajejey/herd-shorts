@@ -50,6 +50,16 @@ export function swingTicks() {
   return out;
 }
 
+/* Commentary: where this take sits among the day's */
+export function insight(take, takes) {
+  const ok = takes.filter((t) => t.players >= MIN_VOTES && t.a && t.b);
+  if (ok.length < 3) return '';
+  const byGap = [...ok].sort((x, y) => gap(x) - gap(y));
+  if (byGap[0].id === take.id) return 'The most divided take of the day';
+  if (byGap[byGap.length - 1].id === take.id) return 'The most one-sided take of the day';
+  return `One of ${ok.length} takes today`;
+}
+
 export function vars(data, pick = {}) {
   const takes = data.hotTakes || [];
   const take = pick.take ? takes.find((t) => t.id === pick.take) : chooseTake(takes);
@@ -70,6 +80,7 @@ export function vars(data, pick = {}) {
     verdict: copy.verdict || verdict(take),
     players: take.players,
     sting: copy.sting || sting(take),
+    insight: copy.insight ?? insight(take, takes),
     ask: copy.ask || 'Which side are you on?',
     play: copy.play || 'Play today’s Hot Takes free',
     url: 'herdgamesonline.com',

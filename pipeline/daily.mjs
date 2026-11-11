@@ -20,6 +20,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits } from './lib.mjs';
 import { render } from './render.mjs';
+import { metadata } from './metadata.mjs';
 
 const LEDGER = path.join(ROOT, 'ledger', 'videos.jsonl');
 const GAME = { 'A-herd-line': 'daily-guesstimate', 'B-board': 'top-answers', 'C-dial': 'hot-takes', 'D-doodle': 'guess-the-doodle', 'E-word-climb': 'word-climb', 'F-secret-word': 'secret-word', 'G-words-from': 'words-from-a-word' };
@@ -101,6 +102,11 @@ async function main() {
   }
 
   const r = await render({ format, day: useDay, pick: pick || {} });
+  // Title, description, pinned question: from the day's content, never too close to the last 20 titles
+  const recent = ledger.slice(-20).map((x) => x.title).filter(Boolean);
+  const meta = metadata(format, r.values, { recent, copy: (pick && pick.copy) || {} });
+  const metaFile = r.file.replace(/\.mp4$/, '.meta.json');
+  fs.writeFileSync(path.join(ROOT, metaFile), `${JSON.stringify(meta, null, 2)}\n`);
   const letter = format.charAt(0);
   const row = {
     id: `${date}-${letter}`,
@@ -110,7 +116,9 @@ async function main() {
     day: useDay,
     source,
     data: Object.fromEntries(Object.entries(r.values).filter(([k, v]) => !LONG.has(k) && (typeof v === 'number' || (typeof v === 'string' && v.length <= 140)))),
-    hook: r.values.hook || r.values.line1 || null,
+    hook: r.values.hook || r.values.label || r.values.question || null,
+    title: meta.title,
+    variety: { theme: r.values.theme, party: r.values.party, react: r.values.react, music: r.values.music },
     explore,
     length_s: r.duration,
     status: 'rendered',
@@ -121,7 +129,7 @@ async function main() {
   writeLedgerRow(row);
   const out = { ok: true, id: row.id, format, day: useDay, source, explore, file: r.file, sheet: r.sheet, duration: r.duration, warnings: r.warnings };
   if (process.env.GITHUB_OUTPUT) {
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `id=${row.id}\nfile=${r.file.replace(/\\/g, '/')}\nsheet=${r.sheet.replace(/\\/g, '/')}\nformat=${format}\nday=${useDay}\n`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `id=${row.id}\nfile=${r.file.replace(/\\/g, '/')}\nsheet=${r.sheet.replace(/\\/g, '/')}\nmeta=${metaFile.replace(/\\/g, '/')}\nformat=${format}\nday=${useDay}\n`);
   }
   console.log(JSON.stringify(out));
 }

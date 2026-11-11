@@ -99,6 +99,7 @@ jobs:
           path: |
             ${{ steps.daily.outputs.file }}
             ${{ steps.daily.outputs.sheet }}
+            ${{ steps.daily.outputs.meta }}
           retention-days: 30
 
       - name: Attach to the day's release
@@ -108,7 +109,7 @@ jobs:
         run: |
           tag="short-${{ steps.daily.outputs.id }}"
           gh release view "$tag" > /dev/null 2>&1 || gh release create "$tag" --title "${{ steps.daily.outputs.id }} (${{ steps.daily.outputs.format }}, day ${{ steps.daily.outputs.day }})" --notes "Rendered by the daily workflow. Not posted yet."
-          gh release upload "$tag" "${{ steps.daily.outputs.file }}" "${{ steps.daily.outputs.sheet }}" --clobber
+          gh release upload "$tag" "${{ steps.daily.outputs.file }}" "${{ steps.daily.outputs.sheet }}" "${{ steps.daily.outputs.meta }}" --clobber
 
       - name: Save the data and the ledger row
         if: steps.daily.outputs.id

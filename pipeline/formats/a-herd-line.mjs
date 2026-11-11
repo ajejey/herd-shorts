@@ -149,6 +149,10 @@ export function vars(data, pick = {}) {
   } else {
     sting = `Nobody got ${q.closeRule}`;
   }
+  // Commentary: which way the herd missed
+  const below = sorted.filter((g) => g < q.answer).length / sorted.length, above = sorted.filter((g) => g > q.answer).length / sorted.length;
+  const low = q.unit === 'year' ? 'too early' : 'too low', high = q.unit === 'year' ? 'too late' : 'too high';
+  const insight = below >= 0.6 ? `${Math.round(below * 100)}% guessed ${low}` : above >= 0.6 ? `${Math.round(above * 100)}% guessed ${high}` : `The herd split: about half ${low}, half ${high}`;
   // The answer as it lands in the slot: the number and what it counts (a year or a percentage says itself)
   const answerText = q.unit === 'year' || q.unit === 'percent' || !ans.unit ? ans.big : `${ans.big} ${ans.unit}`;
 
@@ -171,6 +175,7 @@ export function vars(data, pick = {}) {
     closeLo: q.unit === 'year' ? q.answer - 2 : q.answer - Math.abs(q.answer) * 0.1,
     closeHi: q.unit === 'year' ? q.answer + 2 : q.answer + Math.abs(q.answer) * 0.1,
     sting: copy.sting || sting,
+    insight: copy.insight ?? insight,
     ask: copy.ask || 'What did you guess?',
     play: copy.play || 'Play today\u2019s Guesstimate free',
     url: 'herdgamesonline.com',

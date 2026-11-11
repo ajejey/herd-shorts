@@ -18,7 +18,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT, FORMATS, readJson, NotEligible } from './lib.mjs';
+import { ROOT, FORMATS, readJson, NotEligible, variety } from './lib.mjs';
 import { syncInto } from './sync-shared.mjs';
 
 const SKIP = new Set(['.hyperframes', '.media', 'node_modules', 'renders', 'out', 'snapshots']);
@@ -71,7 +71,8 @@ export async function build({ format, day, pick = {}, out }) {
   if (!fs.existsSync(path.join(template, 'index.html'))) throw new NotEligible(`${format} has no template yet`);
   const data = readJson(path.join(ROOT, 'data', `${day}.json`));
   const { vars } = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'formats', `${dirName}.mjs`)).href);
-  const values = vars(data, pick);
+  // The day's content, plus its world, celebration, host reaction and music (rotated: never the same twice running)
+  const values = { ...vars(data, pick), ...variety(format, day, pick) };
 
   const src = fs.readFileSync(path.join(template, 'index.html'), 'utf8');
   const decl = declaredVariables(src);
@@ -101,6 +102,8 @@ export async function build({ format, day, pick = {}, out }) {
       .replace(/\sid="([^"]+)"/, (m, base) => ` id="${base}-${i + 1}"`)
       .replace(/\sdata-start="[^"]*"/, ` data-start="${t.toFixed(3)}"`)}\n`).join('');
   });
+  // The day's music bed into every music clip (an audio file must be in the HTML itself, not a variable)
+  html = html.replace(/(<audio[^>]*data-music="1"[^>]*src=")assets\/shared\/music\/[^"]+(")/g, (m, a, z) => `${a}assets/shared/music/${values.music}.mp3${z}`);
   fs.writeFileSync(path.join(dir, 'index.html'), html);
   fs.writeFileSync(path.join(dir, 'variables.json'), `${JSON.stringify(values, null, 2)}\n`);
   return { dir, values, duration: rootDuration(html) };

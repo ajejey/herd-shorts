@@ -85,7 +85,27 @@
     ".hk-banner-1 { position: absolute; left: 0; top: 34px; width: 100%; font-family: 'Quicksand', sans-serif; font-size: 48px; font-weight: 700; }",
     ".hk-banner-2 { position: absolute; left: 30px; top: 112px; width: 920px; white-space: nowrap; font-size: 92px; font-weight: 700; letter-spacing: -0.01em; }",
     ".hk-bit { position: absolute; width: 18px; height: 30px; border-radius: 4px; z-index: 30; }",
+    ".hk-star { position: absolute; width: 64px; height: 64px; z-index: 30; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }",
+    ".hk-runner { position: absolute; width: 130px; height: 130px; z-index: 6; background: url('assets/img/sheep.svg') center / contain no-repeat; }",
+    ".hk-sun { position: absolute; left: 800px; top: 40px; width: 180px; height: 180px; border-radius: 90px; }",
+    ".hk-sea { position: absolute; left: 0; top: 1560px; width: 1080px; height: 120px; }",
+    ".hk-fall { position: absolute; left: 0; top: 0; }",
+    ".hk-insight { position: absolute; left: 226px; top: 1378px; width: 764px; color: rgba(45,24,16,0.78); font-family: 'Quicksand', sans-serif; font-size: 36px; font-weight: 700; white-space: nowrap; }",
   ].join("\n");
+
+  /*
+    The worlds (all light, so every line of text keeps its contrast). Rotated by
+    day with the celebration and the cow's reaction (pipeline/lib.mjs variety).
+  */
+  var WORLDS = {
+    meadow: { sky: ["#BFE3F7", "#E9F4E8", "#FFE58F"], dots: "rgba(255,255,255,0.55)", hill: ["#8FD16F", "#6FBF55"] },
+    sunset: { sky: ["#FFC9A8", "#FFE3CF", "#FFF1C1"], dots: "rgba(255,255,255,0.5)", hill: ["#A3CF7E", "#86BC66"], sun: "#FFB27A" },
+    snow: { sky: ["#C9E1F2", "#E9F2F8", "#FFFFFF"], dots: "rgba(255,255,255,0.75)", hill: ["#F4F8FB", "#DCE7EF"], fall: "snow" },
+    beach: { sky: ["#B8E6F6", "#E3F6F6", "#FFF0C8"], dots: "rgba(255,255,255,0.5)", hill: ["#F6D88E", "#EBC46C"], sea: "#7CC8E0", sun: "#FFD36E" },
+    autumn: { sky: ["#F8DEC0", "#FBECD9", "#FFF6E2"], dots: "rgba(255,255,255,0.5)", hill: ["#DDA75E", "#C98C40"], fall: "leaf" },
+    spring: { sky: ["#DDF0FC", "#F1F8EA", "#FDEFF4"], dots: "rgba(255,255,255,0.6)", hill: ["#A8DB86", "#8ACB69"], fall: "blossom" },
+  };
+  var FALL = { snow: { color: "#FFFFFF", r: "50%", w: 18, h: 18, edge: "2px solid rgba(160,190,215,0.7)" }, leaf: { color: "#E07B39", r: "0 60% 0 60%", w: 26, h: 18, edge: "none" }, blossom: { color: "#F7A8C8", r: "60% 0 60% 0", w: 20, h: 16, edge: "none" } };
 
   function el(parent, cls, html) {
     var d = document.createElement("div");
@@ -110,20 +130,34 @@
 
     /* The world behind everything: sky, clouds, the hill with the herd grazing (decoration under the apps' UI) */
     K.world = function (box) {
-      el(box, "hk-ground"); el(box, "hk-dots");
+      var W = WORLDS[vars().theme] || WORLDS.meadow;
+      var g = el(box, "hk-ground"); g.style.background = "linear-gradient(180deg, " + W.sky[0] + " 0%, " + W.sky[1] + " 45%, " + W.sky[2] + " 100%)";
+      var d = el(box, "hk-dots"); d.style.backgroundImage = "radial-gradient(circle, " + W.dots + " 7px, rgba(255,255,255,0) 7.5px)";
+      if (W.sun) { var sun = el(box, "hk-sun"); sun.style.background = "radial-gradient(circle, " + W.sun + " 0%, " + W.sun + " 55%, rgba(255,255,255,0) 72%)"; }
       var c1 = el(box, "hk-cloud"); Object.assign(c1.style, { left: "60px", top: "70px", width: "240px", height: "120px" });
       var c2 = el(box, "hk-cloud"); Object.assign(c2.style, { left: "760px", top: "120px", width: "200px", height: "100px" });
+      if (W.sea) { var sea = el(box, "hk-sea"); sea.style.background = "linear-gradient(180deg, " + W.sea + " 0%, #A8DCEB 100%)"; }
       var hill = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       hill.setAttribute("class", "hk-hill"); hill.setAttribute("viewBox", "0 0 1080 320"); hill.setAttribute("preserveAspectRatio", "none");
-      hill.innerHTML = '<path d="M0 90 C 220 20, 420 40, 600 70 C 780 100, 920 40, 1080 60 L 1080 320 L 0 320 Z" fill="#8FD16F" />' +
-        '<path d="M0 170 C 260 120, 520 150, 760 140 C 900 134, 1000 120, 1080 130 L 1080 320 L 0 320 Z" fill="#6FBF55" />';
+      hill.innerHTML = '<path d="M0 90 C 220 20, 420 40, 600 70 C 780 100, 920 40, 1080 60 L 1080 320 L 0 320 Z" fill="' + W.hill[0] + '" />' +
+        '<path d="M0 170 C 260 120, 520 150, 760 140 C 900 134, 1000 120, 1080 130 L 1080 320 L 0 320 Z" fill="' + W.hill[1] + '" />';
       box.appendChild(hill);
       var flock = [[30, 1598], [240, 1640], [455, 1604], [670, 1644], [885, 1610]].map(function (p, i) {
         var s = el(box, "hk-sheep"); s.style.left = p[0] + "px"; s.style.top = p[1] + "px";
         if (i % 2) s.style.transform = "scaleX(-1)";
         return s;
       });
-      return { clouds: [c1, c2], flock: flock };
+      // Snow, leaves or blossom drifting down (behind everything, seeded)
+      var fall = [];
+      if (W.fall) {
+        var F = FALL[W.fall], rand = seeded(29);
+        for (var i = 0; i < 22; i++) {
+          var p = el(box, "hk-fall");
+          Object.assign(p.style, { width: F.w + "px", height: F.h + "px", background: F.color, borderRadius: F.r, border: F.edge, left: Math.round(rand() * 1060) + "px" });
+          fall.push({ el: p, dur: 6 + rand() * 4, delay: rand() * 8, sway: 30 + rand() * 50, spin: (rand() - 0.5) * 540 });
+        }
+      }
+      return { clouds: [c1, c2], flock: flock, fall: fall };
     };
 
     /* The challenge: stays on screen for the whole video; returns its word spans */
@@ -173,16 +207,34 @@
       return { el: b, url: u };
     };
 
+    /* The reveal's celebration, rotated by day (variety "party"): confetti, a starburst, or the herd stampeding across the hill */
     K.confetti = function (box, x, y, n, seed) {
       var rand = seeded(seed || 11), COLORS = ["#E84A8B", "#3D8B5A", "#FFC93C", "#4FA3D9", "#FF7A45"];
-      var bits = [];
-      for (var i = 0; i < (n || 44); i++) {
-        var b = el(box, "hk-bit"); b.style.background = COLORS[i % COLORS.length]; b.style.left = x + "px"; b.style.top = y + "px";
-        var ang = -Math.PI / 2 + (rand() - 0.5) * 2.4, sp = 380 + rand() * 520;
-        bits.push({ b: b, dx: Math.cos(ang) * sp, dy: Math.sin(ang) * sp, rot: (rand() - 0.5) * 900, fall: 900 + rand() * 500 });
+      var kind = vars().party || "confetti", parts = [], i;
+      if (kind === "stars") {
+        for (i = 0; i < 18; i++) {
+          var s = el(box, "hk-star"); s.style.background = ["#FFC93C", "#E84A8B", "#FFC93C", "#4FA3D9"][i % 4]; s.style.left = (x - 32) + "px"; s.style.top = (y - 32) + "px";
+          var a = (i / 18) * Math.PI * 2 + rand() * 0.3, r = 260 + rand() * 260;
+          parts.push({ b: s, dx: Math.cos(a) * r, dy: Math.sin(a) * r * 0.8, rot: (rand() - 0.5) * 360, sc: 0.6 + rand() * 0.9 });
+        }
+      } else if (kind === "stampede") {
+        for (i = 0; i < 7; i++) {
+          var rn = el(box, "hk-runner"); rn.style.left = "-160px"; rn.style.top = (1560 + (i % 3) * 46) + "px";
+          parts.push({ b: rn, delay: i * 0.13 + rand() * 0.08, hop: 40 + rand() * 40 });
+        }
+      } else {
+        for (i = 0; i < (n || 44); i++) {
+          var b = el(box, "hk-bit"); b.style.background = COLORS[i % COLORS.length]; b.style.left = x + "px"; b.style.top = y + "px";
+          var ang = -Math.PI / 2 + (rand() - 0.5) * 2.4, sp = 380 + rand() * 520;
+          parts.push({ b: b, dx: Math.cos(ang) * sp, dy: Math.sin(ang) * sp, rot: (rand() - 0.5) * 900, fall: 900 + rand() * 500 });
+        }
       }
-      return bits;
+      parts.kind = kind;
+      return parts;
     };
+
+    /* A line under the stat that reads the result ("78% guessed too low"): commentary, not just numbers */
+    K.insight = function (box, text) { var d = el(box, "hk-insight"); d.textContent = text || ""; d.style.visibility = "hidden"; return d; };
 
     /* ---- Animation helpers (all on the scene's one paused timeline) ---- */
     var A = K.anim = {};
@@ -212,6 +264,11 @@
       tl.fromTo(w.clouds[1], { x: 0 }, { x: -60, duration: T.end, ease: "none" }, 0);
       w.flock.forEach(function (s, i) { tl.fromTo(s, { y: 0 }, { keyframes: { y: [0, -6, 0, -4, 0] }, duration: 4, ease: "none" }, 0.3 + i * 0.37); });
       tl.fromTo(w.flock, { y: 0 }, { keyframes: { y: [0, -90, 0, -30, 0] }, duration: 0.75, ease: "none", stagger: 0.05 }, T.reveal + 0.05);
+      // Snow, leaves or blossom: each piece falls on its own loop (finite repeats, so every frame is a function of time)
+      (w.fall || []).forEach(function (p) {
+        var reps = Math.max(0, Math.ceil((T.end + p.delay) / p.dur) - 1);
+        tl.fromTo(p.el, { y: -60, x: 0, rotation: 0 }, { y: 1980, x: p.sway, rotation: p.spin, duration: p.dur, ease: "none", repeat: reps }, -p.delay);
+      });
     };
 
     /* The cow thinks while you guess, fidgets through the countdown, jumps at the answer */
@@ -219,7 +276,15 @@
       gsap.set(h.x, { opacity: 0 });
       tl.fromTo(h.cow, { rotation: 0 }, { keyframes: { rotation: [0, -5, 0, 5, 0, -5, 0, 5, 0] }, duration: Math.max(1, T.count - 0.4), ease: "none", transformOrigin: "50% 90%" }, 0.2);
       tl.fromTo(h.cow, { x: 0 }, { keyframes: { x: [0, -4, 4, -4, 4, -4, 4, -4, 4, 0] }, duration: 3.0, ease: "none" }, T.count);
-      tl.fromTo(h.cow, { y: 0 }, { keyframes: { y: [0, -70, 0, -26, 0] }, duration: 0.7, ease: "none" }, T.reveal);
+      // The reaction at the answer, rotated by day (variety "react")
+      var react = vars().react || "jump";
+      if (react === "spin") {
+        tl.fromTo(h.cow, { y: 0, rotation: 0 }, { keyframes: { y: [0, -60, 0], rotation: [0, 180, 360] }, duration: 0.7, ease: "none", transformOrigin: "50% 60%" }, T.reveal);
+      } else if (react === "dance") {
+        tl.fromTo(h.cow, { y: 0, rotation: 0 }, { keyframes: { y: [0, -30, 0, -30, 0, -30, 0], rotation: [0, -14, 0, 14, 0, -14, 0] }, duration: 1.2, ease: "none", transformOrigin: "50% 90%" }, T.reveal);
+      } else {
+        tl.fromTo(h.cow, { y: 0 }, { keyframes: { y: [0, -70, 0, -26, 0] }, duration: 0.7, ease: "none" }, T.reveal);
+      }
       tl.to(h.q, { opacity: 0, duration: 0.05 }, T.reveal);
       tl.to(h.x, { opacity: 1, duration: 0.05 }, T.reveal);
       tl.fromTo(h.bubble, { scale: 1 }, { keyframes: { scale: [1, 1.3, 1] }, duration: 0.3, ease: "none" }, T.reveal);
@@ -257,6 +322,24 @@
     };
 
     A.burst = function (tl, bits, t) {
+      if (bits.kind === "stars") {
+        gsap.set(bits.map(function (x) { return x.b; }), { opacity: 0, scale: 0 });
+        bits.forEach(function (x, i) {
+          var t0 = t + (i % 4) * 0.03;
+          tl.set(x.b, { opacity: 1 }, t0);
+          tl.fromTo(x.b, { x: 0, y: 0, scale: 0, rotation: 0 }, { x: x.dx, y: x.dy, scale: x.sc, rotation: x.rot, duration: 0.6, ease: "power3.out" }, t0);
+          tl.to(x.b, { opacity: 0, scale: 0, duration: 0.4, ease: "power2.in" }, t0 + 0.9);
+        });
+        return;
+      }
+      if (bits.kind === "stampede") {
+        bits.forEach(function (x) {
+          var t0 = t + 0.05 + x.delay;
+          tl.fromTo(x.b, { x: 0 }, { x: 1400, duration: 1.5, ease: "none" }, t0);
+          tl.fromTo(x.b, { y: 0 }, { keyframes: { y: [0, -x.hop, 0, -x.hop, 0, -x.hop, 0, -x.hop, 0] }, duration: 1.5, ease: "none" }, t0);
+        });
+        return;
+      }
       gsap.set(bits.map(function (x) { return x.b; }), { opacity: 0 });
       bits.forEach(function (x, i) {
         var t0 = t + (i % 6) * 0.015;
@@ -265,6 +348,15 @@
         tl.to(x.b, { y: x.dy + x.fall, x: x.dx * 1.15, rotation: x.rot, duration: 1.3, ease: "power1.in" }, t0 + 0.5);
         tl.set(x.b, { opacity: 0 }, t0 + 1.8);
       });
+    };
+
+    /* The insight line: in under the sting, away when the banner rises */
+    A.insight = function (tl, d, T) {
+      if (!d.textContent) return;
+      tl.set(d, { visibility: "visible" }, T.sting + 0.7);
+      tl.fromTo(d, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, T.sting + 0.7);
+      tl.to(d, { opacity: 0, duration: 0.12 }, T.play - 0.1);
+      tl.set(d, { visibility: "hidden" }, T.play);
     };
 
     /* The stat line: "<b>28</b> of 344 players ..." as plain markup; sting styling on/off */

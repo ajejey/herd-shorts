@@ -56,6 +56,16 @@ push renders it.
 
 `question` (A) or `take` (C) picks the item; leave both out for the format's own choice.
 
+Also yours to set when it helps the story (all optional):
+
+- `copy.title`, `copy.description`, `copy.pinned`: the post's words. Write them
+  from the day's question or finding; the render refuses a title too close to
+  any of the last 20 (`pipeline/metadata.mjs`).
+- `copy.insight`: the line that reads the result ("Most people guessed low").
+- `variety`: `{ "theme": "snow", "party": "stars", "react": "spin", "music": "jazz-swing" }`
+  to override the day's rotation (a snowy world on the first snow day, say).
+  Never set the same look two days running.
+
 Check it builds before you commit (no render needed):
 
     node pipeline/build.mjs --pick=picks/<date>.json

@@ -16,21 +16,24 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT } from './lib.mjs';
+import { ROOT, FORMATS, variety, VARIETY_DECL } from './lib.mjs';
 
-const [dir, day, music, labelsFile] = process.argv.slice(2);
+const [dir, day, musicArg, labelsFile] = process.argv.slice(2);
+const formatKey = Object.keys(FORMATS).find((k) => FORMATS[k] === dir);
 const mod = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'formats', `${dir}.mjs`)).href);
 const T = mod.T;
-const values = mod.vars(JSON.parse(fs.readFileSync(path.join(ROOT, 'data', `${day}.json`), 'utf8')), {});
+const values = { ...mod.vars(JSON.parse(fs.readFileSync(path.join(ROOT, 'data', `${day}.json`), 'utf8')), {}), ...variety(formatKey, Number(day)) };
+const music = musicArg && musicArg !== '-' ? musicArg : `${values.music}.mp3`;
 const labels = labelsFile ? JSON.parse(fs.readFileSync(labelsFile, 'utf8')) : {};
 const decl = Object.entries(values).map(([id, def]) => {
-  const d = { id, type: typeof def === 'number' ? 'number' : typeof def === 'boolean' ? 'boolean' : 'string', label: labels[id] || id, default: def };
+  const d = { id, type: typeof def === 'number' ? 'number' : typeof def === 'boolean' ? 'boolean' : 'string', label: labels[id] || (VARIETY_DECL[id] && VARIETY_DECL[id].label) || id, default: def };
+  if (VARIETY_DECL[id] && VARIETY_DECL[id].options) Object.assign(d, { type: 'enum', options: VARIETY_DECL[id].options.map((o) => ({ value: o, label: o })) });
   return `    ${JSON.stringify(d).replace(/&/g, '&amp;').replace(/'/g, '&#39;')}`;
 }).join(',\n');
 
 const f = (x) => Number(x.toFixed(3));
 const M = `assets/shared/music/${music}`, S = (n) => `assets/shared/sfx/${n}.mp3`;
-const a = (id, src, start, dur, track, vol, extra = '') => `      <audio id="${id}" class="clip" src="${src}" data-start="${f(start)}"${extra} data-duration="${f(dur)}" data-track-index="${track}" data-volume="${vol}"></audio>`;
+const a = (id, src, start, dur, track, vol, extra = '') => `      <audio id="${id}"${src === M ? ' data-music="1"' : ''} class="clip" src="${src}" data-start="${f(start)}"${extra} data-duration="${f(dur)}" data-track-index="${track}" data-volume="${vol}"></audio>`;
 const lines = [];
 const duckEnd = T.count + 3;
 // Music: up, ducked for the countdown, (up again if there is a stretch before the reveal), out for the held breath, up on the reveal

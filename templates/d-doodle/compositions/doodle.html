@@ -70,15 +70,7 @@
   </style>
 
   <div id="root" data-composition-id="doodle" data-width="1080" data-height="1920">
-    <div id="d-ground"></div>
-    <div id="d-dots"></div>
-    <div id="d-cloud1" class="d-cloud"></div>
-    <div id="d-cloud2" class="d-cloud"></div>
-    <svg id="d-hill" viewBox="0 0 1080 320" preserveAspectRatio="none">
-      <path d="M0 90 C 220 20, 420 40, 600 70 C 780 100, 920 40, 1080 60 L 1080 320 L 0 320 Z" fill="#8FD16F" />
-      <path d="M0 170 C 260 120, 520 150, 760 140 C 900 134, 1000 120, 1080 130 L 1080 320 L 0 320 Z" fill="#6FBF55" />
-    </svg>
-    <div id="d-flock"></div>
+    <div id="d-world" style="position:absolute;inset:0"></div>
 
     <div id="d-stage">
 
@@ -99,8 +91,7 @@
       </svg>
       <div id="d-timer-num" class="clip" data-start="6.5" data-duration="3.4" data-track-index="8"><span id="d-n">3</span></div>
 
-      <div id="d-cow"></div>
-      <div id="d-bubble"><span id="d-q">?</span><span id="d-x" style="position:absolute">!</span></div>
+      <div id="d-hostbox"></div>
       <div id="d-meter-label"></div>
       <div id="d-bar"><div id="d-fill"></div></div>
       <div id="d-rider"></div>
@@ -115,7 +106,12 @@
   <script>
     (function () {
       // ---- DATA: the video's variables (index.html), filled per day by pipeline/build.mjs ----
-      const H = window.HERD, V = H.V;
+      const H = window.HERD, V = H.V, K = H.kit(), A = K.anim;
+      const world = K.world(document.getElementById("d-world"));
+      const host = K.host(document.getElementById("d-hostbox"));
+      // Commentary on the result; under the question here (the meter bar sits where the other formats put it)
+      const insight = K.insight(document.getElementById("d-hostbox"), V.insight);
+      insight.style.top = "1526px"; insight.style.left = "70px"; insight.style.width = "940px"; insight.style.textAlign = "center";
       const STROKES = String(V.strokes).split("|").map((s) => s.split(",").map(Number));
       const N = STROKES.length;
       const GOT = String(V.gotByLine).split(",").map(Number);
@@ -173,31 +169,8 @@
         gsap.set("#d-rider", { x: X0 + w - 26 });
       };
 
-      // The herd grazing on the hill: they hop when the answer lands
-      const FLOCK = [[30, 1598], [240, 1640], [455, 1604], [670, 1644], [885, 1610]];
-      const flock = FLOCK.map(([x, y], i) => {
-        const sh = document.createElement("div");
-        sh.className = "d-sheep";
-        sh.style.left = x + "px"; sh.style.top = y + "px";
-        if (i % 2) sh.style.transform = "scaleX(-1)";
-        document.getElementById("d-flock").appendChild(sh);
-        return sh;
-      });
-
-      // Confetti for the reveal: seeded, so every render is the same
-      let seed = 11;
-      const rand = () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-      const COLORS = ["#E84A8B", "#3D8B5A", "#FFC93C", "#4FA3D9", "#FF7A45"];
-      const conf = document.getElementById("d-confetti");
-      const bits = Array.from({ length: 44 }, (_, i) => {
-        const b = document.createElement("div");
-        b.className = "d-bit";
-        b.style.background = COLORS[i % COLORS.length];
-        b.style.left = "531px"; b.style.top = "925px";
-        conf.appendChild(b);
-        const ang = -Math.PI / 2 + (rand() - 0.5) * 2.4, sp = 380 + rand() * 520;
-        return { b, dx: Math.cos(ang) * sp, dy: Math.sin(ang) * sp, rot: (rand() - 0.5) * 900, fall: 900 + rand() * 500 };
-      });
+      // The reveal's celebration (confetti, stars or a stampede, rotated by day)
+      const bits = K.confetti(document.getElementById("d-confetti"), 531, 925, 44, 11);
 
       H.fontsReady().then(() => {
         H.fit("d-hook", { max: 84, min: 58, maxH: 200 });
@@ -211,9 +184,7 @@
         const tl = gsap.timeline({ paused: true });
         show();
         tl.fromTo(clock, { t: 0 }, { t: T.end, duration: T.end, ease: "none", onUpdate: show }, 0);
-        gsap.set(bits.map((x) => x.b), { opacity: 0 });
         gsap.set("#d-badge", { rotation: -6 });
-        gsap.set("#d-x", { opacity: 0 });
 
         // The challenge pops in word by word in the first ~0.8 s (motion is what stops a scroll), then stays
         tl.fromTo(hookW, { opacity: 0, scale: 1.5, y: -14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, stagger: 0.08, ease: "back.out(2.2)" }, 0.02);
@@ -233,15 +204,9 @@
           tl.fromTo("#d-badge", { scale: 1 }, { keyframes: { scale: [1, 1.18, 1] }, duration: 0.24, ease: "none" }, TIMES[k]);
         });
 
-        // The cow thinks while you guess, fidgets through the countdown, jumps at the answer
-        tl.fromTo("#d-cow", { rotation: 0 }, { keyframes: { rotation: [0, -5, 0, 5, 0, -5, 0, 5, 0] }, duration: 6.4, ease: "none", transformOrigin: "50% 90%" }, 0.2);
-        tl.fromTo("#d-cow", { x: 0 }, { keyframes: { x: [0, -4, 4, -4, 4, -4, 4, -4, 4, 0] }, duration: 3.0, ease: "none" }, T.count);
-        tl.fromTo("#d-cow", { y: 0 }, { keyframes: { y: [0, -70, 0, -26, 0] }, duration: 0.7, ease: "none" }, T.reveal);
-        tl.to("#d-q", { opacity: 0, duration: 0.05 }, T.reveal);
-        tl.to("#d-x", { opacity: 1, duration: 0.05 }, T.reveal);
-        tl.to("#d-x", { opacity: 0, duration: 0.05 }, T.rewind + 0.6);
-        tl.to("#d-q", { opacity: 1, duration: 0.05 }, T.rewind + 0.6);
-        tl.fromTo("#d-bubble", { scale: 1 }, { keyframes: { scale: [1, 1.3, 1] }, duration: 0.3, ease: "none" }, T.reveal);
+        // The world (clouds, falling snow/leaves/blossom, the flock) and the cow host (its reaction rotates by day)
+        A.world(tl, world, T);
+        A.host(tl, host, T);
 
         // The line above the card changes at line 3 (a pattern break) and again for the countdown
         tl.fromTo(midW, { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.28, stagger: 0.06, ease: "back.out(2)" }, 2.85);
@@ -264,27 +229,17 @@
         tl.fromTo("#d-answer-in", { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(1.8)", transformOrigin: "50% 50%" }, T.reveal);
         tl.fromTo(["#d-card", "#d-art"], { scale: 1 }, { keyframes: { scale: [1, 1.07, 1] }, duration: 0.45, ease: "none", transformOrigin: "50% 50%" }, T.reveal);
         tl.to(paths, { stroke: "#E84A8B", duration: 0.2, ease: "power2.out" }, T.reveal);
-        bits.forEach((x, i) => {
-          const t0 = T.reveal + (i % 6) * 0.015;
-          tl.set(x.b, { opacity: 1 }, t0);
-          tl.fromTo(x.b, { x: 0, y: 0, rotation: 0 }, { x: x.dx, y: x.dy, rotation: x.rot * 0.4, duration: 0.5, ease: "power2.out" }, t0);
-          tl.to(x.b, { y: x.dy + x.fall, x: x.dx * 1.15, rotation: x.rot, duration: 1.3, ease: "power1.in" }, t0 + 0.5);
-          tl.set(x.b, { opacity: 0 }, t0 + 1.8);
-        });
+        A.burst(tl, bits, T.reveal);
 
-        // The flock grazes (a slow bob), then jumps for the answer
-        flock.forEach((sh, i) => tl.fromTo(sh, { y: 0 }, { keyframes: { y: [0, -6, 0, -4, 0] }, duration: 4, ease: "none" }, 0.3 + i * 0.37));
-        tl.fromTo(flock, { y: 0 }, { keyframes: { y: [0, -90, 0, -30, 0] }, duration: 0.75, ease: "none", stagger: 0.05 }, T.reveal + 0.05);
-        tl.fromTo("#d-cloud1", { x: 0 }, { x: 70, duration: T.end, ease: "none" }, 0);
-        tl.fromTo("#d-cloud2", { x: 0 }, { x: -60, duration: T.end, ease: "none" }, 0);
 
         // How the herd did, then the comment line
         tl.fromTo("#d-bar", { scale: 1 }, { keyframes: { scale: [1, 1.04, 1] }, duration: 0.35, ease: "none" }, T.sting);
         tl.fromTo(ctaW, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.05, ease: "back.out(1.6)" }, T.ask);
+        A.insight(tl, insight, T);
         // The invitation to play rises over the meter, the address pulses once
         tl.to(ctaW, { opacity: 0, duration: 0.12 }, T.play - 0.1);
         // The banner covers the meter row: that row steps out under it and back in for the rewind
-        const UNDER = ["#d-meter-label", "#d-bar", "#d-rider", "#d-cow", "#d-bubble"];
+        const UNDER = ["#d-meter-label", "#d-bar", "#d-rider", host.cow, host.bubble];
         tl.to(UNDER, { opacity: 0, duration: 0.15 }, T.play - 0.1);
         tl.to(UNDER, { opacity: 1, duration: 0.2 }, T.rewind + 0.2);
         tl.fromTo("#d-play", { y: 420 }, { y: 0, duration: 0.42, ease: "back.out(1.4)" }, T.play);

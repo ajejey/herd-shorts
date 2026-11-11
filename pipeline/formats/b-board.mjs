@@ -19,6 +19,16 @@ export function sting(ta) {
   return top.pct < 15 ? `Only ${top.pct}% said ${ans}` : `${num(top.count)} of ${num(ta.answers)} people said ${ans}`;
 }
 
+/* Commentary: how far #1 was ahead of #2 */
+export function insight(ta) {
+  const [a, b] = ta.tiles;
+  if (!b || !b.pct) return '';
+  const ratio = a.pct / b.pct, diff = a.pct - b.pct;
+  if (ratio >= 2) return `#1 got ${Math.round(ratio * 10) / 10}\u00d7 the votes of #2`;
+  if (diff <= 3) return `Only ${diff} ${diff === 1 ? 'point' : 'points'} between #1 and #2`;
+  return `#1 beat #2 by ${diff} points`;
+}
+
 export function vars(data, pick = {}) {
   const ta = data.topAnswers;
   need(ta, 'no Top Answers board that day');
@@ -36,6 +46,7 @@ export function vars(data, pick = {}) {
     total: ta.answers,
     count1: tiles[0].count,
     sting: copy.sting || sting(ta),
+    insight: copy.insight ?? insight(ta),
     ask: copy.ask || 'Did you get it?',
     play: copy.play || 'Play today’s Top Answers free',
     url: 'herdgamesonline.com',

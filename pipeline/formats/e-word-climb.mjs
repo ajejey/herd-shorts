@@ -34,6 +34,13 @@ export function clueRows(rung) {
 /* When each clue row flips in (one flip sound per row) */
 export const rowTimes = (n) => Array.from({ length: n }, (_, i) => T.clues + 0.2 + i * 0.85);
 
+/* Commentary: the ladder's hardest word */
+export function insight(wc) {
+  let k = -1, worst = 2;
+  wc.rungs.forEach((r, i) => { const p = r.reached ? r.solved / r.reached : 1; if (p < worst) { worst = p; k = i; } });
+  return k < 0 ? '' : `Word ${k + 1} was the hardest: ${Math.round(worst * 100)}% solved it`;
+}
+
 export function vars(data, pick = {}) {
   const wc = data.wordClimb;
   need(wc, 'no Word Climb that day');
@@ -61,6 +68,7 @@ export function vars(data, pick = {}) {
     solved: rung.solved,
     reached: rung.reached,
     sting: copy.sting || (wc.climbedAll / wc.players < 0.3 ? `Only ${num(wc.climbedAll)} of ${num(wc.players)} solved all ${n} words` : `${num(wc.climbedAll)} of ${num(wc.players)} solved all ${n} words`),
+    insight: copy.insight ?? insight(wc),
     ask: copy.ask || 'How far would you get?',
     play: copy.play || 'Play today’s Word Climb free',
     url: 'herdgamesonline.com',

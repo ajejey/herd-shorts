@@ -15,7 +15,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits, engagementAsks } from './lib.mjs';
+import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits, engagementAsks, variety, THEMES, MUSIC } from './lib.mjs';
+import { metadata, similarity, similarTo } from './metadata.mjs';
 import { declaredVariables, checkValues, build } from './build.mjs';
 import { staleIn } from './sync-shared.mjs';
 
@@ -47,7 +48,7 @@ for (const [format, dir] of Object.entries(FORMATS)) {
   let made = 0;
   for (const day of days) {
     try {
-      const values = vars(readJson(path.join(ROOT, 'data', `${day}.json`)), {});
+      const values = { ...vars(readJson(path.join(ROOT, 'data', `${day}.json`)), {}), ...variety(format, day) };   // as build.mjs makes them
       const problems = checkValues(decl, values);
       is(`${format} day ${day}: values match the template`, problems.length === 0, problems.join('; '));
       const asks = engagementAsks(values);
@@ -208,6 +209,50 @@ is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordT
   is('fallback: a format the day cannot make is never chosen', chooseFormat({ strategy, ledger: [], can: ['C-dial'], day: 1 }).format === 'C-dial');
   const paused = { ...strategy, formats: Object.fromEntries(Object.entries(strategy.formats).map(([f, s]) => [f, { ...s, status: f === 'B-board' ? 'testing' : 'paused' }])) };
   is('fallback: paused formats are skipped', chooseFormat({ strategy: paused, ledger: [], can, day: 5 }).format === 'B-board');
+}
+
+/* ── Variety: no format looks or sounds the same two days running (YouTube's "template with little variation") ── */
+{
+  for (const format of Object.keys(FORMATS)) {
+    let same = 0;
+    for (let d = 160; d < 220; d++) {
+      const a = variety(format, d), b = variety(format, d + 1);
+      if (a.theme === b.theme || a.party === b.party || a.react === b.react || a.music === b.music) same += 1;
+    }
+    is(`variety: ${format} never repeats its world, celebration, cow reaction or music on consecutive days`, same === 0, `${same} repeats`);
+  }
+  const missing = Object.values(MUSIC).flat().filter((m) => !fs.existsSync(path.join(ROOT, 'templates', '_shared', 'music', `${m}.mp3`)));
+  is('variety: every music bed in every pool exists', missing.length === 0, missing.join(', '));
+  const kitText = fs.readFileSync(path.join(ROOT, 'templates', '_shared', 'herd.js'), 'utf8');
+  const noWorld = THEMES.filter((t) => !new RegExp(`\\b${t}: \\{ sky`).test(kitText));
+  is('variety: the kit draws every world the rotation can pick', noWorld.length === 0, noWorld.join(', '));
+  try {
+    const r = await build({ format: 'D-doodle', day: 162, out: path.join(ROOT, 'out', '_check-music') });
+    const html = fs.readFileSync(path.join(r.dir, 'index.html'), 'utf8');
+    const srcs = [...html.matchAll(/<audio[^>]*data-music="1"[^>]*src="([^"]+)"/g)].map((m) => m[1]);
+    is(`variety: the builder puts the day's music bed in every music clip (${r.values.music})`, srcs.length >= 3 && srcs.every((s) => s.endsWith(`/${r.values.music}.mp3`)), srcs.join(' '));
+    fs.rmSync(r.dir, { recursive: true, force: true });
+  } catch (err) { is('variety: D-doodle builds for the music check', false, err.message); }
+}
+
+/* ── Titles and descriptions: from the day's content, never a near-copy of a recent title, never asking ── */
+{
+  is('titles: the same title twice is refused', similarTo('Guess this doodle before line 3', ['Guess this doodle before line 3']) !== null);
+  is('titles: two different questions pass', similarity('How many colors can a 24-bit display show?', 'Roughly how many square miles is Australia?') < 0.3);
+  const recent = [];
+  for (const [format, dir] of Object.entries(FORMATS)) {
+    const m = await fmt(dir);
+    for (const day of days) {
+      let v;
+      try { v = { ...m.vars(readJson(path.join(ROOT, 'data', `${day}.json`)), {}), ...variety(format, day) }; } catch (err) { continue; }
+      try {
+        const md = metadata(format, v, { recent });
+        recent.push(md.title);
+        const asks = engagementAsks({ title: md.title, description: md.description });
+        is(`titles: ${format} day ${day} "${md.title}" (under 100 chars, no asks)`, md.title.length <= 100 && asks.length === 0, asks.join('; '));
+      } catch (err) { is(`titles: ${format} day ${day} has a fresh title`, false, err.message); }
+    }
+  }
 }
 
 console.log(failures ? `\n${failures} FAILED\n` : '\nevery format makes a valid video from every day it can, and says why when it can\'t\n');
