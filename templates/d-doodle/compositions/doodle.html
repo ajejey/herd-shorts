@@ -127,7 +127,8 @@
 
       document.getElementById("d-play-1").textContent = V.play;
       document.getElementById("d-play-2").textContent = V.url;
-      H.words("d-hook-t", V.hook, "d-w");
+      const hookW = H.words("d-hook-t", V.hook, "d-w");
+      const hookKey = hookW[hookW.length - 1];   // "line 3?": the deadline, lit up when line 3 arrives
       const midW = H.words("d-mid-t", V.mid, "d-w");
       const finalW = H.words("d-final-t", V.final, "d-w");
       document.getElementById("d-answer-in").textContent = V.answer;
@@ -214,6 +215,15 @@
         gsap.set("#d-badge", { rotation: -6 });
         gsap.set("#d-x", { opacity: 0 });
 
+        // The challenge pops in word by word in the first ~0.8 s (motion is what stops a scroll), then stays
+        tl.fromTo(hookW, { opacity: 0, scale: 1.5, y: -14 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, stagger: 0.08, ease: "back.out(2.2)" }, 0.02);
+        // While line 3 is up, its words in the challenge light up with the badge; once line 4 starts the deadline has passed
+        if (TIMES[2]) {
+          tl.to(hookKey, { color: "#C2306F", duration: 0.15 }, TIMES[2]);
+          tl.fromTo(hookKey, { scale: 1 }, { keyframes: { scale: [1, 1.25, 1] }, duration: 0.35, ease: "none" }, TIMES[2]);
+          tl.to(hookKey, { color: "#2D1810", duration: 0.2 }, TIMES[3] || T.count);
+        }
+
         // Line 1 is there at frame 0; each next line draws in its slot (fast once past line 3)
         paths.forEach((p, k) => {
           if (k === 0) { gsap.set(p, { strokeDasharray: lens[0], strokeDashoffset: 0 }); return; }
@@ -284,6 +294,8 @@
         tl.to("#d-answer-in", { opacity: 0, scale: 0.6, duration: 0.15, ease: "power2.in" }, T.rewind);
         for (let k = N - 1; k >= 1; k--) tl.to(paths[k], { strokeDashoffset: lens[k], duration: 0.08, ease: "none" }, T.rewind + (N - 1 - k) * (0.5 / Math.max(1, N - 1)));
         tl.to(paths, { stroke: "#2D1810", duration: 0.2, ease: "none" }, T.rewind);
+        // The challenge pops out at the very end, so the loop restarts on the same pop-in
+        tl.to(hookW, { opacity: 0, scale: 0.6, duration: 0.14, stagger: 0.03, ease: "power2.in" }, T.end - 0.42);
         // Something moves in the first half second: the line badge pops
         tl.fromTo("#d-badge", { scale: 1 }, { keyframes: { scale: [1, 1.22, 1] }, duration: 0.3, ease: "none" }, 0.35);
 

@@ -24,9 +24,12 @@ review may overturn any rule with ledger rows.
 
 1. **The viewer plays.** Every video is a question first: they guess, then see
    how the herd did, then how they compare. Never a report of yesterday.
-2. **Frame 0 is the hook.** A challenge in 6 words or fewer, the biggest thing on
-   screen, with the thing to guess already visible. Never a date, a kicker, a
-   label or a logo first. Frame 0 is also the thumbnail.
+2. **The first second is the hook.** The challenge, naming the game ("Can you
+   guess the doodle before line 3?"), pops in word by word within about 0.8 s
+   over the thing to guess, then stays for the whole video. Motion from frame 0
+   is what stops a scroll. Never a date, a kicker, a label or a logo first. The
+   cover (thumbnail) is set to a frame with everything on screen, about 1.5 s
+   in: Instagram's API takes it as `thumb_offset`; on YouTube pick that frame.
 3. **Give them a turn.** A visible countdown (about 3-5 s) with a ticking clock:
    the "pause and guess" window. Then the reveal.
 4. **One open loop, closed late.** Promise the payoff early ("only 4% got it")
