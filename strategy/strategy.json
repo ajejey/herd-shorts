@@ -1,0 +1,27 @@
+{
+  "_about": "The settings the daily pipeline reads. Changed only by the weekly review (or by Ajey), each change noted in LEARNINGS.md with the ledger rows behind it.",
+  "updated": "2026-11-11",
+  "explore_share": 0.25,
+  "formats": {
+    "A-herd-line": { "weight": 1, "game": "daily-guesstimate", "status": "testing" },
+    "B-board": { "weight": 1, "game": "top-answers", "status": "testing" },
+    "C-dial": { "weight": 1, "game": "hot-takes", "status": "testing" }
+  },
+  "length_seconds": { "min": 15, "max": 22 },
+  "post_times_utc": { "instagram": ["16:00"], "youtube": ["16:00"] },
+  "hook_bank": {
+    "A-herd-line": [
+      "Guess before the herd does",
+      "Only {close} of {players} got close",
+      "Most people said {median}. The answer is {answer}."
+    ],
+    "B-board": [
+      "{answers} people answered. Can you guess #1?",
+      "Name {question_short}. Number 1 surprised us."
+    ],
+    "C-dial": [
+      "{players} people voted. Where do you land?",
+      "{statement_short}? America is split."
+    ]
+  }
+}
