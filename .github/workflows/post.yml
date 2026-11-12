@@ -1,0 +1,66 @@
+name: Post to Instagram
+
+# By hand, after someone has watched the render: posts one rendered video as a
+# Reel and records it in the ledger. "whoami" checks the token and the account
+# without posting anything. The daily workflow posts on its own only once the
+# repo variable AUTO_POST_INSTAGRAM is on (strategy/POSTING.md).
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: 'Ledger id to post, e.g. 2026-11-12-B (blank with whoami)'
+        required: false
+      whoami:
+        description: 'Only check the token and account, post nothing'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-short
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check the token and account
+        if: inputs.whoami
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: node pipeline/post-instagram.mjs --whoami
+
+      - name: The video from its release
+        if: ${{ !inputs.whoami }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test -n "${{ inputs.id }}" || { echo "an id is needed"; exit 1; }
+          gh release download "short-${{ inputs.id }}" --dir renders --pattern '*.mp4' --pattern '*.meta.json' --clobber
+          ls -la renders
+
+      - name: Post the Reel
+        if: ${{ !inputs.whoami }}
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: node pipeline/post-instagram.mjs --id=${{ inputs.id }}
+
+      - name: Record it in the ledger
+        if: ${{ !inputs.whoami }}
+        run: |
+          git config user.name "herd-shorts bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ledger
+          git diff --cached --quiet || git commit -m "Posted ${{ inputs.id }} to Instagram"
+          git pull --rebase --quiet && git push
