@@ -16,9 +16,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits, engagementAsks, variety, THEMES, MUSIC } from './lib.mjs';
-import { metadata, similarity, similarTo } from './metadata.mjs';
+import { metadata, similarity, similarTo, TAGS } from './metadata.mjs';
 import { declaredVariables, checkValues, build } from './build.mjs';
 import { staleIn } from './sync-shared.mjs';
+import { caption, redact, THUMB_OFFSET_MS } from './post-instagram.mjs';
+import { youtubeCopy, shortId } from './youtube-kit.mjs';
 
 let failures = 0;
 const is = (msg, cond, detail = '') => {
@@ -250,9 +252,31 @@ is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordT
         recent.push(md.title);
         const asks = engagementAsks({ title: md.title, description: md.description });
         is(`titles: ${format} day ${day} "${md.title}" (under 100 chars, no asks)`, md.title.length <= 100 && asks.length === 0, asks.join('; '));
+        try { caption(md); youtubeCopy(md); is(`posting: ${format} day ${day} caption and YouTube copy within limits`, true); } catch (err) { is(`posting: ${format} day ${day} caption and YouTube copy within limits`, false, err.message); }
       } catch (err) { is(`titles: ${format} day ${day} has a fresh title`, false, err.message); }
     }
   }
+}
+
+/* ── Posting ─────────────────────────────────────────────────────────────── */
+{
+  const meta = { title: 'Guess the #1 answer', description: "Most said pizza.\n\nPlay today's Top Answers free: herdgamesonline.com\n\n#quiz #trivia", pinned: 'What did you guess?', tags: ['#quiz', '#trivia'] };
+  const c = caption(meta);
+  is('posting: caption opens with the title and carries the question, the address and the hashtags', c.startsWith('Guess the #1 answer\n\nWhat did you guess?') && c.includes('herdgamesonline.com') && c.endsWith('#quiz #trivia'), c);
+  const refuses = (f) => { try { f(); return false; } catch { return true; } };
+  is('posting: a caption that asks for comments is refused', refuses(() => caption({ ...meta, pinned: 'Comment your guess below' })));
+  is('posting: a caption over 2,200 characters is refused', refuses(() => caption({ ...meta, description: 'x'.repeat(2300) })));
+  is('posting: more than 30 hashtags is refused', refuses(() => caption({ ...meta, description: Array.from({ length: 31 }, (_, i) => `#t${i}`).join(' ') })));
+  is('posting: YouTube copy with < or > is refused', refuses(() => youtubeCopy({ ...meta, title: 'a <b> c' })));
+  is('posting: a YouTube title over 100 characters is refused', refuses(() => youtubeCopy({ ...meta, title: 'x'.repeat(101) })));
+  is('posting: YouTube tags lose their #', youtubeCopy(meta).tags.join() === 'quiz,trivia');
+  is('posting: the cover frame is 1.5 s in (PRINCIPLES rule 2)', THUMB_OFFSET_MS === 1500);
+  is('posting: a token never survives into an error', redact('bad token EAAB123 for EAAB123', 'EAAB123') === 'bad token [token] for [token]');
+  const links = [['https://youtube.com/shorts/AbC_12-xyz', 'AbC_12-xyz'], ['https://www.youtube.com/watch?v=AbC12345', 'AbC12345'], ['https://youtu.be/AbC12345', 'AbC12345'], ['https://youtube.com.evil.example/shorts/AbC12345', null], ['not a url', null], ['https://youtube.com/shorts/', null]];
+  for (const [u, want] of links) is(`posting: YouTube link ${u} reads as ${want}`, shortId(u) === want, String(shortId(u)));
+  /* Another company's product as a hashtag is misleading metadata on YouTube (12 Nov 2026: #familyfeud, #wordle, #scrabble, #quickdraw were in these lists). */
+  const BRANDS = /familyfeud|wordle|scrabble|quickdraw|pictionary|jeopardy|kahoot|boggle|codenames|wheeloffortune|spellingbee|connections/i;
+  for (const [format, tags] of Object.entries(TAGS)) is(`posting: ${format} hashtags name no other company's game`, !tags.some((t) => BRANDS.test(t)), tags.filter((t) => BRANDS.test(t)).join(' '));
 }
 
 console.log(failures ? `\n${failures} FAILED\n` : '\nevery format makes a valid video from every day it can, and says why when it can\'t\n');

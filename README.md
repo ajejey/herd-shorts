@@ -19,8 +19,8 @@ repo is the machine.
 3. **Render.** `pipeline/render.mjs` builds the video project with the day's
    values written in, runs `hyperframes check` on the real text, renders, and
    checks the file (length, sound) and writes a contact sheet. On GitHub's machines.
-4. **Post.** Instagram through Meta's API; YouTube through its API once Google's
-   audit clears (by hand until then).
+4. **Post.** Instagram through Meta's API (`pipeline/post-instagram.mjs`); YouTube by hand from the release (`pipeline/youtube-kit.mjs`) until Google's
+   audit clears. Setup and the steps: `strategy/POSTING.md`.
 5. **Measure.** Each video's numbers are collected at 24 h, 3 days and 7 days
    into `ledger/`.
 6. **Learn.** Every week Claude reviews the ledger against each platform,

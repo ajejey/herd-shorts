@@ -9,14 +9,14 @@
 import { num } from './lib.mjs';
 
 const GAME = { 'A-herd-line': 'Daily Guesstimate', 'B-board': 'Top Answers', 'C-dial': 'Hot Takes', 'D-doodle': 'Guess the Doodle', 'E-word-climb': 'Word Climb', 'F-secret-word': 'Secret Word', 'G-words-from': 'Words from a Word' };
-const TAGS = {
+export const TAGS = {
   'A-herd-line': ['#quiz', '#trivia', '#guessinggame', '#didyouknow', '#brainteaser'],
-  'B-board': ['#familyfeud', '#survey', '#quiz', '#guessinggame', '#trivia'],
+  'B-board': ['#gameshow', '#survey', '#quiz', '#guessinggame', '#trivia'],
   'C-dial': ['#wouldyourather', '#hottake', '#poll', '#debate', '#thisorthat'],
-  'D-doodle': ['#drawing', '#guessthedrawing', '#doodle', '#quickdraw', '#puzzle'],
-  'E-word-climb': ['#wordle', '#wordgame', '#wordpuzzle', '#puzzle', '#brainteaser'],
+  'D-doodle': ['#drawing', '#guessthedrawing', '#doodle', '#guessthedoodle', '#puzzle'],
+  'E-word-climb': ['#dailypuzzle', '#wordgame', '#wordpuzzle', '#puzzle', '#brainteaser'],
   'F-secret-word': ['#wordgame', '#guesstheword', '#puzzle', '#hotorcold', '#riddle'],
-  'G-words-from': ['#wordgame', '#anagram', '#scrabble', '#wordpuzzle', '#brainteaser'],
+  'G-words-from': ['#wordgame', '#anagram', '#vocabulary', '#wordpuzzle', '#brainteaser'],
 };
 
 const words = (s) => new Set(String(s).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((w) => w.length > 2));

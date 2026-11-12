@@ -111,6 +111,26 @@ jobs:
           gh release view "$tag" > /dev/null 2>&1 || gh release create "$tag" --title "${{ steps.daily.outputs.id }} (${{ steps.daily.outputs.format }}, day ${{ steps.daily.outputs.day }})" --notes "Rendered by the daily workflow. Not posted yet."
           gh release upload "$tag" "${{ steps.daily.outputs.file }}" "${{ steps.daily.outputs.sheet }}" "${{ steps.daily.outputs.meta }}" --clobber
 
+      - name: YouTube copy for posting by hand
+        if: steps.daily.outputs.id
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node pipeline/youtube-kit.mjs --id=${{ steps.daily.outputs.id }}
+          f="${{ steps.daily.outputs.file }}"
+          gh release upload "short-${{ steps.daily.outputs.id }}" "${f%.mp4}.youtube.txt" --clobber
+
+      # Off until the Instagram account and token exist: set the repo variable
+      # AUTO_POST_INSTAGRAM to on (strategy/POSTING.md). A failed post never
+      # loses the render or the ledger row.
+      - name: Post to Instagram
+        if: steps.daily.outputs.id && vars.AUTO_POST_INSTAGRAM == 'on'
+        continue-on-error: true
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: node pipeline/post-instagram.mjs --id=${{ steps.daily.outputs.id }}
+
       - name: Save the data and the ledger row
         if: steps.daily.outputs.id
         run: |

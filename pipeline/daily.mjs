@@ -21,19 +21,13 @@ import { pathToFileURL } from 'node:url';
 import { ROOT, FORMATS, readJson, NotEligible, sensitiveHits } from './lib.mjs';
 import { render } from './render.mjs';
 import { metadata } from './metadata.mjs';
+import { readLedger, writeLedgerRow } from './ledger.mjs';
 
-const LEDGER = path.join(ROOT, 'ledger', 'videos.jsonl');
+export { readLedger };
+
 const GAME = { 'A-herd-line': 'daily-guesstimate', 'B-board': 'top-answers', 'C-dial': 'hot-takes', 'D-doodle': 'guess-the-doodle', 'E-word-climb': 'word-climb', 'F-secret-word': 'secret-word', 'G-words-from': 'words-from-a-word' };
 const LONG = new Set(['guesses', 'strokes', 'ticks1', 'ticks2', 'lineTimes', 'rungTimes', 'chipTimes', 'wordTimes', 'endGame', 'endHead', 'credit', 'gotByLine']);
 
-export const readLedger = () => (fs.existsSync(LEDGER) ? fs.readFileSync(LEDGER, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l)) : []);
-
-function writeLedgerRow(row) {
-  const rows = readLedger().filter((r) => r.id !== row.id);
-  rows.push(row);
-  rows.sort((a, b) => (a.id < b.id ? -1 : 1));
-  fs.writeFileSync(LEDGER, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
-}
 
 /* mulberry32: the same day always makes the same choice */
 const seeded = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
