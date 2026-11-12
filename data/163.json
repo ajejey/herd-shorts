@@ -740,11 +740,11 @@
             "count": 6
           },
           {
-            "value": "fart",
+            "value": "soup",
             "count": 3
           },
           {
-            "value": "part",
+            "value": "fart",
             "count": 3
           }
         ]
@@ -776,15 +776,15 @@
         "solved": 63,
         "openers": [
           {
-            "value": "growth",
-            "count": 2
-          },
-          {
             "value": "morale",
             "count": 2
           },
           {
-            "value": "friend",
+            "value": "clouds",
+            "count": 2
+          },
+          {
+            "value": "morals",
             "count": 2
           }
         ]
@@ -800,11 +800,11 @@
             "count": 3
           },
           {
-            "value": "demands",
+            "value": "founder",
             "count": 2
           },
           {
-            "value": "founder",
+            "value": "drought",
             "count": 2
           }
         ]
@@ -820,11 +820,11 @@
             "count": 2
           },
           {
-            "value": "enclosed",
+            "value": "startler",
             "count": 1
           },
           {
-            "value": "openings",
+            "value": "overview",
             "count": 1
           }
         ]
@@ -840,11 +840,11 @@
             "count": 6
           },
           {
-            "value": "imaginary",
+            "value": "questions",
             "count": 1
           },
           {
-            "value": "elephants",
+            "value": "answering",
             "count": 1
           }
         ]
@@ -860,11 +860,11 @@
             "count": 2
           },
           {
-            "value": "honourable",
+            "value": "astronomer",
             "count": 1
           },
           {
-            "value": "flashlight",
+            "value": "continuous",
             "count": 1
           }
         ]
@@ -888,11 +888,11 @@
         "count": 13
       },
       {
-        "value": "animal",
+        "value": "dog",
         "count": 8
       },
       {
-        "value": "dog",
+        "value": "animal",
         "count": 8
       },
       {
