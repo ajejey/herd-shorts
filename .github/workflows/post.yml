@@ -10,6 +10,10 @@ on:
       id:
         description: 'Ledger id to post, e.g. 2026-11-12-B (blank with whoami)'
         required: false
+      trial:
+        description: 'Post as a Trial Reel (shown to non-followers first)'
+        type: boolean
+        default: true
       whoami:
         description: 'Only check the token and account, post nothing'
         type: boolean
@@ -54,7 +58,7 @@ jobs:
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-        run: node pipeline/post-instagram.mjs --id=${{ inputs.id }}
+        run: node pipeline/post-instagram.mjs --id=${{ inputs.id }} ${{ inputs.trial && '--trial' || '' }}
 
       - name: Record it in the ledger
         if: ${{ !inputs.whoami }}

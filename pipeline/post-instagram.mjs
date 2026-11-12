@@ -4,7 +4,7 @@
 
     node pipeline/post-instagram.mjs --whoami            check the token and account, post nothing
     node pipeline/post-instagram.mjs --dry-run [--id=…]  show the caption and file, post nothing
-    node pipeline/post-instagram.mjs [--id=2026-11-13-B] post (default: the latest rendered row)
+    node pipeline/post-instagram.mjs [--id=2026-11-13-B] [--trial] post (default: the latest rendered row; --trial: a Trial Reel)
 
   Env: IG_USER_ID (the Instagram professional account's id), IG_ACCESS_TOKEN (a
   Page access token with instagram_basic + instagram_content_publish), and
@@ -104,13 +104,21 @@ export async function whoami() {
   return { username: who.username, name: who.name, media: who.media_count, publishing: limit.data?.[0] || limit };
 }
 
-export async function postReel({ video, text, log = () => {} }) {
+/*
+  Trial Reels (12 Nov 2026, Ajey: "Yes post the Trial Reel"): shown first only to people who
+  do not follow the account, which is the only audience a new account has. SS_PERFORMANCE lets
+  Instagram share it to followers too when it does well. trial_params is part of the create-media
+  call (Meta Instagram Platform changelog, Content Publishing).
+*/
+export const TRIAL = { graduation_strategy: 'SS_PERFORMANCE' };
+
+export async function postReel({ video, text, trial = false, log = () => {} }) {
   const e = env();
   const bytes = fs.readFileSync(video);
-  log(`creating the Reel container (${(bytes.length / 1e6).toFixed(1)} MB)`);
-  const container = await graph(e, 'POST', `${e.user}/media`, {
-    media_type: 'REELS', upload_type: 'resumable', caption: text, thumb_offset: THUMB_OFFSET_MS, share_to_feed: true,
-  });
+  log(`creating the ${trial ? 'Trial ' : ''}Reel container (${(bytes.length / 1e6).toFixed(1)} MB)`);
+  const params = { media_type: 'REELS', upload_type: 'resumable', caption: text, thumb_offset: THUMB_OFFSET_MS, share_to_feed: true };
+  if (trial) params.trial_params = JSON.stringify(TRIAL);
+  const container = await graph(e, 'POST', `${e.user}/media`, params);
   if (!container.id) throw new Error('Meta returned no container id');
 
   log('uploading the video to Meta');
@@ -152,10 +160,11 @@ async function main() {
   const text = caption(JSON.parse(fs.readFileSync(meta, 'utf8')));
 
   if (arg('dry-run')) {
-    console.log(`${row.id}  ${path.relative(ROOT, video)}  cover at ${THUMB_OFFSET_MS} ms\n\n${text}`);
+    console.log(`${row.id}  ${path.relative(ROOT, video)}  cover at ${THUMB_OFFSET_MS} ms${arg('trial') ? ', Trial Reel' : ''}\n\n${text}`);
     return;
   }
-  const posted = await postReel({ video, text, log: (m) => console.error(`  ${m}`) });
+  const trial = Boolean(arg('trial'));
+  const posted = { ...(await postReel({ video, text, trial, log: (m) => console.error(`  ${m}`) })), trial };
   updateLedgerRow(row.id, (r) => {
     r.posts = { ...(r.posts || {}), instagram: posted };
     r.status = 'posted';
