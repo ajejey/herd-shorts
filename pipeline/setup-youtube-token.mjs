@@ -54,9 +54,12 @@ function askHidden(question) {
 const secrets = [];
 const scrub = (s) => secrets.reduce((acc, x) => (x ? acc.split(x).join('[hidden]') : acc), String(s));
 
+/* Opens the consent page without a shell: through cmd, every & in the address ends the command
+   (12 Nov 2026: Google got only client_id and answered "response_type is missing"). */
 function openBrowser(url) {
-  const cmd = process.platform === 'win32' ? ['cmd', ['/c', 'start', '', url]] : process.platform === 'darwin' ? ['open', [url]] : ['xdg-open', [url]];
-  spawn(cmd[0], cmd[1], { stdio: 'ignore', detached: true }).unref();
+  const [cmd, args] = process.platform === 'win32' ? ['rundll32', ['url.dll,FileProtocolHandler', url]]
+    : process.platform === 'darwin' ? ['open', [url]] : ['xdg-open', [url]];
+  try { spawn(cmd, args, { stdio: 'ignore', detached: true, shell: false }).unref(); } catch { /* the link is printed too */ }
 }
 
 /* Google's loopback flow: a one-shot server on 127.0.0.1 receives the code. Resolves once it is
@@ -98,6 +101,9 @@ async function main() {
   const auth = new URL('https://accounts.google.com/o/oauth2/v2/auth');
   auth.search = new URLSearchParams({ client_id: clientId, redirect_uri: redirect, response_type: 'code', scope: SCOPES.join(' '), access_type: 'offline', prompt: 'consent', state }).toString();
   console.log('Opening Google in your browser. Choose the HERD GAMES channel, then Allow.');
+  console.log(`If no browser opens, open this link yourself:
+${auth.toString()}
+`);
   openBrowser(auth.toString());
   const code = await codePromise;
   secrets.push(code);
