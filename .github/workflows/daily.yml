@@ -129,8 +129,9 @@ jobs:
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-        # Trial Reels by default (a new account's only audience is non-followers); repo variable INSTAGRAM_TRIAL=off posts normally
-        run: node pipeline/post-instagram.mjs --id=${{ steps.daily.outputs.id }} ${{ vars.INSTAGRAM_TRIAL != 'off' && '--trial' || '' }}
+        # Trial Reels only when the repo variable INSTAGRAM_TRIAL is on: Meta refuses them for this app
+        # today (code 10/2207081, probe 12 Nov 2026) while normal Reels work
+        run: node pipeline/post-instagram.mjs --id=${{ steps.daily.outputs.id }} ${{ vars.INSTAGRAM_TRIAL == 'on' && '--trial' || '' }}
 
       - name: Save the data and the ledger row
         if: steps.daily.outputs.id

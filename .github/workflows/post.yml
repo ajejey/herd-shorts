@@ -11,9 +11,9 @@ on:
         description: 'Ledger id to post, e.g. 2026-11-12-B (blank with whoami)'
         required: false
       trial:
-        description: 'Post as a Trial Reel (shown to non-followers first)'
+        description: 'Post as a Trial Reel (shown to non-followers first; Meta refused these for this app on 12 Nov 2026)'
         type: boolean
-        default: true
+        default: false
       probe:
         description: 'Only test which Reel containers Meta allows (normal and Trial), post nothing'
         type: boolean
