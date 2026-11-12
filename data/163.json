@@ -740,7 +740,7 @@
             "count": 6
           },
           {
-            "value": "user",
+            "value": "fart",
             "count": 3
           },
           {
@@ -800,7 +800,7 @@
             "count": 3
           },
           {
-            "value": "drought",
+            "value": "demands",
             "count": 2
           },
           {
@@ -820,11 +820,11 @@
             "count": 2
           },
           {
-            "value": "imagines",
+            "value": "enclosed",
             "count": 1
           },
           {
-            "value": "steaming",
+            "value": "openings",
             "count": 1
           }
         ]
@@ -840,11 +840,11 @@
             "count": 6
           },
           {
-            "value": "knowledge",
+            "value": "imaginary",
             "count": 1
           },
           {
-            "value": "smartness",
+            "value": "elephants",
             "count": 1
           }
         ]
@@ -860,11 +860,11 @@
             "count": 2
           },
           {
-            "value": "technology",
+            "value": "honourable",
             "count": 1
           },
           {
-            "value": "researched",
+            "value": "flashlight",
             "count": 1
           }
         ]
@@ -888,15 +888,15 @@
         "count": 13
       },
       {
-        "value": "dog",
-        "count": 8
-      },
-      {
         "value": "animal",
         "count": 8
       },
       {
-        "value": "food",
+        "value": "dog",
+        "count": 8
+      },
+      {
+        "value": "water",
         "count": 6
       }
     ],
@@ -951,11 +951,11 @@
       }
     ],
     "rarestFound": [
-      "andro",
-      "bowne",
       "branked",
-      "downa",
-      "knar"
+      "knar",
+      "nork",
+      "kaed",
+      "kero"
     ],
     "differentWordsFound": 315
   }
