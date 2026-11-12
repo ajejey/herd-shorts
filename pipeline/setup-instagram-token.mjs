@@ -22,13 +22,46 @@ import { spawnSync } from 'node:child_process';
 const GRAPH = `https://graph.facebook.com/${process.env.GRAPH_VERSION || 'v25.0'}`;
 const REPO = 'ajejey/herd-shorts';
 
-function ask(question, hidden = false) {
+function ask(question) {
   return new Promise((resolve) => {
     const rl = readline.createInterface({ input: process.stdin, output: process.stdout, terminal: true });
-    if (hidden) {
-      rl._writeToOutput = (s) => { if (s.includes(question)) rl.output.write(s); };
+    rl.question(question, (answer) => { rl.close(); resolve(answer.trim()); });
+  });
+}
+
+/*
+  A hidden prompt that echoes nothing, pasted text included. (12 Nov 2026: the
+  first version muted readline's output only when the write did not contain
+  the prompt, but readline redraws prompt + line together on a paste, so a
+  pasted token was printed in full.) Raw mode reads the keys directly; nothing
+  typed or pasted is ever written back.
+*/
+function askHidden(question) {
+  return new Promise((resolve, reject) => {
+    const { stdin, stdout } = process;
+    stdout.write(question);
+    if (!stdin.isTTY) { reject(new Error('run this in a terminal, so the secret can be typed without being shown')); return; }
+    let value = '';
+    stdin.setRawMode(true);
+    stdin.resume();
+    stdin.setEncoding('utf8');
+    const done = (err) => {
+      stdin.setRawMode(false);
+      stdin.pause();
+      stdin.removeListener('data', onData);
+      stdout.write('\n');
+      if (err) reject(err); else resolve(value.trim());
+    };
+    function onData(chunk) {
+      for (const ch of chunk) {
+        if (ch === '\r' || ch === '\n') return done();
+        if (ch === '\u0003') return done(new Error('cancelled'));
+        if (ch === '\u0008' || ch === '\u007f') value = value.slice(0, -1);
+        else if (ch >= ' ') value += ch;
+      }
+      return undefined;
     }
-    rl.question(question, (answer) => { rl.close(); if (hidden) process.stdout.write('\n'); resolve(answer.trim()); });
+    stdin.on('data', onData);
   });
 }
 
@@ -51,8 +84,8 @@ function setSecret(name, value) {
 
 async function main() {
   const appId = await ask('App ID: ');
-  const appSecret = await ask('App secret (hidden): ', true);
-  const shortToken = await ask('User token from Graph API Explorer (hidden): ', true);
+  const appSecret = await askHidden('App secret (hidden, nothing shows as you type or paste): ');
+  const shortToken = await askHidden('User token from Graph API Explorer (hidden, nothing shows as you type or paste): ');
   secrets.push(appSecret, shortToken);
   if (!/^\d+$/.test(appId) || !appSecret || !shortToken) throw new Error('all three are needed');
 
