@@ -40,7 +40,7 @@ function titles(format, v) {
     case 'B-board': return [`${clip(v.question, 70)} Guess the #1 answer`, `${v.total ? num(v.total) : 'Thousands of'} people answered: ${clip(v.question, 60)}`, `${clip(v.question, 80)} What did most people say?`];
     case 'C-dial': return [`${v.prompt} ${v.a} or ${String(v.b).charAt(0).toLowerCase()}${String(v.b).slice(1)}?`, `${v.prompt} ${num(v.players)} people voted`, `${v.prompt} ${v.verdict}`];
     case 'D-doodle': return [`Guess this doodle before line 3`, `What is this drawing? ${v.insight}`, `${v.sting}. Can you beat them?`, `Can you guess what this doodle is?`];
-    case 'E-word-climb': return [`Guess the hidden word from the herd's first guesses`, `${num(v.solved)} of ${num(v.reached)} got this word. Can you?`, `${v.insight}. Try the first one`, `Can you crack this ${String(v.word).length}-letter word?`];
+    case 'E-word-climb': return [`Guess the hidden word from the herd's first guesses`, `${num(v.solved)} of ${num(v.reached)} got this word. Can you?`, v.insight ? `${v.insight}. Try the first one` : `${v.sting}. How far would you get?`, `Can you crack this ${String(v.word).length}-letter word?`];
     case 'F-secret-word': return [`Hot or cold: find the secret word`, `${v.insight}. What's the secret word?`, `${v.sting}. Can you find it?`, `Find the secret word from ${num(v.players)} people's guesses`];
     case 'G-words-from': return [`How many words can you find in ${v.word}?`, `${v.reveal.replace('!', '')} in ${v.word}`, `${v.word}: how many words can you make?`, `Find the words hiding inside ${v.word}`, `${v.sting}. Did you?`, v.insight ? `${v.insight} in ${v.word}` : `Spot the words inside ${v.word}`];
     default: return ['Can you beat the herd?'];

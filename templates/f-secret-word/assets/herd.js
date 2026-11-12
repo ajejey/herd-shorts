@@ -354,8 +354,12 @@
     A.insight = function (tl, d, T) {
       if (!d.textContent) return;
       fit(d, { max: 40, min: 28 });   // runs after fonts load (inside the scene's build), so it measures the real text
-      tl.set(d, { visibility: "visible" }, T.sting + 0.7);
-      tl.fromTo(d, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, T.sting + 0.7);
+      /* On long enough to read (about 0.3 s a word): a longer line comes in earlier, never
+         before the reveal has landed. 12 Nov 2026: an 8-word line had 1.8 s and was flagged unread. */
+      var words = d.textContent.trim().split(/\s+/).length;
+      var start = Math.max(T.reveal + 0.4, Math.min(T.sting + 0.7, T.play - 0.1 - (words * 0.3 + 0.2)));
+      tl.set(d, { visibility: "visible" }, start);
+      tl.fromTo(d, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, start);
       tl.to(d, { opacity: 0, duration: 0.12 }, T.play - 0.1);
       tl.set(d, { visibility: "hidden" }, T.play);
     };

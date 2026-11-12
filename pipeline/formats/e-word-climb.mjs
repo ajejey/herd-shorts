@@ -34,11 +34,13 @@ export function clueRows(rung) {
 /* When each clue row flips in (one flip sound per row) */
 export const rowTimes = (n) => Array.from({ length: n }, (_, i) => T.clues + 0.2 + i * 0.85);
 
-/* Commentary: the ladder's hardest word */
-export function insight(wc) {
+/* Commentary: the ladder's hardest word. Nothing when that is the word on screen: the stat line
+   already says how many got it (12 Nov 2026: "108 of 156 got it" then "Word 1 was the hardest: 69%"). */
+export function insight(wc, shown = -1) {
   let k = -1, worst = 2;
   wc.rungs.forEach((r, i) => { const p = r.reached ? r.solved / r.reached : 1; if (p < worst) { worst = p; k = i; } });
-  return k < 0 ? '' : `Word ${k + 1} was the hardest: ${Math.round(worst * 100)}% solved it`;
+  if (k < 0 || k === shown) return '';
+  return `Word ${k + 1} was the hardest: ${Math.round(worst * 100)}% solved it`;
 }
 
 export function vars(data, pick = {}) {
@@ -68,7 +70,7 @@ export function vars(data, pick = {}) {
     solved: rung.solved,
     reached: rung.reached,
     sting: copy.sting || (wc.climbedAll / wc.players < 0.3 ? `Only ${num(wc.climbedAll)} of ${num(wc.players)} solved all ${n} words` : `${num(wc.climbedAll)} of ${num(wc.players)} solved all ${n} words`),
-    insight: copy.insight ?? insight(wc),
+    insight: copy.insight ?? insight(wc, wc.rungs.indexOf(rung)),
     ask: copy.ask || 'How far would you get?',
     play: copy.play || 'Play today’s Word Climb free',
     url: 'herdgamesonline.com',
