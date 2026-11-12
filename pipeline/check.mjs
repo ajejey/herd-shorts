@@ -253,9 +253,18 @@ is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordT
         const asks = engagementAsks({ title: md.title, description: md.description });
         is(`titles: ${format} day ${day} "${md.title}" (under 100 chars, no asks)`, md.title.length <= 100 && asks.length === 0, asks.join('; '));
         try { caption(md); youtubeCopy(md); is(`posting: ${format} day ${day} caption and YouTube copy within limits`, true); } catch (err) { is(`posting: ${format} day ${day} caption and YouTube copy within limits`, false, err.message); }
-      } catch (err) { is(`titles: ${format} day ${day} has a fresh title`, false, err.message); }
+      } catch (err) { is(`titles: ${format} day ${day} makes a title`, false, err.message); }
     }
   }
+  /* 12 Nov 2026: the daily run failed because Words from a Word had used every phrasing within the
+     last 20 titles. A day is never lost to the guard: it takes the least similar and says so. */
+  const g = { word: 'BREAKDOWN', reveal: '87 words were hiding!', sting: '40 of 300 spotted BREAKDOWN itself', insight: 'The herd found 210 different words' };
+  const all = ['How many words can you find in BREAKDOWN?', '87 words were hiding in BREAKDOWN', 'BREAKDOWN: how many words can you make?', 'Find the words hiding inside BREAKDOWN', '40 of 300 spotted BREAKDOWN itself. Did you?', 'The herd found 210 different words in BREAKDOWN'];
+  let md = null; let threw = false;
+  try { md = metadata('G-words-from', g, { recent: all }); } catch { threw = true; }
+  is('titles: every phrasing taken still gives a title, flagged, never a failed day', !threw && md && all.includes(md.title) && /least similar/.test(md.titleWarning || ''), threw ? 'threw' : JSON.stringify(md && { title: md.title, w: md.titleWarning }));
+  md = metadata('G-words-from', g, { recent: [] });
+  is('titles: a fresh day has no warning', md.titleWarning === null);
 }
 
 /* ── Posting ─────────────────────────────────────────────────────────────── */

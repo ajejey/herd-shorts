@@ -42,15 +42,23 @@ function titles(format, v) {
     case 'D-doodle': return [`Guess this doodle before line 3`, `What is this drawing? ${v.insight}`, `${v.sting}. Can you beat them?`, `Can you guess what this doodle is?`];
     case 'E-word-climb': return [`Guess the hidden word from the herd's first guesses`, `${num(v.solved)} of ${num(v.reached)} got this word. Can you?`, `${v.insight}. Try the first one`, `Can you crack this ${String(v.word).length}-letter word?`];
     case 'F-secret-word': return [`Hot or cold: find the secret word`, `${v.insight}. What's the secret word?`, `${v.sting}. Can you find it?`, `Find the secret word from ${num(v.players)} people's guesses`];
-    case 'G-words-from': return [`How many words can you find in ${v.word}?`, `${v.reveal.replace('!', '')} in ${v.word}`, `${v.word}: how many words can you make?`];
+    case 'G-words-from': return [`How many words can you find in ${v.word}?`, `${v.reveal.replace('!', '')} in ${v.word}`, `${v.word}: how many words can you make?`, `Find the words hiding inside ${v.word}`, `${v.sting}. Did you?`, v.insight ? `${v.insight} in ${v.word}` : `Spot the words inside ${v.word}`];
     default: return ['Can you beat the herd?'];
   }
 }
 
 export function metadata(format, values, { recent = [], copy = {} } = {}) {
   const candidates = copy.title ? [copy.title] : titles(format, values);
-  const title = candidates.find((t) => !similarTo(t, recent));
-  if (!title) throw new Error(`every title for ${format} is too close to a recent one ("${candidates[0]}" ~ "${similarTo(candidates[0], recent)}"): the pick must write a new one`);
+  let title = candidates.find((t) => !similarTo(t, recent));
+  let titleWarning = null;
+  if (!title) {
+    /* Every phrasing is close to a recent title (12 Nov 2026: Words from a Word ran out after
+       three, and the day's video failed instead of posting). A day is never lost to this: take
+       the least similar and say so; a pick's copy.title avoids it altogether. */
+    const closest = (t) => Math.max(0, ...recent.map((r) => similarity(t, r)));
+    title = [...candidates].sort((a, b) => closest(a) - closest(b))[0];
+    titleWarning = `every ${format} title is close to a recent one; used the least similar ("${title}", ${closest(title).toFixed(2)}). Write copy.title in the pick to avoid it.`;
+  }
   const tags = TAGS[format] || [];
   const lines = [
     [values.insight, values.sting].filter(Boolean).join('. ') + '.',
@@ -59,5 +67,5 @@ export function metadata(format, values, { recent = [], copy = {} } = {}) {
   ];
   if (values.credit) lines.push('', values.credit);
   lines.push('', tags.slice(0, 4).join(' '));
-  return { title, description: copy.description || lines.join('\n'), pinned: copy.pinned || values.ask || '', tags };
+  return { title, titleWarning, description: copy.description || lines.join('\n'), pinned: copy.pinned || values.ask || '', tags };
 }

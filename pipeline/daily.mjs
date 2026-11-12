@@ -121,7 +121,7 @@ async function main() {
     metrics: {},
   };
   writeLedgerRow(row);
-  const out = { ok: true, id: row.id, format, day: useDay, source, explore, file: r.file, sheet: r.sheet, duration: r.duration, warnings: r.warnings };
+  const out = { ok: true, id: row.id, format, day: useDay, source, explore, file: r.file, sheet: r.sheet, duration: r.duration, warnings: [...(r.warnings || []), meta.titleWarning].filter(Boolean) };
   if (process.env.GITHUB_OUTPUT) {
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `id=${row.id}\nfile=${r.file.replace(/\\/g, '/')}\nsheet=${r.sheet.replace(/\\/g, '/')}\nmeta=${metaFile.replace(/\\/g, '/')}\nformat=${format}\nday=${useDay}\n`);
   }
