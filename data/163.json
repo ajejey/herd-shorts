@@ -740,11 +740,11 @@
             "count": 6
           },
           {
-            "value": "soup",
+            "value": "user",
             "count": 3
           },
           {
-            "value": "user",
+            "value": "part",
             "count": 3
           }
         ]
@@ -776,15 +776,15 @@
         "solved": 63,
         "openers": [
           {
-            "value": "clouds",
-            "count": 2
-          },
-          {
             "value": "growth",
             "count": 2
           },
           {
             "value": "morale",
+            "count": 2
+          },
+          {
+            "value": "friend",
             "count": 2
           }
         ]
@@ -800,7 +800,7 @@
             "count": 3
           },
           {
-            "value": "demands",
+            "value": "drought",
             "count": 2
           },
           {
@@ -820,11 +820,11 @@
             "count": 2
           },
           {
-            "value": "pharmacy",
+            "value": "imagines",
             "count": 1
           },
           {
-            "value": "overview",
+            "value": "steaming",
             "count": 1
           }
         ]
@@ -840,11 +840,11 @@
             "count": 6
           },
           {
-            "value": "erections",
+            "value": "knowledge",
             "count": 1
           },
           {
-            "value": "grandiose",
+            "value": "smartness",
             "count": 1
           }
         ]
@@ -860,11 +860,11 @@
             "count": 2
           },
           {
-            "value": "contestant",
+            "value": "technology",
             "count": 1
           },
           {
-            "value": "continuing",
+            "value": "researched",
             "count": 1
           }
         ]
@@ -951,11 +951,11 @@
       }
     ],
     "rarestFound": [
-      "kero",
-      "nerka",
-      "bowned",
-      "wroken",
-      "kaed"
+      "andro",
+      "bowne",
+      "branked",
+      "downa",
+      "knar"
     ],
     "differentWordsFound": 315
   }
