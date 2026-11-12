@@ -147,6 +147,22 @@ export async function postReel({ video, text, trial = false, log = () => {} }) {
 }
 
 async function main() {
+  /* Which kinds of Reel container Meta will create for this app and account. Never uploads or
+     publishes: an unused container expires on its own within 24 hours. */
+  if (arg('probe')) {
+    const e = env();
+    for (const trial of [false, true]) {
+      const params = { media_type: 'REELS', upload_type: 'resumable', caption: 'probe' };
+      if (trial) params.trial_params = JSON.stringify(TRIAL);
+      try {
+        const c = await graph(e, 'POST', `${e.user}/media`, params);
+        console.log(JSON.stringify({ trial, ok: true, container: Boolean(c.id) }));
+      } catch (err) {
+        console.log(JSON.stringify({ trial, ok: false, error: err.message }));
+      }
+    }
+    return;
+  }
   if (arg('whoami')) {
     console.log(JSON.stringify({ ok: true, ...(await whoami()) }));
     return;
