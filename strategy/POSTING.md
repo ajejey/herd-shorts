@@ -62,3 +62,15 @@ private, so the first weeks go up by hand from the release:
 Phone verification is not needed to upload Shorts. It unlocks videos over
 15 minutes, custom thumbnails and live streaming, none of which a 15-second
 Short uses. Google allows two verified channels per phone number per year.
+
+## The schedule (12 Nov 2026)
+
+`strategy.json` sets `per_day` (2 to start) and `slots_utc` (08 Australian evening,
+19 UK evening and US lunch, 01 next day US evening). The 06:40 UTC render makes the
+day's videos, each a different format with its `post_at`; which slots a day uses and
+which format gets which slot rotate, balanced by the ledger, so every format meets
+every slot. "Post due Reels" runs hourly and posts whatever is due (on while the repo
+variable `AUTO_POST_INSTAGRAM` is on; a video more than 20 hours late waits for a
+person). A forced render has no `post_at`: post it with "Post to Instagram".
+Trial Reels: Meta refuses them for this app today, so they are opt-in
+(`INSTAGRAM_TRIAL=on`).

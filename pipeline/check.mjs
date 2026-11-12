@@ -288,5 +288,40 @@ is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordT
   for (const [format, tags] of Object.entries(TAGS)) is(`posting: ${format} hashtags name no other company's game`, !tags.some((t) => BRANDS.test(t)), tags.filter((t) => BRANDS.test(t)).join(' '));
 }
 
+/* ── Scheduling: per_day videos a day, rotating slots, every format meeting every slot ── */
+{
+  const { planSlots, assignSlots, chooseFormats } = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'daily.mjs')).href);
+  const { dueRows, STALE_HOURS } = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'post-due.mjs')).href);
+  const strategy = readJson(path.join(ROOT, 'strategy', 'strategy.json'));
+  const slots = strategy.slots_utc;
+  is('schedule: strategy has per_day and three slots', strategy.per_day >= 1 && Array.isArray(slots) && slots.length === 3);
+  const p = planSlots('2026-11-13', 165, 2, [8, 19, 1]);
+  is('schedule: two slots, in time order, on the right dates', JSON.stringify(p) === JSON.stringify(['2026-11-13T08:00:00.000Z', '2026-11-13T19:00:00.000Z']), JSON.stringify(p));
+  is('schedule: the 01:00 slot falls on the next calendar day', planSlots('2026-11-13', 163, 2, [8, 19, 1])[1] === '2026-11-14T01:00:00.000Z');
+  const used = new Set();
+  for (let d = 0; d < 3; d += 1) for (const t of planSlots('2026-11-13', d, 2, [8, 19, 1])) used.add(new Date(t).getUTCHours());
+  is('schedule: over three days every slot is used', used.size === 3);
+  const can = Object.keys(strategy.formats);
+  const meets = {};
+  const history = [];
+  for (let d = 300; d < 340; d += 1) {
+    const day = assignSlots(chooseFormats({ strategy, ledger: history, can, day: d, n: 2 }), planSlots('2026-11-13', d, 2, slots), d, history);
+    for (const x of day) history.push({ format: x.format, post_at: x.post_at });
+    is(`schedule: day ${d} has two different formats, each with a time`, day.length === 2 && day[0].format !== day[1].format && day.every((x) => x.post_at), JSON.stringify(day));
+    for (const x of day) (meets[x.format] = meets[x.format] || new Set()).add(new Date(x.post_at).getUTCHours());
+  }
+  is('schedule: over 40 days every format meets every slot', Object.values(meets).every((s) => s.size === 3), JSON.stringify(Object.fromEntries(Object.entries(meets).map(([k, v]) => [k, [...v]]))));
+  const now = Date.parse('2026-11-13T19:05:00Z');
+  const rows = [
+    { id: 'a', file: 'a.mp4', post_at: '2026-11-13T19:00:00.000Z', posts: {} },
+    { id: 'b', file: 'b.mp4', post_at: '2026-11-14T01:00:00.000Z', posts: {} },
+    { id: 'c', file: 'c.mp4', post_at: '2026-11-13T08:00:00.000Z', posts: { instagram: { id: '1' } } },
+    { id: 'd', file: 'd.mp4', post_at: null, posts: {} },
+    { id: 'e', file: 'e.mp4', post_at: new Date(now - (STALE_HOURS + 1) * 3600000).toISOString(), posts: {} },
+    { id: 'f', file: 'f.mp4', post_at: '2026-11-13T08:00:00.000Z', posts: {} },
+  ];
+  is('schedule: due = time come, not posted, not stale, never a hand-posted render; oldest first', dueRows(rows, now).map((r) => r.id).join() === 'f,a', dueRows(rows, now).map((r) => r.id).join());
+}
+
 console.log(failures ? `\n${failures} FAILED\n` : '\nevery format makes a valid video from every day it can, and says why when it can\'t\n');
 process.exit(failures ? 1 : 0);

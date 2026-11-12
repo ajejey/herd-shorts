@@ -1,7 +1,14 @@
 {
   "_about": "The settings the daily pipeline reads. Changed only by the weekly review (or by Ajey), each change noted in LEARNINGS.md with the ledger rows behind it.",
-  "updated": "2026-11-11",
+  "updated": "2026-11-12",
   "explore_share": 0.25,
+  "per_day": 2,
+  "slots_utc": [
+    8,
+    19,
+    1
+  ],
+  "_slots": "UTC hours: 08 = Australian evening, 19 = UK evening and US lunch, 01 (next day) = US evening. per_day of them each day, rotated with the formats so every format meets every slot (12 Nov 2026, Ajey: 2 a day to start).",
   "formats": {
     "A-herd-line": {
       "weight": 1,

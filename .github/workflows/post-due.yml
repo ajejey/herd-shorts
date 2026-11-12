@@ -1,0 +1,58 @@
+name: Post due Reels
+
+# Every hour: post each rendered video whose posting time (ledger post_at, planned by
+# daily.mjs from strategy.slots_utc) has come. Off until the repo variable
+# AUTO_POST_INSTAGRAM is on. One failed post never stops the others; it is retried
+# next hour until it goes stale (pipeline/post-due.mjs).
+on:
+  schedule:
+    - cron: '5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-short
+  cancel-in-progress: false
+
+jobs:
+  post:
+    if: vars.AUTO_POST_INSTAGRAM == 'on'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Post what is due
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: |
+          ids=$(node pipeline/post-due.mjs)
+          if [ -z "$ids" ]; then echo "nothing due"; exit 0; fi
+          failed=0
+          for id in $ids; do
+            echo "== $id"
+            gh release download "short-$id" --dir renders --pattern '*.mp4' --pattern '*.meta.json' --clobber || { failed=1; continue; }
+            node pipeline/post-instagram.mjs --id="$id" ${{ vars.INSTAGRAM_TRIAL == 'on' && '--trial' || '' }} || failed=1
+          done
+          echo "failed=$failed" >> "$GITHUB_ENV"
+
+      - name: Record it in the ledger
+        if: always()
+        run: |
+          git config user.name "herd-shorts bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ledger
+          git diff --cached --quiet || git commit -m "Posted the due Reels"
+          git pull --rebase --quiet && git push
+
+      - name: Fail the run if a post failed
+        if: env.failed == '1'
+        run: exit 1
