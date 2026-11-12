@@ -14,6 +14,10 @@ on:
         description: 'Post as a Trial Reel (shown to non-followers first; Meta refused these for this app on 12 Nov 2026)'
         type: boolean
         default: false
+      youtube_whoami:
+        description: 'Only check which YouTube channel the token reaches, upload nothing'
+        type: boolean
+        default: false
       probe:
         description: 'Only test which Reel containers Meta allows (normal and Trial), post nothing'
         type: boolean
@@ -41,6 +45,14 @@ jobs:
         with:
           node-version: 22
 
+      - name: Check the YouTube token and channel
+        if: inputs.youtube_whoami
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: node pipeline/post-youtube.mjs --whoami
+
       - name: Probe which Reel containers Meta allows
         if: inputs.probe
         env:
@@ -56,7 +68,7 @@ jobs:
         run: node pipeline/post-instagram.mjs --whoami
 
       - name: The video from its release
-        if: ${{ !inputs.whoami && !inputs.probe }}
+        if: ${{ !inputs.whoami && !inputs.probe && !inputs.youtube_whoami }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -65,14 +77,14 @@ jobs:
           ls -la renders
 
       - name: Post the Reel
-        if: ${{ !inputs.whoami && !inputs.probe }}
+        if: ${{ !inputs.whoami && !inputs.probe && !inputs.youtube_whoami }}
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
         run: node pipeline/post-instagram.mjs --id=${{ inputs.id }} ${{ inputs.trial && '--trial' || '' }}
 
       - name: Record it in the ledger
-        if: ${{ !inputs.whoami && !inputs.probe }}
+        if: ${{ !inputs.whoami && !inputs.probe && !inputs.youtube_whoami }}
         run: |
           git config user.name "herd-shorts bot"
           git config user.email "actions@users.noreply.github.com"
