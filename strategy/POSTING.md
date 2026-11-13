@@ -92,3 +92,22 @@ uploaded at once, scheduled. A video more than 20 hours late waits for a person.
 forced render has no `post_at`: post it with "Post to Instagram".
 Trial Reels: Meta refuses them for this app today, so they are opt-in
 (`INSTAGRAM_TRIAL=on`).
+
+## The outside timer (cron-job.org, 13 Nov 2026)
+
+GitHub's own schedule ran hours late or not at all, so cron-job.org starts the
+workflows on time through GitHub's API (POST
+`https://api.github.com/repos/ajejey/herd-shorts/actions/workflows/<file>/dispatches`,
+headers `Accept: application/vnd.github+json`, `Authorization: Bearer <token>`,
+`X-GitHub-Api-Version: 2022-11-28`; GitHub answers 204 when it starts):
+
+- "Herd Shorts render": 06:40 UTC daily, `daily.yml`, body
+  `{"ref":"main","inputs":{"if_not_done":"true"}}` (skips a date already rendered).
+- "Herd Shorts post": 2 and 32 minutes past 01, 08 and 19 UTC, `post-due.yml`, body
+  `{"ref":"main"}` (the :32 run is the retry; posting twice is impossible).
+
+The token is a fine-grained GitHub token, only `ajejey/herd-shorts`, only
+"Actions: read and write"; it lives only in cron-job.org. When it expires the
+timers fail (cron-job.org emails) and GitHub's own schedule is the backup: make a
+new token the same way and paste it into both jobs' Authorization header. If the
+slots in `strategy.json` change, change the post job's hours to match.

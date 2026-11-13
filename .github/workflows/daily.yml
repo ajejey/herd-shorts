@@ -8,6 +8,8 @@ name: Daily short
 # Each render makes strategy.per_day videos, each with its posting time (ledger post_at, from
 # strategy.slots_utc). "Post due Reels" runs straight after a render, then hourly: YouTube gets
 # each video at once, scheduled for its post_at; Instagram gets it when its time comes.
+# GitHub's own schedule runs hours late or not at all (13 Nov 2026), so an outside timer
+# (cron-job.org, strategy/POSTING.md) also starts the render at 06:40 UTC with if_not_done.
 on:
   schedule:
     - cron: '10 6 * * *'
@@ -26,6 +28,10 @@ on:
       date:
         description: 'Posting date the videos are for, YYYY-MM-DD (blank: today, UTC)'
         required: false
+      if_not_done:
+        description: 'Render only if nothing was rendered for the date yet (the outside timer, cron-job.org, sends this)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -75,7 +81,7 @@ jobs:
 
       - name: Already rendered today?
         id: seen
-        if: github.event_name == 'schedule'
+        if: github.event_name == 'schedule' || inputs.if_not_done
         run: node pipeline/daily.mjs --check-done
 
       - name: FFmpeg for the renderer

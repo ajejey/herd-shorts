@@ -7,7 +7,9 @@ name: Post due Reels
 #   every upload went public an hour after its time, and fails the run if one did not.
 # One failed post never stops the others; it is retried next hour until it goes stale.
 # Minute 23, not 5: GitHub drops scheduled runs under load, worst at the top of the hour
-# (13 Nov 2026: '5 * * * *' fired about one hour in eight).
+# (13 Nov 2026: '5 * * * *' fired about one hour in eight). The on-time trigger is an
+# outside timer (cron-job.org, strategy/POSTING.md) at 2 and 32 past each slot hour; this
+# schedule is the backup.
 on:
   schedule:
     - cron: '23 * * * *'

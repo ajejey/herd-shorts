@@ -362,6 +362,8 @@ is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordT
   is('youtube: the hourly poster uploads only while AUTO_POST_YOUTUBE is on, and confirms', /AUTO_YT: \$\{\{ vars\.AUTO_POST_YOUTUBE \}\}/.test(dueYml) && /\[ "\$AUTO_YT" = on \] \|\| continue/.test(dueYml) && /post-youtube\.mjs --confirm/.test(dueYml));
   is('youtube: the hourly poster runs off the top of the hour (GitHub drops those runs)', /cron: '(1[0-9]|[2-4][0-9]) \* \* \* \*'/.test(dueYml));
   is('youtube: a render starts the poster straight away', /actions: write/.test(dailyYml) && /gh workflow run post-due\.yml/.test(dailyYml));
+  /* The outside timer starts the render by workflow_dispatch: without the done check a second start would render two more videos for the same slots. */
+  is('schedule: a render started with if_not_done skips a date already rendered', /if_not_done:[\s\S]*?type: boolean/.test(dailyYml) && /id: seen\n\s+if: github\.event_name == 'schedule' \|\| inputs\.if_not_done/.test(dailyYml));
 }
 
 console.log(failures ? `\n${failures} FAILED\n` : '\nevery format makes a valid video from every day it can, and says why when it can\'t\n');
