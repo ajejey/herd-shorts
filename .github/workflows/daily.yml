@@ -6,7 +6,8 @@ name: Daily short
 #   ~06:30     Claude may commit picks/<date>.json; that push renders straight away
 #   06:40 UTC  if nothing was rendered for the date, render the strategy's choice
 # Each render makes strategy.per_day videos, each with its posting time (ledger post_at, from
-# strategy.slots_utc). The hourly "Post due Reels" workflow posts them when their time comes.
+# strategy.slots_utc). "Post due Reels" runs straight after a render, then hourly: YouTube gets
+# each video at once, scheduled for its post_at; Instagram gets it when its time comes.
 on:
   schedule:
     - cron: '10 6 * * *'
@@ -28,6 +29,7 @@ on:
 
 permissions:
   contents: write
+  actions: write # a render starts "Post due Reels" straight away
 
 concurrency:
   group: daily-short
@@ -127,3 +129,11 @@ jobs:
           git add data ledger
           git diff --cached --quiet || git commit -m "Day ${{ steps.daily.outputs.day }}: ${{ steps.daily.outputs.count }} rendered"
           git pull --rebase --quiet && git push
+
+      # Straight to the poster: YouTube schedules each video for its post_at the moment it is
+      # rendered, instead of waiting for an hourly run GitHub may drop (13 Nov 2026).
+      - name: Hand the videos to Post due Reels
+        if: steps.daily.outputs.count > 0 && (vars.AUTO_POST_INSTAGRAM == 'on' || vars.AUTO_POST_YOUTUBE == 'on')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run post-due.yml --ref main

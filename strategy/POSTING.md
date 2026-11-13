@@ -50,14 +50,30 @@ One-time setup (Ajey does the account steps; Claude can walk the Meta app steps 
 
        gh variable set AUTO_POST_INSTAGRAM -b on -R ajejey/herd-shorts
 
-## YouTube: by hand until the API can post publicly
+## YouTube: automatic (13 Nov 2026)
 
-Videos uploaded through an API project that Google has not audited are locked
-private, so the first weeks go up by hand from the release:
+On while the repo variable `AUTO_POST_YOUTUBE` is on. A render starts "Post due
+Reels" straight away, which uploads each new video private with
+`publishAt = post_at`, so YouTube publishes it on the minute however late GitHub
+runs the job. A video whose time has already passed goes up public. Every run
+then checks (`post-youtube.mjs --confirm`) that each upload was public an hour
+after its time, and fails, saying which, if one was not.
+
+Google's API docs said uploads from an unaudited project are locked private. On
+13 Nov 2026 Google's API team wrote that they are not, and closed our audit
+request as unneeded. If a confirm ever fails with "still private", that changed:
+
+    gh variable set AUTO_POST_YOUTUBE -b off -R ajejey/herd-shorts
+
+and go back to posting by hand from the release:
 
 1. Upload the MP4 (YouTube app or Studio). A vertical video under 3 minutes is a Short.
 2. Paste the title and description from `<video>.youtube.txt`; pin the question as the first comment.
 3. Record it: `node pipeline/youtube-kit.mjs --id=<ledger id> --posted=<the Short's link>`
+
+A video already recorded on YouTube (by hand or by the API) is never uploaded
+again, and before uploading the channel's recent uploads are searched for the
+same title.
 
 Phone verification is not needed to upload Shorts. It unlocks videos over
 15 minutes, custom thumbnails and live streaming, none of which a 15-second
@@ -69,8 +85,10 @@ Short uses. Google allows two verified channels per phone number per year.
 19 UK evening and US lunch, 01 next day US evening). The 06:40 UTC render makes the
 day's videos, each a different format with its `post_at`; which slots a day uses and
 which format gets which slot rotate, balanced by the ledger, so every format meets
-every slot. "Post due Reels" runs hourly and posts whatever is due (on while the repo
-variable `AUTO_POST_INSTAGRAM` is on; a video more than 20 hours late waits for a
-person). A forced render has no `post_at`: post it with "Post to Instagram".
+every slot. "Post due Reels" runs after each render and then hourly at :23 (GitHub
+drops many runs at the top of the hour: on 13 Nov '5 * * * *' fired about one hour in
+eight). Instagram posts when its time has come (its API cannot schedule); YouTube is
+uploaded at once, scheduled. A video more than 20 hours late waits for a person. A
+forced render has no `post_at`: post it with "Post to Instagram".
 Trial Reels: Meta refuses them for this app today, so they are opt-in
 (`INSTAGRAM_TRIAL=on`).

@@ -1,6 +1,7 @@
 /*
-  YouTube, by hand until the API can post publicly (videos uploaded through an
-  unaudited API project are locked private, so the first weeks go up by hand).
+  YouTube by hand: the copy to paste, and recording a Short posted by hand.
+  Uploads are automatic since 13 Nov 2026 (post-youtube.mjs, AUTO_POST_YOUTUBE);
+  this is the fallback, and what each release's .youtube.txt is made from.
 
     node pipeline/youtube-kit.mjs [--id=2026-11-13-B]
         writes renders/<video>.youtube.txt: the title, description, tags and the

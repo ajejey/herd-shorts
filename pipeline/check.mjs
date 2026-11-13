@@ -321,6 +321,47 @@ is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordT
     { id: 'f', file: 'f.mp4', post_at: '2026-11-13T08:00:00.000Z', posts: {} },
   ];
   is('schedule: due = time come, not posted, not stale, never a hand-posted render; oldest first', dueRows(rows, now).map((r) => r.id).join() === 'f,a', dueRows(rows, now).map((r) => r.id).join());
+  /* YouTube: due from the moment it is rendered (uploaded scheduled for post_at), per platform. */
+  const ytRows = [...rows, { id: 'g', file: 'g.mp4', post_at: '2026-11-13T08:00:00.000Z', posts: { youtube: { id: 'x' } } }];
+  const ids = (list) => list.map((r) => r.id).join();
+  is('schedule: YouTube due = rendered, not on YouTube, not stale, future ones too; oldest first', ids(dueRows(ytRows, now, 'youtube')) === 'c,f,a,b', ids(dueRows(ytRows, now, 'youtube')));
+  is('schedule: a row on YouTube is still due on Instagram', ids(dueRows(ytRows, now, 'instagram')) === 'f,g,a', ids(dueRows(ytRows, now, 'instagram')));
+  let unknown = false;
+  try { dueRows(rows, now, 'tiktok'); } catch { unknown = true; }
+  is('schedule: an unknown platform is refused', unknown);
+}
+
+/* ── YouTube automatic upload: scheduled for post_at, never twice, confirmed public ── */
+{
+  const { publishPlan, sameUpload, toConfirm, LEAD_MINUTES } = await import(pathToFileURL(path.join(ROOT, 'pipeline', 'post-youtube.mjs')).href);
+  const now = Date.parse('2026-11-14T06:50:00Z');
+  const later = publishPlan('2026-11-14T08:00:00.000Z', now);
+  is('youtube: a video for later is uploaded private with publishAt = post_at', later.privacyStatus === 'private' && later.publishAt === '2026-11-14T08:00:00.000Z', JSON.stringify(later));
+  is(`youtube: a video due within ${LEAD_MINUTES} minutes, or past, goes up public`, publishPlan(new Date(now + 5 * 60000).toISOString(), now).privacyStatus === 'public' && publishPlan('2026-11-14T01:00:00.000Z', now).privacyStatus === 'public' && !publishPlan(null, now).publishAt);
+  const items = [
+    { snippet: { title: 'Guess this doodle before line 3 ', publishedAt: '2026-11-14T06:45:00Z', resourceId: { videoId: 'NEW1' } } },
+    { snippet: { title: 'Old title', publishedAt: '2026-11-01T06:45:00Z', resourceId: { videoId: 'OLD1' } } },
+  ];
+  is('youtube: the same title uploaded lately is found (no second upload)', sameUpload(items, 'Guess this doodle before line 3', now - 3 * 86400000) === 'NEW1');
+  is('youtube: an old upload or another title is not a match', sameUpload(items, 'Old title', now - 3 * 86400000) === null && sameUpload(items, 'Something new', 0) === null);
+  const hr = 3600000;
+  const yt = (y) => ({ posts: { youtube: y } });
+  const confirmRows = [
+    yt({ id: 'a', by: 'api', publish_at: new Date(now - 2 * hr).toISOString() }),
+    yt({ id: 'b', by: 'api', at: new Date(now - 2 * hr).toISOString() }),
+    yt({ id: 'c', by: 'api', publish_at: new Date(now - 2 * hr).toISOString(), live: true }),
+    yt({ id: 'd', by: 'hand', at: new Date(now - 2 * hr).toISOString() }),
+    yt({ id: 'e', by: 'api', publish_at: new Date(now - 0.5 * hr).toISOString() }),
+    yt({ id: 'f', by: 'api', publish_at: new Date(now + 5 * hr).toISOString() }),
+    yt({ id: 'g', by: 'api', publish_at: new Date(now - 100 * hr).toISOString() }),
+  ];
+  const checked = toConfirm(confirmRows, now).map((r) => r.posts.youtube.id).join();
+  is('youtube: --confirm checks API uploads an hour past their time, not yet seen public, under 3 days old', checked === 'a,b', checked);
+  const dueYml = fs.readFileSync(path.join(ROOT, '.github', 'workflows', 'post-due.yml'), 'utf8');
+  const dailyYml = fs.readFileSync(path.join(ROOT, '.github', 'workflows', 'daily.yml'), 'utf8');
+  is('youtube: the hourly poster uploads only while AUTO_POST_YOUTUBE is on, and confirms', /AUTO_YT: \$\{\{ vars\.AUTO_POST_YOUTUBE \}\}/.test(dueYml) && /\[ "\$AUTO_YT" = on \] \|\| continue/.test(dueYml) && /post-youtube\.mjs --confirm/.test(dueYml));
+  is('youtube: the hourly poster runs off the top of the hour (GitHub drops those runs)', /cron: '(1[0-9]|[2-4][0-9]) \* \* \* \*'/.test(dueYml));
+  is('youtube: a render starts the poster straight away', /actions: write/.test(dailyYml) && /gh workflow run post-due\.yml/.test(dailyYml));
 }
 
 console.log(failures ? `\n${failures} FAILED\n` : '\nevery format makes a valid video from every day it can, and says why when it can\'t\n');

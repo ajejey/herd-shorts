@@ -1,12 +1,16 @@
 name: Post due Reels
 
-# Every hour: post each rendered video whose posting time (ledger post_at, planned by
-# daily.mjs from strategy.slots_utc) has come. Off until the repo variable
-# AUTO_POST_INSTAGRAM is on. One failed post never stops the others; it is retried
-# next hour until it goes stale (pipeline/post-due.mjs).
+# Every hour: post each rendered video that is due (pipeline/post-due.mjs).
+#   Instagram (repo variable AUTO_POST_INSTAGRAM on): once its post_at has come.
+#   YouTube (repo variable AUTO_POST_YOUTUBE on): as soon as it is rendered, scheduled with
+#   publishAt = post_at so YouTube publishes it on the minute; then --confirm checks that
+#   every upload went public an hour after its time, and fails the run if one did not.
+# One failed post never stops the others; it is retried next hour until it goes stale.
+# Minute 23, not 5: GitHub drops scheduled runs under load, worst at the top of the hour
+# (13 Nov 2026: '5 * * * *' fired about one hour in eight).
 on:
   schedule:
-    - cron: '5 * * * *'
+    - cron: '23 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -18,7 +22,7 @@ concurrency:
 
 jobs:
   post:
-    if: vars.AUTO_POST_INSTAGRAM == 'on'
+    if: vars.AUTO_POST_INSTAGRAM == 'on' || vars.AUTO_POST_YOUTUBE == 'on'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -33,15 +37,28 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          AUTO_IG: ${{ vars.AUTO_POST_INSTAGRAM }}
+          AUTO_YT: ${{ vars.AUTO_POST_YOUTUBE }}
+          IG_TRIAL: ${{ vars.INSTAGRAM_TRIAL == 'on' && '--trial' || '' }}
         run: |
-          ids=$(node pipeline/post-due.mjs)
-          if [ -z "$ids" ]; then echo "nothing due"; exit 0; fi
           failed=0
-          for id in $ids; do
-            echo "== $id"
-            gh release download "short-$id" --dir renders --pattern '*.mp4' --pattern '*.meta.json' --clobber || { failed=1; continue; }
-            node pipeline/post-instagram.mjs --id="$id" ${{ vars.INSTAGRAM_TRIAL == 'on' && '--trial' || '' }} || failed=1
+          for platform in instagram youtube; do
+            case "$platform" in
+              instagram) [ "$AUTO_IG" = on ] || continue; poster="pipeline/post-instagram.mjs $IG_TRIAL" ;;
+              youtube)   [ "$AUTO_YT" = on ] || continue; poster="pipeline/post-youtube.mjs" ;;
+            esac
+            ids=$(node pipeline/post-due.mjs --platform="$platform") || { failed=1; continue; }
+            if [ -z "$ids" ]; then echo "$platform: nothing due"; fi
+            for id in $ids; do
+              echo "== $platform $id"
+              gh release download "short-$id" --dir renders --pattern '*.mp4' --pattern '*.meta.json' --clobber || { failed=1; continue; }
+              node $poster --id="$id" || failed=1
+            done
           done
+          if [ "$AUTO_YT" = on ]; then node pipeline/post-youtube.mjs --confirm || failed=1; fi
           echo "failed=$failed" >> "$GITHUB_ENV"
 
       - name: Record it in the ledger
@@ -50,7 +67,7 @@ jobs:
           git config user.name "herd-shorts bot"
           git config user.email "actions@users.noreply.github.com"
           git add ledger
-          git diff --cached --quiet || git commit -m "Posted the due Reels"
+          git diff --cached --quiet || git commit -m "Posted the due videos"
           git pull --rebase --quiet && git push
 
       - name: Fail the run if a post failed
