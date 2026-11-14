@@ -712,11 +712,11 @@
             "count": 6
           },
           {
-            "value": "star",
+            "value": "play",
             "count": 5
           },
           {
-            "value": "play",
+            "value": "star",
             "count": 5
           }
         ]
@@ -752,11 +752,11 @@
             "count": 3
           },
           {
-            "value": "player",
+            "value": "nigger",
             "count": 2
           },
           {
-            "value": "nigger",
+            "value": "player",
             "count": 2
           }
         ]
@@ -768,15 +768,15 @@
         "solved": 49,
         "openers": [
           {
-            "value": "browser",
-            "count": 2
-          },
-          {
             "value": "picture",
             "count": 2
           },
           {
-            "value": "aerobic",
+            "value": "browser",
+            "count": 2
+          },
+          {
+            "value": "climate",
             "count": 1
           }
         ]
@@ -788,15 +788,15 @@
         "solved": 39,
         "openers": [
           {
-            "value": "mountain",
-            "count": 2
-          },
-          {
             "value": "elephant",
             "count": 2
           },
           {
-            "value": "aboideau",
+            "value": "mountain",
+            "count": 2
+          },
+          {
+            "value": "pangolin",
             "count": 1
           }
         ]
@@ -816,7 +816,7 @@
             "count": 2
           },
           {
-            "value": "celebrity",
+            "value": "aeroplane",
             "count": 1
           }
         ]
@@ -828,7 +828,7 @@
         "solved": 26,
         "openers": [
           {
-            "value": "university",
+            "value": "managerial",
             "count": 2
           },
           {
@@ -836,7 +836,7 @@
             "count": 2
           },
           {
-            "value": "managerial",
+            "value": "university",
             "count": 2
           }
         ]
@@ -856,11 +856,11 @@
         "count": 11
       },
       {
-        "value": "house",
+        "value": "ocean",
         "count": 9
       },
       {
-        "value": "ocean",
+        "value": "house",
         "count": 9
       },
       {
@@ -868,7 +868,7 @@
         "count": 6
       },
       {
-        "value": "water",
+        "value": "animal",
         "count": 5
       }
     ],
@@ -923,11 +923,11 @@
       }
     ],
     "rarestFound": [
-      "inion",
-      "nitid",
-      "nied",
-      "inti",
-      "nidi"
+      "tinnie",
+      "nitrid",
+      "nidi",
+      "doen",
+      "norite"
     ],
     "differentWordsFound": 183
   }
