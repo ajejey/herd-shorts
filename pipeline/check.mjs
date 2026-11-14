@@ -181,6 +181,16 @@ is('G: the herd\'s finds all land before the reveal', (() => { const t = G.wordT
   is('asks: "Comment the line" is caught', engagementAsks({ cta: 'When did you get it? Comment the line' }).length === 1);
   is('asks: "Send this to someone" is caught', engagementAsks({ x: 'Send this to someone who would get it wrong' }).length === 1);
   is('asks: a real question passes ("When did you get it?", "Which side are you on?")', engagementAsks({ a: 'When did you get it?', b: 'Which side are you on?', c: 'Play today’s doodle free' }).length === 0);
+  const bait = ['Share this with a friend', 'Share it with someone who needs it', 'Tag a friend who would say pizza', 'Follow for a new one every day',
+    'Like and subscribe', 'Drop your answer below', 'Tell us in the comments', 'Comment below', 'Subscribe for daily puzzles', 'Share if you agree... share this!', 'Repost this'];
+  const caught = bait.filter((b) => engagementAsks({ x: b }).length === 1);
+  is('asks: every common bait phrasing is caught', caught.length === bait.length, bait.filter((b) => !caught.includes(b)).join(' | '));
+  /* 14 Nov 2026: a Spectrum card about sharing food failed every render of the day, so nothing posted.
+     Game content that merely uses the words passes. */
+  const content = ['Dinner with friends? Share every dish or my plate, my food?', 'Found a fiver: keep it or share it?', 'Share the bill or pay exactly?',
+    'No comment', 'Follow the recipe or wing it?', 'Things you like and hate', 'Would you subscribe to a cheese club?', 'Which city is below sea level?'];
+  const flagged = content.filter((c) => engagementAsks({ x: c }).length);
+  is('asks: game content that merely uses share/comment/follow/subscribe passes', flagged.length === 0, flagged.join(' | '));
 }
 
 /* ── Brand safety: the words the unattended fallback must not put on screen ── */

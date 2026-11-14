@@ -58,10 +58,28 @@ export function sensitiveHits(values) {
   comments, shares or tags (its engagement-bait rule), so on-screen copy asks a
   real question instead ("When did you get it?"). check.mjs fails any default
   copy that matches; a pick's copy is checked the same way before render.
+
+  An ask is aimed at the viewer about this video or account ("share this with",
+  "comment below", "follow for more"), never the bare word: on 14 Nov 2026 the
+  Spectrum card "Share every dish / My plate, my food" failed every render of
+  the day as "engagement bait", so nothing posted.
 */
-const ASKS = /\b(comment|comments|share|shares|tag a|tag your|tag someone|follow|subscribe|send this|send it to|repost|like and)\b/i;
+const ASKS = [
+  /\bcomments?\s+(below|down|here|your|the|with|if|what|which|who|how|when|it|this|and)\b/i,
+  /\b(in|to|into)\s+the\s+comments\b/i,
+  /\b(answer|drop|leave|write|put|tell us|let us know)\b[^.?!]*\bbelow\b/i,
+  /\b(share|send|forward)\s+(this|it)\s+(with|to|if)\b/i,
+  /\b(share|send)\s+this\s*(video|reel|short|post|clip|[!.]|$)/i,
+  /\bshare\s+(with|to)\s+(a friend|friends|someone|your)\b/i,
+  /\bshare\s+your\s+(answer|guess|score|result|pick|take)\b/i,
+  /\btag\s+(a|your|someone|somebody)\b/i,
+  /\bfollow\s+(us|me|for|along|now|@|herd|the\s+(channel|page|account))/i,
+  /\bsubscribe\s*(for|to\s+(us|the channel|our|herd)|now|[!.]|$)/i,
+  /\brepost\b/i,
+  /\blike\s+(and|&)\s+(subscribe|share|follow|comment)\b/i,
+];
 export function engagementAsks(values) {
-  return Object.entries(values).filter(([k, v]) => typeof v === 'string' && !['strokes', 'guesses', 'credit'].includes(k) && ASKS.test(v)).map(([k, v]) => `${k}: "${v}"`);
+  return Object.entries(values).filter(([k, v]) => typeof v === 'string' && !['strokes', 'guesses', 'credit'].includes(k) && ASKS.some((re) => re.test(v))).map(([k, v]) => `${k}: "${v}"`);
 }
 
 /*
