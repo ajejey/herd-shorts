@@ -619,11 +619,11 @@
             "count": 5
           },
           {
-            "value": "love",
+            "value": "star",
             "count": 3
           },
           {
-            "value": "star",
+            "value": "rise",
             "count": 3
           }
         ]
@@ -639,11 +639,11 @@
             "count": 5
           },
           {
-            "value": "adieu",
+            "value": "right",
             "count": 3
           },
           {
-            "value": "right",
+            "value": "stare",
             "count": 3
           }
         ]
@@ -663,7 +663,7 @@
             "count": 2
           },
           {
-            "value": "accept",
+            "value": "animes",
             "count": 1
           }
         ]
@@ -679,11 +679,11 @@
             "count": 2
           },
           {
-            "value": "trading",
+            "value": "giraffe",
             "count": 1
           },
           {
-            "value": "pleased",
+            "value": "grenade",
             "count": 1
           }
         ]
@@ -699,11 +699,11 @@
             "count": 2
           },
           {
-            "value": "treatise",
+            "value": "tracking",
             "count": 1
           },
           {
-            "value": "harmonic",
+            "value": "uniforms",
             "count": 1
           }
         ]
@@ -719,7 +719,7 @@
             "count": 3
           },
           {
-            "value": "christmas",
+            "value": "beautiful",
             "count": 1
           },
           {
@@ -739,7 +739,7 @@
             "count": 2
           },
           {
-            "value": "requesting",
+            "value": "housemaids",
             "count": 1
           },
           {
@@ -771,11 +771,11 @@
         "count": 5
       },
       {
-        "value": "food",
+        "value": "water",
         "count": 4
       },
       {
-        "value": "water",
+        "value": "food",
         "count": 4
       }
     ],
@@ -830,11 +830,11 @@
       }
     ],
     "rarestFound": [
-      "uteri",
       "iure",
-      "utis",
       "sruti",
-      "tuis"
+      "uteri",
+      "tuis",
+      "siree"
     ],
     "differentWordsFound": 113
   }
