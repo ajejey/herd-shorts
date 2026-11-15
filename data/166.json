@@ -1,0 +1,841 @@
+{
+  "day": 166,
+  "lastFinished": 166,
+  "guesstimate": [
+    {
+      "id": 3,
+      "question": "In what year was the Eiffel Tower completed?",
+      "unit": "year",
+      "answer": 1889,
+      "fact": "It was built for a world's fair and was only meant to stand for 20 years.",
+      "players": 98,
+      "median": 1890,
+      "exact": 8,
+      "close": 14,
+      "closeRule": "within 2 years",
+      "guesses": [
+        1670,
+        1680,
+        1746,
+        1750,
+        1750,
+        1753,
+        1756,
+        1785,
+        1800,
+        1810,
+        1826,
+        1832,
+        1832,
+        1845,
+        1845,
+        1849,
+        1850,
+        1850,
+        1850,
+        1852,
+        1852,
+        1856,
+        1856,
+        1856,
+        1858,
+        1860,
+        1860,
+        1860,
+        1860,
+        1865,
+        1865,
+        1880,
+        1881,
+        1882,
+        1883,
+        1886,
+        1886,
+        1887,
+        1889,
+        1889,
+        1889,
+        1889,
+        1889,
+        1889,
+        1889,
+        1889,
+        1890,
+        1890,
+        1890,
+        1890,
+        1890,
+        1893,
+        1894,
+        1894,
+        1895,
+        1896,
+        1896,
+        1897,
+        1897,
+        1905,
+        1908,
+        1910,
+        1910,
+        1912,
+        1912,
+        1912,
+        1912,
+        1912,
+        1912,
+        1913,
+        1914,
+        1915,
+        1915,
+        1915,
+        1916,
+        1920,
+        1922,
+        1924,
+        1926,
+        1927,
+        1927,
+        1930,
+        1932,
+        1935,
+        1936,
+        1938,
+        1938,
+        1949,
+        1950,
+        1950,
+        1950,
+        1954,
+        1962,
+        1967,
+        1967,
+        1983,
+        2001,
+        2013
+      ],
+      "sampled": false
+    },
+    {
+      "id": 235,
+      "question": "How many dollars did Leonardo da Vinci's painting Salvator Mundi sell for in 2017?",
+      "unit": "dollars",
+      "answer": 450300000,
+      "fact": "It became the most expensive painting ever sold at auction.",
+      "players": 96,
+      "median": 3000000,
+      "exact": 1,
+      "close": 3,
+      "closeRule": "within 10%",
+      "guesses": [
+        3,
+        5,
+        21,
+        50,
+        300,
+        450.3,
+        4000,
+        6000,
+        20000,
+        100000,
+        100000,
+        100000,
+        200000,
+        200000,
+        300000,
+        329000,
+        500000,
+        500000,
+        800000,
+        800000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1111000,
+        1200000,
+        1200038,
+        1300000,
+        1500000,
+        1526489,
+        1900000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2500000,
+        2500000,
+        2500000,
+        2700000,
+        3000000,
+        3000000,
+        3000000,
+        3000000,
+        3000000,
+        3000000,
+        3000000,
+        3200000,
+        3500000,
+        3900000,
+        4000000,
+        5000000,
+        5000000,
+        5000000,
+        5000000,
+        5000008,
+        6000000,
+        7000000,
+        8000000,
+        12800000,
+        15000000,
+        16000000,
+        20000000,
+        20000000,
+        20000000,
+        22000000,
+        23000000,
+        27000000,
+        30000000,
+        30000000,
+        30000000,
+        45000000,
+        50000000,
+        50000000,
+        50000000,
+        50000000,
+        50000000,
+        60000000,
+        60000000,
+        69000000,
+        82310000,
+        130000000,
+        200000000,
+        202332121,
+        304526784,
+        450000000,
+        450000000,
+        450300000,
+        500000000,
+        500000000,
+        956823064,
+        1200000000,
+        200000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 259,
+      "question": "What is the maximum break in snooker, in points?",
+      "unit": "points",
+      "answer": 147,
+      "fact": "Ronnie O'Sullivan made one in just over five minutes in 1997.",
+      "players": 94,
+      "median": 20.5,
+      "exact": 6,
+      "close": 8,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        1,
+        3,
+        3,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13,
+        15,
+        15,
+        15,
+        15,
+        16,
+        18,
+        18,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        21,
+        21,
+        21,
+        25,
+        25,
+        30,
+        30,
+        32,
+        34,
+        34,
+        35,
+        36,
+        40,
+        45,
+        47,
+        50,
+        50,
+        50,
+        50,
+        50,
+        56,
+        59,
+        60,
+        70,
+        70,
+        80,
+        80,
+        81,
+        85,
+        100,
+        100,
+        141,
+        147,
+        147,
+        147,
+        147,
+        147,
+        147,
+        153,
+        180,
+        200,
+        250,
+        300,
+        300,
+        500,
+        588,
+        700
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name something people collect.",
+    "answers": 2415,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "coins",
+        "count": 499,
+        "pct": 21
+      },
+      {
+        "shown": "stamps",
+        "count": 447,
+        "pct": 19
+      },
+      {
+        "shown": "cards",
+        "count": 374,
+        "pct": 15
+      },
+      {
+        "shown": "Rocks",
+        "count": 120,
+        "pct": 5
+      },
+      {
+        "shown": "Money",
+        "count": 117,
+        "pct": 5
+      },
+      {
+        "shown": "pokemon cards",
+        "count": 94,
+        "pct": 4
+      },
+      {
+        "shown": "shells",
+        "count": 82,
+        "pct": 3
+      },
+      {
+        "shown": "Figures",
+        "count": 57,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "takeout",
+      "prompt": "Friday night dinner?",
+      "a": "Cook at home",
+      "b": "Takeout, always",
+      "counts": [
+        195,
+        195
+      ],
+      "players": 390
+    },
+    {
+      "id": "tipscreen",
+      "prompt": "Tip screen at the coffee counter?",
+      "a": "Always tip",
+      "b": "Skip it",
+      "counts": [
+        139,
+        251
+      ],
+      "players": 390
+    },
+    {
+      "id": "thanks",
+      "prompt": "Thank-you notes?",
+      "a": "Handwritten",
+      "b": "A text is fine",
+      "counts": [
+        225,
+        165
+      ],
+      "players": 390
+    },
+    {
+      "id": "dishes",
+      "prompt": "Dishes after dinner?",
+      "a": "Right away",
+      "b": "Tomorrow’s problem",
+      "counts": [
+        264,
+        126
+      ],
+      "players": 390
+    },
+    {
+      "id": "pace",
+      "prompt": "Vacation pace?",
+      "a": "See every sight",
+      "b": "Do nothing at all",
+      "counts": [
+        274,
+        116
+      ],
+      "players": 390
+    },
+    {
+      "id": "nightstand",
+      "prompt": "Phone at bedtime?",
+      "a": "On the nightstand",
+      "b": "In another room",
+      "counts": [
+        339,
+        51
+      ],
+      "players": 390
+    },
+    {
+      "id": "musicals",
+      "prompt": "Musicals?",
+      "a": "Love them",
+      "b": "Please no",
+      "counts": [
+        229,
+        161
+      ],
+      "players": 390
+    }
+  ],
+  "doodle": {
+    "id": "4935702150119424",
+    "answer": "green bean",
+    "key": "string bean",
+    "lines": 5,
+    "strokes": [
+      [
+        7,
+        5,
+        32,
+        22,
+        49,
+        29,
+        93,
+        38,
+        131,
+        41,
+        163,
+        39,
+        206,
+        31,
+        234,
+        19,
+        254,
+        4,
+        253,
+        15,
+        243,
+        31,
+        229,
+        47,
+        215,
+        56,
+        164,
+        75,
+        115,
+        80,
+        75,
+        75,
+        32,
+        61,
+        18,
+        45,
+        0,
+        0
+      ],
+      [
+        17,
+        47,
+        22,
+        33,
+        34,
+        27,
+        44,
+        28,
+        52,
+        33,
+        54,
+        41,
+        50,
+        50,
+        37,
+        51,
+        19,
+        47
+      ],
+      [
+        78,
+        57,
+        68,
+        53,
+        68,
+        43,
+        74,
+        34,
+        86,
+        34,
+        100,
+        46,
+        102,
+        55,
+        98,
+        63,
+        91,
+        65,
+        76,
+        59
+      ],
+      [
+        120,
+        72,
+        115,
+        64,
+        113,
+        53,
+        121,
+        43,
+        136,
+        44,
+        145,
+        51,
+        148,
+        60,
+        139,
+        69,
+        121,
+        69
+      ],
+      [
+        168,
+        57,
+        172,
+        41,
+        190,
+        28,
+        201,
+        30,
+        204,
+        34,
+        206,
+        42,
+        204,
+        48,
+        196,
+        54,
+        172,
+        57
+      ]
+    ],
+    "players": 175,
+    "finished": 163,
+    "got": 115,
+    "gotByLine": [
+      1,
+      33,
+      33,
+      19,
+      29
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 91,
+    "finished": 50,
+    "climbedAll": 16,
+    "rungs": [
+      {
+        "word": "rush",
+        "letters": 4,
+        "reached": 91,
+        "solved": 70,
+        "openers": [
+          {
+            "value": "play",
+            "count": 5
+          },
+          {
+            "value": "love",
+            "count": 3
+          },
+          {
+            "value": "star",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "squad",
+        "letters": 5,
+        "reached": 66,
+        "solved": 45,
+        "openers": [
+          {
+            "value": "audio",
+            "count": 5
+          },
+          {
+            "value": "adieu",
+            "count": 3
+          },
+          {
+            "value": "right",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "access",
+        "letters": 6,
+        "reached": 43,
+        "solved": 39,
+        "openers": [
+          {
+            "value": "audios",
+            "count": 3
+          },
+          {
+            "value": "trades",
+            "count": 2
+          },
+          {
+            "value": "accept",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "neither",
+        "letters": 7,
+        "reached": 36,
+        "solved": 28,
+        "openers": [
+          {
+            "value": "flowers",
+            "count": 2
+          },
+          {
+            "value": "trading",
+            "count": 1
+          },
+          {
+            "value": "pleased",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "deadline",
+        "letters": 8,
+        "reached": 28,
+        "solved": 24,
+        "openers": [
+          {
+            "value": "managers",
+            "count": 2
+          },
+          {
+            "value": "treatise",
+            "count": 1
+          },
+          {
+            "value": "harmonic",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "contagion",
+        "letters": 9,
+        "reached": 24,
+        "solved": 20,
+        "openers": [
+          {
+            "value": "deadlines",
+            "count": 3
+          },
+          {
+            "value": "christmas",
+            "count": 1
+          },
+          {
+            "value": "stupidity",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "dissimilar",
+        "letters": 10,
+        "reached": 20,
+        "solved": 16,
+        "openers": [
+          {
+            "value": "managerial",
+            "count": 2
+          },
+          {
+            "value": "requesting",
+            "count": 1
+          },
+          {
+            "value": "terrifying",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "mechanic",
+    "players": 134,
+    "found": 58,
+    "gaveUp": 39,
+    "medianGuesses": 31,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "ocean",
+        "count": 7
+      },
+      {
+        "value": "sea",
+        "count": 6
+      },
+      {
+        "value": "animal",
+        "count": 5
+      },
+      {
+        "value": "food",
+        "count": 4
+      },
+      {
+        "value": "water",
+        "count": 4
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "engine",
+        "count": 36
+      },
+      {
+        "value": "motor",
+        "count": 25
+      },
+      {
+        "value": "electrician",
+        "count": 9
+      },
+      {
+        "value": "engineer",
+        "count": 9
+      },
+      {
+        "value": "technician",
+        "count": 5
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "requisite",
+    "hidden": 28,
+    "players": 95,
+    "foundBigWord": 71,
+    "mostFound": [
+      {
+        "word": "site",
+        "count": 83
+      },
+      {
+        "word": "quit",
+        "count": 71
+      },
+      {
+        "word": "requisite",
+        "count": 71
+      },
+      {
+        "word": "quite",
+        "count": 71
+      },
+      {
+        "word": "quiet",
+        "count": 69
+      }
+    ],
+    "rarestFound": [
+      "uteri",
+      "iure",
+      "utis",
+      "sruti",
+      "tuis"
+    ],
+    "differentWordsFound": 113
+  }
+}
