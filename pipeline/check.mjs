@@ -99,6 +99,13 @@ const C = await fmt('c-dial');
   is('C: no near tie: the most lopsided', C.chooseTake([tk(400, 300), tk(85, 537)]).id === '85-537');
   is('C: verdicts follow the gap', C.verdict(tk(343, 332)) === 'Split almost in half!' && C.verdict(tk(85, 537)) === 'Not even close!');
   is('C: a near tie says how close, a landslide says who won', C.sting(tk(343, 332)) === 'Only 11 votes apart' && /^86% picked/.test(C.sting(tk(85, 537))));
+  // Every count the copy quotes reads as real data: never "0 votes", never "1 votes", never "almost" for a tie.
+  // 15 Nov 2026: a 195-195 tie posted as "Only 0 votes apart" + "Split almost in half!" and read as no data.
+  is('C: an exact tie says so', C.sting(tk(195, 195)) === 'Dead even: 195 each' && C.verdict(tk(195, 195)) === 'A perfect tie!');
+  for (let d = 0; d <= 12; d++) {
+    const s = C.sting(tk(200 + d, 200)), v = C.verdict(tk(200 + d, 200));
+    is(`C: a ${d}-vote gap reads right ("${s}" / "${v}")`, !/\b0 votes?\b|\b1 votes\b/.test(s) && !(d === 0 && /almost/.test(v)));
+  }
   is('C: takes under 100 votes are never shown', C.chooseTake([tk(40, 30)]) === null);
   // The option labels never run under the sheep hub (hyperframes check can't see it: the hub is a picture, not text).
   // Showcase, 11 Nov 2026: "Up at the first alarm" ran under it.

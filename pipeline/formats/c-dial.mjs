@@ -28,6 +28,7 @@ export function chooseTake(takes) {
 
 export function verdict(t) {
   const g = gap(t);
+  if (t.counts[0] === t.counts[1]) return 'A perfect tie!';
   if (g <= 6) return 'Split almost in half!';
   if (g <= 20) return 'Close, but not a tie';
   if (g <= 50) return 'A clear winner';
@@ -36,6 +37,9 @@ export function verdict(t) {
 
 export function sting(t) {
   const diff = Math.abs(t.counts[0] - t.counts[1]);
+  // 15 Nov 2026: an exact 195-195 tie went out as "Only 0 votes apart", which read as no data.
+  if (diff === 0) return `Dead even: ${num(t.counts[0])} each`;
+  if (diff === 1) return 'Decided by 1 vote';
   if (gap(t) <= 3) return `Only ${num(diff)} votes apart`;
   const win = t.counts[0] >= t.counts[1] ? 0 : 1;
   const pct = Math.round((100 * t.counts[win]) / t.players);
