@@ -1,0 +1,999 @@
+{
+  "day": 168,
+  "lastFinished": 168,
+  "guesstimate": [
+    {
+      "id": 87,
+      "question": "Roughly how many miles do a hive's honeybees fly to make one pound of honey?",
+      "unit": "miles",
+      "answer": 55000,
+      "fact": "Along the way they visit about 2 million flowers.",
+      "players": 169,
+      "median": 56,
+      "exact": 1,
+      "close": 6,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        1.5,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        7,
+        8,
+        8,
+        8,
+        8,
+        10,
+        10,
+        10,
+        10,
+        10,
+        11,
+        12,
+        13,
+        13,
+        15,
+        15,
+        15,
+        15,
+        16,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        23,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        30,
+        30,
+        32,
+        34,
+        35,
+        36,
+        46,
+        46,
+        50,
+        50,
+        50,
+        50,
+        50,
+        56,
+        56,
+        60,
+        78,
+        82,
+        85,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        128,
+        150,
+        200,
+        200,
+        200,
+        200,
+        220,
+        300,
+        400,
+        500,
+        500,
+        500,
+        500,
+        500,
+        600,
+        600,
+        700,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1200,
+        1300,
+        1500,
+        1600,
+        2000,
+        2000,
+        2500,
+        3000,
+        3500,
+        4000,
+        5000,
+        5000,
+        5000,
+        5000,
+        6387,
+        9000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        13000,
+        15000,
+        20000,
+        20000,
+        23000,
+        30000,
+        30000,
+        50000,
+        50000,
+        50000,
+        55000,
+        57934,
+        58800,
+        100000,
+        100000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 196,
+      "question": "If all the ice on Earth melted, roughly how many feet would sea level rise?",
+      "unit": "feet",
+      "answer": 230,
+      "fact": "Most of that ice sits on Antarctica.",
+      "players": 161,
+      "median": 100,
+      "exact": 0,
+      "close": 1,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        2,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        7,
+        8,
+        8,
+        9,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        12,
+        13,
+        14,
+        14,
+        14,
+        15,
+        15,
+        16,
+        19,
+        20,
+        20,
+        20,
+        20,
+        22,
+        24,
+        25,
+        25,
+        27,
+        28,
+        30,
+        30,
+        30,
+        35,
+        38,
+        40,
+        45,
+        45,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        55,
+        55,
+        60,
+        60,
+        65,
+        67,
+        67,
+        70,
+        80,
+        87,
+        90,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        110,
+        125,
+        150,
+        200,
+        200,
+        200,
+        200,
+        200,
+        204,
+        250,
+        276,
+        300,
+        300,
+        300,
+        300,
+        320,
+        350,
+        378,
+        400,
+        400,
+        500,
+        500,
+        500,
+        500,
+        560,
+        600,
+        600,
+        600,
+        700,
+        1000,
+        1000,
+        1000,
+        1000,
+        1009,
+        2000,
+        2800,
+        3000,
+        5000,
+        5000,
+        5000,
+        6000,
+        7839,
+        8000,
+        8979,
+        10000,
+        10000,
+        10560,
+        30000,
+        30000,
+        35000,
+        55000,
+        60000,
+        60000,
+        70000,
+        70000,
+        75000,
+        80000,
+        80000,
+        100000,
+        100000,
+        100000,
+        150000,
+        400000,
+        500000,
+        580000,
+        588555,
+        900000,
+        1000000,
+        1000000,
+        6000000,
+        10000000,
+        500000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 380,
+      "question": "To the nearest year, how many years is one billion seconds?",
+      "unit": "years",
+      "answer": 32,
+      "fact": "One million seconds, by contrast, is under 12 days.",
+      "players": 160,
+      "median": 32.075,
+      "exact": 19,
+      "close": 33,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1.3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        9,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        11.2,
+        12,
+        13,
+        14,
+        15,
+        20,
+        20,
+        23,
+        25,
+        27,
+        27,
+        28,
+        30,
+        30,
+        30.3,
+        31,
+        31,
+        31,
+        31.5,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32.15,
+        33,
+        33,
+        33,
+        33,
+        33,
+        34,
+        40,
+        47,
+        50,
+        50,
+        50,
+        50,
+        60,
+        62,
+        65,
+        67,
+        72,
+        76,
+        89,
+        100,
+        100,
+        100,
+        100,
+        100,
+        109,
+        130,
+        145,
+        150,
+        200,
+        200,
+        217,
+        300,
+        300,
+        300,
+        365,
+        390,
+        500,
+        500,
+        500,
+        678,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1250,
+        1500,
+        1500,
+        1500,
+        1900,
+        1900,
+        2095,
+        2500,
+        3009,
+        5000,
+        5000,
+        10000,
+        10241,
+        11574,
+        11574,
+        23000,
+        30000,
+        30005,
+        33000,
+        38000,
+        90000,
+        120000,
+        120000,
+        123456,
+        1000000,
+        1000000,
+        2100000,
+        3000000,
+        12000000,
+        300120000,
+        300000000000000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name something you'd hate to forget at home on a work day.",
+    "answers": 1553,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "phone",
+        "count": 634,
+        "pct": 41
+      },
+      {
+        "shown": "laptop",
+        "count": 208,
+        "pct": 13
+      },
+      {
+        "shown": "Keys",
+        "count": 177,
+        "pct": 11
+      },
+      {
+        "shown": "lunch",
+        "count": 139,
+        "pct": 9
+      },
+      {
+        "shown": "computer",
+        "count": 91,
+        "pct": 6
+      },
+      {
+        "shown": "wallet",
+        "count": 41,
+        "pct": 3
+      },
+      {
+        "shown": "headphones",
+        "count": 30,
+        "pct": 2
+      },
+      {
+        "shown": "I.D",
+        "count": 26,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "snacks",
+      "prompt": "Road trip snacks?",
+      "a": "Gas station surprise",
+      "b": "Packed from home",
+      "counts": [
+        382,
+        304
+      ],
+      "players": 686
+    },
+    {
+      "id": "heat",
+      "prompt": "Spice level?",
+      "a": "Bring the heat",
+      "b": "Mild, please",
+      "counts": [
+        311,
+        375
+      ],
+      "players": 686
+    },
+    {
+      "id": "lend",
+      "prompt": "Lend money to friends?",
+      "a": "Sure, happy to",
+      "b": "Never",
+      "counts": [
+        410,
+        276
+      ],
+      "players": 686
+    },
+    {
+      "id": "bookfirst",
+      "prompt": "Book or movie first?",
+      "a": "Read it first",
+      "b": "Movie is fine",
+      "counts": [
+        314,
+        372
+      ],
+      "players": 686
+    },
+    {
+      "id": "bed",
+      "prompt": "Make your bed?",
+      "a": "Every day",
+      "b": "What for?",
+      "counts": [
+        336,
+        350
+      ],
+      "players": 686
+    },
+    {
+      "id": "crew",
+      "prompt": "Your friend group?",
+      "a": "A big crew",
+      "b": "Two or three close",
+      "counts": [
+        147,
+        539
+      ],
+      "players": 686
+    },
+    {
+      "id": "phone",
+      "prompt": "iPhone or Android?",
+      "a": "iPhone",
+      "b": "Android",
+      "counts": [
+        437,
+        249
+      ],
+      "players": 686
+    }
+  ],
+  "doodle": {
+    "id": "5127714656747520",
+    "answer": "hot air balloon",
+    "key": "hot air balloon",
+    "lines": 5,
+    "strokes": [
+      [
+        61,
+        178,
+        38,
+        164,
+        18,
+        138,
+        1,
+        78,
+        2,
+        43,
+        25,
+        21,
+        54,
+        5,
+        109,
+        0,
+        128,
+        2,
+        153,
+        33,
+        160,
+        47,
+        162,
+        80,
+        152,
+        113,
+        133,
+        149,
+        109,
+        173,
+        94,
+        178,
+        57,
+        176
+      ],
+      [
+        69,
+        181,
+        69,
+        202
+      ],
+      [
+        98,
+        177,
+        97,
+        192
+      ],
+      [
+        98,
+        175,
+        99,
+        207
+      ],
+      [
+        47,
+        210,
+        113,
+        203,
+        132,
+        205,
+        141,
+        225,
+        136,
+        244,
+        120,
+        252,
+        85,
+        255,
+        51,
+        255,
+        41,
+        249,
+        38,
+        229,
+        43,
+        208
+      ]
+    ],
+    "players": 284,
+    "finished": 278,
+    "got": 232,
+    "gotByLine": [
+      26,
+      77,
+      11,
+      11,
+      107
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 189,
+    "finished": 82,
+    "climbedAll": 25,
+    "rungs": [
+      {
+        "word": "peak",
+        "letters": 4,
+        "reached": 189,
+        "solved": 147,
+        "openers": [
+          {
+            "value": "play",
+            "count": 7
+          },
+          {
+            "value": "star",
+            "count": 5
+          },
+          {
+            "value": "spot",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "borne",
+        "letters": 5,
+        "reached": 137,
+        "solved": 102,
+        "openers": [
+          {
+            "value": "audio",
+            "count": 14
+          },
+          {
+            "value": "adieu",
+            "count": 7
+          },
+          {
+            "value": "right",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "word": "minute",
+        "letters": 6,
+        "reached": 95,
+        "solved": 73,
+        "openers": [
+          {
+            "value": "cranes",
+            "count": 3
+          },
+          {
+            "value": "please",
+            "count": 2
+          },
+          {
+            "value": "dreams",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "thereby",
+        "letters": 7,
+        "reached": 71,
+        "solved": 55,
+        "openers": [
+          {
+            "value": "minutes",
+            "count": 5
+          },
+          {
+            "value": "rainbow",
+            "count": 2
+          },
+          {
+            "value": "manager",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "ideology",
+        "letters": 8,
+        "reached": 54,
+        "solved": 30,
+        "openers": [
+          {
+            "value": "elephant",
+            "count": 2
+          },
+          {
+            "value": "whispers",
+            "count": 1
+          },
+          {
+            "value": "accursed",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "classical",
+        "letters": 9,
+        "reached": 30,
+        "solved": 28,
+        "openers": [
+          {
+            "value": "elephants",
+            "count": 2
+          },
+          {
+            "value": "respected",
+            "count": 1
+          },
+          {
+            "value": "supporter",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "parenthood",
+        "letters": 10,
+        "reached": 27,
+        "solved": 25,
+        "openers": [
+          {
+            "value": "managerial",
+            "count": 2
+          },
+          {
+            "value": "strictures",
+            "count": 1
+          },
+          {
+            "value": "supernovas",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "watermelon",
+    "players": 242,
+    "found": 135,
+    "gaveUp": 33,
+    "medianGuesses": 26,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "ocean",
+        "count": 15
+      },
+      {
+        "value": "sea",
+        "count": 15
+      },
+      {
+        "value": "water",
+        "count": 12
+      },
+      {
+        "value": "animal",
+        "count": 7
+      },
+      {
+        "value": "hot",
+        "count": 5
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "fruit",
+        "count": 95
+      },
+      {
+        "value": "strawberry",
+        "count": 51
+      },
+      {
+        "value": "grape",
+        "count": 36
+      },
+      {
+        "value": "melon",
+        "count": 35
+      },
+      {
+        "value": "pineapple",
+        "count": 25
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "continual",
+    "hidden": 25,
+    "players": 141,
+    "foundBigWord": 96,
+    "mostFound": [
+      {
+        "word": "count",
+        "count": 112
+      },
+      {
+        "word": "continual",
+        "count": 96
+      },
+      {
+        "word": "lint",
+        "count": 77
+      },
+      {
+        "word": "tail",
+        "count": 75
+      },
+      {
+        "word": "cant",
+        "count": 70
+      }
+    ],
+    "rarestFound": [
+      "actinon",
+      "tolan",
+      "tuan",
+      "anicut",
+      "unco"
+    ],
+    "differentWordsFound": 181
+  }
+}
