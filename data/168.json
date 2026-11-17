@@ -781,7 +781,7 @@
             "count": 5
           },
           {
-            "value": "spot",
+            "value": "word",
             "count": 4
           }
         ]
@@ -817,11 +817,11 @@
             "count": 3
           },
           {
-            "value": "please",
+            "value": "audios",
             "count": 2
           },
           {
-            "value": "dreams",
+            "value": "please",
             "count": 2
           }
         ]
@@ -857,11 +857,11 @@
             "count": 2
           },
           {
-            "value": "whispers",
+            "value": "computer",
             "count": 1
           },
           {
-            "value": "accursed",
+            "value": "teaching",
             "count": 1
           }
         ]
@@ -877,11 +877,11 @@
             "count": 2
           },
           {
-            "value": "respected",
+            "value": "countless",
             "count": 1
           },
           {
-            "value": "supporter",
+            "value": "beautiful",
             "count": 1
           }
         ]
@@ -897,11 +897,11 @@
             "count": 2
           },
           {
-            "value": "strictures",
+            "value": "graduation",
             "count": 1
           },
           {
-            "value": "supernovas",
+            "value": "government",
             "count": 1
           }
         ]
@@ -988,11 +988,11 @@
       }
     ],
     "rarestFound": [
-      "actinon",
-      "tolan",
-      "tuan",
-      "anicut",
-      "unco"
+      "ancon",
+      "couta",
+      "linac",
+      "tali",
+      "calo"
     ],
     "differentWordsFound": 181
   }
