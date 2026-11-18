@@ -730,7 +730,7 @@
             "count": 4
           },
           {
-            "value": "love",
+            "value": "spot",
             "count": 4
           }
         ]
@@ -746,11 +746,11 @@
             "count": 6
           },
           {
-            "value": "adieu",
+            "value": "stare",
             "count": 5
           },
           {
-            "value": "stare",
+            "value": "adieu",
             "count": 5
           }
         ]
@@ -766,11 +766,11 @@
             "count": 3
           },
           {
-            "value": "martyr",
+            "value": "trades",
             "count": 2
           },
           {
-            "value": "adieus",
+            "value": "climbs",
             "count": 2
           }
         ]
@@ -786,11 +786,11 @@
             "count": 4
           },
           {
-            "value": "giraffe",
+            "value": "pointer",
             "count": 2
           },
           {
-            "value": "pointer",
+            "value": "giraffe",
             "count": 2
           }
         ]
@@ -806,11 +806,11 @@
             "count": 2
           },
           {
-            "value": "placider",
+            "value": "dramatic",
             "count": 1
           },
           {
-            "value": "blackest",
+            "value": "climbers",
             "count": 1
           }
         ]
@@ -826,11 +826,11 @@
             "count": 3
           },
           {
-            "value": "solutions",
+            "value": "cunningly",
             "count": 1
           },
           {
-            "value": "maximized",
+            "value": "threading",
             "count": 1
           }
         ]
@@ -850,7 +850,7 @@
             "count": 2
           },
           {
-            "value": "university",
+            "value": "formations",
             "count": 1
           }
         ]
@@ -882,7 +882,7 @@
         "count": 6
       },
       {
-        "value": "cat",
+        "value": "person",
         "count": 5
       }
     ],
@@ -932,16 +932,16 @@
         "count": 81
       },
       {
-        "word": "ripe",
+        "word": "hyper",
         "count": 70
       }
     ],
     "rarestFound": [
-      "ichor",
-      "rochet",
-      "yech",
       "etic",
-      "ryot"
+      "tricep",
+      "troche",
+      "tocher",
+      "potcher"
     ],
     "differentWordsFound": 205
   }
