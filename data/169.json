@@ -1,0 +1,948 @@
+{
+  "day": 169,
+  "lastFinished": 169,
+  "guesstimate": [
+    {
+      "id": 29,
+      "question": "In what year did construction begin on Barcelona's Sagrada Familia?",
+      "unit": "year",
+      "answer": 1882,
+      "fact": "Architect Antoni Gaudi worked on it for more than 40 years.",
+      "players": 137,
+      "median": 1863,
+      "exact": 6,
+      "close": 12,
+      "closeRule": "within 2 years",
+      "guesses": [
+        10,
+        50,
+        183,
+        1100,
+        1233,
+        1250,
+        1357,
+        1395,
+        1420,
+        1436,
+        1480,
+        1500,
+        1512,
+        1525,
+        1580,
+        1580,
+        1590,
+        1598,
+        1600,
+        1612,
+        1620,
+        1625,
+        1630,
+        1630,
+        1642,
+        1650,
+        1650,
+        1650,
+        1652,
+        1700,
+        1707,
+        1738,
+        1740,
+        1742,
+        1744,
+        1745,
+        1750,
+        1750,
+        1750,
+        1750,
+        1751,
+        1756,
+        1762,
+        1768,
+        1770,
+        1782,
+        1789,
+        1800,
+        1800,
+        1800,
+        1800,
+        1800,
+        1802,
+        1822,
+        1823,
+        1823,
+        1824,
+        1834,
+        1835,
+        1838,
+        1842,
+        1850,
+        1854,
+        1856,
+        1856,
+        1856,
+        1862,
+        1863,
+        1863,
+        1865,
+        1867,
+        1870,
+        1872,
+        1872,
+        1872,
+        1873,
+        1874,
+        1876,
+        1876,
+        1876,
+        1876,
+        1876,
+        1880,
+        1880,
+        1880,
+        1880,
+        1880,
+        1882,
+        1882,
+        1882,
+        1882,
+        1882,
+        1882,
+        1883,
+        1885,
+        1885,
+        1890,
+        1890,
+        1890,
+        1890,
+        1893,
+        1894,
+        1894,
+        1902,
+        1902,
+        1905,
+        1905,
+        1910,
+        1912,
+        1912,
+        1913,
+        1920,
+        1920,
+        1920,
+        1920,
+        1924,
+        1925,
+        1936,
+        1943,
+        1943,
+        1950,
+        1950,
+        1950,
+        1953,
+        1954,
+        1958,
+        1958,
+        1968,
+        1975,
+        1976,
+        1979,
+        1980,
+        1980,
+        1985,
+        1988,
+        1995,
+        1995
+      ],
+      "sampled": false
+    },
+    {
+      "id": 52,
+      "question": "How many days does a human red blood cell typically live?",
+      "unit": "days",
+      "answer": 120,
+      "fact": "Your bone marrow makes millions of new ones every second to keep up.",
+      "players": 136,
+      "median": 9.5,
+      "exact": 6,
+      "close": 7,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        9,
+        9,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10.5,
+        11,
+        11,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        14,
+        14,
+        14,
+        15,
+        15,
+        15,
+        17,
+        19,
+        20,
+        20,
+        21,
+        24,
+        25,
+        28,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        30,
+        40,
+        45,
+        45,
+        47,
+        60,
+        60,
+        60,
+        60,
+        76,
+        78,
+        90,
+        90,
+        100,
+        100,
+        108,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        200,
+        200,
+        200,
+        365,
+        450,
+        1000,
+        10000,
+        50000,
+        18000000,
+        100000000,
+        1000000000,
+        3000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 102,
+      "question": "How many days does a typical dog pregnancy last?",
+      "unit": "days",
+      "answer": 63,
+      "fact": "That is about nine weeks, similar to a cat's.",
+      "players": 134,
+      "median": 90,
+      "exact": 5,
+      "close": 27,
+      "closeRule": "within 10%",
+      "guesses": [
+        4,
+        5,
+        10,
+        12,
+        12,
+        14,
+        15,
+        28,
+        30,
+        30,
+        35,
+        36,
+        42,
+        45,
+        45,
+        46,
+        46,
+        48,
+        54,
+        58,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        60,
+        63,
+        63,
+        63,
+        63,
+        63,
+        65,
+        65,
+        66,
+        66,
+        67,
+        68,
+        68,
+        69,
+        70,
+        70,
+        70,
+        70,
+        75,
+        78,
+        79,
+        80,
+        80,
+        85,
+        85,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        95,
+        98,
+        100,
+        100,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        120,
+        133,
+        135,
+        140,
+        140,
+        140,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        150,
+        160,
+        163,
+        174,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        180,
+        189,
+        190,
+        200,
+        200,
+        215,
+        234,
+        264,
+        270,
+        270,
+        270,
+        270,
+        300,
+        400,
+        670
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name a sport people love to watch but would never play.",
+    "answers": 2548,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "football",
+        "count": 981,
+        "pct": 39
+      },
+      {
+        "shown": "hockey",
+        "count": 203,
+        "pct": 8
+      },
+      {
+        "shown": "Box",
+        "count": 194,
+        "pct": 8
+      },
+      {
+        "shown": "rugby",
+        "count": 187,
+        "pct": 7
+      },
+      {
+        "shown": "mma",
+        "count": 102,
+        "pct": 4
+      },
+      {
+        "shown": "Soccer",
+        "count": 74,
+        "pct": 3
+      },
+      {
+        "shown": "American football",
+        "count": 73,
+        "pct": 3
+      },
+      {
+        "shown": "tennis",
+        "count": 69,
+        "pct": 3
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "thumbsup",
+      "prompt": "A thumbs-up emoji reply?",
+      "a": "Friendly",
+      "b": "Passive-aggressive",
+      "counts": [
+        422,
+        165
+      ],
+      "players": 587
+    },
+    {
+      "id": "airport",
+      "prompt": "Get to the airport…",
+      "a": "Three hours early",
+      "b": "Just in time",
+      "counts": [
+        444,
+        143
+      ],
+      "players": 587
+    },
+    {
+      "id": "splitbill",
+      "prompt": "Splitting the bill?",
+      "a": "Split it evenly",
+      "b": "Pay for what you had",
+      "counts": [
+        208,
+        379
+      ],
+      "players": 587
+    },
+    {
+      "id": "frontrow",
+      "prompt": "At a concert?",
+      "a": "Front row",
+      "b": "Near the exit",
+      "counts": [
+        330,
+        257
+      ],
+      "players": 587
+    },
+    {
+      "id": "reunion",
+      "prompt": "School reunion?",
+      "a": "Wouldn’t miss it",
+      "b": "Hard pass",
+      "counts": [
+        202,
+        385
+      ],
+      "players": 587
+    },
+    {
+      "id": "coffee",
+      "prompt": "Your coffee order?",
+      "a": "Black, simple",
+      "b": "Sweet and fancy",
+      "counts": [
+        230,
+        357
+      ],
+      "players": 587
+    },
+    {
+      "id": "fan",
+      "prompt": "Sleep with a fan on?",
+      "a": "Can’t sleep without it",
+      "b": "Total silence",
+      "counts": [
+        346,
+        241
+      ],
+      "players": 587
+    }
+  ],
+  "doodle": {
+    "id": "5023128289804288",
+    "answer": "compass",
+    "key": "compass",
+    "lines": 5,
+    "strokes": [
+      [
+        138,
+        6,
+        122,
+        1,
+        102,
+        0,
+        65,
+        13,
+        36,
+        37,
+        15,
+        61,
+        7,
+        78,
+        0,
+        117,
+        3,
+        156,
+        12,
+        190,
+        27,
+        214,
+        48,
+        230,
+        80,
+        242,
+        126,
+        245,
+        155,
+        239,
+        191,
+        223,
+        211,
+        207,
+        235,
+        177,
+        249,
+        147,
+        255,
+        118,
+        251,
+        95,
+        242,
+        76,
+        216,
+        46,
+        187,
+        21,
+        154,
+        6,
+        135,
+        11
+      ],
+      [
+        120,
+        41,
+        115,
+        42,
+        108,
+        66,
+        105,
+        54,
+        111,
+        54,
+        148,
+        77,
+        155,
+        67,
+        158,
+        33
+      ],
+      [
+        126,
+        166,
+        112,
+        168,
+        107,
+        172,
+        108,
+        177,
+        124,
+        191,
+        130,
+        200,
+        127,
+        216,
+        115,
+        224,
+        97,
+        224
+      ],
+      [
+        135,
+        121,
+        134,
+        100
+      ],
+      [
+        116,
+        104,
+        125,
+        90,
+        136,
+        82,
+        141,
+        82,
+        153,
+        95
+      ]
+    ],
+    "players": 281,
+    "finished": 268,
+    "got": 221,
+    "gotByLine": [
+      5,
+      7,
+      148,
+      21,
+      40
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 147,
+    "finished": 69,
+    "climbedAll": 26,
+    "rungs": [
+      {
+        "word": "spur",
+        "letters": 4,
+        "reached": 147,
+        "solved": 127,
+        "openers": [
+          {
+            "value": "stop",
+            "count": 7
+          },
+          {
+            "value": "star",
+            "count": 4
+          },
+          {
+            "value": "love",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "today",
+        "letters": 5,
+        "reached": 120,
+        "solved": 97,
+        "openers": [
+          {
+            "value": "audio",
+            "count": 6
+          },
+          {
+            "value": "adieu",
+            "count": 5
+          },
+          {
+            "value": "stare",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "word": "remark",
+        "letters": 6,
+        "reached": 93,
+        "solved": 71,
+        "openers": [
+          {
+            "value": "audios",
+            "count": 3
+          },
+          {
+            "value": "martyr",
+            "count": 2
+          },
+          {
+            "value": "adieus",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "crucial",
+        "letters": 7,
+        "reached": 66,
+        "solved": 50,
+        "openers": [
+          {
+            "value": "remarks",
+            "count": 4
+          },
+          {
+            "value": "giraffe",
+            "count": 2
+          },
+          {
+            "value": "pointer",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "industry",
+        "letters": 8,
+        "reached": 48,
+        "solved": 42,
+        "openers": [
+          {
+            "value": "managers",
+            "count": 2
+          },
+          {
+            "value": "placider",
+            "count": 1
+          },
+          {
+            "value": "blackest",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "overslept",
+        "letters": 9,
+        "reached": 42,
+        "solved": 32,
+        "openers": [
+          {
+            "value": "elephants",
+            "count": 3
+          },
+          {
+            "value": "solutions",
+            "count": 1
+          },
+          {
+            "value": "maximized",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "anticlimax",
+        "letters": 10,
+        "reached": 31,
+        "solved": 26,
+        "openers": [
+          {
+            "value": "oversleeps",
+            "count": 3
+          },
+          {
+            "value": "background",
+            "count": 2
+          },
+          {
+            "value": "university",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "chili",
+    "players": 231,
+    "found": 62,
+    "gaveUp": 94,
+    "medianGuesses": 36,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "ocean",
+        "count": 11
+      },
+      {
+        "value": "sea",
+        "count": 10
+      },
+      {
+        "value": "animal",
+        "count": 7
+      },
+      {
+        "value": "water",
+        "count": 6
+      },
+      {
+        "value": "cat",
+        "count": 5
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "pepper",
+        "count": 88
+      },
+      {
+        "value": "soup",
+        "count": 68
+      },
+      {
+        "value": "tomato",
+        "count": 64
+      },
+      {
+        "value": "sauce",
+        "count": 62
+      },
+      {
+        "value": "chicken",
+        "count": 49
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "hypocrite",
+    "hidden": 39,
+    "players": 146,
+    "foundBigWord": 131,
+    "mostFound": [
+      {
+        "word": "hypocrite",
+        "count": 131
+      },
+      {
+        "word": "rite",
+        "count": 104
+      },
+      {
+        "word": "hype",
+        "count": 82
+      },
+      {
+        "word": "type",
+        "count": 81
+      },
+      {
+        "word": "ripe",
+        "count": 70
+      }
+    ],
+    "rarestFound": [
+      "ichor",
+      "rochet",
+      "yech",
+      "etic",
+      "ryot"
+    ],
+    "differentWordsFound": 205
+  }
+}
