@@ -810,7 +810,7 @@
             "count": 5
           },
           {
-            "value": "word",
+            "value": "pour",
             "count": 4
           }
         ]
@@ -846,11 +846,11 @@
             "count": 3
           },
           {
-            "value": "places",
+            "value": "flight",
             "count": 2
           },
           {
-            "value": "stares",
+            "value": "audios",
             "count": 2
           }
         ]
@@ -862,7 +862,7 @@
         "solved": 47,
         "openers": [
           {
-            "value": "friends",
+            "value": "because",
             "count": 2
           },
           {
@@ -870,7 +870,7 @@
             "count": 2
           },
           {
-            "value": "because",
+            "value": "useless",
             "count": 2
           }
         ]
@@ -890,7 +890,7 @@
             "count": 2
           },
           {
-            "value": "chapters",
+            "value": "scratchy",
             "count": 1
           }
         ]
@@ -906,11 +906,11 @@
             "count": 5
           },
           {
-            "value": "relations",
+            "value": "sparkling",
             "count": 2
           },
           {
-            "value": "sparkling",
+            "value": "relations",
             "count": 2
           }
         ]
@@ -930,7 +930,7 @@
             "count": 2
           },
           {
-            "value": "camouflage",
+            "value": "friendship",
             "count": 1
           }
         ]
@@ -950,19 +950,19 @@
         "count": 12
       },
       {
-        "value": "ocean",
-        "count": 7
-      },
-      {
         "value": "water",
         "count": 7
       },
       {
-        "value": "food",
-        "count": 6
+        "value": "ocean",
+        "count": 7
       },
       {
         "value": "hot",
+        "count": 6
+      },
+      {
+        "value": "animal",
         "count": 6
       }
     ],
@@ -1017,11 +1017,11 @@
       }
     ],
     "rarestFound": [
-      "liane",
-      "amia",
-      "anlace",
-      "amban",
-      "amnic"
+      "amla",
+      "amnia",
+      "linac",
+      "caman",
+      "albe"
     ],
     "differentWordsFound": 202
   }
