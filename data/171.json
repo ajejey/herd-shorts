@@ -1,0 +1,887 @@
+{
+  "day": 171,
+  "lastFinished": 171,
+  "guesstimate": [
+    {
+      "id": 231,
+      "question": "Roughly how many years ago did our species, Homo sapiens, first appear?",
+      "unit": "years",
+      "answer": 300000,
+      "fact": "The oldest known fossils of our species come from Jebel Irhoud in Morocco.",
+      "players": 137,
+      "median": 100000,
+      "exact": 6,
+      "close": 7,
+      "closeRule": "within 10%",
+      "guesses": [
+        1.2,
+        45,
+        500,
+        725,
+        900,
+        1000,
+        1000,
+        2000,
+        2000,
+        2000,
+        2600,
+        3000,
+        3000,
+        3000,
+        4000,
+        4000,
+        4000,
+        5000,
+        5000,
+        5000,
+        5000,
+        5000,
+        6000,
+        6850,
+        7000,
+        7027,
+        8000,
+        8000,
+        8000,
+        8000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        12000,
+        12000,
+        13000,
+        14000,
+        15000,
+        20000,
+        20000,
+        20000,
+        20000,
+        21000,
+        25000,
+        30000,
+        30000,
+        30000,
+        30000,
+        35000,
+        40000,
+        45000,
+        50000,
+        50000,
+        50000,
+        50000,
+        60000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        150000,
+        200000,
+        200000,
+        200000,
+        200000,
+        200000,
+        250000,
+        280000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        450000,
+        500000,
+        500000,
+        600000,
+        800000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1200000,
+        1200000,
+        2000000,
+        2000000,
+        2000000,
+        2500000,
+        3000000,
+        3500000,
+        6000000,
+        10000000,
+        10000000,
+        13200000,
+        14000000,
+        15000000,
+        20000000,
+        30000000,
+        30000000,
+        40000000,
+        60000000,
+        67777777,
+        140000000,
+        200000000,
+        200000000,
+        300000000,
+        670000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        2000000000,
+        4300000000,
+        5000000000,
+        80000000000,
+        569000000000,
+        1000000000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 36,
+      "question": "Roughly how many cubic yards of concrete were poured into the Hoover Dam itself?",
+      "unit": "cubic yards",
+      "answer": 3250000,
+      "fact": "Engineers worked out that a single giant pour would have taken 125 years to cool.",
+      "players": 126,
+      "median": 100000,
+      "exact": 2,
+      "close": 4,
+      "closeRule": "within 10%",
+      "guesses": [
+        4,
+        15,
+        50,
+        65,
+        67,
+        90,
+        140,
+        150,
+        165,
+        213,
+        242,
+        300,
+        300,
+        300,
+        427,
+        500,
+        500,
+        530,
+        600,
+        700,
+        700,
+        750,
+        858,
+        1000,
+        1000,
+        1500,
+        1675,
+        2000,
+        2000,
+        3000,
+        3500,
+        4000,
+        4800,
+        5000,
+        5000,
+        5000,
+        5000,
+        5345,
+        7817,
+        8798,
+        10000,
+        10000,
+        12009,
+        12500,
+        14000,
+        15000,
+        20000,
+        20000,
+        40000,
+        40000,
+        50000,
+        50000,
+        52000,
+        56000,
+        58000,
+        80000,
+        87000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        150000,
+        150000,
+        200000,
+        280000,
+        289999,
+        300000,
+        300000,
+        300000,
+        350000,
+        500000,
+        500000,
+        670000,
+        700000,
+        751556,
+        800000,
+        900000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1200000,
+        1200000,
+        2000000,
+        2000000,
+        2000000,
+        3000000,
+        3000000,
+        3250000,
+        3250000,
+        4360000,
+        4500000,
+        5000000,
+        5000000,
+        5000000,
+        5000000,
+        5000000,
+        5049464,
+        7800000,
+        10000000,
+        10000000,
+        10000000,
+        10200000,
+        15000000,
+        15000000,
+        19324384,
+        100000000,
+        100000000,
+        100000000,
+        120000000,
+        200000000,
+        216000178,
+        250000000,
+        3000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 112,
+      "question": "Roughly how many eggs were found in a single ocean sunfish, the record for any vertebrate?",
+      "unit": "eggs",
+      "answer": 300000000,
+      "fact": "Each egg was only about a millimeter across.",
+      "players": 123,
+      "median": 5000,
+      "exact": 2,
+      "close": 2,
+      "closeRule": "within 10%",
+      "guesses": [
+        18,
+        20,
+        24,
+        25,
+        30,
+        35,
+        42,
+        50,
+        50,
+        50,
+        68,
+        70,
+        80,
+        88,
+        98,
+        100,
+        100,
+        100,
+        120,
+        150,
+        157,
+        160,
+        178,
+        275,
+        300,
+        300,
+        300,
+        300,
+        318,
+        350,
+        450,
+        500,
+        500,
+        500,
+        522,
+        540,
+        570,
+        600,
+        600,
+        630,
+        652,
+        670,
+        700,
+        800,
+        852,
+        999,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1250,
+        1500,
+        1576,
+        2000,
+        2000,
+        3000,
+        3000,
+        3000,
+        3800,
+        5000,
+        5000,
+        6000,
+        6000,
+        6000,
+        6574,
+        9000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        10000,
+        12000,
+        12000,
+        12254,
+        12520,
+        18000,
+        20000,
+        25000,
+        25000,
+        30000,
+        48000,
+        50000,
+        50000,
+        50000,
+        50000,
+        50000,
+        56000,
+        60000,
+        60000,
+        78000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        120206,
+        150000,
+        200000,
+        300000,
+        456465,
+        500000,
+        500000,
+        980000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1200000,
+        3200000,
+        10000000,
+        30000000,
+        33437337,
+        45000000,
+        300000000,
+        300000000,
+        500000000,
+        2000000000,
+        6000000000,
+        300000000000000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "What's the most annoying queue to be stuck in?",
+    "answers": 4340,
+    "survey": false,
+    "tiles": [
+      {
+        "shown": "Bathroom",
+        "count": 726,
+        "pct": 17
+      },
+      {
+        "shown": "DMV",
+        "count": 683,
+        "pct": 16
+      },
+      {
+        "shown": "traffic",
+        "count": 451,
+        "pct": 10
+      },
+      {
+        "shown": "airport",
+        "count": 267,
+        "pct": 6
+      },
+      {
+        "shown": "bank",
+        "count": 198,
+        "pct": 5
+      },
+      {
+        "shown": "food",
+        "count": 154,
+        "pct": 4
+      },
+      {
+        "shown": "Supermarket",
+        "count": 134,
+        "pct": 3
+      },
+      {
+        "shown": "line",
+        "count": 104,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "groupchat",
+      "prompt": "Group chats?",
+      "a": "I live in them",
+      "b": "Muted, all of them",
+      "counts": [
+        215,
+        329
+      ],
+      "players": 544
+    },
+    {
+      "id": "speed",
+      "prompt": "Podcasts at…",
+      "a": "Normal speed",
+      "b": "2x speed",
+      "counts": [
+        351,
+        193
+      ],
+      "players": 544
+    },
+    {
+      "id": "ketchup",
+      "prompt": "Where does ketchup live?",
+      "a": "In the fridge",
+      "b": "In the cupboard",
+      "counts": [
+        490,
+        54
+      ],
+      "players": 544
+    },
+    {
+      "id": "armrest",
+      "prompt": "Middle seat gets both armrests?",
+      "a": "Yes, it’s only fair",
+      "b": "First come, first served",
+      "counts": [
+        240,
+        304
+      ],
+      "players": 544
+    },
+    {
+      "id": "hustle",
+      "prompt": "Hustle culture?",
+      "a": "Grind now, rest later",
+      "b": "Rest is productive",
+      "counts": [
+        211,
+        333
+      ],
+      "players": 544
+    },
+    {
+      "id": "naps",
+      "prompt": "Afternoon naps?",
+      "a": "Yes, bliss",
+      "b": "I’d never sleep tonight",
+      "counts": [
+        266,
+        278
+      ],
+      "players": 544
+    },
+    {
+      "id": "endings",
+      "prompt": "Movie endings?",
+      "a": "Happy",
+      "b": "Leave me wrecked",
+      "counts": [
+        360,
+        184
+      ],
+      "players": 544
+    }
+  ],
+  "doodle": {
+    "id": "5927517829464064",
+    "answer": "hourglass",
+    "key": "hourglass",
+    "lines": 5,
+    "strokes": [
+      [
+        2,
+        7,
+        6,
+        45,
+        17,
+        69,
+        65,
+        120,
+        77,
+        120
+      ],
+      [
+        184,
+        8,
+        161,
+        22,
+        146,
+        38,
+        135,
+        60,
+        131,
+        80,
+        119,
+        98,
+        101,
+        117
+      ],
+      [
+        70,
+        125,
+        54,
+        173,
+        5,
+        247
+      ],
+      [
+        102,
+        132,
+        111,
+        172,
+        123,
+        213,
+        133,
+        236,
+        143,
+        252,
+        135,
+        255,
+        94,
+        255,
+        53,
+        243,
+        8,
+        240,
+        6,
+        232
+      ],
+      [
+        0,
+        2,
+        99,
+        0,
+        116,
+        4,
+        167,
+        4,
+        170,
+        8
+      ]
+    ],
+    "players": 280,
+    "finished": 261,
+    "got": 220,
+    "gotByLine": [
+      3,
+      2,
+      63,
+      28,
+      124
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 182,
+    "finished": 131,
+    "climbedAll": 14,
+    "rungs": [
+      {
+        "word": "joke",
+        "letters": 4,
+        "reached": 182,
+        "solved": 69,
+        "openers": [
+          {
+            "value": "read",
+            "count": 7
+          },
+          {
+            "value": "love",
+            "count": 7
+          },
+          {
+            "value": "star",
+            "count": 6
+          }
+        ]
+      },
+      {
+        "word": "false",
+        "letters": 5,
+        "reached": 65,
+        "solved": 55,
+        "openers": [
+          {
+            "value": "adieu",
+            "count": 5
+          },
+          {
+            "value": "audio",
+            "count": 4
+          },
+          {
+            "value": "stare",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "divide",
+        "letters": 6,
+        "reached": 54,
+        "solved": 36,
+        "openers": [
+          {
+            "value": "climbs",
+            "count": 2
+          },
+          {
+            "value": "stared",
+            "count": 2
+          },
+          {
+            "value": "audios",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "teenage",
+        "letters": 7,
+        "reached": 35,
+        "solved": 28,
+        "openers": [
+          {
+            "value": "diamond",
+            "count": 2
+          },
+          {
+            "value": "crumble",
+            "count": 1
+          },
+          {
+            "value": "ravaged",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "demolish",
+        "letters": 8,
+        "reached": 27,
+        "solved": 20,
+        "openers": [
+          {
+            "value": "teenager",
+            "count": 2
+          },
+          {
+            "value": "complain",
+            "count": 2
+          },
+          {
+            "value": "overturn",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "parameter",
+        "letters": 9,
+        "reached": 18,
+        "solved": 17,
+        "openers": [
+          {
+            "value": "structure",
+            "count": 1
+          },
+          {
+            "value": "exception",
+            "count": 1
+          },
+          {
+            "value": "motivated",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "chromosome",
+        "letters": 10,
+        "reached": 17,
+        "solved": 14,
+        "openers": [
+          {
+            "value": "camouflage",
+            "count": 1
+          },
+          {
+            "value": "customised",
+            "count": 1
+          },
+          {
+            "value": "inhumanity",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "rectangle",
+    "players": 232,
+    "found": 92,
+    "gaveUp": 55,
+    "medianGuesses": 35,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "ocean",
+        "count": 18
+      },
+      {
+        "value": "sea",
+        "count": 17
+      },
+      {
+        "value": "animal",
+        "count": 13
+      },
+      {
+        "value": "water",
+        "count": 10
+      },
+      {
+        "value": "food",
+        "count": 7
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "square",
+        "count": 101
+      },
+      {
+        "value": "circle",
+        "count": 77
+      },
+      {
+        "value": "triangle",
+        "count": 62
+      },
+      {
+        "value": "shape",
+        "count": 54
+      },
+      {
+        "value": "oval",
+        "count": 26
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "irritated",
+    "hidden": 26,
+    "players": 158,
+    "foundBigWord": 131,
+    "mostFound": [
+      {
+        "word": "irritated",
+        "count": 131
+      },
+      {
+        "word": "tired",
+        "count": 121
+      },
+      {
+        "word": "rate",
+        "count": 117
+      },
+      {
+        "word": "rated",
+        "count": 114
+      },
+      {
+        "word": "date",
+        "count": 107
+      }
+    ],
+    "rarestFound": [
+      "territ",
+      "aret",
+      "ditt",
+      "etat",
+      "airted"
+    ],
+    "differentWordsFound": 129
+  }
+}
