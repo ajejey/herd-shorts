@@ -626,15 +626,15 @@
         "solved": 126,
         "openers": [
           {
-            "value": "read",
-            "count": 4
-          },
-          {
             "value": "love",
             "count": 4
           },
           {
-            "value": "fort",
+            "value": "read",
+            "count": 4
+          },
+          {
+            "value": "word",
             "count": 3
           }
         ]
@@ -650,11 +650,11 @@
             "count": 13
           },
           {
-            "value": "audio",
+            "value": "stare",
             "count": 6
           },
           {
-            "value": "stare",
+            "value": "audio",
             "count": 6
           }
         ]
@@ -666,15 +666,15 @@
         "solved": 70,
         "openers": [
           {
+            "value": "stared",
+            "count": 4
+          },
+          {
             "value": "audios",
             "count": 4
           },
           {
             "value": "adieus",
-            "count": 4
-          },
-          {
-            "value": "stared",
             "count": 4
           }
         ]
@@ -690,11 +690,11 @@
             "count": 3
           },
           {
-            "value": "weather",
+            "value": "flowers",
             "count": 2
           },
           {
-            "value": "flowers",
+            "value": "extract",
             "count": 2
           }
         ]
@@ -706,7 +706,7 @@
         "solved": 32,
         "openers": [
           {
-            "value": "sparkled",
+            "value": "extracts",
             "count": 2
           },
           {
@@ -714,7 +714,7 @@
             "count": 2
           },
           {
-            "value": "extracts",
+            "value": "sparkled",
             "count": 2
           }
         ]
@@ -730,11 +730,11 @@
             "count": 4
           },
           {
-            "value": "climbings",
+            "value": "creations",
             "count": 1
           },
           {
-            "value": "colourful",
+            "value": "climbings",
             "count": 1
           }
         ]
@@ -750,11 +750,11 @@
             "count": 4
           },
           {
-            "value": "thoughtful",
+            "value": "precaution",
             "count": 1
           },
           {
-            "value": "helicopter",
+            "value": "thoughtful",
             "count": 1
           }
         ]
@@ -778,11 +778,11 @@
         "count": 9
       },
       {
-        "value": "sea",
+        "value": "animal",
         "count": 8
       },
       {
-        "value": "animal",
+        "value": "sea",
         "count": 8
       },
       {
@@ -828,11 +828,11 @@
         "count": 100
       },
       {
-        "word": "deer",
+        "word": "shore",
         "count": 72
       },
       {
-        "word": "shore",
+        "word": "deer",
         "count": 72
       },
       {
@@ -841,11 +841,11 @@
       }
     ],
     "rarestFound": [
-      "rondes",
-      "thonder",
-      "nesher",
-      "esne",
-      "strond"
+      "reshoed",
+      "reos",
+      "sorned",
+      "senhor",
+      "nesher"
     ],
     "differentWordsFound": 456
   }
