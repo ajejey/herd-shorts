@@ -1,0 +1,749 @@
+{
+  "day": 173,
+  "lastFinished": 173,
+  "guesstimate": [
+    {
+      "id": 73,
+      "question": "What is the normal pH of human blood, to one decimal place?",
+      "unit": "pH",
+      "answer": 7.4,
+      "fact": "Your body holds it within a tiny band, about 7.35 to 7.45.",
+      "players": 80,
+      "median": 7,
+      "exact": 2,
+      "close": 38,
+      "closeRule": "within 10%",
+      "guesses": [
+        0.6,
+        0.7,
+        2.1,
+        2.3,
+        2.5,
+        3,
+        4.0156,
+        4.5,
+        4.5,
+        4.5,
+        5.1,
+        5.2,
+        5.3,
+        6,
+        6,
+        6.1,
+        6.3,
+        6.3,
+        6.5,
+        6.5,
+        6.5,
+        6.7,
+        6.8,
+        6.8,
+        6.8,
+        6.8,
+        6.9,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7.1,
+        7.1,
+        7.1,
+        7.1,
+        7.2,
+        7.3,
+        7.3,
+        7.3,
+        7.3,
+        7.4,
+        7.4,
+        7.45,
+        7.5,
+        7.5,
+        7.6,
+        7.8,
+        8,
+        8,
+        8.2,
+        9.3,
+        10,
+        10.1,
+        13,
+        15,
+        15,
+        20,
+        23.1,
+        47,
+        52,
+        61,
+        62,
+        64,
+        65.1,
+        69,
+        73,
+        75,
+        81,
+        357,
+        398.8
+      ],
+      "sampled": false
+    },
+    {
+      "id": 75,
+      "question": "Roughly how many bacteria live in and on a typical human body?",
+      "unit": "bacteria",
+      "answer": 38000000000000,
+      "fact": "That is about the same as the number of human cells; most live in the gut.",
+      "players": 77,
+      "median": 15000000,
+      "exact": 0,
+      "close": 1,
+      "closeRule": "within 10%",
+      "guesses": [
+        45,
+        150,
+        200,
+        1200,
+        1219,
+        2000,
+        10000,
+        10000,
+        20000,
+        20000,
+        67890,
+        100000,
+        100000,
+        100000,
+        600000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1100000,
+        1223543,
+        2000000,
+        2002020,
+        3000000,
+        3500000,
+        4000000,
+        5000000,
+        5000000,
+        5600000,
+        8000000,
+        8400000,
+        9000000,
+        9900000,
+        10000000,
+        10000000,
+        15000000,
+        20000000,
+        20000000,
+        40000000,
+        50000000,
+        100000000,
+        110000000,
+        500000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1000000000,
+        1300000000,
+        2500000000,
+        2500000000,
+        3000000000,
+        5000000000,
+        5000000000,
+        8000000000,
+        9000000000,
+        10000000000,
+        10000000000,
+        15000000000,
+        20000000000,
+        36000000000,
+        49000000000,
+        70000000000,
+        100000000000,
+        100000000000,
+        480000000000,
+        800000000000,
+        1000000000000,
+        1000000000000,
+        4000000000000,
+        5000000000000,
+        25000000000000,
+        39000000000000,
+        75000000000000,
+        1000000000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 272,
+      "question": "How many runs did Brian Lara score in his record Test innings in 2004?",
+      "unit": "runs",
+      "answer": 400,
+      "fact": "He finished not out, against England in Antigua.",
+      "players": 75,
+      "median": 31,
+      "exact": 2,
+      "close": 2,
+      "closeRule": "within 10%",
+      "guesses": [
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        7,
+        8,
+        9,
+        9,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        12,
+        12,
+        13,
+        15,
+        15,
+        17,
+        17,
+        22,
+        24,
+        24,
+        25,
+        25,
+        25,
+        30,
+        31,
+        35,
+        36,
+        42,
+        50,
+        54,
+        56,
+        60,
+        65,
+        67,
+        69,
+        75,
+        78,
+        80,
+        84,
+        91,
+        123,
+        123,
+        123,
+        150,
+        160,
+        167,
+        200,
+        200,
+        200,
+        202,
+        204,
+        300,
+        333,
+        400,
+        400,
+        888,
+        900,
+        1000,
+        1200,
+        1919,
+        7856,
+        24000000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name something people do after a big holiday meal.",
+    "answers": 2193,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "sleep",
+        "count": 973,
+        "pct": 44
+      },
+      {
+        "shown": "nap",
+        "count": 427,
+        "pct": 19
+      },
+      {
+        "shown": "rest",
+        "count": 95,
+        "pct": 4
+      },
+      {
+        "shown": "poop",
+        "count": 90,
+        "pct": 4
+      },
+      {
+        "shown": "drink",
+        "count": 71,
+        "pct": 3
+      },
+      {
+        "shown": "walk",
+        "count": 60,
+        "pct": 3
+      },
+      {
+        "shown": "talk",
+        "count": 51,
+        "pct": 2
+      },
+      {
+        "shown": "dessert",
+        "count": 38,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "music",
+      "prompt": "While you clean?",
+      "a": "Music blasting",
+      "b": "Quiet",
+      "counts": [
+        544,
+        146
+      ],
+      "players": 690
+    },
+    {
+      "id": "binge",
+      "prompt": "A new season drops?",
+      "a": "Binge it tonight",
+      "b": "One a week",
+      "counts": [
+        451,
+        239
+      ],
+      "players": 690
+    },
+    {
+      "id": "stay",
+      "prompt": "Where to stay?",
+      "a": "A hotel",
+      "b": "A rental with a kitchen",
+      "counts": [
+        462,
+        228
+      ],
+      "players": 690
+    },
+    {
+      "id": "paper",
+      "prompt": "Books?",
+      "a": "Paper",
+      "b": "E-reader",
+      "counts": [
+        515,
+        175
+      ],
+      "players": 690
+    },
+    {
+      "id": "inbox",
+      "prompt": "Your inbox?",
+      "a": "Inbox zero",
+      "b": "4,000 unread",
+      "counts": [
+        349,
+        341
+      ],
+      "players": 690
+    },
+    {
+      "id": "goodbye",
+      "prompt": "Leaving a party?",
+      "a": "Say bye to everyone",
+      "b": "Slip out quietly",
+      "counts": [
+        275,
+        415
+      ],
+      "players": 690
+    },
+    {
+      "id": "mint",
+      "prompt": "Mint chocolate chip?",
+      "a": "Love it",
+      "b": "Tastes like toothpaste",
+      "counts": [
+        368,
+        322
+      ],
+      "players": 690
+    }
+  ],
+  "doodle": {
+    "id": "6553209365594112",
+    "answer": "suitcase",
+    "key": "suitcase",
+    "lines": 7,
+    "strokes": [
+      [
+        7,
+        57,
+        0,
+        162,
+        1,
+        194,
+        4,
+        204
+      ],
+      [
+        6,
+        59,
+        52,
+        48,
+        117,
+        41,
+        247,
+        42,
+        251,
+        64,
+        252,
+        105,
+        245,
+        193,
+        246,
+        215,
+        243,
+        217
+      ],
+      [
+        29,
+        222,
+        8,
+        224,
+        54,
+        214,
+        241,
+        208,
+        255,
+        207,
+        244,
+        203
+      ],
+      [
+        78,
+        24,
+        77,
+        51,
+        81,
+        46
+      ],
+      [
+        80,
+        26,
+        80,
+        18,
+        101,
+        7,
+        164,
+        0,
+        172,
+        7,
+        167,
+        36
+      ],
+      [
+        90,
+        30,
+        90,
+        43
+      ],
+      [
+        91,
+        27,
+        95,
+        18,
+        144,
+        12,
+        149,
+        14,
+        149,
+        36
+      ]
+    ],
+    "players": 126,
+    "finished": 120,
+    "got": 114,
+    "gotByLine": [
+      1,
+      1,
+      0,
+      7,
+      90,
+      6,
+      9
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 81,
+    "finished": 43,
+    "climbedAll": 15,
+    "rungs": [
+      {
+        "word": "song",
+        "letters": 4,
+        "reached": 81,
+        "solved": 55,
+        "openers": [
+          {
+            "value": "read",
+            "count": 3
+          },
+          {
+            "value": "love",
+            "count": 3
+          },
+          {
+            "value": "head",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "roman",
+        "letters": 5,
+        "reached": 52,
+        "solved": 50,
+        "openers": [
+          {
+            "value": "adieu",
+            "count": 4
+          },
+          {
+            "value": "stare",
+            "count": 4
+          },
+          {
+            "value": "place",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "cookie",
+        "letters": 6,
+        "reached": 43,
+        "solved": 33,
+        "openers": [
+          {
+            "value": "trades",
+            "count": 2
+          },
+          {
+            "value": "string",
+            "count": 2
+          },
+          {
+            "value": "sunday",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "concern",
+        "letters": 7,
+        "reached": 33,
+        "solved": 29,
+        "openers": [
+          {
+            "value": "proudly",
+            "count": 1
+          },
+          {
+            "value": "socials",
+            "count": 1
+          },
+          {
+            "value": "penguin",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "initiate",
+        "letters": 8,
+        "reached": 28,
+        "solved": 21,
+        "openers": [
+          {
+            "value": "concerns",
+            "count": 2
+          },
+          {
+            "value": "reaction",
+            "count": 1
+          },
+          {
+            "value": "elephant",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "glassware",
+        "letters": 9,
+        "reached": 19,
+        "solved": 17,
+        "openers": [
+          {
+            "value": "pleasures",
+            "count": 1
+          },
+          {
+            "value": "spreading",
+            "count": 1
+          },
+          {
+            "value": "elephants",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "formidable",
+        "letters": 10,
+        "reached": 16,
+        "solved": 15,
+        "openers": [
+          {
+            "value": "bouldering",
+            "count": 2
+          },
+          {
+            "value": "managerial",
+            "count": 1
+          },
+          {
+            "value": "vulnerable",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "tissue",
+    "players": 97,
+    "found": 38,
+    "gaveUp": 36,
+    "medianGuesses": 45.5,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "dog",
+        "count": 5
+      },
+      {
+        "value": "sea",
+        "count": 5
+      },
+      {
+        "value": "animal",
+        "count": 4
+      },
+      {
+        "value": "house",
+        "count": 2
+      },
+      {
+        "value": "cat",
+        "count": 2
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "skin",
+        "count": 28
+      },
+      {
+        "value": "muscle",
+        "count": 25
+      },
+      {
+        "value": "bone",
+        "count": 19
+      },
+      {
+        "value": "liver",
+        "count": 18
+      },
+      {
+        "value": "cartilage",
+        "count": 9
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "personnel",
+    "hidden": 26,
+    "players": 67,
+    "foundBigWord": 55,
+    "mostFound": [
+      {
+        "word": "person",
+        "count": 61
+      },
+      {
+        "word": "personnel",
+        "count": 55
+      },
+      {
+        "word": "lose",
+        "count": 47
+      },
+      {
+        "word": "lone",
+        "count": 44
+      },
+      {
+        "word": "sole",
+        "count": 44
+      }
+    ],
+    "rarestFound": [
+      "enol",
+      "splore",
+      "slee",
+      "neps",
+      "preons"
+    ],
+    "differentWordsFound": 187
+  }
+}
