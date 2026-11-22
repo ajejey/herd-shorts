@@ -523,11 +523,11 @@
         "solved": 55,
         "openers": [
           {
-            "value": "read",
+            "value": "love",
             "count": 3
           },
           {
-            "value": "love",
+            "value": "read",
             "count": 3
           },
           {
@@ -563,15 +563,15 @@
         "solved": 33,
         "openers": [
           {
-            "value": "trades",
-            "count": 2
-          },
-          {
             "value": "string",
             "count": 2
           },
           {
-            "value": "sunday",
+            "value": "trades",
+            "count": 2
+          },
+          {
+            "value": "loving",
             "count": 1
           }
         ]
@@ -583,15 +583,15 @@
         "solved": 29,
         "openers": [
           {
-            "value": "proudly",
-            "count": 1
-          },
-          {
-            "value": "socials",
+            "value": "because",
             "count": 1
           },
           {
             "value": "penguin",
+            "count": 1
+          },
+          {
+            "value": "beaming",
             "count": 1
           }
         ]
@@ -607,11 +607,11 @@
             "count": 2
           },
           {
-            "value": "reaction",
+            "value": "ploughed",
             "count": 1
           },
           {
-            "value": "elephant",
+            "value": "optimize",
             "count": 1
           }
         ]
@@ -623,15 +623,15 @@
         "solved": 17,
         "openers": [
           {
+            "value": "knowledge",
+            "count": 1
+          },
+          {
             "value": "pleasures",
             "count": 1
           },
           {
-            "value": "spreading",
-            "count": 1
-          },
-          {
-            "value": "elephants",
+            "value": "pangolins",
             "count": 1
           }
         ]
@@ -647,11 +647,11 @@
             "count": 2
           },
           {
-            "value": "managerial",
+            "value": "friendship",
             "count": 1
           },
           {
-            "value": "vulnerable",
+            "value": "managerial",
             "count": 1
           }
         ]
@@ -729,20 +729,20 @@
         "count": 47
       },
       {
-        "word": "lone",
+        "word": "sole",
         "count": 44
       },
       {
-        "word": "sole",
+        "word": "pole",
         "count": 44
       }
     ],
     "rarestFound": [
-      "enol",
-      "splore",
-      "slee",
-      "neps",
-      "preons"
+      "leno",
+      "prees",
+      "nenes",
+      "ernes",
+      "leres"
     ],
     "differentWordsFound": 187
   }
