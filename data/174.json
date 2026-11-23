@@ -559,11 +559,11 @@
             "count": 2
           },
           {
-            "value": "trades",
+            "value": "streak",
             "count": 2
           },
           {
-            "value": "streak",
+            "value": "mighty",
             "count": 2
           }
         ]
@@ -579,11 +579,11 @@
             "count": 4
           },
           {
-            "value": "hopeful",
+            "value": "flowers",
             "count": 1
           },
           {
-            "value": "planets",
+            "value": "brights",
             "count": 1
           }
         ]
@@ -595,15 +595,15 @@
         "solved": 28,
         "openers": [
           {
-            "value": "brighter",
+            "value": "precised",
             "count": 1
           },
           {
-            "value": "creation",
+            "value": "politics",
             "count": 1
           },
           {
-            "value": "gloating",
+            "value": "straight",
             "count": 1
           }
         ]
@@ -615,15 +615,15 @@
         "solved": 18,
         "openers": [
           {
-            "value": "waterless",
+            "value": "pronounce",
             "count": 1
           },
           {
-            "value": "throughly",
+            "value": "restrooms",
             "count": 1
           },
           {
-            "value": "survivals",
+            "value": "surcharge",
             "count": 1
           }
         ]
@@ -643,7 +643,7 @@
             "count": 1
           },
           {
-            "value": "compulsive",
+            "value": "chameleons",
             "count": 1
           }
         ]
@@ -667,11 +667,11 @@
         "count": 5
       },
       {
-        "value": "train",
+        "value": "food",
         "count": 4
       },
       {
-        "value": "food",
+        "value": "train",
         "count": 4
       },
       {
@@ -693,11 +693,11 @@
         "count": 3
       },
       {
-        "value": "outlook",
+        "value": "predicted",
         "count": 1
       },
       {
-        "value": "predicted",
+        "value": "outlook",
         "count": 1
       }
     ]
@@ -730,10 +730,10 @@
       }
     ],
     "rarestFound": [
+      "recoure",
+      "drere",
       "copered",
       "purree",
-      "repured",
-      "urde",
       "perdu"
     ],
     "differentWordsFound": 167
