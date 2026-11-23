@@ -1,0 +1,741 @@
+{
+  "day": 174,
+  "lastFinished": 174,
+  "guesstimate": [
+    {
+      "id": 238,
+      "question": "Roughly how many pounds of solid gold make up Tutankhamun's innermost coffin?",
+      "unit": "pounds",
+      "answer": 243,
+      "fact": "It was the innermost of three coffins nested inside each other.",
+      "players": 66,
+      "median": 200,
+      "exact": 1,
+      "close": 2,
+      "closeRule": "within 10%",
+      "guesses": [
+        3,
+        5,
+        5,
+        5,
+        10,
+        10,
+        19,
+        20,
+        20,
+        20,
+        20,
+        30,
+        40,
+        40,
+        50,
+        55,
+        58,
+        70,
+        80,
+        80,
+        80,
+        100,
+        100,
+        108,
+        120,
+        150,
+        150,
+        150,
+        150,
+        200,
+        200,
+        200,
+        200,
+        200,
+        243,
+        250,
+        280,
+        280,
+        300,
+        300,
+        300,
+        350,
+        350,
+        400,
+        413,
+        450,
+        500,
+        500,
+        500,
+        500,
+        500,
+        600,
+        600,
+        650,
+        840,
+        980,
+        1000,
+        2560,
+        3000,
+        3000,
+        5800,
+        6666,
+        7000,
+        8000,
+        25000,
+        800000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 262,
+      "question": "How many miles long is a full Ironman triathlon in total, to one decimal place?",
+      "unit": "miles",
+      "answer": 140.6,
+      "fact": "That is a 2.4-mile swim, a 112-mile bike ride and a full marathon.",
+      "players": 65,
+      "median": 77,
+      "exact": 0,
+      "close": 6,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        3.25,
+        10,
+        10,
+        10,
+        12,
+        13.5,
+        16.7,
+        17,
+        22.8,
+        23.4,
+        25,
+        26.3,
+        28,
+        30,
+        33,
+        36.2,
+        42,
+        45,
+        46.3,
+        47,
+        48.2,
+        50,
+        50.7,
+        53,
+        54,
+        57,
+        60,
+        60.2,
+        60.9,
+        65,
+        71.4,
+        77,
+        78.3,
+        82.2,
+        85,
+        85.5,
+        90.5,
+        100,
+        100,
+        100,
+        101.2,
+        115,
+        128.7,
+        130,
+        136.2,
+        141.7,
+        150,
+        154.2,
+        155.5,
+        158.3,
+        180,
+        180,
+        180.1,
+        200,
+        200,
+        200,
+        209.8,
+        233,
+        240,
+        500,
+        731,
+        1628,
+        3000,
+        88000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 25,
+      "question": "How many rooms are in Buckingham Palace?",
+      "unit": "rooms",
+      "answer": 775,
+      "fact": "That includes 78 bathrooms and 52 royal and guest bedrooms.",
+      "players": 64,
+      "median": 125,
+      "exact": 0,
+      "close": 2,
+      "closeRule": "within 10%",
+      "guesses": [
+        18,
+        20,
+        20,
+        20,
+        23,
+        25,
+        30,
+        34,
+        36,
+        40,
+        45,
+        48,
+        50,
+        56,
+        57,
+        65,
+        81,
+        84,
+        89,
+        100,
+        100,
+        100,
+        100,
+        102,
+        103,
+        107,
+        110,
+        112,
+        120,
+        120,
+        125,
+        125,
+        125,
+        125,
+        128,
+        142,
+        150,
+        150,
+        150,
+        153,
+        160,
+        170,
+        200,
+        208,
+        232,
+        244,
+        245,
+        250,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        300,
+        500,
+        722,
+        750,
+        1000,
+        1223,
+        1400,
+        1628,
+        3000,
+        88000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "What takes people the longest in the morning?",
+    "answers": 4149,
+    "survey": false,
+    "tiles": [
+      {
+        "shown": "showering",
+        "count": 992,
+        "pct": 24
+      },
+      {
+        "shown": "waking up",
+        "count": 738,
+        "pct": 18
+      },
+      {
+        "shown": "getting up",
+        "count": 467,
+        "pct": 11
+      },
+      {
+        "shown": "getting out of bed",
+        "count": 444,
+        "pct": 11
+      },
+      {
+        "shown": "makeup",
+        "count": 409,
+        "pct": 10
+      },
+      {
+        "shown": "Getting ready",
+        "count": 223,
+        "pct": 5
+      },
+      {
+        "shown": "Hair",
+        "count": 170,
+        "pct": 4
+      },
+      {
+        "shown": "Breakfast",
+        "count": 101,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "ownboss",
+      "prompt": "Dream career?",
+      "a": "Be my own boss",
+      "b": "A steady paycheck",
+      "counts": [
+        236,
+        239
+      ],
+      "players": 475
+    },
+    {
+      "id": "power",
+      "prompt": "Pick a superpower.",
+      "a": "Fly",
+      "b": "Be invisible",
+      "counts": [
+        219,
+        256
+      ],
+      "players": 475
+    },
+    {
+      "id": "pancakes",
+      "prompt": "Pancakes or waffles?",
+      "a": "Pancakes",
+      "b": "Waffles",
+      "counts": [
+        248,
+        227
+      ],
+      "players": 475
+    },
+    {
+      "id": "grid",
+      "prompt": "Dream trip?",
+      "a": "A buzzing city",
+      "b": "Off the grid",
+      "counts": [
+        194,
+        281
+      ],
+      "players": 475
+    },
+    {
+      "id": "bath",
+      "prompt": "Bath or shower?",
+      "a": "Bath",
+      "b": "Shower",
+      "counts": [
+        126,
+        349
+      ],
+      "players": 475
+    },
+    {
+      "id": "phonesdinner",
+      "prompt": "Phones at the dinner table?",
+      "a": "Put away",
+      "b": "On the table",
+      "counts": [
+        316,
+        159
+      ],
+      "players": 475
+    },
+    {
+      "id": "silent",
+      "prompt": "Phone on silent?",
+      "a": "Always",
+      "b": "Ringer on",
+      "counts": [
+        341,
+        134
+      ],
+      "players": 475
+    }
+  ],
+  "doodle": {
+    "id": "6152521028468736",
+    "answer": "watermelon",
+    "key": "watermelon",
+    "lines": 8,
+    "strokes": [
+      [
+        255,
+        29,
+        203,
+        6,
+        181,
+        0,
+        47,
+        12,
+        16,
+        26,
+        7,
+        39,
+        2,
+        60,
+        2,
+        98,
+        9,
+        107,
+        22,
+        116,
+        71,
+        139,
+        101,
+        145,
+        161,
+        145,
+        200,
+        134,
+        228,
+        118,
+        238,
+        109,
+        241,
+        100,
+        250,
+        40,
+        238,
+        27,
+        222,
+        20
+      ],
+      [
+        247,
+        41,
+        208,
+        35,
+        135,
+        35,
+        82,
+        27,
+        6,
+        26
+      ],
+      [
+        236,
+        56,
+        172,
+        52,
+        111,
+        52,
+        7,
+        38
+      ],
+      [
+        7,
+        38,
+        7,
+        38
+      ],
+      [
+        238,
+        96,
+        200,
+        87,
+        167,
+        83,
+        57,
+        82,
+        22,
+        77,
+        5,
+        77
+      ],
+      [
+        227,
+        116,
+        87,
+        100,
+        23,
+        99,
+        0,
+        105
+      ],
+      [
+        183,
+        137,
+        158,
+        130,
+        39,
+        115,
+        32,
+        115,
+        20,
+        123
+      ],
+      [
+        151,
+        148,
+        54,
+        131
+      ]
+    ],
+    "players": 121,
+    "finished": 98,
+    "got": 29,
+    "gotByLine": [
+      3,
+      1,
+      0,
+      1,
+      1,
+      2,
+      0,
+      21
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 89,
+    "finished": 43,
+    "climbedAll": 14,
+    "rungs": [
+      {
+        "word": "chap",
+        "letters": 4,
+        "reached": 89,
+        "solved": 72,
+        "openers": [
+          {
+            "value": "love",
+            "count": 5
+          },
+          {
+            "value": "star",
+            "count": 5
+          },
+          {
+            "value": "song",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "might",
+        "letters": 5,
+        "reached": 69,
+        "solved": 56,
+        "openers": [
+          {
+            "value": "stare",
+            "count": 5
+          },
+          {
+            "value": "adieu",
+            "count": 4
+          },
+          {
+            "value": "audio",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "figure",
+        "letters": 6,
+        "reached": 51,
+        "solved": 43,
+        "openers": [
+          {
+            "value": "stared",
+            "count": 2
+          },
+          {
+            "value": "trades",
+            "count": 2
+          },
+          {
+            "value": "streak",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "trilogy",
+        "letters": 7,
+        "reached": 42,
+        "solved": 36,
+        "openers": [
+          {
+            "value": "figures",
+            "count": 4
+          },
+          {
+            "value": "hopeful",
+            "count": 1
+          },
+          {
+            "value": "planets",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "survival",
+        "letters": 8,
+        "reached": 36,
+        "solved": 28,
+        "openers": [
+          {
+            "value": "brighter",
+            "count": 1
+          },
+          {
+            "value": "creation",
+            "count": 1
+          },
+          {
+            "value": "gloating",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "nonentity",
+        "letters": 9,
+        "reached": 27,
+        "solved": 18,
+        "openers": [
+          {
+            "value": "waterless",
+            "count": 1
+          },
+          {
+            "value": "throughly",
+            "count": 1
+          },
+          {
+            "value": "survivals",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "nationwide",
+        "letters": 10,
+        "reached": 17,
+        "solved": 14,
+        "openers": [
+          {
+            "value": "television",
+            "count": 2
+          },
+          {
+            "value": "enlightens",
+            "count": 1
+          },
+          {
+            "value": "compulsive",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "forecast",
+    "players": 113,
+    "found": 52,
+    "gaveUp": 20,
+    "medianGuesses": 35.5,
+    "fewestGuesses": 6,
+    "firstGuesses": [
+      {
+        "value": "water",
+        "count": 6
+      },
+      {
+        "value": "animal",
+        "count": 5
+      },
+      {
+        "value": "train",
+        "count": 4
+      },
+      {
+        "value": "food",
+        "count": 4
+      },
+      {
+        "value": "apple",
+        "count": 3
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "weather",
+        "count": 51
+      },
+      {
+        "value": "rainfall",
+        "count": 4
+      },
+      {
+        "value": "prediction",
+        "count": 3
+      },
+      {
+        "value": "outlook",
+        "count": 1
+      },
+      {
+        "value": "predicted",
+        "count": 1
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "reproduce",
+    "hidden": 28,
+    "players": 89,
+    "foundBigWord": 79,
+    "mostFound": [
+      {
+        "word": "reproduce",
+        "count": 79
+      },
+      {
+        "word": "produce",
+        "count": 74
+      },
+      {
+        "word": "rope",
+        "count": 61
+      },
+      {
+        "word": "cure",
+        "count": 58
+      },
+      {
+        "word": "peer",
+        "count": 54
+      }
+    ],
+    "rarestFound": [
+      "copered",
+      "purree",
+      "repured",
+      "urde",
+      "perdu"
+    ],
+    "differentWordsFound": 167
+  }
+}
