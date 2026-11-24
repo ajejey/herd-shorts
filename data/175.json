@@ -655,11 +655,11 @@
             "count": 5
           },
           {
-            "value": "kept",
+            "value": "star",
             "count": 3
           },
           {
-            "value": "love",
+            "value": "four",
             "count": 3
           }
         ]
@@ -691,15 +691,15 @@
         "solved": 66,
         "openers": [
           {
+            "value": "flower",
+            "count": 2
+          },
+          {
+            "value": "people",
+            "count": 2
+          },
+          {
             "value": "adieus",
-            "count": 2
-          },
-          {
-            "value": "orange",
-            "count": 2
-          },
-          {
-            "value": "crusty",
             "count": 2
           }
         ]
@@ -711,15 +711,15 @@
         "solved": 50,
         "openers": [
           {
+            "value": "lobster",
+            "count": 2
+          },
+          {
             "value": "sparkle",
             "count": 2
           },
           {
             "value": "publics",
-            "count": 2
-          },
-          {
-            "value": "lobster",
             "count": 2
           }
         ]
@@ -731,15 +731,15 @@
         "solved": 41,
         "openers": [
           {
-            "value": "dreamers",
+            "value": "brighter",
             "count": 1
           },
           {
-            "value": "shopping",
+            "value": "sparkles",
             "count": 1
           },
           {
-            "value": "pleasure",
+            "value": "reversal",
             "count": 1
           }
         ]
@@ -751,15 +751,15 @@
         "solved": 37,
         "openers": [
           {
-            "value": "clothings",
+            "value": "daughters",
             "count": 1
           },
           {
-            "value": "sparklers",
+            "value": "pangolins",
             "count": 1
           },
           {
-            "value": "picturing",
+            "value": "radiology",
             "count": 1
           }
         ]
@@ -775,11 +775,11 @@
             "count": 2
           },
           {
-            "value": "chimpanzee",
+            "value": "tattletale",
             "count": 1
           },
           {
-            "value": "flashlight",
+            "value": "isolations",
             "count": 1
           }
         ]
@@ -866,11 +866,11 @@
       }
     ],
     "rarestFound": [
-      "spue",
-      "isled",
-      "delph",
-      "elds",
-      "sidhe"
+      "sulph",
+      "huis",
+      "heids",
+      "pehs",
+      "seil"
     ],
     "differentWordsFound": 201
   }
