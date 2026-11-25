@@ -676,11 +676,11 @@
             "count": 6
           },
           {
-            "value": "four",
+            "value": "spot",
             "count": 4
           },
           {
-            "value": "spot",
+            "value": "four",
             "count": 4
           }
         ]
@@ -696,11 +696,11 @@
             "count": 11
           },
           {
-            "value": "audio",
+            "value": "steam",
             "count": 3
           },
           {
-            "value": "teams",
+            "value": "audio",
             "count": 3
           }
         ]
@@ -712,15 +712,15 @@
         "solved": 46,
         "openers": [
           {
-            "value": "blouse",
-            "count": 2
-          },
-          {
-            "value": "traces",
+            "value": "adieus",
             "count": 2
           },
           {
             "value": "trades",
+            "count": 2
+          },
+          {
+            "value": "traces",
             "count": 2
           }
         ]
@@ -732,15 +732,15 @@
         "solved": 34,
         "openers": [
           {
-            "value": "scholar",
+            "value": "holiday",
             "count": 1
           },
           {
-            "value": "browser",
+            "value": "dancers",
             "count": 1
           },
           {
-            "value": "boughts",
+            "value": "players",
             "count": 1
           }
         ]
@@ -756,11 +756,11 @@
             "count": 2
           },
           {
-            "value": "strongly",
+            "value": "twerking",
             "count": 1
           },
           {
-            "value": "climbers",
+            "value": "thursday",
             "count": 1
           }
         ]
@@ -772,15 +772,15 @@
         "solved": 20,
         "openers": [
           {
-            "value": "stationed",
+            "value": "restoring",
             "count": 1
           },
           {
-            "value": "alphabets",
+            "value": "pregnancy",
             "count": 1
           },
           {
-            "value": "dreamings",
+            "value": "pleasured",
             "count": 1
           }
         ]
@@ -796,11 +796,11 @@
             "count": 2
           },
           {
-            "value": "ploughings",
+            "value": "managerial",
             "count": 1
           },
           {
-            "value": "compulsive",
+            "value": "restaurant",
             "count": 1
           }
         ]
@@ -887,11 +887,11 @@
       }
     ],
     "rarestFound": [
-      "urite",
-      "tuis",
-      "uteri",
-      "buret",
-      "debur"
+      "bedsit",
+      "reduits",
+      "stude",
+      "urds",
+      "surbed"
     ],
     "differentWordsFound": 297
   }
