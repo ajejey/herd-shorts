@@ -1,0 +1,898 @@
+{
+  "day": 176,
+  "lastFinished": 176,
+  "guesstimate": [
+    {
+      "id": 336,
+      "question": "Counting the novels, how many Sherlock Holmes stories did Arthur Conan Doyle write?",
+      "unit": "stories",
+      "answer": 60,
+      "fact": "Holmes never says \"Elementary, my dear Watson\" in any of them.",
+      "players": 115,
+      "median": 23,
+      "exact": 5,
+      "close": 10,
+      "closeRule": "within 10%",
+      "guesses": [
+        2,
+        3,
+        3,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        9,
+        9,
+        9,
+        10,
+        10,
+        10,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13,
+        13,
+        14,
+        14,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        16,
+        16,
+        17,
+        18,
+        19,
+        19,
+        20,
+        20,
+        22,
+        22,
+        23,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25,
+        26,
+        26,
+        30,
+        35,
+        35,
+        35,
+        38,
+        42,
+        43,
+        45,
+        48,
+        48,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        50,
+        55,
+        56,
+        57,
+        60,
+        60,
+        60,
+        60,
+        60,
+        65,
+        65,
+        72,
+        79,
+        80,
+        85,
+        85,
+        86,
+        93,
+        100,
+        100,
+        100,
+        100,
+        100,
+        109,
+        120,
+        136,
+        138,
+        150,
+        200,
+        250,
+        300,
+        80000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 396,
+      "question": "How many different plates can a 3-letter, 4-digit license plate format produce?",
+      "unit": "plates",
+      "answer": 175760000,
+      "fact": "Many states skip letters like I, O and Q to avoid confusion with numbers.",
+      "players": 110,
+      "median": 911771.5,
+      "exact": 7,
+      "close": 7,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        7,
+        10,
+        20,
+        49,
+        50,
+        55,
+        64,
+        64,
+        65,
+        72,
+        99,
+        100,
+        100,
+        100,
+        100,
+        120,
+        200,
+        300,
+        427,
+        454,
+        500,
+        750,
+        1000,
+        1000,
+        1000,
+        1560,
+        1700,
+        2400,
+        4000,
+        5040,
+        8000,
+        8900,
+        9668,
+        9999,
+        10000,
+        10000,
+        10000,
+        10000,
+        12000,
+        20000,
+        27576,
+        28000,
+        30000,
+        30000,
+        30000,
+        30500,
+        95236,
+        120000,
+        138240,
+        222222,
+        286000,
+        300000,
+        525000,
+        823543,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1200000,
+        1400000,
+        1500000,
+        1504875,
+        2345235,
+        3000000,
+        3450826,
+        8000000,
+        9999999,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        10000000,
+        13824000,
+        17500000,
+        17576000,
+        20000000,
+        35000000,
+        67000000,
+        78640000,
+        100000000,
+        115300000,
+        129140163,
+        130000000,
+        175760000,
+        175760000,
+        175760000,
+        175760000,
+        175760000,
+        175760000,
+        175760000,
+        200000000,
+        200000000,
+        200000000,
+        220000000,
+        320000000,
+        323000000,
+        456000000,
+        500000000,
+        700000000,
+        1000000000,
+        8000000000,
+        8000000000,
+        16000000000,
+        16236789898,
+        64339296875,
+        100000000000,
+        144000000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 331,
+      "question": "What is the maximum possible score, in points, in the original Pac-Man arcade game?",
+      "unit": "points",
+      "answer": 3333360,
+      "fact": "Level 256 is unplayable because of a bug, which caps the score.",
+      "players": 105,
+      "median": 35000,
+      "exact": 0,
+      "close": 2,
+      "closeRule": "within 10%",
+      "guesses": [
+        15,
+        15,
+        50,
+        50,
+        56,
+        100,
+        100,
+        100,
+        112,
+        125,
+        150,
+        200,
+        200,
+        200,
+        200,
+        200,
+        254,
+        300,
+        350,
+        500,
+        500,
+        500,
+        501,
+        600,
+        600,
+        700,
+        785,
+        999,
+        999,
+        999,
+        999,
+        999,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        3000,
+        5000,
+        6000,
+        9999,
+        9999,
+        9999,
+        10000,
+        10000,
+        10000,
+        12000,
+        20000,
+        24000,
+        35000,
+        50000,
+        50000,
+        65536,
+        80000,
+        99850,
+        99999,
+        100000,
+        100000,
+        100000,
+        140000,
+        150000,
+        150000,
+        256000,
+        300000,
+        333333,
+        335600,
+        500000,
+        600000,
+        700000,
+        800000,
+        900000,
+        999999,
+        999999,
+        999999,
+        999999,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1058480,
+        1222200,
+        1700000,
+        3333333,
+        3333369,
+        9999999,
+        9999999,
+        9999999,
+        10000000,
+        100000000,
+        100000000,
+        999999999,
+        999999999,
+        999999999,
+        999999999,
+        1000000000,
+        4000000000,
+        100000000000000,
+        246424244644646
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name something that always gets spilled at a big family dinner.",
+    "answers": 2120,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "drink",
+        "count": 479,
+        "pct": 23
+      },
+      {
+        "shown": "water",
+        "count": 416,
+        "pct": 20
+      },
+      {
+        "shown": "wine",
+        "count": 363,
+        "pct": 17
+      },
+      {
+        "shown": "tea",
+        "count": 153,
+        "pct": 7
+      },
+      {
+        "shown": "gossip",
+        "count": 102,
+        "pct": 5
+      },
+      {
+        "shown": "Secrets",
+        "count": 98,
+        "pct": 5
+      },
+      {
+        "shown": "Gravy",
+        "count": 70,
+        "pct": 3
+      },
+      {
+        "shown": "juice",
+        "count": 51,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "breakfast",
+      "prompt": "Breakfast?",
+      "a": "Most important meal",
+      "b": "I skip it",
+      "counts": [
+        259,
+        333
+      ],
+      "players": 592
+    },
+    {
+      "id": "late",
+      "prompt": "Showing up to a party?",
+      "a": "Right on time",
+      "b": "Fashionably late",
+      "counts": [
+        333,
+        259
+      ],
+      "players": 592
+    },
+    {
+      "id": "samespot",
+      "prompt": "Same vacation spot every year?",
+      "a": "Yes, it’s our place",
+      "b": "Somewhere new",
+      "counts": [
+        140,
+        452
+      ],
+      "players": 592
+    },
+    {
+      "id": "notifs",
+      "prompt": "Phone notifications?",
+      "a": "All on",
+      "b": "Almost all off",
+      "counts": [
+        158,
+        434
+      ],
+      "players": 592
+    },
+    {
+      "id": "socks",
+      "prompt": "Socks in bed?",
+      "a": "Yes, cozy",
+      "b": "Never",
+      "counts": [
+        192,
+        400
+      ],
+      "players": 592
+    },
+    {
+      "id": "reality",
+      "prompt": "Reality TV?",
+      "a": "Guilty pleasure",
+      "b": "Can’t stand it",
+      "counts": [
+        209,
+        383
+      ],
+      "players": 592
+    },
+    {
+      "id": "cameras",
+      "prompt": "Cameras on in meetings?",
+      "a": "On",
+      "b": "Off",
+      "counts": [
+        178,
+        414
+      ],
+      "players": 592
+    }
+  ],
+  "doodle": {
+    "id": "5182310267748352",
+    "answer": "airplane",
+    "key": "airplane",
+    "lines": 10,
+    "strokes": [
+      [
+        10,
+        62,
+        99,
+        57,
+        242,
+        61,
+        251,
+        63,
+        255,
+        69,
+        250,
+        85,
+        232,
+        100,
+        215,
+        107,
+        88,
+        114,
+        23,
+        105,
+        7,
+        99,
+        1,
+        88,
+        0,
+        77,
+        15,
+        57
+      ],
+      [
+        70,
+        70,
+        66,
+        89,
+        68,
+        93,
+        85,
+        87,
+        76,
+        72
+      ],
+      [
+        33,
+        64,
+        30,
+        108
+      ],
+      [
+        113,
+        76,
+        108,
+        75,
+        108,
+        79,
+        113,
+        82,
+        113,
+        78
+      ],
+      [
+        144,
+        78,
+        134,
+        82,
+        138,
+        89,
+        149,
+        85,
+        153,
+        78
+      ],
+      [
+        175,
+        70,
+        171,
+        82,
+        178,
+        82,
+        177,
+        75
+      ],
+      [
+        198,
+        72,
+        191,
+        81,
+        193,
+        86,
+        198,
+        86,
+        209,
+        81,
+        215,
+        73,
+        214,
+        69
+      ],
+      [
+        126,
+        93,
+        117,
+        158,
+        125,
+        153,
+        135,
+        133,
+        135,
+        96
+      ],
+      [
+        132,
+        64,
+        127,
+        40,
+        128,
+        0,
+        135,
+        4,
+        148,
+        22,
+        150,
+        51,
+        147,
+        62
+      ],
+      [
+        249,
+        50,
+        247,
+        78
+      ]
+    ],
+    "players": 189,
+    "finished": 176,
+    "got": 168,
+    "gotByLine": [
+      9,
+      8,
+      7,
+      13,
+      5,
+      4,
+      4,
+      39,
+      62,
+      17
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 120,
+    "finished": 46,
+    "climbedAll": 18,
+    "rungs": [
+      {
+        "word": "team",
+        "letters": 4,
+        "reached": 120,
+        "solved": 103,
+        "openers": [
+          {
+            "value": "star",
+            "count": 6
+          },
+          {
+            "value": "four",
+            "count": 4
+          },
+          {
+            "value": "spot",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "lousy",
+        "letters": 5,
+        "reached": 96,
+        "solved": 78,
+        "openers": [
+          {
+            "value": "adieu",
+            "count": 11
+          },
+          {
+            "value": "audio",
+            "count": 3
+          },
+          {
+            "value": "teams",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "verify",
+        "letters": 6,
+        "reached": 71,
+        "solved": 46,
+        "openers": [
+          {
+            "value": "blouse",
+            "count": 2
+          },
+          {
+            "value": "traces",
+            "count": 2
+          },
+          {
+            "value": "trades",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "inverse",
+        "letters": 7,
+        "reached": 45,
+        "solved": 34,
+        "openers": [
+          {
+            "value": "scholar",
+            "count": 1
+          },
+          {
+            "value": "browser",
+            "count": 1
+          },
+          {
+            "value": "boughts",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "although",
+        "letters": 8,
+        "reached": 34,
+        "solved": 28,
+        "openers": [
+          {
+            "value": "grouping",
+            "count": 2
+          },
+          {
+            "value": "strongly",
+            "count": 1
+          },
+          {
+            "value": "climbers",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "threshold",
+        "letters": 9,
+        "reached": 27,
+        "solved": 20,
+        "openers": [
+          {
+            "value": "stationed",
+            "count": 1
+          },
+          {
+            "value": "alphabets",
+            "count": 1
+          },
+          {
+            "value": "dreamings",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "fulfilling",
+        "letters": 10,
+        "reached": 19,
+        "solved": 18,
+        "openers": [
+          {
+            "value": "complexity",
+            "count": 2
+          },
+          {
+            "value": "ploughings",
+            "count": 1
+          },
+          {
+            "value": "compulsive",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "breath",
+    "players": 175,
+    "found": 94,
+    "gaveUp": 31,
+    "medianGuesses": 36.5,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "sea",
+        "count": 11
+      },
+      {
+        "value": "ocean",
+        "count": 11
+      },
+      {
+        "value": "water",
+        "count": 9
+      },
+      {
+        "value": "hot",
+        "count": 8
+      },
+      {
+        "value": "food",
+        "count": 8
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "mouth",
+        "count": 42
+      },
+      {
+        "value": "breathe",
+        "count": 31
+      },
+      {
+        "value": "inhale",
+        "count": 24
+      },
+      {
+        "value": "eyes",
+        "count": 14
+      },
+      {
+        "value": "throat",
+        "count": 13
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "disturbed",
+    "hidden": 58,
+    "players": 111,
+    "foundBigWord": 92,
+    "mostFound": [
+      {
+        "word": "disturbed",
+        "count": 92
+      },
+      {
+        "word": "disturb",
+        "count": 76
+      },
+      {
+        "word": "dust",
+        "count": 73
+      },
+      {
+        "word": "bust",
+        "count": 66
+      },
+      {
+        "word": "best",
+        "count": 65
+      }
+    ],
+    "rarestFound": [
+      "urite",
+      "tuis",
+      "uteri",
+      "buret",
+      "debur"
+    ],
+    "differentWordsFound": 297
+  }
+}
