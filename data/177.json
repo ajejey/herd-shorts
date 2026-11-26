@@ -593,7 +593,7 @@
             "count": 5
           },
           {
-            "value": "climb",
+            "value": "audio",
             "count": 3
           }
         ]
@@ -609,11 +609,11 @@
             "count": 2
           },
           {
-            "value": "gamers",
+            "value": "orange",
             "count": 2
           },
           {
-            "value": "orange",
+            "value": "trades",
             "count": 2
           }
         ]
@@ -629,11 +629,11 @@
             "count": 2
           },
           {
-            "value": "conduct",
+            "value": "grumble",
             "count": 1
           },
           {
-            "value": "spacers",
+            "value": "crinkle",
             "count": 1
           }
         ]
@@ -665,11 +665,11 @@
         "solved": 35,
         "openers": [
           {
-            "value": "relations",
+            "value": "creations",
             "count": 2
           },
           {
-            "value": "creations",
+            "value": "relations",
             "count": 2
           },
           {
@@ -689,11 +689,11 @@
             "count": 2
           },
           {
-            "value": "managerial",
+            "value": "missionary",
             "count": 1
           },
           {
-            "value": "production",
+            "value": "understand",
             "count": 1
           }
         ]
@@ -721,11 +721,11 @@
         "count": 7
       },
       {
-        "value": "food",
+        "value": "water",
         "count": 6
       },
       {
-        "value": "water",
+        "value": "food",
         "count": 6
       }
     ],
@@ -780,11 +780,11 @@
       }
     ],
     "rarestFound": [
-      "ferer",
-      "dorper",
-      "frore",
+      "deperm",
       "merer",
-      "roemer"
+      "ferer",
+      "dorp",
+      "dero"
     ],
     "differentWordsFound": 112
   }
