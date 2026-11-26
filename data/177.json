@@ -1,0 +1,791 @@
+{
+  "day": 177,
+  "lastFinished": 177,
+  "guesstimate": [
+    {
+      "id": 243,
+      "question": "How far is the pitcher's rubber from home plate in MLB, in feet, to one decimal place?",
+      "unit": "feet",
+      "answer": 60.5,
+      "fact": "That odd distance has been in the rules since 1893.",
+      "players": 87,
+      "median": 32,
+      "exact": 7,
+      "close": 15,
+      "closeRule": "within 10%",
+      "guesses": [
+        0.75,
+        2,
+        5,
+        6,
+        6.2,
+        6.9,
+        7.6,
+        8,
+        10,
+        10,
+        10,
+        10.1,
+        11.7,
+        12,
+        12,
+        12.4,
+        12.9,
+        13.4,
+        15,
+        15.3,
+        15.6,
+        16.5,
+        16.6,
+        18,
+        18,
+        18.2,
+        18.2,
+        20,
+        20,
+        20,
+        20.1,
+        23,
+        23,
+        25,
+        25,
+        25,
+        25,
+        25,
+        25.5,
+        26.6,
+        27,
+        30,
+        30,
+        32,
+        33,
+        38,
+        40,
+        40.2,
+        40.5,
+        42.43,
+        42.6,
+        45,
+        45,
+        45,
+        48,
+        50.2,
+        54,
+        54.5,
+        55,
+        60,
+        60.5,
+        60.5,
+        60.5,
+        60.5,
+        60.5,
+        60.5,
+        60.5,
+        60.6,
+        62.5,
+        63,
+        64,
+        65,
+        66.6,
+        67,
+        70,
+        80,
+        86,
+        90,
+        90,
+        90,
+        100,
+        100,
+        123,
+        125,
+        150,
+        250,
+        300
+      ],
+      "sampled": false
+    },
+    {
+      "id": 319,
+      "question": "Roughly how many years old are the oldest known noodles, found in China?",
+      "unit": "years",
+      "answer": 4000,
+      "fact": "They were made from millet and found under an upturned bowl.",
+      "players": 84,
+      "median": 1500,
+      "exact": 10,
+      "close": 10,
+      "closeRule": "within 10%",
+      "guesses": [
+        30,
+        60,
+        60,
+        112,
+        120,
+        133,
+        150,
+        152,
+        160,
+        180,
+        200,
+        230,
+        235,
+        236,
+        250,
+        300,
+        300,
+        333,
+        345,
+        350,
+        400,
+        500,
+        500,
+        500,
+        500,
+        500,
+        600,
+        675,
+        700,
+        750,
+        800,
+        900,
+        1000,
+        1000,
+        1000,
+        1000,
+        1000,
+        1250,
+        1300,
+        1500,
+        1500,
+        1500,
+        1500,
+        1700,
+        2000,
+        2000,
+        2500,
+        2500,
+        2500,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3000,
+        3200,
+        3500,
+        3500,
+        3500,
+        4000,
+        4000,
+        4000,
+        4000,
+        4000,
+        4000,
+        4000,
+        4000,
+        4000,
+        4000,
+        4500,
+        4500,
+        5000,
+        5000,
+        5000,
+        5000,
+        5000,
+        5000,
+        5000,
+        5732,
+        6000,
+        10000,
+        10000,
+        50000,
+        200000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 298,
+      "question": "How old was Frank Epperson when he accidentally invented the Popsicle, in years?",
+      "unit": "years",
+      "answer": 11,
+      "fact": "He left a cup of soda with a stirring stick outside on a cold night.",
+      "players": 83,
+      "median": 34,
+      "exact": 3,
+      "close": 8,
+      "closeRule": "within 10%",
+      "guesses": [
+        6,
+        7,
+        9,
+        10,
+        11,
+        11,
+        11,
+        12,
+        12,
+        12,
+        12,
+        13,
+        13,
+        13,
+        13,
+        14,
+        14,
+        14,
+        14,
+        15,
+        15,
+        15,
+        15,
+        16,
+        16,
+        17,
+        18,
+        19,
+        22,
+        22,
+        23,
+        23,
+        24,
+        24,
+        25,
+        25,
+        30,
+        30,
+        31,
+        33,
+        34,
+        34,
+        34,
+        34,
+        35,
+        36,
+        36,
+        40,
+        40,
+        43,
+        45,
+        45,
+        45,
+        45,
+        45,
+        46,
+        50,
+        53,
+        55,
+        56,
+        56,
+        57,
+        57,
+        58,
+        60,
+        62,
+        63,
+        66,
+        66,
+        67,
+        67,
+        67,
+        72,
+        72,
+        75,
+        76,
+        78,
+        78,
+        78,
+        84,
+        87,
+        1460,
+        1000000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name something people watch on TV on Thanksgiving.",
+    "answers": 1981,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "Football",
+        "count": 825,
+        "pct": 42
+      },
+      {
+        "shown": "Parade",
+        "count": 227,
+        "pct": 11
+      },
+      {
+        "shown": "Movies",
+        "count": 154,
+        "pct": 8
+      },
+      {
+        "shown": "Macys parade",
+        "count": 74,
+        "pct": 4
+      },
+      {
+        "shown": "news",
+        "count": 61,
+        "pct": 3
+      },
+      {
+        "shown": "home alone",
+        "count": 52,
+        "pct": 3
+      },
+      {
+        "shown": "superbowl",
+        "count": 52,
+        "pct": 3
+      },
+      {
+        "shown": "nfl",
+        "count": 44,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "videocalls",
+      "prompt": "Group video calls?",
+      "a": "Fun",
+      "b": "Exhausting",
+      "counts": [
+        224,
+        293
+      ],
+      "players": 517
+    },
+    {
+      "id": "cereal",
+      "prompt": "Cereal or milk first?",
+      "a": "Cereal first",
+      "b": "Milk first",
+      "counts": [
+        454,
+        63
+      ],
+      "players": 517
+    },
+    {
+      "id": "escalator",
+      "prompt": "On an escalator?",
+      "a": "Walk up it",
+      "b": "Stand and ride",
+      "counts": [
+        170,
+        347
+      ],
+      "players": 517
+    },
+    {
+      "id": "surprise",
+      "prompt": "A surprise party for you?",
+      "a": "Love it",
+      "b": "Please don’t",
+      "counts": [
+        284,
+        233
+      ],
+      "players": 517
+    },
+    {
+      "id": "meetings",
+      "prompt": "Most meetings should be…",
+      "a": "Emails",
+      "b": "Meetings",
+      "counts": [
+        331,
+        186
+      ],
+      "players": 517
+    },
+    {
+      "id": "remakes",
+      "prompt": "Remakes and sequels?",
+      "a": "Bring them on",
+      "b": "Make something new",
+      "counts": [
+        166,
+        351
+      ],
+      "players": 517
+    },
+    {
+      "id": "plants",
+      "prompt": "Houseplants?",
+      "a": "A jungle",
+      "b": "Fake ones, honestly",
+      "counts": [
+        271,
+        246
+      ],
+      "players": 517
+    }
+  ],
+  "doodle": {
+    "id": "5866099826491392",
+    "answer": "vase",
+    "key": "vase",
+    "lines": 5,
+    "strokes": [
+      [
+        39,
+        66,
+        84,
+        67,
+        79,
+        125,
+        116,
+        162,
+        125,
+        192,
+        120,
+        243,
+        112,
+        252,
+        99,
+        255,
+        71,
+        255,
+        48,
+        250,
+        12,
+        250,
+        8,
+        246,
+        1,
+        212,
+        0,
+        168,
+        10,
+        147,
+        24,
+        135,
+        37,
+        128,
+        42,
+        122,
+        46,
+        67
+      ],
+      [
+        63,
+        60,
+        81,
+        29,
+        97,
+        18
+      ],
+      [
+        106,
+        16,
+        103,
+        26,
+        119,
+        32,
+        129,
+        32,
+        132,
+        18,
+        136,
+        21,
+        135,
+        13,
+        112,
+        0,
+        104,
+        0,
+        99,
+        9,
+        89,
+        11,
+        88,
+        26
+      ],
+      [
+        57,
+        74,
+        63,
+        36,
+        51,
+        18
+      ],
+      [
+        44,
+        21,
+        55,
+        22,
+        53,
+        16,
+        46,
+        11,
+        12,
+        6,
+        5,
+        12,
+        6,
+        24,
+        20,
+        32,
+        23,
+        31,
+        20,
+        24,
+        24,
+        27
+      ]
+    ],
+    "players": 181,
+    "finished": 178,
+    "got": 171,
+    "gotByLine": [
+      118,
+      20,
+      5,
+      11,
+      17
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 124,
+    "finished": 60,
+    "climbedAll": 29,
+    "rungs": [
+      {
+        "word": "blew",
+        "letters": 4,
+        "reached": 124,
+        "solved": 93,
+        "openers": [
+          {
+            "value": "star",
+            "count": 5
+          },
+          {
+            "value": "stop",
+            "count": 5
+          },
+          {
+            "value": "spot",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "split",
+        "letters": 5,
+        "reached": 91,
+        "solved": 78,
+        "openers": [
+          {
+            "value": "stare",
+            "count": 8
+          },
+          {
+            "value": "adieu",
+            "count": 5
+          },
+          {
+            "value": "climb",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "bubble",
+        "letters": 6,
+        "reached": 76,
+        "solved": 57,
+        "openers": [
+          {
+            "value": "action",
+            "count": 2
+          },
+          {
+            "value": "gamers",
+            "count": 2
+          },
+          {
+            "value": "orange",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "bigotry",
+        "letters": 7,
+        "reached": 53,
+        "solved": 45,
+        "openers": [
+          {
+            "value": "oranges",
+            "count": 2
+          },
+          {
+            "value": "conduct",
+            "count": 1
+          },
+          {
+            "value": "spacers",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "antidote",
+        "letters": 8,
+        "reached": 45,
+        "solved": 38,
+        "openers": [
+          {
+            "value": "rainbows",
+            "count": 3
+          },
+          {
+            "value": "reaction",
+            "count": 2
+          },
+          {
+            "value": "elephant",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "underrate",
+        "letters": 9,
+        "reached": 37,
+        "solved": 35,
+        "openers": [
+          {
+            "value": "relations",
+            "count": 2
+          },
+          {
+            "value": "creations",
+            "count": 2
+          },
+          {
+            "value": "antidotes",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "missionary",
+        "letters": 10,
+        "reached": 34,
+        "solved": 29,
+        "openers": [
+          {
+            "value": "background",
+            "count": 2
+          },
+          {
+            "value": "managerial",
+            "count": 1
+          },
+          {
+            "value": "production",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "dream",
+    "players": 149,
+    "found": 78,
+    "gaveUp": 31,
+    "medianGuesses": 29,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "dog",
+        "count": 10
+      },
+      {
+        "value": "ocean",
+        "count": 8
+      },
+      {
+        "value": "sea",
+        "count": 7
+      },
+      {
+        "value": "food",
+        "count": 6
+      },
+      {
+        "value": "water",
+        "count": 6
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "love",
+        "count": 21
+      },
+      {
+        "value": "life",
+        "count": 10
+      },
+      {
+        "value": "imagine",
+        "count": 6
+      },
+      {
+        "value": "wish",
+        "count": 5
+      },
+      {
+        "value": "mind",
+        "count": 4
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "performed",
+    "hidden": 25,
+    "players": 113,
+    "foundBigWord": 88,
+    "mostFound": [
+      {
+        "word": "performed",
+        "count": 88
+      },
+      {
+        "word": "perform",
+        "count": 82
+      },
+      {
+        "word": "form",
+        "count": 78
+      },
+      {
+        "word": "formed",
+        "count": 74
+      },
+      {
+        "word": "more",
+        "count": 66
+      }
+    ],
+    "rarestFound": [
+      "ferer",
+      "dorper",
+      "frore",
+      "merer",
+      "roemer"
+    ],
+    "differentWordsFound": 112
+  }
+}
