@@ -1,0 +1,791 @@
+{
+  "day": 178,
+  "lastFinished": 178,
+  "guesstimate": [
+    {
+      "id": 152,
+      "question": "Roughly how many kilometers wide is the Sun?",
+      "unit": "kilometers",
+      "answer": 1390000,
+      "fact": "It holds about 99.8 percent of all the mass in the solar system.",
+      "players": 90,
+      "median": 1475000,
+      "exact": 0,
+      "close": 6,
+      "closeRule": "within 10%",
+      "guesses": [
+        1.4,
+        120,
+        3000,
+        3000,
+        3567,
+        5000,
+        5000,
+        6400,
+        7800,
+        9000,
+        12000,
+        12500,
+        20000,
+        23000,
+        30001,
+        40000,
+        40000,
+        45000,
+        45000,
+        80000,
+        100000,
+        300000,
+        300000,
+        350000,
+        500000,
+        500000,
+        500000,
+        750000,
+        800000,
+        800000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1200000,
+        1300000,
+        1391400,
+        1392700,
+        1400000,
+        1450000,
+        1500000,
+        2500000,
+        3000000,
+        3200000,
+        3600000,
+        4000000,
+        4500000,
+        5000000,
+        5679481,
+        6000000,
+        6100000,
+        6700989,
+        10000000,
+        10000000,
+        10000000,
+        12222222,
+        13000000,
+        20000000,
+        35000000,
+        42000000,
+        45432345,
+        53000000,
+        80000000,
+        90000000,
+        100000000,
+        100000000,
+        200000000,
+        200000000,
+        223000000,
+        338000000,
+        500000000,
+        736499203,
+        1000000000,
+        1200000000,
+        2000000008,
+        4000000000,
+        5000000000,
+        7000000000,
+        9000000000,
+        22000000000,
+        24000000000,
+        40000000000,
+        100000000000,
+        100000000000,
+        1000000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 86,
+      "question": "Roughly how many months is an African elephant pregnant?",
+      "unit": "months",
+      "answer": 22,
+      "fact": "It is the longest pregnancy of any land animal.",
+      "players": 88,
+      "median": 14,
+      "exact": 5,
+      "close": 19,
+      "closeRule": "within 10%",
+      "guesses": [
+        3,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        7,
+        7,
+        8,
+        8,
+        8,
+        9,
+        9,
+        9,
+        9,
+        10,
+        10,
+        10,
+        10,
+        10,
+        11,
+        11,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        14,
+        14,
+        14,
+        14,
+        14,
+        15,
+        15,
+        15,
+        15,
+        15,
+        16,
+        16,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18,
+        18,
+        19,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        21,
+        22,
+        22,
+        22,
+        22,
+        22,
+        23,
+        23,
+        24,
+        24,
+        24,
+        24,
+        24,
+        26,
+        26,
+        34,
+        44,
+        167
+      ],
+      "sampled": false
+    },
+    {
+      "id": 267,
+      "question": "How many points did Wayne Gretzky score in his NHL regular-season career?",
+      "unit": "points",
+      "answer": 2857,
+      "fact": "His assists alone would still top the all-time points list.",
+      "players": 87,
+      "median": 400,
+      "exact": 2,
+      "close": 4,
+      "closeRule": "within 10%",
+      "guesses": [
+        1,
+        6,
+        15,
+        24,
+        24,
+        30,
+        32,
+        34,
+        35,
+        38,
+        42,
+        47,
+        50,
+        56,
+        61,
+        65,
+        66,
+        67,
+        67,
+        70,
+        79,
+        80,
+        80,
+        87,
+        89,
+        100,
+        100,
+        108,
+        120,
+        132,
+        132,
+        150,
+        150,
+        157,
+        157,
+        168,
+        180,
+        200,
+        240,
+        255,
+        256,
+        260,
+        300,
+        400,
+        500,
+        500,
+        563,
+        584,
+        600,
+        600,
+        654,
+        674,
+        695,
+        800,
+        804,
+        850,
+        876,
+        950,
+        954,
+        1000,
+        1000,
+        1000,
+        1200,
+        1250,
+        1250,
+        1500,
+        1700,
+        2000,
+        2000,
+        2100,
+        2200,
+        2479,
+        2550,
+        2857,
+        2857,
+        2900,
+        3000,
+        3300,
+        4000,
+        4500,
+        5000,
+        7500,
+        12000,
+        12345,
+        18539,
+        34242,
+        50000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name a leftover that tastes better the next day.",
+    "answers": 1734,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "pizza",
+        "count": 857,
+        "pct": 49
+      },
+      {
+        "shown": "Pasta",
+        "count": 108,
+        "pct": 6
+      },
+      {
+        "shown": "Lasagna",
+        "count": 89,
+        "pct": 5
+      },
+      {
+        "shown": "Soup",
+        "count": 68,
+        "pct": 4
+      },
+      {
+        "shown": "turkey",
+        "count": 58,
+        "pct": 3
+      },
+      {
+        "shown": "spaghetti",
+        "count": 41,
+        "pct": 2
+      },
+      {
+        "shown": "Rice",
+        "count": 38,
+        "pct": 2
+      },
+      {
+        "shown": "Cake",
+        "count": 36,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "recline",
+      "prompt": "Recline your plane seat?",
+      "a": "Yes, I paid for it",
+      "b": "Never",
+      "counts": [
+        216,
+        201
+      ],
+      "players": 417
+    },
+    {
+      "id": "office",
+      "prompt": "You work best…",
+      "a": "In the office",
+      "b": "At home",
+      "counts": [
+        203,
+        214
+      ],
+      "players": 417
+    },
+    {
+      "id": "shoes",
+      "prompt": "Shoes in the house?",
+      "a": "Off at the door",
+      "b": "Keep them on",
+      "counts": [
+        340,
+        77
+      ],
+      "players": 417
+    },
+    {
+      "id": "grocery",
+      "prompt": "Grocery shopping?",
+      "a": "With a list",
+      "b": "Wander the aisles",
+      "counts": [
+        272,
+        145
+      ],
+      "players": 417
+    },
+    {
+      "id": "lottery",
+      "prompt": "Win the lottery. Tell people?",
+      "a": "Tell everyone",
+      "b": "Tell no one",
+      "counts": [
+        65,
+        352
+      ],
+      "players": 417
+    },
+    {
+      "id": "punctuation",
+      "prompt": "Texting style?",
+      "a": "Full sentences.",
+      "b": "lowercase no periods",
+      "counts": [
+        210,
+        207
+      ],
+      "players": 417
+    },
+    {
+      "id": "diagonal",
+      "prompt": "Cut your sandwich…",
+      "a": "Diagonally",
+      "b": "Straight down",
+      "counts": [
+        258,
+        159
+      ],
+      "players": 417
+    }
+  ],
+  "doodle": {
+    "id": "5125352760279040",
+    "answer": "van",
+    "key": "van",
+    "lines": 6,
+    "strokes": [
+      [
+        2,
+        118,
+        1,
+        54,
+        7,
+        31,
+        18,
+        17,
+        51,
+        3,
+        125,
+        0,
+        214,
+        5,
+        235,
+        14,
+        246,
+        32,
+        253,
+        56,
+        255,
+        117,
+        253,
+        123
+      ],
+      [
+        6,
+        112,
+        26,
+        123,
+        66,
+        123
+      ],
+      [
+        57,
+        114,
+        52,
+        116,
+        54,
+        128,
+        63,
+        137,
+        72,
+        138,
+        79,
+        128,
+        81,
+        115,
+        78,
+        108,
+        69,
+        107
+      ],
+      [
+        90,
+        123,
+        116,
+        128,
+        187,
+        123
+      ],
+      [
+        206,
+        114,
+        197,
+        114,
+        188,
+        127,
+        186,
+        135,
+        189,
+        137,
+        202,
+        137,
+        218,
+        128,
+        220,
+        117,
+        217,
+        110,
+        212,
+        106,
+        205,
+        107
+      ],
+      [
+        218,
+        128,
+        229,
+        129,
+        250,
+        125
+      ]
+    ],
+    "players": 171,
+    "finished": 160,
+    "got": 124,
+    "gotByLine": [
+      3,
+      4,
+      38,
+      27,
+      24,
+      28
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 112,
+    "finished": 50,
+    "climbedAll": 24,
+    "rungs": [
+      {
+        "word": "whom",
+        "letters": 4,
+        "reached": 112,
+        "solved": 86,
+        "openers": [
+          {
+            "value": "spot",
+            "count": 5
+          },
+          {
+            "value": "four",
+            "count": 4
+          },
+          {
+            "value": "tear",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "vital",
+        "letters": 5,
+        "reached": 80,
+        "solved": 62,
+        "openers": [
+          {
+            "value": "audio",
+            "count": 9
+          },
+          {
+            "value": "adieu",
+            "count": 9
+          },
+          {
+            "value": "crane",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "word": "police",
+        "letters": 6,
+        "reached": 59,
+        "solved": 54,
+        "openers": [
+          {
+            "value": "audios",
+            "count": 3
+          },
+          {
+            "value": "scream",
+            "count": 2
+          },
+          {
+            "value": "cranes",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "premium",
+        "letters": 7,
+        "reached": 53,
+        "solved": 46,
+        "openers": [
+          {
+            "value": "leisure",
+            "count": 2
+          },
+          {
+            "value": "dreamer",
+            "count": 2
+          },
+          {
+            "value": "picture",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "overview",
+        "letters": 8,
+        "reached": 46,
+        "solved": 30,
+        "openers": [
+          {
+            "value": "creating",
+            "count": 2
+          },
+          {
+            "value": "premiums",
+            "count": 2
+          },
+          {
+            "value": "frighten",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "fledgling",
+        "letters": 9,
+        "reached": 29,
+        "solved": 26,
+        "openers": [
+          {
+            "value": "overviews",
+            "count": 4
+          },
+          {
+            "value": "preaching",
+            "count": 1
+          },
+          {
+            "value": "newspaper",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "flamboyant",
+        "letters": 10,
+        "reached": 26,
+        "solved": 24,
+        "openers": [
+          {
+            "value": "friendship",
+            "count": 2
+          },
+          {
+            "value": "playground",
+            "count": 2
+          },
+          {
+            "value": "firetrucks",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "passport",
+    "players": 148,
+    "found": 76,
+    "gaveUp": 29,
+    "medianGuesses": 33,
+    "fewestGuesses": 7,
+    "firstGuesses": [
+      {
+        "value": "sea",
+        "count": 8
+      },
+      {
+        "value": "water",
+        "count": 7
+      },
+      {
+        "value": "ocean",
+        "count": 6
+      },
+      {
+        "value": "turkey",
+        "count": 4
+      },
+      {
+        "value": "cow",
+        "count": 3
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "card",
+        "count": 16
+      },
+      {
+        "value": "certificate",
+        "count": 7
+      },
+      {
+        "value": "visa",
+        "count": 6
+      },
+      {
+        "value": "wallet",
+        "count": 5
+      },
+      {
+        "value": "registration",
+        "count": 3
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "embedding",
+    "hidden": 25,
+    "players": 94,
+    "foundBigWord": 73,
+    "mostFound": [
+      {
+        "word": "embedding",
+        "count": 73
+      },
+      {
+        "word": "bedding",
+        "count": 73
+      },
+      {
+        "word": "ding",
+        "count": 69
+      },
+      {
+        "word": "embed",
+        "count": 68
+      },
+      {
+        "word": "dime",
+        "count": 63
+      }
+    ],
+    "rarestFound": [
+      "nimbed",
+      "deid",
+      "meined",
+      "deni",
+      "mened"
+    ],
+    "differentWordsFound": 90
+  }
+}
