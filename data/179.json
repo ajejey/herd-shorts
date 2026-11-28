@@ -1,0 +1,768 @@
+{
+  "day": 179,
+  "lastFinished": 179,
+  "guesstimate": [
+    {
+      "id": 265,
+      "question": "How many matches are played in a full Premier League season?",
+      "unit": "matches",
+      "answer": 380,
+      "fact": "Each of the 20 clubs plays every other club home and away.",
+      "players": 87,
+      "median": 52,
+      "exact": 3,
+      "close": 5,
+      "closeRule": "within 10%",
+      "guesses": [
+        4,
+        5,
+        7,
+        7,
+        8,
+        10,
+        12,
+        12,
+        12,
+        14,
+        15,
+        16,
+        20,
+        20,
+        20,
+        20,
+        21,
+        21,
+        22,
+        22,
+        23,
+        24,
+        24,
+        25,
+        25,
+        30,
+        30,
+        30,
+        32,
+        32,
+        35,
+        36,
+        36,
+        36,
+        38,
+        40,
+        43,
+        43,
+        45,
+        46,
+        46,
+        50,
+        52,
+        52,
+        52,
+        54,
+        56,
+        56,
+        60,
+        60,
+        65,
+        65,
+        68,
+        70,
+        80,
+        80,
+        89,
+        95,
+        96,
+        102,
+        125,
+        130,
+        140,
+        160,
+        180,
+        200,
+        200,
+        200,
+        200,
+        250,
+        256,
+        300,
+        300,
+        340,
+        370,
+        380,
+        380,
+        380,
+        400,
+        496,
+        600,
+        732,
+        760,
+        800,
+        800,
+        900,
+        2903
+      ],
+      "sampled": false
+    },
+    {
+      "id": 392,
+      "question": "In 2022, a 1955 Mercedes-Benz sold for roughly how many dollars, a record for any car?",
+      "unit": "dollars",
+      "answer": 143000000,
+      "fact": "It was one of only two prototypes ever built.",
+      "players": 84,
+      "median": 5250000,
+      "exact": 0,
+      "close": 2,
+      "closeRule": "within 10%",
+      "guesses": [
+        22,
+        450,
+        3500,
+        45000,
+        50000,
+        75000,
+        100000,
+        100000,
+        150692,
+        200000,
+        230000,
+        234599,
+        250000,
+        250000,
+        300000,
+        300000,
+        500856,
+        600000,
+        700000,
+        850000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1000000,
+        1200000,
+        1500000,
+        2000000,
+        2300000,
+        2500000,
+        2500000,
+        2500000,
+        2500000,
+        3000000,
+        3000000,
+        3400000,
+        3500000,
+        3500000,
+        4500000,
+        5000000,
+        5000000,
+        5500000,
+        6000000,
+        6184225,
+        6200000,
+        7000000,
+        8000000,
+        9473649,
+        10000000,
+        10000000,
+        10800000,
+        20000000,
+        20000000,
+        20000000,
+        22000000,
+        22000000,
+        22000000,
+        24500000,
+        30000000,
+        34000000,
+        35000000,
+        50000000,
+        50000000,
+        56000000,
+        70000000,
+        80000000,
+        100000000,
+        100000000,
+        100000000,
+        120000000,
+        148000000,
+        150000000,
+        300000000,
+        400000000,
+        593443944,
+        600000000,
+        1000000000,
+        1000000000,
+        2000000000,
+        2000000000,
+        3600000000,
+        5200000000,
+        15000000000
+      ],
+      "sampled": false
+    },
+    {
+      "id": 299,
+      "question": "Roughly how many milligrams of caffeine are in an 8-ounce cup of brewed coffee?",
+      "unit": "milligrams",
+      "answer": 95,
+      "fact": "Finland drinks more coffee per person than any other country.",
+      "players": 83,
+      "median": 80,
+      "exact": 0,
+      "close": 10,
+      "closeRule": "within 10%",
+      "guesses": [
+        5,
+        6,
+        8,
+        9,
+        10,
+        10,
+        10,
+        10,
+        12,
+        15,
+        15,
+        15,
+        16,
+        16,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        20,
+        25,
+        28,
+        32,
+        32,
+        33,
+        38,
+        38,
+        38,
+        40,
+        40,
+        50,
+        50,
+        50,
+        50,
+        58,
+        60,
+        60,
+        60,
+        75,
+        80,
+        80,
+        80,
+        82,
+        90,
+        90,
+        93,
+        98,
+        98,
+        100,
+        100,
+        100,
+        100,
+        100,
+        125,
+        125,
+        125,
+        125,
+        125,
+        130,
+        130,
+        134,
+        150,
+        150,
+        160,
+        200,
+        200,
+        200,
+        200,
+        220,
+        240,
+        258,
+        300,
+        400,
+        500,
+        500,
+        600,
+        800,
+        9000,
+        10000,
+        80000,
+        600000
+      ],
+      "sampled": false
+    }
+  ],
+  "topAnswers": {
+    "question": "Name something people buy on Black Friday.",
+    "answers": 1565,
+    "survey": true,
+    "tiles": [
+      {
+        "shown": "TVs",
+        "count": 803,
+        "pct": 51
+      },
+      {
+        "shown": "clothes",
+        "count": 270,
+        "pct": 17
+      },
+      {
+        "shown": "phones",
+        "count": 110,
+        "pct": 7
+      },
+      {
+        "shown": "Electronics",
+        "count": 106,
+        "pct": 7
+      },
+      {
+        "shown": "tech",
+        "count": 42,
+        "pct": 3
+      },
+      {
+        "shown": "Gifts",
+        "count": 33,
+        "pct": 2
+      }
+    ]
+  },
+  "hotTakes": [
+    {
+      "id": "routine",
+      "prompt": "Your mornings?",
+      "a": "Same routine every day",
+      "b": "Different every day",
+      "counts": [
+        291,
+        96
+      ],
+      "players": 387
+    },
+    {
+      "id": "birthday",
+      "prompt": "Your birthday?",
+      "a": "A big celebration",
+      "b": "A low-key day",
+      "counts": [
+        100,
+        287
+      ],
+      "players": 387
+    },
+    {
+      "id": "choc",
+      "prompt": "Chocolate?",
+      "a": "Milk chocolate",
+      "b": "Dark only",
+      "counts": [
+        252,
+        135
+      ],
+      "players": 387
+    },
+    {
+      "id": "spoilers",
+      "prompt": "Spoilers?",
+      "a": "Don’t care",
+      "b": "Ruins everything",
+      "counts": [
+        142,
+        245
+      ],
+      "players": 387
+    },
+    {
+      "id": "travelpillow",
+      "prompt": "Neck pillow at the airport?",
+      "a": "Comfort first",
+      "b": "Never in public",
+      "counts": [
+        223,
+        164
+      ],
+      "players": 387
+    },
+    {
+      "id": "budget",
+      "prompt": "Your budget is…",
+      "a": "A spreadsheet",
+      "b": "Vibes",
+      "counts": [
+        132,
+        255
+      ],
+      "players": 387
+    },
+    {
+      "id": "signoff",
+      "prompt": "Email sign-off?",
+      "a": "Best,",
+      "b": "Cheers!",
+      "counts": [
+        269,
+        118
+      ],
+      "players": 387
+    }
+  ],
+  "doodle": {
+    "id": "5266508735315968",
+    "answer": "cup",
+    "key": "cup",
+    "lines": 6,
+    "strokes": [
+      [
+        2,
+        26,
+        54,
+        45,
+        101,
+        48,
+        163,
+        39,
+        180,
+        33,
+        187,
+        25,
+        185,
+        21,
+        154,
+        9,
+        101,
+        2,
+        24,
+        9,
+        5,
+        16,
+        0,
+        21
+      ],
+      [
+        8,
+        16,
+        3,
+        46,
+        1,
+        186
+      ],
+      [
+        11,
+        184,
+        33,
+        189,
+        119,
+        186,
+        162,
+        192
+      ],
+      [
+        178,
+        196,
+        174,
+        170,
+        176,
+        126,
+        184,
+        21,
+        190,
+        0
+      ],
+      [
+        179,
+        51,
+        197,
+        43,
+        213,
+        43,
+        232,
+        49,
+        248,
+        63,
+        255,
+        87,
+        248,
+        109,
+        227,
+        129,
+        203,
+        137,
+        171,
+        138
+      ],
+      [
+        181,
+        114,
+        205,
+        102,
+        216,
+        87,
+        212,
+        75,
+        201,
+        64,
+        181,
+        59
+      ]
+    ],
+    "players": 160,
+    "finished": 151,
+    "got": 147,
+    "gotByLine": [
+      27,
+      30,
+      22,
+      10,
+      47,
+      11
+    ],
+    "credit": "Doodles from Quick, Draw! by Google, CC BY 4.0"
+  },
+  "wordClimb": {
+    "players": 109,
+    "finished": 53,
+    "climbedAll": 18,
+    "rungs": [
+      {
+        "word": "loan",
+        "letters": 4,
+        "reached": 109,
+        "solved": 91,
+        "openers": [
+          {
+            "value": "word",
+            "count": 5
+          },
+          {
+            "value": "four",
+            "count": 3
+          },
+          {
+            "value": "read",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "dense",
+        "letters": 5,
+        "reached": 84,
+        "solved": 67,
+        "openers": [
+          {
+            "value": "audio",
+            "count": 6
+          },
+          {
+            "value": "adieu",
+            "count": 5
+          },
+          {
+            "value": "stare",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "word": "invoke",
+        "letters": 6,
+        "reached": 66,
+        "solved": 37,
+        "openers": [
+          {
+            "value": "pirate",
+            "count": 3
+          },
+          {
+            "value": "slated",
+            "count": 2
+          },
+          {
+            "value": "audios",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "word": "pudding",
+        "letters": 7,
+        "reached": 37,
+        "solved": 35,
+        "openers": [
+          {
+            "value": "invokes",
+            "count": 2
+          },
+          {
+            "value": "watered",
+            "count": 1
+          },
+          {
+            "value": "poverty",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "syndrome",
+        "letters": 8,
+        "reached": 35,
+        "solved": 28,
+        "openers": [
+          {
+            "value": "puddings",
+            "count": 2
+          },
+          {
+            "value": "climbers",
+            "count": 2
+          },
+          {
+            "value": "creating",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "labyrinth",
+        "letters": 9,
+        "reached": 26,
+        "solved": 24,
+        "openers": [
+          {
+            "value": "syndromes",
+            "count": 3
+          },
+          {
+            "value": "chocolate",
+            "count": 1
+          },
+          {
+            "value": "clumpiest",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "word": "regression",
+        "letters": 10,
+        "reached": 23,
+        "solved": 18,
+        "openers": [
+          {
+            "value": "labyrinths",
+            "count": 3
+          },
+          {
+            "value": "telescopic",
+            "count": 1
+          },
+          {
+            "value": "flourishes",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "secretWord": {
+    "word": "nacho",
+    "players": 147,
+    "found": 49,
+    "gaveUp": 34,
+    "medianGuesses": 37,
+    "fewestGuesses": 1,
+    "firstGuesses": [
+      {
+        "value": "ocean",
+        "count": 10
+      },
+      {
+        "value": "sea",
+        "count": 7
+      },
+      {
+        "value": "water",
+        "count": 5
+      },
+      {
+        "value": "hot",
+        "count": 5
+      },
+      {
+        "value": "house",
+        "count": 4
+      }
+    ],
+    "closeCalls": [
+      {
+        "value": "cheese",
+        "count": 58
+      },
+      {
+        "value": "burrito",
+        "count": 42
+      },
+      {
+        "value": "tortilla",
+        "count": 41
+      },
+      {
+        "value": "quesadilla",
+        "count": 36
+      },
+      {
+        "value": "taco",
+        "count": 36
+      }
+    ]
+  },
+  "wordsFrom": {
+    "word": "turntable",
+    "hidden": 49,
+    "players": 94,
+    "foundBigWord": 75,
+    "mostFound": [
+      {
+        "word": "turn",
+        "count": 91
+      },
+      {
+        "word": "table",
+        "count": 81
+      },
+      {
+        "word": "able",
+        "count": 75
+      },
+      {
+        "word": "turntable",
+        "count": 75
+      },
+      {
+        "word": "burn",
+        "count": 65
+      }
+    ],
+    "rarestFound": [
+      "balun",
+      "blatt",
+      "buret",
+      "ternal",
+      "labret"
+    ],
+    "differentWordsFound": 225
+  }
+}
